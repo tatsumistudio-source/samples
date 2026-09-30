@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1C1216">
+<title>Boulangerie Pièce（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --oven: #1C1216;     /* 窯の奥の暗さ */
+  --raisin: #3B2330;   /* ノワレザン */
+  --butter: #F2C14E;   /* バター。大事な時間とボタンだけ */
+  --crust: #C0843F;    /* 焼き色 */
+  --flour: #F7F4EE;    /* 粉 */
+  --ink: #221A1D;
+  --mist: #C9B8BF;
+  --line: rgba(247,244,238,.16);
+  --serif-jp: "Shippori Mincho B1", serif;
+  --serif-fr: "Cormorant Garamond", serif;
+  --sans: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--flour); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--butter); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.fr { font-family: var(--serif-fr); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.jp { font-family: var(--serif-jp); font-weight: 500; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--butter); color: var(--oven); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--oven); display: grid; place-items: center; }
+.loader .word { font-family: var(--serif-fr); font-style: italic; color: var(--flour); font-size: clamp(64px, 18vw, 180px); line-height: 1; display: flex; overflow: hidden; }
+.loader .word span { display: inline-block; transform: translateY(110%); }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--mist); font-size: 12px; letter-spacing: .3em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--flour); transition: background .4s, color .4s, padding .4s; }
+.head.solid { background: rgba(28,18,22,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--serif-fr); font-style: italic; font-size: 24px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(28,18,22,.35); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mist); }
+.status.open i { background: #7BD389; box-shadow: 0 0 0 4px rgba(123,211,137,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--oven); color: var(--flour); }
+.hero picture, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero img { transform: scale(1.12); transform-origin: 50% 40%; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28,18,22,.35) 0%, rgba(28,18,22,0) 30%, rgba(28,18,22,.15) 55%, rgba(28,18,22,.92) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .12em; color: var(--mist); margin-bottom: 6px; }
+.hero h1 { font-family: var(--serif-fr); font-style: italic; font-weight: 400; font-size: clamp(104px, 33vw, 340px); line-height: .82; letter-spacing: -.035em; margin-left: -.04em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding-right: .06em; }
+.hero h1 .w span { display: inline-block; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 18px; font-size: 13px; color: var(--mist); }
+.hero .meta b { color: var(--butter); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 112px; writing-mode: vertical-rl; font-family: var(--serif-jp); font-size: clamp(17px, 4.6vw, 26px); letter-spacing: .28em; line-height: 1.9; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 112px; font-size: 10px; color: rgba(247,244,238,.7); }
+.cue { width: 1px; height: 44px; background: rgba(247,244,238,.25); position: relative; overflow: hidden; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--butter); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--butter); color: var(--oven); overflow: hidden; white-space: nowrap; padding: 14px 0 10px; border-block: 1px solid rgba(28,18,22,.12); }
+.marquee .track { display: inline-flex; gap: 28px; animation: slide 26s linear infinite; font-family: var(--serif-fr); font-style: italic; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--serif-jp); font-style: normal; font-size: .62em; align-self: center; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(84px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; }
+.story .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(38px, 11vw, 96px); line-height: 1.28; letter-spacing: .02em; color: var(--raisin); }
+.line { display: block; overflow: hidden; padding-bottom: .04em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #5B4B51; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--raisin); font-weight: 700; }
+.story figure { margin: 0; position: relative; overflow: hidden; border-radius: 4px; }
+.story figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.15); }
+.story figcaption, .cap { position: absolute; right: 10px; bottom: 8px; font-size: 10px; color: rgba(255,255,255,.8); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(34,26,29,.14); font-size: 13px; color: #6B5A60; }
+.stars b { font-family: var(--serif-fr); font-style: italic; font-weight: 500; font-size: 44px; color: var(--raisin); line-height: 1; }
+
+/* 11時の章（スクロールで時刻が進む） */
+.clock { position: relative; background: var(--oven); color: var(--flour); }
+.clock .pin { height: 100svh; min-height: 620px; display: grid; grid-template-rows: auto 1fr auto; padding: 96px var(--g) 36px; }
+.clock h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(22px, 6vw, 40px); line-height: 1.5; }
+.clock h2 em { font-style: normal; color: var(--butter); }
+.clock .face { align-self: center; display: grid; gap: 18px; }
+.time { font-family: var(--serif-fr); font-weight: 500; font-style: normal; font-size: clamp(96px, 30vw, 260px); line-height: .9; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.time.peak { color: var(--butter); }
+.msg { min-height: 3.4em; font-size: 15px; color: var(--mist); }
+.shelf { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px 8px; max-width: 520px; }
+.shelf svg { width: 100%; height: auto; opacity: .12; transform: scale(.7); transition: opacity .25s, transform .25s; }
+.shelf svg.on { opacity: 1; transform: scale(1); }
+.bar { height: 2px; background: var(--line); position: relative; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--butter); }
+.ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--mist); margin-top: 8px; }
+.clock .note { font-size: 11px; color: #8E7C83; margin-top: 10px; }
+
+/* パン */
+.breads { padding: clamp(84px, 14vw, 160px) 0 0; background: var(--flour); }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.5vw, 64px); line-height: 1.25; color: var(--raisin); }
+.sec-head p { font-size: 12px; color: #7A686E; max-width: 15em; }
+.rail { display: grid; gap: 64px; padding: 0 var(--g) 40px; }
+.card { position: relative; }
+.card .ph { position: relative; overflow: hidden; border-radius: 4px; }
+.card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.12); }
+.card .fr { font-size: clamp(40px, 12vw, 72px); line-height: 1; color: var(--raisin); margin: 18px 0 6px; }
+.card h3 { font-family: var(--serif-jp); font-size: 19px; font-weight: 700; color: var(--raisin); }
+.card p { margin-top: 8px; color: #5B4B51; font-size: 15px; max-width: 24em; }
+.src { padding: 0 var(--g) 20px; font-size: 11px; color: #8A787E; }
+
+/* 来店 */
+.visit { background: var(--raisin); color: var(--flour); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--flour); }
+.visit .sec-head p { color: var(--mist); }
+.visit figure { margin: 0 calc(var(--g) * -1) 40px; position: relative; overflow: hidden; }
+.visit figure img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transform: scale(1.12); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mist); flex: none; }
+.today.open .dot { background: #7BD389; box-shadow: 0 0 0 6px rgba(123,211,137,.15); }
+.today b { font-family: var(--serif-jp); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--mist); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--butter); }
+.hours li.closed span:last-child { color: #9B878E; }
+.small { font-size: 11.5px; color: var(--mist); }
+.addr { margin-top: 40px; font-family: var(--serif-jp); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #2A1B22; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.85) contrast(1.05) brightness(.92); }
+.park { margin-top: 18px; padding: 18px 20px; border-left: 3px solid var(--butter); background: rgba(247,244,238,.05); border-radius: 0 14px 14px 0; font-size: 14.5px; }
+.park b { display: block; font-family: var(--serif-jp); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.fill-in { background: rgba(242,193,78,.18); color: var(--butter); padding: 0 4px; border-radius: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s, background .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--butter); color: var(--oven); }
+.btn.ghost { border: 1px solid currentColor; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(34,26,29,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--serif-jp); font-size: 18px; font-weight: 500; color: var(--raisin); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--crust),var(--crust)) center/14px 1.5px no-repeat, linear-gradient(var(--crust),var(--crust)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #5B4B51; font-size: 15px; }
+details .fill-in { color: #8A5A12; background: rgba(242,193,78,.28); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 26px; }
+.tiles img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.gram h2 { font-family: var(--serif-jp); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.4; color: var(--raisin); }
+.gram p { margin-top: 10px; color: #5B4B51; font-size: 15px; }
+.gram .btn.fill { background: var(--raisin); color: var(--flour); }
+
+/* 最後 */
+.foot { background: var(--oven); color: var(--mist); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif-fr); font-style: italic; color: var(--flour); font-size: clamp(120px, 40vw, 420px); line-height: .8; letter-spacing: -.04em; margin: 0 0 40px -.05em; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(28,18,22,.78); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--flour); }
+.dock a.main { background: var(--butter); color: var(--oven); }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(90deg, rgba(28,18,22,.82) 0%, rgba(28,18,22,.45) 38%, rgba(28,18,22,0) 62%), linear-gradient(180deg, rgba(28,18,22,.35) 0%, rgba(28,18,22,0) 25%, rgba(28,18,22,0) 60%, rgba(28,18,22,.7) 100%); }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .rail { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .card:nth-child(even) { margin-top: 120px; }
+  .card .fr { font-size: 48px; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .visit figure { margin: 0 0 56px; border-radius: 4px; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero img, .story figure img, .card img, .visit figure img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="word"><span>P</span><span>i</span><span>è</span><span>c</span><span>e</span></div>
+  <div class="sub">BOULANGERIE</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">Pièce</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="ブーランジェリー ピエス">
+    <picture>
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="窓の光を受けるクロワッサン（イメージ）">
+    </picture>
+    <span class="caption">写真はイメージです</span>
+    <p class="vert" aria-hidden="true">住宅街の、小さなブーランジェリー</p>
+    <div class="title">
+      <p class="kicker">Boulangerie ／ 千葉市中央区花輪町</p>
+      <h1><span class="w"><span>Pièce</span></span></h1>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（142件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Croissant</span><span>クロワッサン</span><span>Danoise</span><span>季節のデニッシュ</span><span>Pain au curry</span><span>カレーパン</span><span>Sel &amp; beurre</span><span>塩バター</span>
+      <span>Croissant</span><span>クロワッサン</span><span>Danoise</span><span>季節のデニッシュ</span><span>Pain au curry</span><span>カレーパン</span><span>Sel &amp; beurre</span><span>塩バター</span>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>割ると、</span></span><span class="line"><span>パリッと</span></span><span class="line"><span>音がする。</span></span></h2>
+    <div>
+      <p class="lead">口コミに並ぶのは <q>パリパリ</q> <q>ザクザク</q> <q>バターの風味が自然</q> という言葉。住宅街の一軒家のような小さなお店で、層の立つクロワッサンと季節のデニッシュを焼いています。</p>
+      <div class="stars" style="margin-top:28px"><b>4.5</b><span>Googleの口コミ 142件の平均（2026年9月）</span></div>
+    </div>
+    <figure><img src="img/dough.jpg" alt="打ち粉をした台の上の生地（イメージ）" loading="lazy"><figcaption>写真はイメージです</figcaption></figure>
+  </section>
+
+  <section class="clock" aria-labelledby="clock-title">
+    <div class="pin">
+      <h2 id="clock-title">品数がいちばん多いのは、<br><em>11時</em>ごろ。</h2>
+      <div class="face">
+        <div class="time" id="time" aria-live="off">11:00</div>
+        <div class="shelf" id="shelf" aria-hidden="true"></div>
+        <p class="msg" id="msg">いちばん品数が多い時間。お目当てのパンがある日は、この時間を目安に。</p>
+      </div>
+      <div>
+        <div class="bar"><i id="bar"></i></div>
+        <div class="ticks"><span>7:30 開店</span><span>11:00</span><span>16:30 閉店</span></div>
+        <p class="note">※平日の目安です（口コミにある店員さんのお話より）。実際の焼き上がり時間に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="breads" aria-labelledby="breads-title">
+    <div class="sec-head">
+      <h2 id="breads-title">口コミで<br>名前が挙がる<br>パン</h2>
+      <p>季節の商品は実際のラインナップに差し替えます</p>
+    </div>
+    <div class="rail">
+      <article class="card">
+        <div class="ph"><img src="img/croissant.jpg" alt="断面に層が見えるクロワッサン（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="fr">Croissant</p>
+        <h3>クロワッサン</h3>
+        <p>外はパリパリ、バターの香りは自然。口コミでいちばん名前が挙がるパン。</p>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/danish.jpg" alt="季節の果物をのせたデニッシュ（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="fr">Danoise</p>
+        <h3>季節のデニッシュ</h3>
+        <p>和栗、スイートポテト、いちご。季節で変わる、ケーキのようなひと品。</p>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/curry.jpg" alt="半分に割ったカレーパン（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="fr">Pain au curry</p>
+        <h3>カレーパン</h3>
+        <p>薄い生地をじっくり揚げてザクザクに。大きなチキン入り。</p>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/shiopan.jpg" alt="塩バターパン（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="fr">Sel &amp; beurre</p>
+        <h3>塩バターパン</h3>
+        <p>底はカリッと、塩味はしっかり。食べやすい大きさ。</p>
+      </article>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がったパンから選んでいます。写真はすべてイメージです。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年9月）</p>
+    </div>
+    <figure><img src="img/bag.jpg" alt="紙袋に入ったクロワッサンとバゲット（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></figure>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>お休み</span></li>
+          <li data-d="2" class="closed"><span>火</span><span>お休み</span></li>
+          <li data-d="3"><span>水</span><span>7:30 – 16:30</span></li>
+          <li data-d="4"><span>木</span><span>7:30 – 16:30</span></li>
+          <li data-d="5"><span>金</span><span>7:30 – 16:30</span></li>
+          <li data-d="6"><span>土</span><span>9:00 – 18:00</span></li>
+          <li data-d="0" class="closed"><span>日</span><span>お休み</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram でお知らせします。</p>
+      </div>
+      <div>
+        <p class="addr">〒260-0803<br>千葉県千葉市中央区花輪町46-64</p>
+        <div class="map"><iframe title="ブーランジェリー ピエスの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E3%83%96%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%AA%E3%83%BC%20%E3%83%94%E3%82%A8%E3%82%B9%20%E5%8D%83%E8%91%89%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%8A%B1%E8%BC%AA%E7%94%BA46-64&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="park"><b>駐車場</b>お店の前に2台。幅がせまいので、運転に自信のない方は少し先の第2駐車場へ。<span class="fill-in">第2駐車場の地図と台数を入れます</span></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=10262021521976151977" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>お目当てのパンを取り置きできますか？</summary><p><span class="fill-in">取り置きの可否と方法（電話・Instagram の DM など）を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>午後に行っても買えますか？</summary><p>営業中も追加で焼き上がりますが、午後は品数が少なくなります。種類を選びたい方はお昼前がおすすめです。</p></details>
+    <details><summary>車で行けますか？</summary><p>お店の前に2台と、少し先に第2駐車場があります。住宅街の中なので、ゆっくり走ってお越しください。</p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles"><img src="img/shiopan.jpg" alt="" loading="lazy"><img src="img/danish.jpg" alt="" loading="lazy"><img src="img/curry.jpg" alt="" loading="lazy"></div>
+    <h2 id="gram-title">今日の焼き上がりは、<br>Instagramで。</h2>
+    <p>その日のパン、季節の新作、臨時のお休みをお知らせしています。</p>
+    <div class="row"><a class="btn fill" href="https://www.instagram.com/boulangerie_piece/" target="_blank" rel="noopener">@boulangerie_piece を見る</a></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">Pièce</p>
+  <p>ブーランジェリー ピエス<br>千葉県千葉市中央区花輪町46-64<br>水〜金 7:30–16:30　土 9:00–18:00　日・月・火 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=10262021521976151977" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0433560914">電話</a>
+  <a href="https://www.instagram.com/boulangerie_piece/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 3: [7.5, 16.5], 4: [7.5, 16.5], 5: [7.5, 16.5], 6: [9, 18] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* 棚のパン（12個） */
+  const shelf = document.getElementById('shelf');
+  // 丸いパン（ドーム形＋クープ3本）。扇形のクロワッサンは扇子に見えたのでやめた
+  const icon = '<svg viewBox="0 0 64 40"><path d="M5 34C5 17 17 7 32 7s27 10 27 27z" fill="#F2C14E"/><path d="M5 34h54" stroke="#C0843F" stroke-width="3" stroke-linecap="round"/><path d="M20 22l6-8M29 25l6-9M38 24l6-8" stroke="#8A5A22" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  for (let i = 0; i < 12; i++) shelf.insertAdjacentHTML('beforeend', icon);
+  const loaves = [...shelf.children];
+  const timeEl = document.getElementById('time'), msgEl = document.getElementById('msg'), barEl = document.getElementById('bar');
+  // 品ぞろえの目安: 開店で6割 → 11時で満杯 → 午後に減って閉店で2割
+  const fullness = hr => hr <= 11 ? 0.6 + 0.4 * (hr - 7.5) / 3.5 : Math.max(0.15, 1 - 0.85 * (hr - 11) / 5.5);
+  const setTime = hr => {
+    const snapped = Math.round(hr * 4) / 4;
+    timeEl.textContent = fmt(snapped);
+    timeEl.classList.toggle('peak', snapped >= 10.5 && snapped <= 11.75);
+    const n = Math.round(fullness(snapped) * 12);
+    loaves.forEach((el, i) => el.classList.toggle('on', i < n));
+    barEl.style.width = `${(snapped - 7.5) / 9 * 100}%`;
+    msgEl.textContent =
+      snapped < 9 ? '開店。焼きたてが少しずつ並びはじめます。' :
+      snapped < 10.5 ? '棚がどんどん埋まっていく時間。' :
+      snapped <= 11.75 ? 'いちばん品数が多い時間。お目当てのパンがある日は、この時間を目安に。' :
+      snapped < 14.5 ? 'お昼を過ぎると、人気のパンから売り切れていきます。' :
+      snapped < 16.5 ? '残りわずか。デニッシュが中心になります。' : '閉店。また明日。';
+  };
+  setTime(11);
+
+  if (reduced || !window.gsap) { document.querySelector('.loader')?.remove(); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ） */
+  gsap.set('.loader', { clipPath: 'inset(0 0 0% 0)' });
+  gsap.set('.hero h1 .w span', { yPercent: 105 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .meta', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .word span', { y: 0, duration: 0.9, stagger: 0.06 })
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.4')
+       .to('.loader', { clipPath: 'inset(0 0 100% 0)', duration: 1.1, ease: 'power4.inOut' }, '+=0.25')
+       .to('.hero img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2 }, '-=1.9')
+       .to('.hero .vert, .hero .kicker, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => document.querySelector('.loader')?.remove());
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  ScrollTrigger.create({ start: () => innerHeight * 0.8, onToggle: s => document.getElementById('head').classList.toggle('solid', s.isActive) });
+  function showDock() { document.getElementById('dock').classList.add('show'); }
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero picture', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 写真は枠の中で少しずつ動かす */
+  gsap.utils.toArray('.story figure img, .card img, .visit figure img').forEach(img => {
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.from(img.parentElement, { clipPath: 'inset(12% 0 12% 0)', duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: img.parentElement, start: 'top 85%' } });
+  });
+
+  /* 11時の章: スクロールで時刻を 7:30 → 16:30 まで進める */
+  ScrollTrigger.create({
+    trigger: '.clock', start: 'top top', end: '+=160%', pin: '.clock .pin', scrub: true,
+    onUpdate: s => setTime(7.5 + s.progress * 9)
+  });
+
+  /* パンの見出しの文字を大きくずらして出す */
+  gsap.utils.toArray('.card .fr').forEach(el => {
+    gsap.from(el, { xPercent: 12, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
