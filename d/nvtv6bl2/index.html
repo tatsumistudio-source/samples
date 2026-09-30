@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F1511">
+<title>HAZEL eyelashes and brows（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&family=Zen+Old+Mincho:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --espresso: #1F1511;  /* いちばん深い茶 */
+  --bark: #33231B;      /* 殻の影 */
+  --hazel: #8C5E3B;     /* はしばみの殻 */
+  --nut: #C49A6C;       /* 実の明るいところ */
+  --oat: #E9DFD0;       /* ブークレの生地 */
+  --ivory: #F6F1EA;
+  --blush: #EDB9A1;     /* 差し色。大事な所とボタンだけ */
+  --rose: #9E553A;      /* 明るい地に置く差し色の文字 */
+  --leaf: #B9C77F;      /* 営業中の灯り */
+  --ink: #2B1F19;
+  --mute-d: #BDAA9B;
+  --mute-l: #6B584C;
+  --line-d: rgba(246,241,234,.16);
+  --line-l: rgba(43,31,25,.14);
+  --latin: "Fraunces", "Times New Roman", serif;
+  --mincho: "Zen Old Mincho", serif;
+  --maru: "Zen Maru Gothic", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ivory); color: var(--ink); font-family: var(--maru); font-size: 16px; line-height: 1.9; overflow-x: hidden; word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; border-radius: 8px; }
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+.la { font-family: var(--latin); font-variation-settings: "SOFT" 100, "WONK" 0; font-optical-sizing: auto; }
+.it { font-style: italic; }
+.eyebrow { font-family: var(--latin); font-style: italic; font-variation-settings: "SOFT" 100; font-size: 15px; letter-spacing: .02em; display: flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .6; }
+.fill-in { background: rgba(237,185,161,.28); color: var(--rose); padding: 1px 6px; border-radius: 4px; font-size: .94em; }
+.dark .fill-in, .visit .fill-in, .flow .fill-in { background: rgba(237,185,161,.16); color: var(--blush); }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--blush); color: var(--espresso); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--espresso); display: grid; place-items: center; color: var(--ivory); animation: loader-bye .01s linear 5s forwards; }
+@keyframes loader-bye { to { opacity: 0; visibility: hidden; } }
+.loader .ld { display: grid; justify-items: center; gap: 10px; }
+.loader svg { width: 70px; height: 70px; overflow: visible; }
+.loader svg path { fill: none; stroke: var(--blush); stroke-width: 2.4; stroke-linecap: round; }
+.loader .word { display: flex; overflow: hidden; font-size: clamp(56px, 17vw, 150px); line-height: 1; font-weight: 300; letter-spacing: .04em; padding: 0 .05em .06em; }
+.loader .word span { display: inline-block; transform: translateY(110%); }
+.loader .sub { font-family: var(--latin); font-style: italic; font-size: 15px; color: var(--mute-d); opacity: 0; letter-spacing: .06em; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--ivory); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(31,21,17,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line-d); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-size: 22px; font-weight: 400; letter-spacing: .12em; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line-d); border-radius: 999px; background: rgba(31,21,17,.38); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--blush); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; background: var(--espresso); color: var(--ivory); }
+.hero picture { position: absolute; inset: 0; }
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(31,21,17,.55) 0%, rgba(31,21,17,0) 18%, rgba(31,21,17,0) 42%, rgba(31,21,17,.55) 70%, rgba(31,21,17,.94) 100%); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 92px; font-size: 10px; line-height: 1; color: rgba(246,241,234,.86); background: rgba(31,21,17,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 5px 10px; border-radius: 999px; }
+.badge { position: absolute; z-index: 2; right: var(--g); top: 47%; width: 112px; height: 112px; }
+.badge svg { width: 100%; height: 100%; animation: spin 22s linear infinite; }
+.badge text { font-family: var(--latin); font-size: 10.6px; letter-spacing: .14em; fill: var(--ivory); }
+.badge .core { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1; }
+.badge .core b { font-family: var(--latin); font-weight: 400; font-size: 30px; color: var(--blush); font-variation-settings: "SOFT" 100; }
+.badge .core small { display: block; font-size: 10px; margin-top: 5px; color: var(--mute-d); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero .title { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(88px + env(safe-area-inset-bottom)); }
+.hero .kicker { font-size: 12.5px; letter-spacing: .1em; color: var(--oat); margin-bottom: 4px; }
+.hero h1 { font-size: clamp(92px, 27vw, 300px); line-height: .86; font-weight: 300; letter-spacing: .01em; margin-left: -.05em; }
+.hero h1 .mask { display: inline-flex; overflow: hidden; padding: 0 .04em .04em; }
+.hero h1 .mask span { display: inline-block; }
+.hero .sub { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100; font-size: clamp(26px, 7.4vw, 56px); line-height: 1.1; color: var(--blush); margin-top: 2px; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 20px; font-size: 13px; color: var(--oat); }
+.cue { width: 1px; height: 44px; background: rgba(246,241,234,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--blush); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 波の帯 */
+.wave { background: var(--ivory); overflow: hidden; padding: 18px 0 6px; border-bottom: 1px solid var(--line-l); }
+.wave svg { display: block; width: max(100%, 1100px); margin-left: 50%; transform: translateX(-50%); overflow: visible; }
+.wave text { font-size: 46px; fill: var(--hazel); }
+.wave .l { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100; }
+.wave .j { font-family: var(--mincho); font-size: 28px; fill: var(--ink); }
+.wave .d { fill: var(--blush); font-family: var(--latin); }
+.wave .guide { fill: none; stroke: var(--line-l); stroke-width: 1.2; stroke-dasharray: 2 8; stroke-linecap: round; }
+
+/* 語りの章 */
+.story { padding: clamp(84px, 16vw, 180px) var(--g) clamp(72px, 12vw, 150px); display: grid; gap: 44px; background: var(--ivory); }
+.story .eyebrow { color: var(--hazel); margin-bottom: 18px; }
+.big { font-family: var(--mincho); font-weight: 500; font-size: clamp(40px, 10.6vw, 104px); line-height: 1.26; letter-spacing: .02em; color: var(--ink); }
+.big em { font-style: normal; color: var(--hazel); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: var(--mute-l); font-size: 15.5px; }
+.story q { quotes: "「" "」"; color: var(--ink); font-weight: 700; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line-l); font-size: 13px; color: var(--mute-l); }
+.stars b { font-family: var(--latin); font-weight: 400; font-size: 52px; color: var(--hazel); line-height: 1; font-variation-settings: "SOFT" 100; }
+.arch { position: relative; margin: 0; overflow: hidden; border-radius: 999px 999px 6px 6px; background: var(--oat); }
+.arch img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.14); }
+.cap { position: absolute; right: 12px; bottom: 10px; font-size: 10px; line-height: 1; color: rgba(255,255,255,.9); background: rgba(31,21,17,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 5px 9px; border-radius: 999px; }
+.story figure .tag { position: absolute; left: 14px; bottom: 12px; font-size: 11.5px; color: var(--ivory); background: rgba(31,21,17,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 4px 12px; border-radius: 999px; }
+
+/* シートの章（スクロールでシートが倒れて起きる） */
+.flow { position: relative; background: var(--espresso); color: var(--ivory); }
+.flow .pin { padding: 92px var(--g) 40px; display: grid; gap: 14px; }
+.flow .eyebrow { color: var(--blush); }
+.flow h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(25px, 6.6vw, 46px); line-height: 1.45; margin-top: 8px; }
+.flow h2 em { font-style: normal; color: var(--blush); }
+.stage { position: relative; }
+.chair { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto; overflow: visible; }
+.chair .zz text { font-family: var(--latin); font-style: italic; fill: var(--blush); }
+.chair .soft { filter: drop-shadow(0 8px 12px rgba(0,0,0,.32)); }
+body:not(.fx) .chair #back { transform: rotate(64deg); transform-origin: 164px 176px; }
+body:not(.fx) .chair #legs { transform: rotate(55deg); transform-origin: 282px 180px; }
+.steps { list-style: none; padding: 0; display: grid; gap: 26px; }
+.steps li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; }
+.steps .no { font-family: var(--latin); font-size: 13px; color: var(--mute-d); grid-row: span 3; padding-top: 4px; }
+.steps .en { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100; font-size: clamp(34px, 9.4vw, 64px); line-height: 1; color: var(--blush); }
+.steps h3 { font-family: var(--mincho); font-weight: 500; font-size: 20px; margin-top: 6px; }
+.steps p.t { font-size: 14.5px; color: var(--oat); line-height: 1.85; margin-top: 4px; max-width: 26em; }
+.prog { display: none; }
+.flow .note { font-size: 11px; color: #9C8779; line-height: 1.7; }
+/* 動きが使える時は1枚ずつ切り替える */
+.fx .flow .pin { height: 100vh; height: 100svh; min-height: 640px; grid-template-rows: auto minmax(0, 1fr) auto auto auto; gap: 10px; padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+.fx .stage { display: grid; place-items: center; min-height: 0; }
+.fx .chair { max-height: 100%; width: auto; max-width: 100%; }
+.fx .steps { display: block; position: relative; min-height: 150px; }
+.fx .steps li { position: absolute; inset: 0 0 auto 0; opacity: 0; transform: translateY(14px); transition: opacity .45s, transform .45s; }
+.fx .steps li.on { opacity: 1; transform: none; }
+.fx .prog { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.prog i { height: 3px; border-radius: 3px; background: var(--line-d); position: relative; overflow: hidden; }
+.prog i b { position: absolute; inset: 0; background: var(--blush); transform: scaleX(0); transform-origin: left; }
+
+/* メニュー（横に流れる大きな写真） */
+.menu { background: var(--oat); color: var(--ink); overflow: hidden; padding: clamp(84px, 14vw, 140px) 0 48px; }
+.menu .mpin { padding-top: 8px; }
+.menu .mhead { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 26px; }
+.menu .eyebrow { color: var(--hazel); }
+.menu h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; }
+.menu .mhead p { font-size: 12.5px; color: var(--mute-l); max-width: 22em; }
+.track { display: flex; gap: 16px; padding: 0 var(--g) 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.track::-webkit-scrollbar { display: none; }
+.panel { flex: none; width: 82vw; max-width: 460px; scroll-snap-align: start; }
+.panel figure { position: relative; overflow: hidden; border-radius: 8px; height: 56vh; height: 56svh; min-height: 330px; background: var(--bark); }
+.fx .panel figure { height: calc(100vh - 330px); height: calc(100svh - 330px); min-height: 300px; }
+.panel figure img { width: 100%; height: 100%; object-fit: cover; }
+.panel .word { position: absolute; left: 14px; bottom: 6px; font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100; font-size: clamp(72px, 22vw, 150px); line-height: .9; color: var(--ivory); text-shadow: 0 6px 30px rgba(31,21,17,.35); }
+.panel .cap { top: 12px; bottom: auto; }
+.panel .txt { padding: 18px 4px 0; display: grid; grid-template-columns: auto 1fr; column-gap: 12px; }
+.panel .no { font-family: var(--latin); font-size: 13px; color: var(--hazel); padding-top: 6px; grid-row: span 2; }
+.panel h3 { font-family: var(--mincho); font-weight: 700; font-size: 21px; }
+.panel p { font-size: 14px; line-height: 1.8; color: var(--mute-l); margin-top: 4px; }
+.panel.end { width: 72vw; max-width: 380px; display: grid; align-content: center; gap: 18px; padding: 28px; border-radius: 999px 999px 8px 8px; background: var(--espresso); color: var(--ivory); min-height: 330px; }
+.fx .panel.end { height: calc(100vh - 330px); height: calc(100svh - 330px); min-height: 300px; }
+.panel.end .la { font-style: italic; font-weight: 300; font-size: clamp(40px, 11vw, 64px); line-height: 1; color: var(--blush); }
+.panel.end p { color: var(--oat); font-size: 14px; margin: 0; }
+.fx .track { overflow: visible; scroll-snap-type: none; width: max-content; }
+
+/* 口コミの声（重なっていくカード） */
+.voices { background: var(--ivory); padding: clamp(84px, 14vw, 150px) var(--g) clamp(60px, 10vw, 120px); }
+.voices .eyebrow { color: var(--hazel); }
+.voices h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; margin: 12px 0 10px; }
+.voices .score { display: flex; align-items: baseline; gap: 10px; color: var(--mute-l); font-size: 13px; }
+.voices .score b { font-family: var(--latin); font-weight: 400; font-size: 40px; color: var(--hazel); line-height: 1; }
+.cards { list-style: none; padding: 0; margin-top: 36px; }
+.cards li { position: sticky; top: calc(96px + var(--i) * 14px); margin-bottom: 26vh; padding: 26px 24px 22px; border-radius: 22px; background: var(--c, #fff); color: var(--ink); box-shadow: 0 18px 40px rgba(43,31,25,.12); transform: rotate(var(--r, 0deg)); }
+.cards li:last-child { margin-bottom: 0; }
+.cards .q { font-family: var(--latin); font-size: 64px; line-height: .6; color: var(--hazel); display: block; height: 28px; }
+.cards p { font-family: var(--mincho); font-weight: 500; font-size: 18.5px; line-height: 1.75; }
+.cards .who { display: inline-block; margin-top: 14px; font-size: 12px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--line-l); color: var(--mute-l); }
+.voices .src { margin-top: 30px; font-size: 11.5px; color: var(--mute-l); }
+
+/* 来店 */
+.visit { background: var(--espresso); color: var(--ivory); padding: clamp(84px, 14vw, 160px) var(--g) 72px; }
+.visit .eyebrow { color: var(--blush); }
+.visit h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; margin: 12px 0 8px; }
+.visit .hint { font-size: 12px; color: var(--mute-d); margin-bottom: 30px; }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--line-d); border-radius: 18px; margin-bottom: 26px; background: rgba(246,241,234,.03); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mute-d); flex: none; }
+.today.open .dot { background: var(--leaf); box-shadow: 0 0 0 6px rgba(185,199,127,.16); }
+.today b { font-family: var(--mincho); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--mute-d); font-size: 12.5px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.today small:first-child { color: var(--blush); letter-spacing: .04em; }
+.hours li { display: grid; grid-template-columns: 5.2em 1fr; column-gap: 8px; padding: 12px 4px; line-height: 1.7; border-bottom: 1px solid var(--line-d); font-size: 15px; font-variant-numeric: tabular-nums; }
+.hours li span:first-child { color: var(--mute-d); font-size: 13.5px; }
+.today .dot { background: var(--blush); box-shadow: 0 0 0 6px rgba(237,185,161,.14); }
+.hours li.closed span:last-child { color: #9C8779; }
+.addr { margin-top: 40px; font-family: var(--mincho); font-size: 18px; line-height: 1.75; }
+.addr .in { display: inline-block; margin-top: 6px; font-family: var(--maru); font-size: 13px; color: var(--espresso); background: var(--blush); padding: 2px 12px; border-radius: 999px; }
+.map { position: relative; margin-top: 20px; border-radius: 999px 999px 18px 18px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--bark); border: 1px solid var(--line-d); }
+/* 上端の店名カードはアーチで欠けるので枠の外へ逃がす（下端の地図の表記は残す） */
+.map iframe { --lift: 80px; position: absolute; left: 0; top: calc(var(--lift) * -1); width: 100%; height: calc(100% + var(--lift)); border: 0; filter: sepia(.35) saturate(.7) contrast(1.02) brightness(.95); }
+.box { margin-top: 18px; padding: 18px 20px; border-left: 3px solid var(--blush); background: rgba(246,241,234,.05); border-radius: 0 16px 16px 0; font-size: 14.5px; }
+.box b { display: block; font-family: var(--mincho); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s, background .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--blush); color: var(--espresso); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; background: var(--ivory); }
+.faq .eyebrow { color: var(--hazel); }
+.faq h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; margin: 12px 0 18px; }
+details { border-bottom: 1px solid var(--line-l); }
+summary { list-style: none; cursor: pointer; padding: 22px 38px 22px 0; position: relative; font-family: var(--mincho); font-size: 18px; font-weight: 500; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--hazel),var(--hazel)) center/14px 1.5px no-repeat, linear-gradient(var(--hazel),var(--hazel)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: var(--mute-l); font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); background: var(--ivory); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 26px; }
+.tiles img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.tiles img:first-child { border-radius: 999px 0 0 999px; }
+.tiles img:last-child { border-radius: 0 999px 999px 0; }
+.gram h2 { font-family: var(--mincho); font-size: clamp(25px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; }
+.gram p { margin-top: 10px; color: var(--mute-l); font-size: 15px; }
+.gram .btn.fill { background: var(--espresso); color: var(--ivory); }
+
+/* 最後 */
+.foot { background: var(--espresso); color: var(--mute-d); padding: 72px var(--g) calc(124px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-weight: 300; color: var(--ivory); font-size: clamp(96px, 28vw, 400px); line-height: .8; letter-spacing: .01em; margin: 0 0 6px -.05em; }
+.foot .huge-sub { font-family: var(--latin); font-style: italic; font-weight: 300; color: var(--blush); font-size: clamp(26px, 7.4vw, 56px); line-height: 1.1; margin-bottom: 36px; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line-d); font-size: 11.5px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(31,21,17,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ivory); }
+.dock a.main { background: var(--blush); color: var(--espresso); }
+
+@media (min-width: 900px) {
+  .hero img { object-position: 50% 50%; }
+  .hero::after { background: linear-gradient(90deg, rgba(31,21,17,.86) 0%, rgba(31,21,17,.5) 36%, rgba(31,21,17,0) 60%), linear-gradient(180deg, rgba(31,21,17,.45) 0%, rgba(31,21,17,0) 22%, rgba(31,21,17,0) 64%, rgba(31,21,17,.55) 100%); }
+  .hero .title { right: auto; bottom: 9vh; }
+  .hero h1 { font-size: clamp(160px, 16vw, 280px); }
+  .hero .meta { justify-content: flex-start; gap: 28px; }
+  .badge { top: 19vh; left: 41vw; right: auto; width: 150px; height: 150px; }
+  .badge .core b { font-size: 40px; }
+  .story { grid-template-columns: 1.15fr .85fr; align-items: center; column-gap: 96px; }
+  .story .big { font-size: clamp(56px, 5.8vw, 88px); }
+  .story .arch { max-width: 460px; justify-self: end; width: 100%; }
+  .flow .pin { grid-template-columns: .95fr 1.05fr; column-gap: 72px; padding-top: 110px; }
+  .flow .pin > header { grid-column: 1; grid-row: 1; }
+  .flow .stage { grid-column: 2; grid-row: 1 / span 5; }
+  .flow .steps, .flow .prog, .flow .note { grid-column: 1; }
+  .fx .flow .pin { grid-template-rows: auto 1fr auto auto; align-content: center; }
+  .fx .steps { min-height: 200px; align-self: center; }
+  .steps h3 { font-size: 24px; }
+  .steps p.t { font-size: 15.5px; }
+  .menu .mhead { grid-template-columns: 1fr auto; align-items: end; }
+  .menu .mhead .eyebrow { grid-column: 1 / -1; }
+  .panel { width: 30vw; max-width: none; }
+  .panel figure { height: 58vh; }
+  .panel.end { width: 26vw; }
+  .voices { display: grid; grid-template-columns: .8fr 1.2fr; column-gap: 80px; align-items: start; }
+  .voices .vhead { position: sticky; top: 120px; }
+  .cards { margin-top: 0; }
+  .cards p { font-size: 22px; }
+  .voices .src { grid-column: 2; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  .visit .addr { margin-top: 0; }
+  .map { aspect-ratio: 5 / 4; border-radius: 999px 999px 18px 18px / 420px 420px 18px 18px; }
+  .map iframe { --lift: 180px; }
+  .faq, .gram { padding-left: max(var(--g), calc((100vw - 980px) / 2)); padding-right: max(var(--g), calc((100vw - 980px) / 2)); }
+  .dock { left: auto; right: 24px; width: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge svg, .cue::after { animation: none; }
+  .arch img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="ld">
+    <svg viewBox="0 0 70 70"><path id="curl" d="M8 52 C 22 54, 40 50, 52 36 C 60 26, 60 14, 50 10"/></svg>
+    <div class="word la"><span>H</span><span>A</span><span>Z</span><span>E</span><span>L</span></div>
+    <div class="sub">eyelashes &amp; brows</div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark la" href="#top">HAZEL</a>
+  <span class="status" id="status"><i></i><span>営業時間を<wbr>確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="HAZEL eyelashes and brows">
+    <picture>
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="はしばみ色の布の上に置いたツイーザーと眉用のブラシ（イメージ）">
+    </picture>
+    <span class="caption">写真は<wbr>イメージです</span>
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 120 120"><defs><path id="ring" d="M60 60 m-47 0 a47 47 0 1 1 94 0 a47 47 0 1 1 -94 0"/></defs><text><textPath href="#ring" textLength="292" lengthAdjust="spacing">EYELASHES &amp; BROWS · INAGEKAIGAN · CHIBA ·</textPath></text></svg>
+      <div class="core"><b>5.0</b><small>Google ★</small></div>
+    </div>
+    <div class="title">
+      <p class="kicker">まつげと<wbr>眉の<wbr>サロン ／ 稲毛海岸駅前・美容室 esse. 内</p>
+      <h1 class="la" aria-label="HAZEL"><span class="mask" aria-hidden="true"><span>H</span><span>A</span><span>Z</span><span>E</span><span>L</span></span></h1>
+      <p class="sub">eyelashes &amp; brows</p>
+      <div class="meta">
+        <span>Googleの<wbr>口コミ ★5.0<wbr>（19件）<br>10:00–18:00 ／ 不定休</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" aria-hidden="true">
+    <svg viewBox="0 0 1200 150">
+      <path id="wavePath" d="M-300 88 C-150 30 0 146 150 88 S450 30 600 88 S900 146 1050 88 S1350 30 1500 88 S1800 146 1950 88"/>
+      <path class="guide" d="M-300 120 C-150 62 0 178 150 120 S450 62 600 120 S900 178 1050 120 S1350 62 1500 120 S1800 178 1950 120"/>
+      <text><textPath href="#wavePath" id="waveText" startOffset="0"><tspan class="l">Lash perm</tspan><tspan class="d"> · </tspan><tspan class="j">まつ毛パーマ</tspan><tspan class="d"> · </tspan><tspan class="l">Brow perm</tspan><tspan class="d"> · </tspan><tspan class="j">眉パーマ</tspan><tspan class="d"> · </tspan><tspan class="l">Head spa</tspan><tspan class="d"> · </tspan><tspan class="j">ヘッドスパ</tspan><tspan class="d"> · </tspan><tspan class="l">Counseling</tspan><tspan class="d"> · </tspan><tspan class="j">カウンセリング</tspan><tspan class="d"> · </tspan><tspan class="l">Lash perm</tspan><tspan class="d"> · </tspan><tspan class="j">まつ毛パーマ</tspan><tspan class="d"> · </tspan><tspan class="l">Brow perm</tspan><tspan class="d"> · </tspan><tspan class="j">眉パーマ</tspan><tspan class="d"> · </tspan><tspan class="l">Head spa</tspan><tspan class="d"> · </tspan><tspan class="j">ヘッドスパ</tspan><tspan class="d"> · </tspan><tspan class="l">Counseling</tspan><tspan class="d"> · </tspan><tspan class="j">カウンセリング</tspan><tspan class="d"> · </tspan></textPath></text>
+    </svg>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 class="big" id="story-title"><span class="line"><span>話して、</span></span><span class="line"><span>まかせて、</span></span><span class="line"><span><em>ねむって</em>しまう。</span></span></h2>
+      <p class="lead" style="margin-top:28px">稲毛海岸駅の<wbr>北口から<wbr>すぐ、<wbr>美容室 esse. の<wbr>中に<wbr>ある、<wbr>まつげと<wbr>眉の<wbr>サロン。<wbr>Googleの<wbr>口コミには、<wbr>毎回の<q>ていねいな<wbr>カウンセリング</q>、<q>ふかふか</q>の<wbr>リクライニングシート、<q>話しやすい</q>アイリストさんと、<wbr>安心してくつろげたという<wbr>言葉が<wbr>並びます。</p>
+      <div class="stars"><b>5.0</b><span>Googleの<wbr>口コミ 19件の<wbr>平均<wbr>（2026年9月）</span></div>
+    </div>
+    <figure class="arch"><img src="img/salon.jpg" alt="ブークレ生地のリクライニングシートとアーチ形の鏡がある、落ち着いた部屋（イメージ）" loading="lazy"><span class="tag">ふかふかの<wbr>リクライニングシート、という<wbr>口コミから</span><span class="cap">イメージ</span></figure>
+  </section>
+
+  <section class="flow dark" aria-labelledby="flow-title">
+    <div class="pin">
+      <header>
+        <p class="eyebrow">For first-timers</p>
+        <h2 id="flow-title">はじめて<wbr>でも、<br><em>流れ</em>が<wbr>わかる。</h2>
+      </header>
+      <div class="stage">
+        <svg class="chair" viewBox="0 0 420 290" role="img" aria-label="リクライニングシートが倒れて、また起きるイラスト">
+          <defs>
+            <pattern id="boucle" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F2EADF"/><circle cx="2" cy="2" r="1.7" fill="#DDCDB8"/><circle cx="6" cy="6" r="1.5" fill="#E4D6C4"/><circle cx="6.2" cy="1.6" r=".9" fill="#E8DCCC"/></pattern>
+            <pattern id="boucle2" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#E6D8C5"/><circle cx="2" cy="2" r="1.7" fill="#D3C1A9"/><circle cx="6" cy="6" r="1.5" fill="#D9C8B2"/></pattern>
+            <radialGradient id="gl" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F6C9A6" stop-opacity=".5"/><stop offset="1" stop-color="#F6C9A6" stop-opacity="0"/></radialGradient>
+          </defs>
+          <g id="lamp">
+            <circle id="glow" cx="262" cy="70" r="96" fill="url(#gl)"/>
+            <line x1="262" y1="-40" x2="262" y2="44" stroke="#8C5E3B" stroke-width="2"/>
+            <path d="M238 68 C238 51 248 42 262 42 C276 42 286 51 286 68 Z" fill="#EDB9A1"/>
+            <circle cx="262" cy="70" r="5" fill="#FFE9D2"/>
+          </g>
+          <g id="mirror" opacity="0">
+            <path d="M352 204 V120 a29 29 0 0 1 58 0 V204 Z" fill="rgba(246,241,234,.08)" stroke="#C49A6C" stroke-width="3"/>
+            <path d="M366 140 l16 -16 M372 156 l24 -24" stroke="rgba(246,241,234,.55)" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M340 92 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z" fill="#EDB9A1"/>
+          </g>
+          <ellipse cx="220" cy="262" rx="160" ry="11" fill="rgba(0,0,0,.28)"/>
+          <path d="M200 198 H236 L246 252 H190 Z" fill="#8C5E3B"/>
+          <ellipse cx="218" cy="254" rx="62" ry="8" fill="#6E4A2F"/>
+          <g id="legs" class="soft"><rect x="274" y="160" width="88" height="40" rx="19" fill="url(#boucle)" stroke="#D6C6B1" stroke-width="1.2"/></g>
+          <g id="back" class="soft">
+            <rect x="12" y="149" width="164" height="54" rx="26" fill="url(#boucle)" stroke="#D6C6B1" stroke-width="1.2"/>
+            <rect x="0" y="144" width="58" height="64" rx="29" fill="url(#boucle)" stroke="#D6C6B1" stroke-width="1.2"/>
+            <path d="M58 156 v40" stroke="#D6C6B1" stroke-width="1.4" stroke-linecap="round"/>
+          </g>
+          <rect x="146" y="160" width="148" height="44" rx="21" fill="url(#boucle)" stroke="#D6C6B1" stroke-width="1.2"/>
+          <rect class="soft" x="168" y="132" width="104" height="70" rx="32" fill="url(#boucle2)"/>
+          <g id="throw">
+            <path d="M198 131 C214 126 236 126 252 132 L256 196 C240 202 220 202 204 196 Z" fill="#C9AE8E"/>
+            <path d="M214 132 L216 197 M230 130 L231 199 M244 131 L246 198" stroke="#B7997A" stroke-width="1.3" fill="none"/>
+            <path d="M206 197 l-1 7 M212 199 l-1 7 M218 200 l0 7 M224 200 l0 7 M230 200 l0 7 M236 200 l1 7 M242 199 l1 7 M248 198 l1 7 M254 196 l1 7" stroke="#C9AE8E" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          </g>
+          <g id="talk">
+            <rect x="148" y="8" width="80" height="38" rx="19" fill="#EDB9A1"/>
+            <path d="M160 42 l-12 16 l24 -10 z" fill="#EDB9A1"/>
+            <circle cx="172" cy="27" r="3.4" fill="#1F1511"/><circle cx="188" cy="27" r="3.4" fill="#1F1511"/><circle cx="204" cy="27" r="3.4" fill="#1F1511"/>
+          </g>
+          <g id="zzz" class="zz" opacity="0"><text x="54" y="122" font-size="22">z</text><text x="74" y="98" font-size="30">z</text><text x="100" y="68" font-size="40">Z</text></g>
+          <g id="steam" opacity="0">
+            <g fill="none" stroke="#F6F1EA" stroke-opacity=".55" stroke-width="2.2" stroke-linecap="round">
+              <path d="M22 126 c-8 -8 8 -15 0 -24 s8 -15 0 -24"/>
+              <path d="M48 120 c-8 -8 8 -15 0 -24 s8 -15 0 -24"/>
+            </g>
+            <g fill="rgba(246,241,234,.12)" stroke="#F6F1EA" stroke-opacity=".7" stroke-width="1.4">
+              <circle cx="74" cy="112" r="9"/><circle cx="90" cy="94" r="6"/><circle cx="70" cy="84" r="4.5"/><circle cx="100" cy="116" r="4"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="on"><span class="no">01</span><p class="en">Talk</p><h3>まず、<wbr>話す</h3><p class="t">施術の<wbr>前に、<wbr>毎回ていねいな<wbr>カウンセリング。<wbr>まぶたの<wbr>左右差など、<wbr>気に<wbr>なる<wbr>ことは<wbr>ここで。</p></li>
+        <li><span class="no">02</span><p class="en">Recline</p><h3>倒して、<wbr>まかせる</h3><p class="t">ふかふかの<wbr>リクライニングシートを<wbr>倒して、<wbr>まつ毛パーマ・眉パーマへ。</p></li>
+        <li><span class="no">03</span><p class="en">Rest</p><h3>話しても、<wbr>眠っても</h3><p class="t">おしゃべりしていたら<wbr>あっという<wbr>間、<wbr>途中から<wbr>ぐっすり。<wbr>口コミには、<wbr>どちらの<wbr>声も。</p></li>
+        <li><span class="no">04</span><p class="en">Head spa</p><h3>ヘッドスパも</h3><p class="t">まつげ・眉と<wbr>一緒に<wbr>受けた<wbr>ヘッドスパが<wbr>気持ちよかった、という<wbr>声も。</p></li>
+        <li><span class="no">05</span><p class="en">Rise</p><h3>起こして、<wbr>仕上がりと<wbr>ご対面</h3><p class="t">シートを<wbr>起こして、<wbr>仕上がりの<wbr>確認。<wbr>思いどおりの<wbr>カールに<wbr>満足した、という<wbr>声が<wbr>続きます。</p></li>
+      </ol>
+      <div class="prog" id="prog" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <p class="note">※口コミを<wbr>もとに<wbr>した<wbr>流れの<wbr>イメージです。<span class="fill-in">手順・<wbr>時間は<wbr>実際の<wbr>内容に<wbr>差し替えます</span></p>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="mhead">
+      <p class="eyebrow">Menu</p>
+      <h2 id="menu-title">口コミに<wbr>出てくる<br>3つの<wbr>メニュー</h2>
+      <p>流行を<wbr>取り入れた<wbr>メニュー、という<wbr>声も。<wbr>料金・所要時間は<wbr>実際の<wbr>内容に<wbr>差し替えます。</p>
+    </div>
+    <div class="mpin">
+      <div class="track" id="track">
+        <article class="panel">
+          <figure><img src="img/lash.jpg" alt="トレーに並んだまつ毛パーマ用のシリコンの道具（イメージ）" loading="lazy"><span class="word">Lash</span><span class="cap">イメージ</span></figure>
+          <div class="txt"><span class="no">01</span><h3>まつ毛パーマ</h3><p>口コミで<wbr>いちばん名前が<wbr>挙がる<wbr>メニュー。<wbr>左右の<wbr>カールが<wbr>均等に<wbr>そろった、という<wbr>声も。</p></div>
+        </article>
+        <article class="panel">
+          <figure><img src="img/brow.jpg" alt="眉用のブラシとツイーザー（イメージ）" loading="lazy"><span class="word">Brow</span><span class="cap">イメージ</span></figure>
+          <div class="txt"><span class="no">02</span><h3>眉パーマ</h3><p>はじめての<wbr>まつ毛パーマと<wbr>一緒に<wbr>受けて、<wbr>安心して<wbr>任せられたという声。</p></div>
+        </article>
+        <article class="panel">
+          <figure><img src="img/spa.jpg" alt="丸めたタオルと木のくし（イメージ）" loading="lazy"><span class="word">Spa</span><span class="cap">イメージ</span></figure>
+          <div class="txt"><span class="no">03</span><h3>ヘッドスパ</h3><p>まつげ・眉の<wbr>施術と<wbr>一緒に。<wbr>気持ちよかった、という<wbr>声が<wbr>口コミに<wbr>あります。</p></div>
+        </article>
+        <article class="panel end">
+          <p class="la">Book</p>
+          <p>メニューの<wbr>詳しい<wbr>内容と<wbr>料金は、<wbr>ホットペッパービューティーの<wbr>予約ページで。</p>
+          <a class="btn fill" href="https://beauty.hotpepper.jp/kr/slnH000723911/" target="_blank" rel="noopener">予約ページへ</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="vhead">
+      <p class="eyebrow">Voices</p>
+      <h2 id="voices-title">口コミから</h2>
+      <div class="score"><b>5.0</b><span>Googleの<wbr>口コミ 19件</span></div>
+    </div>
+    <ul class="cards">
+      <li style="--i:0; --r:-1.5deg; --c:#FFFFFF"><span class="q" aria-hidden="true">“</span><p>どこで<wbr>受けても<wbr>左右の<wbr>カールが<wbr>そろわなかったのに、<wbr>ここでは<wbr>均等に<wbr>仕上がった。</p><span class="who">まつ毛パーマ</span></li>
+      <li style="--i:1; --r:1.2deg; --c:#F3E6DA"><span class="q" aria-hidden="true">“</span><p>施術の<wbr>前の<wbr>カウンセリングが<wbr>毎回ていねいで、<wbr>安心して<wbr>任せられる。</p><span class="who">カウンセリング</span></li>
+      <li style="--i:2; --r:-.8deg; --c:#FBEDE4"><span class="q" aria-hidden="true">“</span><p>はじめての<wbr>まつ毛パーマと<wbr>眉パーマ。<wbr>不安なく<wbr>受けられて、<wbr>仕上がりにも<wbr>満足。</p><span class="who">はじめて</span></li>
+      <li style="--i:3; --r:1.6deg; --c:#EFE5D5"><span class="q" aria-hidden="true">“</span><p>おしゃれで<wbr>かわいいサロンで、<wbr>いつも<wbr>癒される。<wbr>仕上がりも<wbr>きれいで、<wbr>気分が<wbr>上がる。</p><span class="who">お店の<wbr>雰囲気</span></li>
+      <li style="--i:4; --r:-1deg; --c:#FFFFFF"><span class="q" aria-hidden="true">“</span><p>アイリストさんが<wbr>話しやすくて、<wbr>施術の<wbr>時間が<wbr>あっという間。</p><span class="who">過ごし方</span></li>
+    </ul>
+    <p class="src">※移転前の<wbr>店舗に<wbr>寄せられた<wbr>Googleの<wbr>口コミから、<wbr>2026年9月に<wbr>確認した<wbr>5件の<wbr>要旨を<wbr>言い換えた<wbr>ものです。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <p class="eyebrow">Visit</p>
+    <h2 id="visit-title">お店へ<wbr>行く<wbr>前に</h2>
+    <p class="hint">営業時間・定休日・<wbr>お支払い・駐車場は、<wbr>ホットペッパービューティーの<wbr>店舗情報<wbr>（2026年9月）</p>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><small id="today-date"></small><b>本日の<wbr>営業時間 10:00〜18:00</b><small>お休みの<wbr>日は<wbr> Instagram で<wbr>ご確認ください</small></div></div>
+        <ul class="hours" id="hours">
+          <li><span>営業時間</span><span>10:00 – 18:00</span></li>
+          <li><span>定休日</span><span>不定休<wbr>（お休みは<wbr> Instagram で<wbr>お知らせ）</span></li>
+          <li><span>お支払い</span><span>クレジットカード各種<wbr>（Visa・Mastercard・JCB・American Express など）</span></li>
+        </ul>
+        <div class="box"><b>アクセス</b>稲毛海岸駅の<wbr>北口から<wbr>歩いて<wbr>すぐ。<wbr>1階に<wbr>「チョコザップ」が<wbr>ある<wbr>ビルの<wbr>3階、<wbr>美容室 esse. の<wbr>中に<wbr>あります。</div>
+        <div class="box"><b>駐車場</b>専用駐車場あり<wbr>（予約制）。<wbr>場所と<wbr>予約の<wbr>方法は<wbr> Instagram で<wbr>ご確認ください。</div>
+      </div>
+      <div>
+        <p class="addr">千葉県千葉市美浜区高洲1-24-4<br>ビギ稲毛海岸駅前ビル3階<br><span class="in">美容室 esse. 内<wbr>（半個室）</span></p>
+        <div class="map"><iframe title="HAZEL by esse. の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=esse.%20%E5%8D%83%E8%91%89%E5%B8%82%E7%BE%8E%E6%B5%9C%E5%8C%BA%E9%AB%98%E6%B4%B21-24-4&amp;z=17&amp;output=embed"></iframe></div>
+        <div class="row"><a class="btn fill" href="https://www.google.com/maps/dir/?api=1&amp;destination=esse.%20%E5%8D%83%E8%91%89%E5%B8%82%E7%BE%8E%E6%B5%9C%E5%8C%BA%E9%AB%98%E6%B4%B21-24-4" target="_blank" rel="noopener">Googleマップで<wbr>道順を<wbr>見る</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <p class="eyebrow">Q&amp;A</p>
+    <h2 id="faq-title">よく<wbr>ある<wbr>質問</h2>
+    <details open><summary>はじめてでも<wbr>大丈夫ですか？</summary><p>口コミには、<wbr>はじめての<wbr>まつ毛パーマ・眉パーマでも<wbr>安心して<wbr>任せられた、という<wbr>声が<wbr>あります。<wbr>施術の<wbr>前には<wbr>毎回カウンセリングの<wbr>時間が<wbr>あります。</p></details>
+    <details><summary>所要時間は<wbr>どの<wbr>くらいですか？</summary><p><span class="fill-in">メニューごとの<wbr>所要時間を、<wbr>実際の<wbr>内容に<wbr>合わせて<wbr>書きます。</span></p></details>
+    <details><summary>支払い<wbr>方法は？</summary><p>クレジットカード各種<wbr>（Visa・Mastercard・JCB・American Express など）が<wbr>使えます。</p></details>
+    <details><summary>駐車場は<wbr>ありますか？</summary><p>専用駐車場が<wbr>あります<wbr>（予約制）。<wbr>場所と<wbr>予約の<wbr>方法は<wbr> Instagram で<wbr>ご確認ください。</p></details>
+    <details><summary>予約は<wbr>どこから<wbr>できますか？</summary><p>画面下の<wbr>「予約」ボタンから、<wbr>ホットペッパービューティーの<wbr>予約ページへ<wbr>進めます。</p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles"><img src="img/lash.jpg" alt="" loading="lazy"><img src="img/brow.jpg" alt="" loading="lazy"><img src="img/spa.jpg" alt="" loading="lazy"></div>
+    <h2 id="gram-title">日々の<wbr>お知らせは、<br>Instagramで。</h2>
+    <p>@hazel_eyelashes_brows</p>
+    <div class="row"><a class="btn fill" href="https://www.instagram.com/hazel_eyelashes_brows/" target="_blank" rel="noopener">Instagramを<wbr>見る</a></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge la" aria-hidden="true">HAZEL</p>
+  <p class="huge-sub" aria-hidden="true">eyelashes &amp; brows</p>
+  <p>HAZEL eyelashes &amp; brows<wbr>（HAZEL by esse.）<br>千葉県千葉市美浜区高洲1-24-4 ビギ稲毛海岸駅前ビル3階<wbr>（美容室 esse. 内）<br>10:00–18:00　不定休</p>
+  <p class="made">この<wbr>ページは<wbr>辰巳アンドスタジオが<wbr>ご提案用に<wbr>作成した<wbr>サンプルです。<wbr>お店の<wbr>公式サイトではありません。<wbr>写真は<wbr>生成した<wbr>イメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=esse.%20%E5%8D%83%E8%91%89%E5%B8%82%E7%BE%8E%E6%B5%9C%E5%8C%BA%E9%AB%98%E6%B4%B21-24-4" target="_blank" rel="noopener">道順</a>
+  <a class="main" href="https://beauty.hotpepper.jp/kr/slnH000723911/" target="_blank" rel="noopener">予約</a>
+  <a href="https://www.instagram.com/hazel_eyelashes_brows/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  const dock = $('#dock'), head = $('#head');
+  const showDock = () => dock.classList.add('show');
+
+  /* ヘッダーを濃くする・下のボタンを出す（動きの有無に関係なく） */
+  const onScroll = () => {
+    head.classList.toggle('solid', scrollY > innerHeight * 0.8);
+    if (scrollY > innerHeight * 0.6) showDock();
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 今日の日付（日本時間）と営業時間。不定休なので、曜日から「営業中」とは断定しない */
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  $('#status span').textContent = '本日 10:00–18:00';
+  $('#today-date').textContent = `${now.getMonth() + 1}月${now.getDate()}日（${NAMES[now.getDay()]}）`;
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) {
+    document.querySelector('.loader')?.remove();
+    showDock();
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  document.body.classList.add('fx');
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: まつげのカールを描く → 店名 → アーチ形の窓から写真が広がる */
+  const curl = $('#curl');
+  const len = curl.getTotalLength();
+  gsap.set(curl, { strokeDasharray: len, strokeDashoffset: len });
+  /* clip-path の文字列はブラウザが値をまとめて書き直すので、数値だけを動かして毎回組み立てる */
+  const pic = $('.hero picture');
+  const arch = { k: 1 };
+  const drawArch = () => {
+    const k = arch.k;
+    pic.style.clipPath = k <= 0 ? '' : `inset(${(22 * k).toFixed(2)}% ${(26 * k).toFixed(2)}% ${(18 * k).toFixed(2)}% ${(26 * k).toFixed(2)}% round ${(999 * k).toFixed(1)}px ${(999 * k).toFixed(1)}px 0px 0px)`;
+  };
+  drawArch();
+  gsap.set('.hero img', { scale: 1.18 });
+  gsap.set('.hero h1 .mask span', { yPercent: 108 });
+  gsap.set('.hero .kicker, .hero .sub, .hero .meta, .badge, .hero .caption', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to(curl, { strokeDashoffset: 0, duration: 1.0, ease: 'power2.inOut' })
+       .to('.loader .word span', { y: 0, duration: 0.9, stagger: 0.06 }, '-=0.55')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.45')
+       .to('.loader .ld', { y: -30, opacity: 0, duration: 0.6, ease: 'power2.in' }, '+=0.25')
+       .to('.loader', { opacity: 0, duration: 0.5, ease: 'none' }, '-=0.15')
+       .to(arch, { k: 0, duration: 1.5, ease: 'power3.inOut', onUpdate: drawArch }, '-=0.45')
+       .to('.hero img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '<')
+       .to('.hero h1 .mask span', { yPercent: 0, duration: 1.2, stagger: 0.05 }, '-=1.1')
+       .to('.hero .kicker, .hero .sub, .hero .meta, .badge, .hero .caption', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => { document.querySelector('.loader')?.remove(); pic.style.clipPath = ''; });
+
+  /* 下からせり上がって開く（clip-path は数値だけを動かす） */
+  const rise = (el, start = 'top 86%') => {
+    const o = { p: 100 };
+    const draw = () => { el.style.clipPath = o.p <= 0 ? '' : `inset(${o.p.toFixed(2)}% 0% 0% 0%)`; };
+    draw();
+    gsap.to(o, { p: 0, duration: 1.4, ease: 'power3.out', onUpdate: draw, scrollTrigger: { trigger: el, start } });
+  };
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero img', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 波の帯: スクロールで文字が波に沿って流れる */
+  gsap.fromTo('#waveText', { attr: { startOffset: 0 } }, { attr: { startOffset: -900 }, ease: 'none', scrollTrigger: { trigger: '.wave', start: 'top bottom', end: 'bottom top', scrub: 0.5 } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* アーチの写真: 下から持ち上がって開く＋枠の中でゆっくり動く */
+  rise($('.story .arch'));
+  gsap.fromTo('.story .arch img', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.story .arch', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* シートの章: スクロールでシートが倒れ、眠り、ヘッドスパ、また起きる */
+  const steps = gsap.utils.toArray('#steps li');
+  const bars = gsap.utils.toArray('#prog b');
+  let cur = 0;
+  const setStep = p => {
+    const i = Math.min(steps.length - 1, Math.floor(p * steps.length));
+    bars.forEach((b, k) => gsap.set(b, { scaleX: Math.max(0, Math.min(1, p * steps.length - k)) }));
+    if (i === cur) return;
+    steps[cur].classList.remove('on'); steps[i].classList.add('on'); cur = i;
+  };
+  gsap.set('#back', { rotation: 64, svgOrigin: '164 176' });
+  gsap.set('#legs', { rotation: 55, svgOrigin: '282 180' });
+  const ct = gsap.timeline({
+    defaults: { ease: 'power2.inOut' },
+    scrollTrigger: { trigger: '.flow', start: 'top top', end: '+=320%', pin: '.flow .pin', scrub: 0.6, onUpdate: s => setStep(s.progress) }
+  });
+  ct.to('#talk', { opacity: 0, y: -8, duration: 0.25 }, 0.7)
+    .to('#back', { rotation: 6, svgOrigin: '164 176', duration: 0.7 }, 0.85)
+    .to('#legs', { rotation: -8, svgOrigin: '282 180', duration: 0.7 }, 0.85)
+    .to('#zzz', { opacity: 1, duration: 0.3 }, 1.9)
+    .fromTo('#zzz text', { y: 10 }, { y: -6, stagger: 0.08, duration: 0.8, ease: 'sine.out' }, 1.9)
+    .to('#glow', { opacity: 0.25, duration: 0.4 }, 1.9)
+    .to('#zzz', { opacity: 0, duration: 0.25 }, 2.8)
+    .to('#steam', { opacity: 1, duration: 0.35 }, 2.95)
+    .fromTo('#steam path, #steam circle', { y: 10 }, { y: -8, stagger: 0.06, duration: 0.9, ease: 'sine.inOut' }, 2.95)
+    .to('#glow', { opacity: 0.6, duration: 0.4 }, 2.95)
+    .to('#steam', { opacity: 0, duration: 0.25 }, 3.8)
+    .to('#back', { rotation: 64, svgOrigin: '164 176', duration: 0.7 }, 3.9)
+    .to('#legs', { rotation: 55, svgOrigin: '282 180', duration: 0.7 }, 3.9)
+    .to('#glow', { opacity: 1, duration: 0.4 }, 3.9)
+    .fromTo('#mirror', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45 }, 4.25)
+    .to({}, { duration: 0.3 }, 4.7);
+
+  /* メニュー: 縦のスクロールで大きな写真が横に流れる */
+  const track = $('#track');
+  const dist = () => Math.max(0, track.scrollWidth - document.documentElement.clientWidth);
+  const slide = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.menu .mpin', start: 'top 76px', end: () => '+=' + Math.round(dist() * 1.1), pin: true, scrub: 0.6, invalidateOnRefresh: true } });
+  gsap.utils.toArray('.panel .word').forEach(w => {
+    gsap.fromTo(w, { xPercent: 30 }, { xPercent: -10, ease: 'none', scrollTrigger: { trigger: w.closest('.panel'), containerAnimation: slide, start: 'left right', end: 'right left', scrub: true } });
+  });
+
+  /* 口コミのカードを少しずつ出す */
+  gsap.utils.toArray('.cards li').forEach(el => {
+    gsap.from(el, { y: 60, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+  });
+
+  /* 地図のアーチを下から開く */
+  rise($('.map'), 'top 90%');
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
