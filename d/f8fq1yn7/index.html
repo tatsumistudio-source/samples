@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2438A6">
+<title>小さなパン屋 moitie（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bleu: #2438A6;      /* 布巾の青。店の地の色 */
+  --bleu-deep: #172674;
+  --crust: #E2762B;     /* 焼き色 */
+  --crust-deep: #B4511A;
+  --crumb: #F7EFE1;     /* パンの中身 */
+  --paper: #EADBC0;     /* 紙袋 */
+  --ink: #1B1D33;
+  --soft: #5C5560;
+  --open: #39A56A;
+  --en: "Bricolage Grotesque", "Zen Maru Gothic", system-ui, sans-serif;
+  --jp: "Zen Maru Gothic", system-ui, sans-serif;
+  --g: clamp(18px, 5vw, 64px);
+  --bar: 24px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--crumb); color: var(--ink); font-family: var(--jp); font-weight: 500; font-size: 16px; line-height: 1.85; overflow-x: clip; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, figure, ol, ul, dl, dd { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h2, h3, p, summary, dd, li { word-break: auto-phrase; }
+:focus-visible { outline: 3px solid var(--crust); outline-offset: 3px; border-radius: 8px; }
+.en { font-family: var(--en); }
+.moi { color: var(--bleu); }
+.tie { color: var(--crust); }
+.pill-cap { position: absolute; z-index: 2; font-size: 10.5px; font-weight: 700; line-height: 1; padding: 6px 9px; border-radius: 999px; background: rgba(247,239,225,.88); color: var(--ink); }
+
+/* 紙の粒子 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 95; height: var(--bar); display: flex; align-items: center; justify-content: center; background: var(--ink); color: var(--crumb); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: 青い幕がパンのように半分に裂ける */
+.loader { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+.loader .half { position: absolute; inset: 0; background: var(--bleu); display: grid; place-items: center; transform-origin: 50% 100%; }
+.loader .word { font-family: var(--en); font-weight: 800; font-size: clamp(88px, 27vw, 280px); line-height: 1; letter-spacing: -.055em; display: flex; }
+.loader .word span { display: inline-block; }
+.loader .word .a { color: var(--crumb); }
+.loader .word .b { color: var(--crust); }
+.loader .sub { position: absolute; left: 0; right: 0; bottom: 15vh; text-align: center; color: rgba(247,239,225,.72); font-family: var(--en); font-weight: 600; font-size: 12px; letter-spacing: .34em; }
+.loader svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.loader svg { clip-path: inset(0 0 100% 0); }
+.loader polyline { fill: none; stroke: var(--crust); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: var(--bar); left: 0; right: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between; padding: 12px var(--g); transition: background .35s, box-shadow .35s; }
+.head.solid { background: rgba(247,239,225,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 rgba(27,29,51,.08); }
+.head .mark { font-family: var(--en); font-weight: 800; font-size: 26px; letter-spacing: -.05em; text-decoration: none; line-height: 1; opacity: 0; transform: translateY(-6px); transition: opacity .35s, transform .35s; }
+.head.solid .mark, .static .head .mark { opacity: 1; transform: none; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; padding: 8px 13px; border-radius: 999px; background: var(--crumb); color: var(--ink); box-shadow: 0 4px 16px rgba(27,29,51,.14); }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: #A59C98; }
+.status.open i { background: var(--open); box-shadow: 0 0 0 4px rgba(57,165,106,.22); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--crumb); }
+.hero .ph { position: absolute; inset: 0; overflow: hidden; }
+.hero .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(247,239,225,0) 60%, rgba(247,239,225,.55) 82%, rgba(247,239,225,.92) 100%); }
+.hero .ph .pill-cap { left: var(--g); top: calc(var(--bar) + 70px); }
+.hero .title { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(26px + env(safe-area-inset-bottom)); }
+.hero .kicker { font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--ink); }
+.hero .tag { display: none; }
+.hero h1 { font-family: var(--en); font-weight: 800; font-size: clamp(96px, 33vw, 300px); line-height: .84; letter-spacing: -.06em; margin: 4px 0 0 -.05em; display: flex; }
+.hero h1 .w { display: inline-flex; overflow: hidden; padding: 0 .04em .06em 0; }
+.hero h1 .ch { display: inline-block; }
+.hero .meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 13px; font-weight: 700; }
+.hero .meta b { font-family: var(--en); font-weight: 800; font-size: 20px; color: var(--crust-deep); }
+.hero .scroll { font-family: var(--en); font-weight: 700; font-size: 11px; letter-spacing: .24em; display: inline-flex; align-items: center; gap: 8px; }
+.hero .scroll::after { content: ""; width: 28px; height: 2px; background: var(--ink); animation: nudge 1.6s ease-in-out infinite; transform-origin: left; }
+@keyframes nudge { 0%,100% { transform: scaleX(.3); } 50% { transform: scaleX(1); } }
+.badge { position: absolute; z-index: 3; right: var(--g); bottom: calc(210px + env(safe-area-inset-bottom)); width: clamp(96px, 27vw, 150px); aspect-ratio: 1; }
+.badge .ring { position: absolute; inset: 0; animation: spin 16s linear infinite; }
+.badge svg { width: 100%; height: 100%; }
+.badge .disc { position: absolute; inset: 0; border-radius: 50%; background: var(--crust); box-shadow: 0 10px 26px rgba(27,29,51,.22); }
+.badge .ring text { font-family: var(--en); font-weight: 700; font-size: 9.6px; fill: var(--ink); }
+.badge .half-mark { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--en); font-weight: 800; font-size: clamp(30px, 8.6vw, 48px); color: var(--crumb); line-height: 1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 交差するテープ */
+.tape { position: relative; height: clamp(190px, 44vw, 300px); overflow: hidden; background: var(--crumb); }
+.tape .band { position: absolute; left: -6%; right: -6%; top: 50%; white-space: nowrap; overflow: hidden; padding: 14px 0 12px; }
+.tape .b1 { top: 64%; background: var(--bleu); color: var(--crumb); transform: translateY(-50%) rotate(-4deg); }
+.tape .b2 { top: 32%; background: var(--crust); color: var(--ink); transform: translateY(-50%) rotate(3.5deg); }
+.tape .track { display: inline-flex; gap: 22px; align-items: center; animation: slide 34s linear infinite; font-family: var(--en); font-weight: 800; font-size: clamp(28px, 7.4vw, 60px); line-height: 1; letter-spacing: -.03em; }
+.tape .b2 .track { animation-direction: reverse; font-family: var(--jp); font-weight: 900; font-size: clamp(20px, 5.2vw, 40px); letter-spacing: .02em; }
+.tape .track i { width: .32em; height: .32em; border-radius: 50%; background: currentColor; opacity: .55; flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(64px, 12vw, 150px) var(--g) clamp(72px, 12vw, 150px); }
+.eyebrow { font-family: var(--en); font-weight: 700; font-size: 12.5px; letter-spacing: .14em; color: var(--crust-deep); text-transform: uppercase; }
+.fill { margin-top: 18px; font-weight: 900; font-size: clamp(31px, 8.8vw, 84px); line-height: 1.42; letter-spacing: .01em; }
+.fill em { font-style: normal; color: var(--bleu); }
+.story .lead { margin-top: 30px; max-width: 32em; font-size: 15.5px; color: var(--soft); }
+.stickers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 10px; margin-top: 44px; max-width: 760px; }
+.sticker { aspect-ratio: 1; display: grid; }
+.sticker .s-in { border-radius: 50%; display: grid; place-content: center; text-align: center; padding: 14px; transform: rotate(var(--r, 0deg)); box-shadow: 0 8px 22px rgba(27,29,51,.12); }
+.sticker b { display: block; font-weight: 900; font-size: clamp(21px, 5.8vw, 30px); line-height: 1.25; }
+.sticker small { display: block; margin-top: 6px; font-size: 11.5px; line-height: 1.5; opacity: .85; }
+.st1 .s-in { background: var(--bleu); color: var(--crumb); }
+.st2 .s-in { background: var(--crust); color: var(--ink); }
+.st3 .s-in { background: var(--paper); color: var(--ink); }
+.st4 .s-in { background: var(--ink); color: var(--crumb); }
+.rate { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 44px; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 13px; color: var(--soft); }
+.rate b { font-family: var(--en); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -.04em; color: var(--ink); }
+.rate b span { color: var(--crust); font-size: .6em; vertical-align: .35em; margin-right: 4px; }
+
+/* 主役: 半分に割ると、わかる（静的な並び。JS が動けば .live で舞台に変わる） */
+.split { position: relative; background: var(--crumb); border-top: 2px solid var(--ink); overflow: clip; }
+.split-pin { padding: clamp(72px, 12vw, 140px) var(--g) 56px; }
+.split-head h2 { margin-top: 8px; font-weight: 900; font-size: clamp(28px, 7.6vw, 76px); line-height: 1.3; color: var(--bleu); }
+.split-head .sub { margin-top: 10px; font-size: 14px; color: var(--soft); max-width: 26em; }
+.prog { display: none; }
+.cards { display: grid; gap: 56px; margin-top: 36px; }
+.card { position: relative; }
+.card .inside { position: relative; overflow: hidden; border-radius: 22px; aspect-ratio: 1; }
+.card .inside img { width: 100%; height: 100%; object-fit: cover; }
+.card .inside .pill-cap { right: 12px; bottom: 12px; }
+.card .cv, .card .hint { display: none; }
+.card .txt { padding-top: 16px; position: relative; z-index: 3; }
+.card .no { font-family: var(--en); font-weight: 700; font-size: 13px; letter-spacing: .08em; color: var(--crust-deep); }
+.card h3 { font-weight: 900; font-size: 23px; line-height: 1.4; }
+.card .say { margin-top: 4px; font-size: 15px; line-height: 1.8; color: var(--soft); }
+.split-note { margin-top: 28px; font-size: 11.5px; color: var(--soft); }
+
+.split.live .split-pin { height: 100svh; min-height: 660px; display: flex; flex-direction: column; padding: calc(var(--bar) + 74px) var(--g) calc(92px + env(safe-area-inset-bottom)); --stage: min(calc(100vw - 2 * var(--g)), 42svh, 560px); }
+.split.live .split-head .sub { display: none; }
+.split.live .prog { display: flex; gap: 6px; margin-top: 12px; }
+.prog i { width: 38px; height: 4px; border-radius: 4px; background: rgba(27,29,51,.14); overflow: hidden; position: relative; }
+.prog i::after { content: ""; position: absolute; inset: 0; background: var(--crust); transform: scaleX(var(--p, 0)); transform-origin: left; }
+.split.live .cards { position: relative; flex: 1; display: block; margin-top: 18px; clip-path: inset(0 -100vw); }
+.split.live .card { position: absolute; inset: 0; background: var(--crumb); isolation: isolate; }
+.split.live .card.c1 { z-index: 1; } .split.live .card.c2 { z-index: 2; } .split.live .card.c3 { z-index: 3; }
+.split.live .card .inside, .split.live .card .txt, .split.live .card .hint { width: var(--stage); margin: 0 auto; }
+.split.live .card .cv { display: block; position: absolute; top: 0; left: 50%; width: var(--stage); aspect-ratio: 1; margin-left: calc(var(--stage) / -2); transform-origin: 50% 92%; z-index: 2; }
+.split.live .card .hint { display: flex; align-items: center; gap: 10px; position: absolute; left: 0; right: 0; top: calc(var(--stage) + 20px); font-weight: 700; font-size: 14px; color: var(--ink); }
+.hint .arrow { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--crumb); display: grid; place-items: center; animation: bob 1.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(5px); } }
+.split.live .split-note { display: none; }
+.card .no small { font-family: var(--jp); font-weight: 700; letter-spacing: .02em; color: var(--soft); margin-left: 10px; }
+.cv-in { position: absolute; inset: 0; border-radius: 22px; overflow: hidden; container-type: inline-size; padding: 7cqw; display: flex; flex-direction: column; justify-content: space-between; }
+.cv-in::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .25  0 0 0 0 .1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.cv-in > * { position: relative; }
+.cv-in .top { display: flex; justify-content: space-between; font-family: var(--en); font-weight: 700; font-size: 4.4cqw; letter-spacing: .06em; }
+.cv-in .name { font-family: var(--en); font-weight: 800; font-size: 17.5cqw; line-height: .86; letter-spacing: -.05em; }
+.cv-in .jp { font-weight: 900; font-size: 5.6cqw; margin-top: 3cqw; letter-spacing: .04em; }
+.cv-in .bot { display: flex; justify-content: space-between; align-items: flex-end; font-family: var(--en); font-weight: 800; font-size: 9cqw; line-height: 1; letter-spacing: -.04em; }
+.cv-in svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cv-in polyline { fill: none; stroke-width: 2.4; stroke-dasharray: 6 7; vector-effect: non-scaling-stroke; opacity: .75; }
+.c1 .cv-in { background: radial-gradient(circle at 28% 22%, rgba(255,236,200,.35), transparent 48%), radial-gradient(circle at 78% 86%, rgba(90,30,0,.25), transparent 52%), var(--crust); color: var(--ink); }
+.c1 polyline { stroke: var(--ink); }
+.c2 .cv-in { background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.16), transparent 48%), radial-gradient(circle at 78% 86%, rgba(0,0,30,.3), transparent 52%), var(--bleu); color: var(--crumb); }
+.c2 .cv-in .jp, .c2 .cv-in .bot span:last-child { color: #FFB27A; }
+.c2 polyline { stroke: var(--crumb); }
+.c3 .cv-in { background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.4), transparent 48%), radial-gradient(circle at 78% 86%, rgba(120,70,20,.22), transparent 52%), var(--paper); color: var(--bleu); }
+.c3 .cv-in .jp { color: var(--ink); }
+.c3 polyline { stroke: var(--bleu); }
+
+/* 写真の見せ場: 天板のまま店頭へ（人気の順番） */
+.show { position: relative; background: var(--crumb); padding: clamp(72px, 12vw, 140px) 0 0; }
+.show h2 { padding: 0 var(--g); font-weight: 900; font-size: clamp(28px, 7.6vw, 76px); line-height: 1.3; color: var(--bleu); }
+.show .frame { position: relative; margin-top: 28px; aspect-ratio: 4 / 5; overflow: hidden; }
+.show .frame img { width: 100%; height: 100%; object-fit: cover; }
+.show .frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(247,239,225,.85) 0%, rgba(247,239,225,0) 26%); opacity: 0; }
+.show .frame .pill-cap { right: var(--g); top: auto; bottom: 14px; }
+.rank { position: relative; z-index: 3; margin: -80px var(--g) 0; padding: 22px 22px 18px; border-radius: 24px; background: var(--crumb); box-shadow: 0 18px 44px rgba(27,29,51,.2); }
+.rank-t { font-size: 13px; font-weight: 700; color: var(--soft); }
+.rank ol { margin-top: 8px; }
+.rank li { display: grid; grid-template-columns: 58px 1fr; align-items: center; padding: 10px 0; border-top: 1.5px solid rgba(27,29,51,.1); }
+.rank li:first-child { border-top: 0; }
+.rank li b { font-family: var(--en); font-weight: 800; font-size: 46px; line-height: 1; letter-spacing: -.04em; color: var(--crust); }
+.rank li span { font-weight: 900; font-size: 19px; line-height: 1.4; }
+.rank li small { display: block; font-weight: 500; font-size: 12.5px; color: var(--soft); line-height: 1.6; }
+.rank-n { margin-top: 6px; font-size: 11px; color: var(--soft); }
+.show.live { padding: 0; }
+.show.live .show-pin { position: relative; height: 100svh; min-height: 620px; overflow: hidden; }
+.show.live h2 { position: absolute; z-index: 3; left: 0; right: 0; top: calc(var(--bar) + 78px); line-height: 1.5; }
+.show.live h2 span { background: var(--crumb); padding: .02em .22em; border-radius: 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.show.live .frame { position: absolute; inset: 0; margin: 0; aspect-ratio: auto; }
+.show.live .frame::after { opacity: 1; }
+.show.live .rank { position: absolute; left: var(--g); right: var(--g); bottom: calc(88px + env(safe-area-inset-bottom)); margin: 0; }
+
+/* 並ぶパン */
+.menu { padding: clamp(84px, 13vw, 160px) var(--g) clamp(72px, 11vw, 140px); }
+.sec-head { display: grid; gap: 10px; }
+.sec-head h2 { font-weight: 900; font-size: clamp(28px, 7.6vw, 64px); line-height: 1.3; }
+.sec-head p { font-size: 13px; color: var(--soft); max-width: 26em; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; margin: 40px auto 0; max-width: 980px; padding: 28px 14px; border-radius: 28px; background: #23252f; box-shadow: inset 0 0 0 6px #33363f, inset 0 0 0 7px #15161c; }
+.chips li { display: block; }
+.chips li span { display: block; transform: rotate(var(--r, 0deg)); padding: 11px 16px; border-radius: 999px; font-weight: 900; font-size: 15px; line-height: 1.3; white-space: nowrap; box-shadow: 0 5px 0 rgba(0,0,0,.28); }
+.k1 span { background: var(--crust); color: var(--ink); }
+.k2 span { background: var(--crumb); color: var(--ink); }
+.k3 span { background: var(--bleu); color: var(--crumb); }
+.k4 span { background: var(--paper); color: var(--bleu); }
+.chips-cap { margin-top: 14px; text-align: center; font-size: 11.5px; color: var(--soft); }
+
+/* 来店 */
+.visit { background: var(--bleu); color: var(--crumb); padding: clamp(84px, 13vw, 160px) var(--g) clamp(72px, 11vw, 140px); border-radius: 36px 36px 0 0; }
+.visit .eyebrow { color: #FFB27A; }
+.visit .sec-head p { color: rgba(247,239,225,.72); }
+.visit-grid { display: grid; gap: 40px; margin-top: 36px; }
+.today { display: flex; align-items: center; gap: 14px; padding: 20px; border-radius: 22px; background: rgba(247,239,225,.08); border: 1.5px solid rgba(247,239,225,.22); }
+.today .dot { width: 12px; height: 12px; border-radius: 50%; background: #A59C98; flex: none; }
+.today.open .dot { background: #7BE0A3; box-shadow: 0 0 0 6px rgba(123,224,163,.2); }
+.today b { display: block; font-weight: 900; font-size: 22px; line-height: 1.4; }
+.today small { display: block; font-size: 13px; color: rgba(247,239,225,.75); }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 20px; text-align: center; }
+.week li { display: grid; justify-items: center; gap: 6px; }
+.week b { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 16px; background: var(--crumb); color: var(--bleu); position: relative; }
+.week small { font-size: 10.5px; line-height: 1.2; color: rgba(247,239,225,.8); font-family: var(--en); font-weight: 600; }
+.week li.off b { background: transparent; color: rgba(247,239,225,.55); box-shadow: inset 0 0 0 1.5px rgba(247,239,225,.35); }
+.week li.off b::after { content: ""; position: absolute; left: 9px; right: 9px; top: 50%; height: 1.5px; background: rgba(247,239,225,.5); transform: rotate(-35deg); }
+.week li.off small { font-family: var(--jp); }
+.week li.is-today b { background: var(--crust); color: var(--ink); box-shadow: 0 0 0 3px var(--bleu), 0 0 0 5px var(--crust); }
+.week li.off.is-today b { background: transparent; color: var(--crumb); }
+.hours-line { margin-top: 18px; font-size: 14px; color: rgba(247,239,225,.85); }
+.hours-line b { font-family: var(--en); font-weight: 800; font-size: 26px; letter-spacing: -.02em; color: var(--crumb); margin-right: 10px; }
+.info { margin-top: 30px; border-top: 1.5px solid rgba(247,239,225,.22); }
+.info div { display: grid; grid-template-columns: 5.4em 1fr; gap: 10px; padding: 16px 2px; border-bottom: 1.5px solid rgba(247,239,225,.22); font-size: 14.5px; line-height: 1.75; }
+.info dt { font-weight: 700; color: #FFB27A; font-size: 13px; padding-top: 2px; }
+.fill-in { display: inline; background: rgba(226,118,43,.16); color: #8A3C0F; padding: 1px 5px; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-size: .92em; }
+.visit .fill-in { background: rgba(247,239,225,.14); color: #FFCFA8; }
+.map { border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--bleu-deep); border: 1.5px solid rgba(247,239,225,.22); }
+.map iframe { width: 100%; height: 100%; border: 0; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; padding: 0 26px; border-radius: 18px; font-weight: 900; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.c { background: var(--crust); color: var(--ink); }
+.btn.k { background: var(--ink); color: var(--crumb); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.picnic { position: relative; margin-top: 36px; border-radius: 22px; overflow: hidden; }
+.picnic img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transform: scale(1.12); }
+.picnic::after { content: ""; position: absolute; inset: 45% 0 0 0; background: linear-gradient(180deg, rgba(20,24,50,0), rgba(20,24,50,.62)); pointer-events: none; }
+.picnic figcaption { z-index: 2; position: absolute; left: 16px; bottom: 14px; right: 16px; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; font-weight: 900; font-size: 17px; color: var(--crumb); text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+.picnic figcaption .pill-cap { position: static; text-shadow: none; flex: none; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 13vw, 150px) var(--g) 48px; }
+.faq-list { margin-top: 30px; border-bottom: 2px solid var(--ink); }
+details { border-top: 2px solid var(--ink); }
+summary { list-style: none; cursor: pointer; position: relative; padding: 20px 52px 20px 0; font-weight: 900; font-size: 17.5px; line-height: 1.55; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 0; top: 50%; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%; background: linear-gradient(var(--crumb), var(--crumb)) center/13px 2.5px no-repeat, linear-gradient(var(--crumb), var(--crumb)) center/2.5px 13px no-repeat, var(--bleu); transition: transform .3s, background-color .3s; }
+details[open] summary::after { transform: rotate(45deg); background-color: var(--crust); }
+details p { padding: 0 0 22px; font-size: 15px; color: var(--soft); }
+
+/* Instagram */
+.gram { margin: 40px var(--g) 0; padding: 44px 24px 34px; border-radius: 30px; background: var(--crust); color: var(--ink); overflow: hidden; position: relative; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+.tiles figure { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; box-shadow: 0 10px 22px rgba(27,29,51,.2); }
+.tiles figure:nth-child(1) { transform: rotate(-5deg); }
+.tiles figure:nth-child(2) { transform: translateY(-8px) rotate(2deg); }
+.tiles figure:nth-child(3) { transform: rotate(6deg); }
+.tiles img { width: 100%; height: 100%; object-fit: cover; }
+.gram .pill-cap { position: static; display: inline-block; margin-bottom: 10px; }
+.gram h2 { font-weight: 900; font-size: clamp(26px, 7vw, 52px); line-height: 1.35; }
+.gram p { margin-top: 10px; font-size: 15px; }
+
+/* 最後 */
+.foot { margin-top: clamp(84px, 13vw, 150px); background: var(--ink); color: rgba(247,239,225,.78); padding: 64px var(--g) calc(122px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { display: flex; justify-content: space-between; font-family: var(--en); font-weight: 800; font-size: clamp(100px, 30vw, 430px); line-height: .8; letter-spacing: -.03em; margin: 0 -.02em 18px -.05em; }
+.foot .huge .moi { color: var(--crumb); }
+.foot .meaning { font-family: var(--en); font-weight: 600; font-size: 13px; letter-spacing: .06em; color: #FFB27A; margin-bottom: 34px; }
+.foot p { font-size: 13px; line-height: 1.95; }
+.foot .made { margin-top: 26px; padding-top: 16px; border-top: 1px solid rgba(247,239,225,.16); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 70; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 22px; background: rgba(247,239,225,.93); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 14px 34px rgba(27,29,51,.24), inset 0 0 0 1.5px rgba(27,29,51,.1); transform: translateY(160%); transition: transform .55s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; gap: 7px; text-decoration: none; font-weight: 900; font-size: 14px; color: var(--ink); }
+.dock a.main { background: var(--bleu); color: var(--crumb); }
+.dock svg { width: 17px; height: 17px; flex: none; }
+
+@media (min-width: 900px) {
+  .hero { background: var(--bleu); }
+  .hero .ph { left: calc(50% - 20px); clip-path: var(--tear-ph, none); }
+  .hero .ph::after { display: none; }
+  .hero .ph .pill-cap { left: 60px; top: calc(var(--bar) + 22px); }
+  .hero .title { right: 52%; bottom: 60px; }
+  .hero .kicker { color: rgba(247,239,225,.82); }
+  .hero .tag { display: block; position: absolute; z-index: 2; left: var(--g); top: calc(var(--bar) + 110px); font-weight: 900; font-size: clamp(26px, 2.3vw, 36px); line-height: 1.5; color: var(--crumb); }
+  .hero .tag em { font-style: normal; color: #FFB27A; }
+  .hero h1 { flex-direction: column; font-size: min(15.5vw, 30svh); line-height: .8; margin-top: 10px; }
+  .hero h1 .moi { color: var(--crumb); }
+  .hero .meta { color: var(--crumb); max-width: 560px; }
+  .hero .meta b { color: #FFB27A; }
+  .hero .scroll::after { background: var(--crumb); }
+  .badge { right: auto; left: calc(50% - 20px - 75px); bottom: auto; top: 58%; width: 150px; }
+  .tape .band { padding: 18px 0 15px; }
+  .story { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); column-gap: 72px; align-items: start; }
+  .story .eyebrow { grid-column: 1 / -1; }
+  .story .fill { grid-column: 1; grid-row: 2; font-size: clamp(40px, 5.2vw, 78px); }
+  .story .lead { grid-column: 1; grid-row: 3; }
+  .story .rate { grid-column: 1; grid-row: 4; }
+  .story .stickers { grid-column: 2; grid-row: 2 / span 3; align-self: center; margin-top: 0; width: 100%; max-width: 480px; justify-self: end; }
+  .split-pin { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; }
+  .cards { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .split.live .split-pin { display: grid; grid-template-columns: minmax(0, 1fr) var(--stage); grid-template-rows: 1fr auto; column-gap: 72px; padding-top: calc(var(--bar) + 96px); padding-bottom: 48px; --stage: min(40vw, calc(100svh - 330px), 540px); }
+  .split.live .split-head { grid-column: 1; grid-row: 1; align-self: center; position: relative; z-index: 3; }
+  .split.live .split-head h2 { font-size: clamp(40px, 4.4vw, 64px); }
+  .split.live .split-head .sub { display: block; }
+  .split.live .cards { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+  .split.live .split-note { display: block; position: static; grid-column: 1; grid-row: 2; }
+  .split.live .card .hint { top: calc(var(--stage) + 22px); }
+  .show { display: grid; }
+  .show .frame { aspect-ratio: 16 / 8; }
+  .rank { justify-self: end; width: 440px; margin-top: -160px; margin-right: var(--g); }
+  .show.live .rank { left: var(--g); right: auto; bottom: 40px; width: 440px; }
+  .visit-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .faq, .menu .sec-head { max-width: 980px; margin-left: auto; margin-right: auto; }
+  .gram { max-width: 980px; margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 56px; }
+  .tiles { margin: 0; }
+  .dock { left: auto; right: 24px; width: 440px; }
+  .chips { padding: 48px 40px; gap: 16px 12px; }
+  .chips li span { font-size: 18px; padding: 13px 20px; }
+  .gram h2 { font-size: clamp(30px, 3vw, 42px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tape .track, .badge .ring, .hint .arrow, .hero .scroll::after { animation: none; }
+  .picnic img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="half l"><div class="word"><span class="a">moi</span><span class="b">tie</span></div></div>
+  <div class="half r"><div class="word"><span class="a">moi</span><span class="b">tie</span></div></div>
+  <svg class="seam" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg>
+  <p class="sub">PETITE BOULANGERIE</p>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top" aria-label="moitie"><span class="moi">moi</span><span class="tie">tie</span></a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="小さなパン屋 moitie">
+    <div class="ph">
+      <img src="img/hero.jpg" alt="天板に並んだ焼きたてのメロンパン・カレーパン・クロワッサンなど（イメージ）">
+      <span class="pill-cap">写真はイメージです</span>
+    </div>
+    <p class="tag">開店は10時。<br>お昼すぎでも、<em>焼きたて。</em></p>
+    <div class="badge" aria-hidden="true">
+      <span class="disc"></span>
+      <div class="ring"><svg viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text textLength="276" lengthAdjust="spacing"><textPath href="#circ" textLength="276" lengthAdjust="spacing">PETITE BOULANGERIE · KEMIGAWA · CHIBA · </textPath></text></svg></div>
+      <span class="half-mark">½</span>
+    </div>
+    <div class="title">
+      <p class="kicker">千葉市花見川区・検見川町の、小さなパン屋</p>
+      <h1 aria-label="moitie"><span class="w moi"><span class="ch">m</span><span class="ch">o</span><span class="ch">i</span></span><span class="w tie"><span class="ch">t</span><span class="ch">i</span><span class="ch">e</span></span></h1>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.7</b>（55件）</span>
+        <span class="scroll" aria-hidden="true">SCROLL</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="tape" aria-hidden="true">
+    <div class="band b2"><div class="track">
+      <span>ガーリックシュリンプ</span><i></i><span>明太フォンデュ</span><i></i><span>紅茶メロンパン</span><i></i><span>ラムレーズンチーズロール</span><i></i><span>胡桃パン</span><i></i><span>コーンマヨネーズ</span><i></i>
+      <span>ガーリックシュリンプ</span><i></i><span>明太フォンデュ</span><i></i><span>紅茶メロンパン</span><i></i><span>ラムレーズンチーズロール</span><i></i><span>胡桃パン</span><i></i><span>コーンマヨネーズ</span><i></i>
+    </div></div>
+    <div class="band b1"><div class="track">
+      <span>Garlic Shrimp</span><i></i><span>Melon Pan</span><i></i><span>Apple Cinnamon</span><i></i><span>Curry Pan</span><i></i><span>Mini Baguette</span><i></i><span>Banana Danish</span><i></i>
+      <span>Garlic Shrimp</span><i></i><span>Melon Pan</span><i></i><span>Apple Cinnamon</span><i></i><span>Curry Pan</span><i></i><span>Mini Baguette</span><i></i><span>Banana Danish</span><i></i>
+    </div></div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <p class="eyebrow">Fresh from the oven</p>
+    <h2 class="fill" id="story-title">開店は10時。<br>お昼をすぎても、<br><em>焼きたて</em>が並ぶ。<br>焼けたパンは、<br><em>天板のまま</em>店頭へ。</h2>
+    <p class="lead">新検見川駅から歩いて5分ほど。口コミでは、小さなお店なのに焼きたてが天板ごと運ばれてくること、お昼をすぎても焼きたてに出会えることが喜ばれています。</p>
+    <div class="stickers" aria-label="口コミで挙がる、うれしいところ">
+      <div class="sticker st1"><div class="s-in" style="--r:-6deg"><b>国産小麦</b><small>口コミより</small></div></div>
+      <div class="sticker st2"><div class="s-in" style="--r:5deg"><b>無添加</b><small>口コミより</small></div></div>
+      <div class="sticker st3"><div class="s-in" style="--r:4deg"><b>ちょうど<br>いい大きさ</b><small>大きすぎない、の声</small></div></div>
+      <div class="sticker st4"><div class="s-in" style="--r:-4deg"><b>ていねいな<br>接客</b><small>おすすめを<br>教えてくれた、の声</small></div></div>
+    </div>
+    <div class="rate"><b><span>★</span>4.7</b><span>Googleの口コミ 55件の平均（2026年9月）</span></div>
+  </section>
+
+  <section class="split" id="split" aria-labelledby="split-title">
+    <div class="split-pin">
+      <div class="split-head">
+        <p class="eyebrow">moitié ＝ フランス語で「半分」</p>
+        <h2 id="split-title">半分に割ると、わかる。</h2>
+        <p class="sub">口コミで中身までほめられているパンを、半分に割って見せます。</p>
+        <div class="prog" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="cards">
+        <article class="card c1">
+          <figure class="inside"><img src="img/shrimp.jpg" alt="半分に割ったガーリックシュリンプ。中にガーリックバターと海老（イメージ）" loading="lazy"><span class="pill-cap">イメージ</span></figure>
+          <div class="cv l" aria-hidden="true"><div class="cv-in"><div class="top"><span>01</span><span>/03</span></div><div><p class="name">Garlic<br>Shrimp</p><p class="jp">ガーリックシュリンプ</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <div class="cv r" aria-hidden="true"><div class="cv-in"><div class="top"><span>01</span><span>/03</span></div><div><p class="name">Garlic<br>Shrimp</p><p class="jp">ガーリックシュリンプ</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <p class="hint" aria-hidden="true"><span class="arrow">↓</span>スクロールで、半分に割ってみる</p>
+          <div class="txt"><p class="no">01 / 03<small>口コミの要旨</small></p><h3>ガーリックシュリンプ</h3><p class="say">外はサクッと軽く、中はもっちり。濃いめのガーリックバターと、海老の歯ごたえ。</p></div>
+        </article>
+        <article class="card c2">
+          <figure class="inside"><img src="img/mentai.jpg" alt="半分に割った明太フォンデュ。中に明太子のソース（イメージ）" loading="lazy"><span class="pill-cap">イメージ</span></figure>
+          <div class="cv l" aria-hidden="true"><div class="cv-in"><div class="top"><span>02</span><span>/03</span></div><div><p class="name">Mentai<br>Fondue</p><p class="jp">明太フォンデュ</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <div class="cv r" aria-hidden="true"><div class="cv-in"><div class="top"><span>02</span><span>/03</span></div><div><p class="name">Mentai<br>Fondue</p><p class="jp">明太フォンデュ</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <div class="txt"><p class="no">02 / 03<small>口コミの要旨</small></p><h3>明太フォンデュ</h3><p class="say">割ってみると、中には明太がたっぷり。焼きたてを公園で食べた、という声も。</p></div>
+        </article>
+        <article class="card c3">
+          <figure class="inside"><img src="img/apple.jpg" alt="半分に割ったアップルシナモン。中にカスタードとりんごジャム（イメージ）" loading="lazy"><span class="pill-cap">イメージ</span></figure>
+          <div class="cv l" aria-hidden="true"><div class="cv-in"><div class="top"><span>03</span><span>/03</span></div><div><p class="name">Apple<br>Cinnamon</p><p class="jp">アップルシナモン</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <div class="cv r" aria-hidden="true"><div class="cv-in"><div class="top"><span>03</span><span>/03</span></div><div><p class="name">Apple<br>Cinnamon</p><p class="jp">アップルシナモン</p></div><div class="bot"><span>moi</span><span>tie</span></div><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points=""/></svg></div></div>
+          <div class="txt"><p class="no">03 / 03<small>口コミの要旨</small></p><h3>アップルシナモン</h3><p class="say">ふわふわの生地に、やさしい甘さの自家製カスタードとりんごジャム。</p></div>
+        </article>
+      </div>
+      <p class="split-note">※パンの中身の説明は Google の口コミの要旨です。写真はすべてイメージです。</p>
+    </div>
+  </section>
+
+  <section class="show" aria-labelledby="show-title">
+    <div class="show-pin">
+      <h2 id="show-title"><span>焼けたら、</span><br><span>天板のまま店頭へ。</span></h2>
+      <figure class="frame"><img src="img/trays.jpg" alt="天板に並んだメロンパン・チョコクロワッサン・カレーパン（イメージ）" loading="lazy"><span class="pill-cap">写真はイメージです</span></figure>
+      <div class="rank">
+        <p class="rank-t">口コミに書かれていた、お店の人気順</p>
+        <ol>
+          <li><b>1</b><span>メロンパン</span></li>
+          <li><b>2</b><span>チョコクロワッサン</span></li>
+          <li><b>3</b><span>焼き牛肉カレーパン<small>温め直すとカレーがおいしい、の声も</small></span></li>
+        </ol>
+        <p class="rank-n">1年ほど前の口コミより。時期で変わるので、最新の順位に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <p class="eyebrow">On the tray</p>
+      <h2 id="menu-title">口コミに<br>名前が出てくるパン</h2>
+      <p>並ぶパンは季節や日によって変わります。実際のラインナップに差し替えます。</p>
+    </div>
+    <ul class="chips" aria-label="口コミに名前が出てくるパン">
+      <li class="k1"><span style="--r:-4deg">ガーリックシュリンプ</span></li>
+      <li class="k2"><span style="--r:3deg">明太フォンデュ</span></li>
+      <li class="k3"><span style="--r:-2deg">メロンパン</span></li>
+      <li class="k4"><span style="--r:5deg">紅茶メロンパン</span></li>
+      <li class="k2"><span style="--r:-5deg">チョコクロワッサン</span></li>
+      <li class="k1"><span style="--r:2deg">焼き牛肉カレーパン</span></li>
+      <li class="k3"><span style="--r:4deg">アップルシナモン</span></li>
+      <li class="k4"><span style="--r:-3deg">ブルーベリーベーグル</span></li>
+      <li class="k2"><span style="--r:6deg">胡桃パン</span></li>
+      <li class="k1"><span style="--r:-6deg">コーンマヨネーズ</span></li>
+      <li class="k3"><span style="--r:3deg">全粒粉ミニバゲット</span></li>
+      <li class="k4"><span style="--r:-2deg">ラムレーズンチーズロール</span></li>
+      <li class="k2"><span style="--r:4deg">おつまみチーズデニッシュ</span></li>
+      <li class="k1"><span style="--r:-4deg">バナナデニッシュ</span></li>
+    </ul>
+    <p class="chips-cap">天板の上に、口コミに出てきたパンの名前を並べています</p>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <p class="eyebrow">Visit</p>
+      <h2 id="visit-title">お店へ行く前に</h2>
+      <p>営業日と時間は Googleマップの情報です（2026年9月）</p>
+    </div>
+    <div class="visit-grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ol class="week" id="week" aria-label="曜日ごとの営業">
+          <li data-d="1" class="off"><b>月</b><small>お休み</small></li>
+          <li data-d="2"><b>火</b><small>10–18</small></li>
+          <li data-d="3"><b>水</b><small>10–18</small></li>
+          <li data-d="4" class="off"><b>木</b><small>お休み</small></li>
+          <li data-d="5"><b>金</b><small>10–18</small></li>
+          <li data-d="6"><b>土</b><small>10–18</small></li>
+          <li data-d="0"><b>日</b><small>10–18</small></li>
+        </ol>
+        <p class="hours-line"><b>10:00 – 18:00</b>月・木はお休み</p>
+        <dl class="info">
+          <div><dt>住所</dt><dd>〒262-0023<br>千葉県千葉市花見川区<br>検見川町3丁目300-26</dd></div>
+          <div><dt>駅から</dt><dd>新検見川駅から歩いて5分ほど（口コミより）</dd></div>
+          <div><dt>駐車場</dt><dd>お店の駐車場はないようです（口コミより）。<span class="fill-in">近くに停められる場所があれば案内を入れます</span></dd></div>
+          <div><dt>お支払い</dt><dd>口コミでは現金と PayPay の声があります。<span class="fill-in">最新の支払い方法に差し替えます</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <div class="map"><iframe title="小さなパン屋 moitie の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E5%B0%8F%E3%81%95%E3%81%AA%E3%83%91%E3%83%B3%E5%B1%8Bmoitie%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E8%8A%B1%E8%A6%8B%E5%B7%9D%E5%8C%BA%E6%A4%9C%E8%A6%8B%E5%B7%9D%E7%94%BA3%E4%B8%81%E7%9B%AE300-26&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row"><a class="btn c" href="https://maps.google.com/?cid=14203788373353086359" target="_blank" rel="noopener">Googleマップで道順を見る</a></div>
+        <figure class="picnic"><img src="img/picnic.jpg" alt="公園の芝生に置いたパンの紙袋（イメージ）" loading="lazy"><figcaption><span>焼きたてを、近くの公園で。</span><span class="pill-cap">イメージ</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><p class="eyebrow">Q &amp; A</p><h2 id="faq-title">よくある質問</h2></div>
+    <div class="faq-list">
+      <details><summary>焼きたてに出会いやすい時間は？</summary><p>開店は10時です。口コミでは、11時半ごろやお昼すぎに行っても焼きたてが並んでいた、という声があります。<span class="fill-in">焼き上がりの時間の目安を入れます</span></p></details>
+      <details><summary>夕方でも買えますか？</summary><p>閉店は18時です。夕方は売り切れているパンもある、という口コミがあります。</p></details>
+      <details><summary>あんこは、こしあん？つぶあん？</summary><p>口コミによると、こしあんです。</p></details>
+      <details><summary>自販機があると聞きました</summary><p>2026年2月から自販機での販売が始まった、という口コミがあります。<span class="fill-in">置き場所・使える時間・入っているパンを入れます</span></p></details>
+      <details><summary>取り置きや予約はできますか？</summary><p><span class="fill-in">取り置きができるかどうかと頼み方（Instagram の DM など）を、お店のルールに合わせて書きます</span></p></details>
+      <details><summary>原材料やアレルギーについて</summary><p>口コミでは、国産小麦・無添加のパンとして紹介されています。<span class="fill-in">アレルギー表示の方針を入れます</span></p></details>
+    </div>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles">
+      <figure><img src="img/shrimp.jpg" alt="" loading="lazy"></figure>
+      <figure><img src="img/mentai.jpg" alt="" loading="lazy"></figure>
+      <figure><img src="img/apple.jpg" alt="" loading="lazy"></figure>
+    </div>
+    <div>
+      <span class="pill-cap">写真はイメージです</span>
+      <h2 id="gram-title">最新のお知らせは、<br>Instagramで。</h2>
+      <p>最新の情報は、<br>Instagram をご覧ください。</p>
+      <div class="row"><a class="btn k" href="https://www.instagram.com/panya_moitie/" target="_blank" rel="noopener">@panya_moitie を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true"><span class="moi">moi</span><span class="tie">tie</span></p>
+  <p class="meaning">moitié ＝ フランス語で「半分」</p>
+  <p>小さなパン屋 moitie<br>〒262-0023 千葉県千葉市花見川区検見川町3丁目300-26<br>火・水・金・土・日 10:00–18:00　月・木 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージで、口コミは要旨を言い換えたものです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=14203788373353086359" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>道順</a>
+  <a href="#visit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>営業時間</a>
+  <a href="https://www.instagram.com/panya_moitie/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></svg>Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const body = document.body;
+  const reduced = body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+
+  /* 営業中かどうか（日本時間）: 月・木が定休、ほかは 10:00–18:00 */
+  const HOURS = { 0: [10, 18], 2: [10, 18], 3: [10, 18], 5: [10, 18], 6: [10, 18] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  $('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  const todayCell = $(`#week li[data-d="${d}"]`);
+  if (todayCell) { todayCell.classList.add('is-today'); todayCell.querySelector('small').textContent = '今日'; }
+
+  /* パンを割ったような裂け目（ジグザグ）を作る */
+  const tear = (seed, n, amp) => {
+    let s = seed;
+    const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+    const pts = [];
+    for (let i = 0; i <= n; i++) {
+      const y = (i / n) * 100;
+      const x = (i === 0 || i === n) ? 50 : 50 + (i % 2 ? 1 : -1) * amp * (0.45 + rnd() * 0.55);
+      pts.push([x, y]);
+    }
+    return pts;
+  };
+  const clip = (pts, side) => {
+    const edge = pts.map(([x, y]) => `${x.toFixed(2)}% ${y.toFixed(2)}%`).join(', ');
+    return side === 'l' ? `polygon(0% 0%, ${edge}, 0% 100%)` : `polygon(100% 0%, ${edge}, 100% 100%)`;
+  };
+  const line = pts => pts.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(' ');
+
+  const loaderPts = tear(7, 14, 2.2);
+  $$('.loader .half').forEach(el => el.style.clipPath = clip(loaderPts, el.classList.contains('l') ? 'l' : 'r'));
+  $('.loader polyline').setAttribute('points', line(loaderPts));
+
+  $$('.card').forEach((card, i) => {
+    const pts = tear(11 + i * 5, 12, 5.5);
+    card.querySelector('.cv.l').style.clipPath = clip(pts, 'l');
+    card.querySelector('.cv.r').style.clipPath = clip(pts, 'r');
+    card.querySelectorAll('.cv polyline').forEach(p => p.setAttribute('points', line(pts)));
+  });
+
+  /* PC のファーストビュー: 写真の左端を裂け目にする */
+  const phPts = tear(3, 16, 2.2).map(([x, y]) => [(x - 50) + 2.6, y]);
+  document.documentElement.style.setProperty('--tear-ph', `polygon(100% 0%, ${phPts.map(([x, y]) => `${x.toFixed(2)}% ${y.toFixed(2)}%`).join(', ')}, 100% 100%)`);
+
+  const loader = $('.loader');
+  const showDock = () => $('#dock').classList.add('show');
+
+  const onScroll = () => {
+    $('#head').classList.toggle('solid', scrollY > innerHeight * 0.85);
+    if (scrollY > innerHeight * 0.5) showDock();
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const live = !reduced && window.gsap && window.ScrollTrigger;
+  if (!live) { loader && loader.remove(); body.classList.add('static'); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  setTimeout(() => { if (loader.isConnected) loader.remove(); }, 6000);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: moi と tie が寄って、幕が半分に裂ける */
+  gsap.set('.hero h1 .ch', { yPercent: 110 });
+  gsap.set('.hero .kicker, .hero .meta, .hero .tag, .badge', { autoAlpha: 0, y: 14 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.from('.loader .a', { xPercent: -90, autoAlpha: 0, duration: 0.9 })
+       .from('.loader .b', { xPercent: 90, autoAlpha: 0, duration: 0.9 }, '<')
+       .from('.loader .sub', { autoAlpha: 0, duration: 0.4 }, '-=0.35')
+       .to('.loader .seam', { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.5, ease: 'power2.inOut' }, '+=0.05')
+       .to('.loader .half.l', { xPercent: -104, rotation: -5, duration: 1.05, ease: 'power4.inOut' }, '+=0.05')
+       .to('.loader .half.r', { xPercent: 104, rotation: 5, duration: 1.05, ease: 'power4.inOut' }, '<')
+       .to('.loader .seam, .loader .sub', { autoAlpha: 0, duration: 0.2 }, '<')
+       .fromTo('.hero .ph img', { scale: 1.16 }, { scale: 1, duration: 2, ease: 'power3.out' }, '<')
+       .to('.hero h1 .ch', { yPercent: 0, duration: 1, stagger: 0.05 }, '<+0.35')
+       .to('.hero .kicker, .hero .meta, .hero .tag, .badge', { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08 }, '<+0.3')
+       .add(() => loader.remove());
+
+
+  /* ファーストビュー: スクロールで店名が半分に分かれる */
+  gsap.to('.hero h1 .moi', { xPercent: -14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.to('.hero h1 .tie', { xPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 語り: 一文字ずつ色が乗る */
+  const fillEl = $('.fill');
+  const wrap = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        [...n.textContent].forEach(ch => { const s = document.createElement('span'); s.className = 'c'; s.textContent = ch; frag.appendChild(s); });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') wrap(n);
+    });
+  };
+  wrap(fillEl);
+  gsap.fromTo('.fill .c', { opacity: 0.14 }, { opacity: 1, stagger: 0.08, ease: 'none', scrollTrigger: { trigger: fillEl, start: 'top 80%', end: 'bottom 45%', scrub: true } });
+  gsap.from('.story .lead, .rate', { y: 24, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.story .lead', start: 'top 88%' } });
+  gsap.from('.sticker', { scale: 0.2, rotation: -40, autoAlpha: 0, duration: 0.9, ease: 'back.out(2)', stagger: 0.12, scrollTrigger: { trigger: '.stickers', start: 'top 82%' } });
+
+  /* 主役: スクロールでパンを半分に割る */
+  const split = $('#split');
+  split.classList.add('live');
+  const cards = $$('.card');
+  const segs = $$('.prog i');
+  const wide = matchMedia('(min-width: 900px)').matches;
+  const OPEN = wide ? { x: 36, y: 0, r: 7 } : { x: 44, y: 4, r: 9 };
+  gsap.set(cards.slice(1), { yPercent: 115 });
+  gsap.set('.card .txt', { autoAlpha: 0, y: 16 });
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: split, start: 'top top', end: () => '+=' + innerHeight * 3.4, pin: '.split-pin', scrub: 0.6,
+      onUpdate: s => segs.forEach((el, i) => el.style.setProperty('--p', Math.min(1, Math.max(0, s.progress * 3 - i)).toFixed(3)))
+    }
+  });
+  tl.to('.card .hint', { autoAlpha: 0, duration: 0.3 }, 0);
+  cards.forEach((c, i) => {
+    const L = c.querySelector('.cv.l'), R = c.querySelector('.cv.r');
+    if (i > 0) {
+      const p = cards[i - 1];
+      tl.to(p.querySelector('.cv.l'), { xPercent: -150, autoAlpha: 0, duration: 0.7, ease: 'power2.in' }, '>')
+        .to(p.querySelector('.cv.r'), { xPercent: 150, autoAlpha: 0, duration: 0.7, ease: 'power2.in' }, '<')
+        .to(p.querySelector('.txt'), { autoAlpha: 0, y: -12, duration: 0.35 }, '<')
+        .to(c, { yPercent: 0, duration: 0.8, ease: 'power2.out' }, '<+0.1');
+    }
+    tl.addLabel('open' + i)
+      .to(L, { xPercent: -OPEN.x, yPercent: OPEN.y, rotation: -OPEN.r, duration: 1, ease: 'power2.inOut' }, 'open' + i)
+      .to(R, { xPercent: OPEN.x, yPercent: OPEN.y, rotation: OPEN.r, duration: 1, ease: 'power2.inOut' }, 'open' + i)
+      .fromTo(c.querySelector('.inside img'), { scale: 1.22 }, { scale: 1, duration: 1.1, ease: 'power2.out' }, 'open' + i)
+      .to(c.querySelector('.txt'), { autoAlpha: 1, y: 0, duration: 0.5 }, 'open' + i + '+=0.55')
+      .to({}, { duration: 0.7 });
+  });
+
+  /* 写真の見せ場: 小さな窓から画面いっぱいへ広げ、人気の順番を出す */
+  const show = $('.show');
+  show.classList.add('live');
+  gsap.set('.rank', { yPercent: 40, autoAlpha: 0 });
+  const st = gsap.timeline({ scrollTrigger: { trigger: show, start: 'top top', end: () => '+=' + innerHeight * 1.8, pin: '.show-pin', scrub: 0.6 } });
+  st.fromTo('.show .frame', { clipPath: 'inset(34% 9% 16% 9% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1, ease: 'power2.inOut' })
+    .fromTo('.show .frame img', { scale: 1.3 }, { scale: 1, duration: 1, ease: 'power2.inOut' }, 0)
+    .to('.rank', { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' }, '>-0.1')
+    .from('.rank li', { x: 30, autoAlpha: 0, stagger: 0.12, duration: 0.4 }, '<+0.2')
+    .to({}, { duration: 0.5 });
+
+  /* 並ぶパン: 天板に落ちてくる */
+  gsap.from('.chips li', { y: -160, rotation: () => gsap.utils.random(-50, 50), autoAlpha: 0, duration: 1, ease: 'bounce.out', stagger: 0.06, scrollTrigger: { trigger: '.chips', start: 'top 78%' } });
+
+  /* 見出しと写真 */
+  $$('.sec-head, .faq-list, .today, .week, .info, .map').forEach(el => {
+    gsap.from(el, { y: 28, autoAlpha: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+  gsap.fromTo('.picnic img', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.picnic', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.tiles figure', { y: 50, rotation: 0, autoAlpha: 0, duration: 1, ease: 'back.out(1.6)', stagger: 0.1, scrollTrigger: { trigger: '.gram', start: 'top 80%' } });
+
+  /* 最後: 店名が真ん中から分かれる */
+  gsap.from('.foot .huge .moi', { xPercent: 30, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+  gsap.from('.foot .huge .tie', { xPercent: -30, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+
+  document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
