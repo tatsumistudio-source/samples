@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1E2024">
+<title>ドッグサロン ラ・ブランシュ（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Kiwi+Maru:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pepper: #1E2024;    /* ソルト＆ペッパーの「ペッパー」 */
+  --pepper-2: #2A2D32;
+  --slate: #5B6168;
+  --silver: #A9AEB3;
+  --salt: #F5F2EC;      /* ソルト。店名の「白」 */
+  --snow: #FFFDF9;
+  --kinari: #ECE5DA;    /* 木の店内のあたたかさ */
+  --oak: #B98B5E;
+  --ribbon: #B3313A;    /* トリミングのリボン。大事な所とボタンだけ */
+  --ribbon-lt: #F29C94;
+  --leaf: #9CCB86;      /* 営業中の灯り */
+  --ink: #1E2024;
+  --body: #4B5057;
+  --mute-d: #B7BBC0;
+  --line-l: rgba(30,32,36,.12);
+  --line-d: rgba(245,242,236,.16);
+  --latin: "Instrument Serif", "Times New Roman", serif;
+  --round: "Kiwi Maru", serif;
+  --sans: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--salt); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.9; overflow-x: clip; word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--ribbon); outline-offset: 4px; border-radius: 8px; }
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+.la { font-family: var(--latin); font-style: italic; font-weight: 400; }
+.eyebrow { font-family: var(--latin); font-style: italic; font-size: 19px; line-height: 1.2; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ""; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid currentColor; box-shadow: inset -2px -2px 0 rgba(255,255,255,.35); flex: none; }
+.fill-in { background: rgba(179,49,58,.1); color: #8E2530; padding: 1px 6px; border-radius: 4px; font-size: .94em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.dark .fill-in { background: rgba(242,156,148,.14); color: var(--ribbon-lt); }
+.cap { position: absolute; right: 12px; bottom: 10px; z-index: 3; font-size: 10px; line-height: 1; color: rgba(255,255,255,.92); background: rgba(30,32,36,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 5px 9px; border-radius: 999px; }
+.src { font-size: 11.5px; color: var(--slate); line-height: 1.7; }
+.dark .src { color: var(--mute-d); }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 96; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--ribbon); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: 泡が立って店名 → たたんだタオルのように左右へ抜ける */
+.loader { position: fixed; inset: 0; z-index: 100; pointer-events: none; animation: loader-bye .01s linear 7s forwards; }
+@keyframes loader-bye { to { opacity: 0; visibility: hidden; } }
+.loader .fold { position: absolute; left: 0; right: 0; height: calc(25% + 1px); background: var(--pepper); border-bottom: 1px dashed rgba(245,242,236,.08); }
+.loader .fold:nth-child(1) { top: 0; }
+.loader .fold:nth-child(2) { top: 25%; }
+.loader .fold:nth-child(3) { top: 50%; }
+.loader .fold:nth-child(4) { top: 75%; }
+.loader .ld { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; color: var(--salt); }
+.loader .word { position: relative; display: flex; overflow: hidden; font-family: var(--latin); font-style: italic; font-size: clamp(64px, 19vw, 170px); line-height: 1; padding: .04em .12em .12em .04em; }
+.loader .word span { display: inline-block; }
+.loader .word .sp { width: .26em; }
+.loader .sub { font-size: 11px; letter-spacing: .32em; color: var(--mute-d); margin-right: -.32em; }
+.loader .bub { position: absolute; inset: 0; }
+.loader .bub b { position: absolute; border-radius: 50%; border: 1.5px solid rgba(245,242,236,.8); background: radial-gradient(circle at 32% 30%, rgba(255,255,255,.55), rgba(255,255,255,.04) 60%); }
+.loader .bub b:nth-child(1) { width: 34px; height: 34px; left: calc(50% - 150px); top: calc(50% - 90px); }
+.loader .bub b:nth-child(2) { width: 18px; height: 18px; left: calc(50% - 96px); top: calc(50% - 118px); }
+.loader .bub b:nth-child(3) { width: 46px; height: 46px; left: calc(50% + 96px); top: calc(50% - 110px); }
+.loader .bub b:nth-child(4) { width: 14px; height: 14px; left: calc(50% + 150px); top: calc(50% - 50px); }
+.loader .bub b:nth-child(5) { width: 24px; height: 24px; left: calc(50% + 40px); top: calc(50% - 140px); }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px var(--g); color: var(--salt); transition: background .4s, padding .4s, box-shadow .4s; }
+.head.solid { background: rgba(30,32,36,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line-d); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--latin); font-style: italic; font-size: 25px; line-height: 1; text-decoration: none; white-space: nowrap; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.3; padding: 7px 12px; border: 1px solid var(--line-d); border-radius: 999px; background: rgba(30,32,36,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mute-d); flex: none; }
+.status.open i { background: var(--leaf); box-shadow: 0 0 0 4px rgba(156,203,134,.2); }
+.status.maybe i { background: var(--ribbon-lt); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; background: var(--pepper); color: var(--salt); }
+.hero picture { position: absolute; inset: 0; }
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(30,32,36,.5) 0%, rgba(30,32,36,0) 20%, rgba(30,32,36,0) 44%, rgba(30,32,36,.6) 66%, rgba(30,32,36,.95) 100%); }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); top: 96px; font-size: 10px; line-height: 1; color: rgba(245,242,236,.9); background: rgba(30,32,36,.4); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 5px 10px; border-radius: 999px; }
+.notice { position: absolute; z-index: 2; left: var(--g); top: 92px; display: inline-flex; align-items: center; gap: 10px; max-width: calc(100% - 2 * var(--g) - 110px); padding: 7px 14px 7px 7px; border-radius: 999px; background: var(--snow); color: var(--ink); font-size: 12.5px; font-weight: 700; line-height: 1.35; text-decoration: none; box-shadow: 0 8px 24px rgba(30,32,36,.18); }
+.notice b { flex: none; font-size: 11px; color: #fff; background: var(--ribbon); padding: 4px 9px; border-radius: 999px; }
+.hero .title { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(86px + env(safe-area-inset-bottom)); }
+.hero .kicker { font-size: 12.5px; letter-spacing: .08em; color: #D9DCDF; margin-bottom: 10px; }
+.hero h1 { font-family: var(--latin); font-style: italic; font-weight: 400; line-height: .8; letter-spacing: -.015em; }
+.hero h1 .r { display: flex; }
+.hero h1 .r1 { font-size: clamp(42px, 11vw, 100px); color: var(--ribbon-lt); margin: 0 0 -.02em .04em; }
+.hero h1 .r2 { font-size: clamp(100px, 28vw, 300px); margin-left: -.05em; }
+.hero h1 .c { display: inline-block; overflow: hidden; padding: 0 .07em .1em 0; margin-right: -.07em; }
+.hero h1 .c > span { display: inline-block; }
+.hero .jp { margin-top: 12px; font-family: var(--round); font-size: clamp(16px, 4.4vw, 22px); line-height: 1.6; }
+.hero .jp small { display: block; font-family: var(--sans); font-size: 12.5px; color: #C9CCD0; letter-spacing: .04em; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 14px; font-size: 13px; color: #D9DCDF; }
+.hero .meta b { color: var(--ribbon-lt); font-size: 15px; }
+.cue { width: 1px; height: 44px; background: rgba(245,242,236,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--ribbon-lt); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* リボンの帯 */
+.ribbon { position: relative; overflow: hidden; background: var(--salt); padding: 30px 0 22px; }
+.ribbon .band { position: relative; margin: 0 -6%; transform: rotate(-2.2deg); background: var(--ribbon); color: #fff; padding: 15px 0 13px; white-space: nowrap; overflow: hidden; box-shadow: 0 10px 24px rgba(179,49,58,.25); }
+.ribbon .band::before, .ribbon .band::after { content: ""; position: absolute; left: 0; right: 0; border-top: 1.5px dashed rgba(255,255,255,.6); }
+.ribbon .band::before { top: 6px; }
+.ribbon .band::after { bottom: 6px; }
+.ribbon .track { display: inline-flex; align-items: center; gap: 22px; padding-left: 22px; animation: slide 32s linear infinite; font-family: var(--latin); font-style: italic; font-size: clamp(30px, 8vw, 58px); line-height: 1; }
+.ribbon .track span:nth-child(3n+2) { font-family: var(--round); font-style: normal; font-size: .5em; letter-spacing: .06em; }
+.ribbon .track i { width: .3em; height: .3em; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.85); flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(72px, 14vw, 170px) var(--g) clamp(72px, 12vw, 150px); display: grid; gap: 44px; }
+.story .eyebrow { color: var(--ribbon); margin-bottom: 20px; }
+.big { font-family: var(--round); font-weight: 500; font-size: clamp(34px, 9.4vw, 84px); line-height: 1.34; letter-spacing: .02em; }
+.big em { font-style: normal; color: var(--ribbon); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { margin-top: 28px; max-width: 31em; color: var(--body); font-size: 15.5px; }
+.story q { quotes: "「" "」"; color: var(--ink); font-weight: 700; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line-l); font-size: 13px; color: var(--slate); }
+.stars b { font-family: var(--latin); font-weight: 400; font-size: 58px; color: var(--ink); line-height: .9; }
+.stars b small { font-size: .45em; color: var(--ribbon); margin-right: 4px; vertical-align: .5em; }
+.towel { position: relative; overflow: hidden; border-radius: 30px; background: var(--kinari); }
+.towel::after { content: ""; position: absolute; inset: 10px; border: 1.5px dashed rgba(255,255,255,.75); border-radius: 22px; pointer-events: none; z-index: 2; }
+.towel img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.12); }
+.towel .tag { position: absolute; z-index: 3; left: 22px; bottom: 22px; max-width: calc(100% - 110px); font-size: 12px; line-height: 1.5; color: var(--ink); background: rgba(255,253,249,.9); padding: 7px 12px; border-radius: 14px; }
+.towel .cap { right: 22px; bottom: 24px; }
+
+/* 二度洗いの章（スクロールで泡が立ち、乾いて、整う） */
+.wash { position: relative; background: var(--pepper); color: var(--salt); }
+.wash .pin { padding: clamp(84px, 14vw, 150px) var(--g) 64px; display: grid; gap: 22px; }
+.wash .eyebrow { color: var(--ribbon-lt); }
+.wash h2 { font-family: var(--round); font-weight: 500; font-size: clamp(30px, 8.6vw, 64px); line-height: 1.35; margin-top: 10px; }
+.wash h2 em { font-style: normal; color: var(--ribbon-lt); }
+.wash .intro { margin-top: 10px; font-size: 14px; line-height: 1.8; color: #C9CCD0; max-width: 30em; }
+.stage { position: relative; border-radius: 26px; overflow: hidden; background: #2A2D32; aspect-ratio: 4 / 3.3; isolation: isolate; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.stage .foam { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 0; }
+.st-label { position: absolute; left: 18px; top: 14px; z-index: 3; text-shadow: 0 1px 12px rgba(30,32,36,.55); display: flex; align-items: baseline; gap: 10px; color: var(--salt); transition: color .3s; }
+.st-label b { font-family: var(--latin); font-style: italic; font-weight: 400; font-size: clamp(30px, 8vw, 46px); line-height: 1; }
+.st-label small { font-size: 12px; letter-spacing: .08em; opacity: .75; }
+.stage.light .st-label { color: var(--ink); text-shadow: 0 1px 10px rgba(242,238,231,.9); }
+.stage .cap { opacity: .9; }
+.stage svg.fx-bow { position: absolute; left: 0; top: 0; width: 25%; max-width: 124px; z-index: 2; opacity: 0; transform-origin: 50% 50%; will-change: transform; }
+.stage svg.fx-sc { position: absolute; left: 0; top: 0; width: 60px; z-index: 2; opacity: 0; will-change: transform; }
+.wsteps { list-style: none; padding: 0; display: grid; gap: 20px; }
+.wsteps li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: baseline; }
+.wsteps .no { font-family: var(--latin); font-size: 16px; color: var(--ribbon-lt); grid-row: span 2; }
+.wsteps h3 { font-family: var(--round); font-weight: 500; font-size: 19px; line-height: 1.5; }
+.wsteps p { font-size: 14.5px; color: #C9CCD0; line-height: 1.8; margin-top: 2px; max-width: 28em; }
+.wprog { display: none; }
+.wash .note { font-size: 11px; color: #8D9298; line-height: 1.7; }
+.fx .wash .pin { height: 100vh; height: 100svh; min-height: 620px; grid-template-rows: auto minmax(0, 1fr) auto auto auto; gap: 12px; padding-top: 96px; padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+.fx .wash .intro { display: none; }
+.fx .stage { aspect-ratio: auto; min-height: 0; }
+.fx .wsteps { display: block; position: relative; min-height: 108px; }
+.fx .wsteps li { position: absolute; inset: 0 0 auto 0; opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .4s; }
+.fx .wsteps li.on { opacity: 1; transform: none; }
+.fx .wprog { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.wprog i { height: 3px; border-radius: 3px; background: var(--line-d); position: relative; overflow: hidden; }
+.wprog i b { position: absolute; inset: 0; background: var(--ribbon-lt); transform: scaleX(0); transform-origin: left; }
+
+/* 泡の窓から広がる写真 */
+.window { position: relative; background: var(--salt); }
+.w-pin { position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; }
+.w-img { position: absolute; inset: 0; }
+.w-img img { width: 100%; height: 100%; object-fit: cover; object-position: 44% 50%; }
+.w-rings { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.w-rings circle { fill: none; stroke: rgba(255,255,255,.85); stroke-width: 1.5; }
+.w-rings path { fill: none; stroke: rgba(255,255,255,.9); stroke-width: 2; stroke-linecap: round; }
+.window .cap { top: 96px; bottom: auto; right: var(--g); }
+.w-card { position: absolute; z-index: 3; left: var(--g); right: var(--g); bottom: calc(92px + env(safe-area-inset-bottom)); background: var(--snow); color: var(--ink); border-radius: 24px; padding: 22px 22px 20px; box-shadow: 0 24px 60px rgba(30,32,36,.22); }
+.w-card .eyebrow { color: var(--ribbon); }
+.w-card h2 { font-family: var(--round); font-weight: 500; font-size: clamp(26px, 7.2vw, 46px); line-height: 1.4; margin-top: 10px; }
+.w-card p { margin-top: 8px; font-size: 14.5px; color: var(--body); line-height: 1.8; }
+
+/* 料金 */
+.price { background: var(--snow); padding: clamp(84px, 14vw, 160px) var(--g) clamp(72px, 11vw, 130px); }
+.sec-head { display: grid; gap: 10px; }
+.sec-head .eyebrow { color: var(--ribbon); }
+.sec-head h2 { font-family: var(--round); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.34; }
+.sec-head p { font-size: 13px; color: var(--slate); max-width: 30em; }
+.revise { margin-top: 26px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: baseline; padding: 16px 18px; border: 1.5px solid var(--ribbon); border-radius: 18px; background: rgba(179,49,58,.04); }
+.revise b { font-family: var(--latin); font-weight: 400; font-size: 27px; line-height: 1; color: var(--ribbon); font-variant-numeric: tabular-nums; }
+.revise p { font-size: 14px; line-height: 1.7; }
+.revise small { grid-column: 1 / -1; font-size: 11.5px; color: var(--slate); }
+.picker { display: none; margin-top: 30px; }
+.js .picker { display: block; }
+.picker .lbl { font-size: 12.5px; color: var(--slate); margin-bottom: 10px; }
+.quick { display: flex; flex-wrap: wrap; gap: 8px; }
+.quick button { min-height: 42px; padding: 8px 15px; border-radius: 999px; border: 1.5px solid rgba(30,32,36,.8); background: transparent; color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1.3; cursor: pointer; transition: background .25s, color .25s, border-color .25s, transform .2s; }
+.quick button:active { transform: scale(.96); }
+.quick button[aria-pressed="true"] { background: var(--ribbon); border-color: var(--ribbon); color: #fff; }
+.sel { position: relative; }
+.sel select { -webkit-appearance: none; appearance: none; width: 100%; min-height: 52px; padding: 0 46px 0 16px; border-radius: 14px; border: 1.5px solid var(--line-l); background: #fff; color: var(--ink); font: inherit; font-size: 16px; cursor: pointer; }
+.sel::after { content: ""; position: absolute; right: 20px; top: 50%; width: 9px; height: 9px; margin-top: -7px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg); pointer-events: none; }
+.result { margin-top: 16px; padding: 22px 22px 20px; border-radius: 26px; background: var(--pepper); color: var(--salt); position: relative; overflow: hidden; }
+.result::after { content: ""; position: absolute; inset: 8px; border: 1.5px dashed rgba(245,242,236,.14); border-radius: 20px; pointer-events: none; }
+.r-name { font-family: var(--round); font-weight: 500; font-size: 20px; line-height: 1.5; }
+.r-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.r-cols > div { padding-top: 10px; border-top: 1px solid var(--line-d); }
+.r-cols small { display: block; font-size: 12px; color: var(--mute-d); }
+.r-cols b { display: block; font-family: var(--latin); font-weight: 400; font-size: clamp(42px, 11.5vw, 66px); line-height: 1.05; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.r-cols b i { font-style: normal; font-size: .45em; margin-right: 3px; color: var(--ribbon-lt); vertical-align: .45em; }
+.r-cols .none b { color: #6F757C; }
+.r-note { margin-top: 10px; font-size: 12px; color: var(--mute-d); min-height: 1.6em; }
+.opts { margin-top: 44px; }
+.opts h3 { font-family: var(--round); font-weight: 500; font-size: 21px; }
+.opts dl { margin-top: 12px; border-top: 1px solid var(--line-l); }
+.opts dl div { display: grid; grid-template-columns: 1fr auto; gap: 14px; padding: 13px 2px; border-bottom: 1px solid var(--line-l); font-size: 14.5px; line-height: 1.6; }
+.opts dd { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.notes { list-style: none; padding: 0; margin-top: 18px; display: grid; gap: 6px; font-size: 13px; color: var(--body); line-height: 1.7; }
+.notes li { padding-left: 1.1em; position: relative; }
+.notes li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid var(--ribbon); }
+details.all { margin-top: 30px; border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+details.all summary { font-family: var(--round); font-size: 17px; }
+.ptable { width: 100%; border-collapse: collapse; margin: 4px 0 18px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.ptable th, .ptable td { padding: 9px 6px; border-bottom: 1px solid var(--line-l); text-align: right; font-weight: 500; line-height: 1.5; }
+.ptable th:first-child { text-align: left; }
+.ptable thead th { font-size: 12px; color: var(--slate); font-weight: 700; }
+.ptable tbody th { font-weight: 500; }
+.ptable tr.fav th { font-weight: 700; }
+.ptable tr.is-sel { background: rgba(179,49,58,.07); }
+
+/* 手づくりのお店 */
+.handmade { position: relative; overflow: hidden; background: var(--kinari); padding: clamp(84px, 14vw, 160px) var(--g) clamp(72px, 12vw, 140px); }
+.handmade .bigword { position: absolute; left: 0; top: clamp(24px, 5vw, 60px); white-space: nowrap; font-family: var(--latin); font-style: italic; font-size: clamp(120px, 34vw, 380px); line-height: 1; color: transparent; -webkit-text-stroke: 1.2px rgba(185,139,94,.45); pointer-events: none; }
+.handmade .inner { position: relative; display: grid; gap: 40px; }
+.handmade .eyebrow { color: #8A5A2E; }
+.handmade .big { margin-top: 18px; font-size: clamp(32px, 8.8vw, 72px); }
+.handmade .lead { margin-top: 24px; color: var(--body); font-size: 15.5px; max-width: 30em; }
+.points { list-style: none; padding: 0; margin-top: 26px; display: grid; gap: 12px; }
+.points li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: rgba(255,253,249,.7); font-size: 14.5px; line-height: 1.7; }
+.points svg { width: 44px; height: 44px; }
+.handmade figure { position: relative; overflow: hidden; border-radius: 999px 999px 26px 26px; background: var(--salt); }
+.handmade figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.1); }
+.handmade .ph-note { margin-top: 12px; font-size: 12px; }
+
+/* 口コミ（タグのカード） */
+.voices { background: var(--salt); padding: clamp(84px, 14vw, 160px) var(--g) clamp(72px, 11vw, 130px); }
+.voices .score { display: flex; align-items: baseline; gap: 12px; margin-top: 6px; color: var(--slate); font-size: 13px; }
+.voices .score b { font-family: var(--latin); font-weight: 400; font-size: 44px; color: var(--ink); line-height: 1; }
+.tags { list-style: none; padding: 0; margin-top: 44px; display: grid; gap: 30px; }
+.tags li { position: relative; padding: 38px 22px 22px; border-radius: 22px; background: #fff; box-shadow: 0 18px 40px -22px rgba(30,32,36,.35); transform: rotate(var(--r, 0deg)); transform-origin: 50% 0; }
+.tags li::before { content: ""; position: absolute; left: 50%; top: 12px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--salt); box-shadow: inset 0 1px 3px rgba(30,32,36,.35); }
+.tags li::after { content: ""; position: absolute; left: 50%; top: -18px; width: 5px; height: 34px; margin-left: -2.5px; border-radius: 3px; background: var(--ribbon); z-index: -1; }
+.tags .t-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.tags .topic { font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: 999px; background: var(--kinari); color: #6B4A2B; }
+.tags .st { color: var(--ribbon); font-size: 13px; letter-spacing: .1em; }
+.tags p { margin-top: 12px; font-family: var(--round); font-size: 17.5px; line-height: 1.8; }
+.voices .src { margin-top: 30px; }
+
+/* お知らせ・来店 */
+.visit { background: var(--pepper); color: var(--salt); padding: clamp(84px, 14vw, 160px) var(--g) 72px; }
+.visit .sec-head .eyebrow { color: var(--ribbon-lt); }
+.visit .sec-head p { color: var(--mute-d); }
+.news { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid var(--line-d); }
+.news li { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 18px 0; border-bottom: 1px solid var(--line-d); }
+.news time { font-family: var(--latin); font-size: 26px; line-height: 1.1; color: var(--ribbon-lt); font-variant-numeric: tabular-nums; }
+.news b { font-family: var(--round); font-weight: 500; font-size: 18px; line-height: 1.5; }
+.news p { font-size: 14px; color: #C9CCD0; line-height: 1.75; }
+.visit .grid { margin-top: clamp(64px, 10vw, 110px); display: grid; gap: 44px; }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--line-d); border-radius: 18px; margin-bottom: 22px; background: rgba(245,242,236,.04); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mute-d); flex: none; }
+.today.open .dot { background: var(--leaf); box-shadow: 0 0 0 6px rgba(156,203,134,.16); }
+.today.maybe .dot { background: var(--ribbon-lt); box-shadow: 0 0 0 6px rgba(242,156,148,.14); }
+.today b { display: block; font-family: var(--round); font-weight: 500; font-size: 20px; line-height: 1.5; }
+.today small { display: block; color: var(--mute-d); font-size: 12.5px; line-height: 1.6; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3em 1fr; padding: 11px 4px; border-bottom: 1px solid var(--line-d); font-size: 15px; font-variant-numeric: tabular-nums; }
+.hours li.is-today { color: var(--ribbon-lt); }
+.hours li.closed span:last-child { color: #8D9298; }
+.book { margin-top: 26px; padding: 20px; border-radius: 20px; background: var(--pepper-2); }
+.book b { display: block; font-family: var(--round); font-weight: 500; font-size: 18px; }
+.book p { font-size: 14px; color: #C9CCD0; line-height: 1.75; margin-top: 4px; }
+.addr { font-family: var(--round); font-size: 18px; line-height: 1.75; }
+.map { margin-top: 18px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line-d); aspect-ratio: 4 / 3; background: var(--pepper-2); }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.02) brightness(.95); }
+.box { margin-top: 16px; padding: 16px 18px; border-left: 3px solid var(--ribbon-lt); background: rgba(245,242,236,.05); border-radius: 0 16px 16px 0; font-size: 14px; line-height: 1.75; }
+.box b { display: block; font-family: var(--round); font-weight: 500; font-size: 16.5px; margin-bottom: 2px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s, background .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--ribbon); color: #fff; }
+.btn.ghost { border: 1px solid currentColor; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+/* よくある質問 */
+.faq { background: var(--salt); padding: clamp(84px, 14vw, 150px) var(--g) clamp(72px, 10vw, 120px); }
+.faq .list { margin-top: 26px; }
+details { border-bottom: 1px solid var(--line-l); }
+summary { list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative; font-family: var(--round); font-weight: 500; font-size: 17.5px; line-height: 1.6; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: linear-gradient(#fff, #fff) center/11px 2px no-repeat, linear-gradient(#fff, #fff) center/2px 11px no-repeat, var(--ink); transition: transform .3s, background-color .3s; }
+details[open] summary::after { transform: rotate(45deg); background-color: var(--ribbon); }
+details > p { padding: 0 0 22px; color: var(--body); font-size: 15px; }
+details.all summary { padding-left: 0; }
+
+/* 最後 */
+.foot { background: var(--pepper); color: var(--mute-d); padding: 64px var(--g) calc(124px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--latin); font-style: italic; color: var(--salt); font-size: clamp(84px, 22.5vw, 360px); line-height: .82; letter-spacing: -.02em; margin: 0 0 8px -.04em; white-space: nowrap; }
+.foot .huge span { color: var(--ribbon-lt); }
+.foot .stitch { border-top: 1.5px dashed rgba(245,242,236,.25); margin: 22px 0 26px; }
+.foot p { font-size: 13px; line-height: 1.95; }
+.foot .fill-in { font-size: 12px; }
+.foot .made { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line-d); font-size: 11.5px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(30,32,36,.84); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--salt); white-space: nowrap; }
+.dock a.main { background: var(--ribbon); color: #fff; }
+.dock svg { width: 16px; height: 16px; flex: none; }
+
+@media (min-width: 900px) {
+  .hero img { object-position: 50% 50%; }
+  .hero::after { background: linear-gradient(90deg, rgba(30,32,36,.88) 0%, rgba(30,32,36,.55) 34%, rgba(30,32,36,0) 58%), linear-gradient(180deg, rgba(30,32,36,.45) 0%, rgba(30,32,36,0) 22%, rgba(30,32,36,0) 66%, rgba(30,32,36,.55) 100%); }
+  .hero .title { right: auto; bottom: 9vh; }
+  .hero h1 .r1 { font-size: clamp(60px, 5.4vw, 96px); }
+  .hero h1 .r2 { font-size: min(15.5vw, 27vh); }
+  .hero .meta { justify-content: flex-start; gap: 32px; }
+  .notice { max-width: none; }
+  .story { grid-template-columns: 1.15fr .85fr; align-items: center; column-gap: 96px; max-width: 1320px; margin: 0 auto; }
+  .story .big { font-size: clamp(52px, 5.2vw, 80px); }
+  .story .towel { max-width: 470px; width: 100%; justify-self: end; }
+  .wash .pin { grid-template-columns: .92fr 1.08fr; column-gap: 72px; align-items: center; max-width: 1400px; margin: 0 auto; }
+  .wash .pin > header { grid-column: 1; grid-row: 1; }
+  .wash .stage { grid-column: 2; grid-row: 1 / span 4; }
+  .wash .wsteps, .wash .wprog, .wash .note { grid-column: 1; }
+  .fx .wash .pin { grid-template-rows: auto auto auto auto; align-content: center; padding-top: 110px; padding-bottom: 56px; }
+  .fx .stage { height: min(74vh, 660px); align-self: center; }
+  .fx .wsteps { min-height: 150px; }
+  .wsteps h3 { font-size: 23px; }
+  .wsteps p { font-size: 15.5px; }
+  .w-card { left: auto; right: var(--g); bottom: 56px; width: 460px; padding: 30px 32px 28px; }
+  .window .cap { right: auto; left: var(--g); }
+  .price .wrap { display: grid; grid-template-columns: .9fr 1.1fr; column-gap: 80px; max-width: 1240px; margin: 0 auto; align-items: start; }
+  .price .left { position: sticky; top: 110px; }
+  .picker { margin-top: 0; }
+  .handmade .inner { grid-template-columns: 1.1fr .9fr; column-gap: 96px; align-items: center; max-width: 1240px; margin: 0 auto; }
+  .handmade figure { max-width: 440px; justify-self: end; width: 100%; }
+  .voices .in { max-width: 1240px; margin: 0 auto; }
+  .tags { grid-template-columns: repeat(3, 1fr); gap: 36px 28px; align-items: start; }
+  .tags li:nth-child(3n+2) { margin-top: 40px; }
+  .visit .in { max-width: 1240px; margin: 0 auto; }
+  .news li { grid-template-columns: 200px 1fr; column-gap: 32px; align-items: baseline; }
+  .news li > div { grid-column: 2; }
+  .news time { grid-row: span 2; }
+  .visit .grid { grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  .faq .in { max-width: 980px; margin: 0 auto; }
+  .dock { left: auto; right: 24px; width: 460px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ribbon .track, .cue::after { animation: none; }
+  .towel img, .handmade figure img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <i class="fold"></i><i class="fold"></i><i class="fold"></i><i class="fold"></i>
+  <div class="ld">
+    <div class="bub"><b></b><b></b><b></b><b></b><b></b></div>
+    <p class="word"><span>L</span><span>a</span><span class="sp"></span><span>B</span><span>l</span><span>a</span><span>n</span><span>c</span><span>h</span><span>e</span></p>
+    <p class="sub">DOG SALON ／ CHIBA MIDORI</p>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">La Blanche</a>
+  <span class="status" id="status"><i></i><span>営業日を<wbr>確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="ドッグサロン ラ・ブランシュ">
+    <picture>
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="たたんだ白いタオルの上に置いたブラシとコーム、赤いリボン（イメージ）">
+    </picture>
+    <span class="caption">写真は<wbr>イメージです</span>
+    <a class="notice" href="#news"><b>お知らせ</b><span>11月2日から<wbr>料金改定</span></a>
+    <div class="title">
+      <p class="kicker">シュナウザー・プードルの<wbr>トリミングサロン</p>
+      <h1 aria-label="La Blanche">
+        <span class="r r1" aria-hidden="true"><span class="c"><span>La</span></span></span>
+        <span class="r r2" aria-hidden="true"><span class="c"><span>B</span></span><span class="c"><span>l</span></span><span class="c"><span>a</span></span><span class="c"><span>n</span></span><span class="c"><span>c</span></span><span class="c"><span>h</span></span><span class="c"><span>e</span></span></span>
+      </h1>
+      <p class="jp">ドッグサロン ラ・ブランシュ<small>千葉市緑区 高田町</small></p>
+      <div class="meta">
+        <span>Googleの<wbr>口コミ <b>★4.6</b>（13件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="band"><div class="track">
+      <span>Schnauzer</span><span>シュナウザー</span><i></i><span>Poodle</span><span>プードル</span><i></i><span>Shampoo</span><span>シャンプーコース</span><i></i><span>Cut</span><span>カットコース</span><i></i><span>Mud pack</span><span>泥パック</span><i></i><span>Foot care</span><span>フットケア</span><i></i>
+      <span>Schnauzer</span><span>シュナウザー</span><i></i><span>Poodle</span><span>プードル</span><i></i><span>Shampoo</span><span>シャンプーコース</span><i></i><span>Cut</span><span>カットコース</span><i></i><span>Mud pack</span><span>泥パック</span><i></i><span>Foot care</span><span>フットケア</span><i></i>
+    </div></div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <div>
+      <p class="eyebrow">Our wish</p>
+      <h2 class="big" id="story-title"><span class="line"><span>きれいに<wbr>なって、</span></span><span class="line"><span><em>家族のもと</em>へ</span></span><span class="line"><span>帰っていく。</span></span></h2>
+      <p class="lead">大切な<wbr>家族である<wbr>わんちゃんの<wbr>美容と<wbr>健康を、<wbr>プロの<wbr>目線で<wbr>支えたい。<wbr>きれいに<wbr>なった<wbr>子が<wbr>家族のもとへ<wbr>帰っていく、<wbr>あの<wbr>あたたかな<wbr>時間の<wbr>ために。<wbr>千葉市緑区・高田町の、<wbr>シュナウザーと<wbr>プードルの<wbr>トリミングサロンです。<wbr>口コミには<wbr> <q>予想以上に<wbr>きれいに</q> <q>人<wbr>見知りの<wbr>子も<wbr>大人しく</q> <q>皮膚の<wbr>変化も<wbr>教えてくれる</q> という<wbr>声が<wbr>並びます。</p>
+      <div class="stars"><b><small>★</small>4.6</b><span>Googleの<wbr>口コミ 13件の<wbr>平均<wbr>（2026年9月）</span></div>
+    </div>
+    <figure class="towel"><img src="img/dog.jpg" alt="白いタオルの上で目を閉じてくつろぐ、毛の整った小型犬（イメージ）" loading="lazy"><span class="tag">人<wbr>見知りの<wbr>子も、<wbr>ここでは<wbr>大人しく。<wbr>という<wbr>口コミから</span><span class="cap">イメージ</span></figure>
+  </section>
+
+  <section class="wash dark" aria-labelledby="wash-title">
+    <div class="pin">
+      <header>
+        <p class="eyebrow">Double wash</p>
+        <h2 id="wash-title">毎回、<em>二度洗い</em>。</h2>
+        <p class="intro">オプション扱いに<wbr>される<wbr>こともある<wbr>シャンプーを、<wbr>ここでは<wbr>すべての<wbr>わんちゃんに。<wbr>二度<wbr>洗いで<wbr>汚れを<wbr>しっかり落とすから、<wbr>カットも<wbr>崩れにくく<wbr>仕上がります。</p>
+      </header>
+      <div class="stage" id="stage">
+        <img class="foam" id="stage-foam" src="img/foam.jpg" alt="" loading="lazy">
+        <canvas id="cv" aria-hidden="true"></canvas>
+        <svg class="fx-sc" id="scissors" viewBox="0 0 64 40" aria-hidden="true">
+          <g id="blade-a"><path d="M20 17 L62 21 L20 21 Z" fill="#C9CCD0" stroke="#1E2024" stroke-width="1.6" stroke-linejoin="round"/><circle cx="10" cy="11" r="7" fill="none" stroke="#1E2024" stroke-width="3"/><path d="M15 15 L22 18" stroke="#1E2024" stroke-width="3" stroke-linecap="round"/></g>
+          <g id="blade-b"><path d="M20 23 L62 19 L20 19 Z" fill="#E1E3E6" stroke="#1E2024" stroke-width="1.6" stroke-linejoin="round"/><circle cx="10" cy="29" r="7" fill="none" stroke="#1E2024" stroke-width="3"/><path d="M15 25 L22 22" stroke="#1E2024" stroke-width="3" stroke-linecap="round"/></g>
+          <circle cx="24" cy="20" r="2" fill="#1E2024"/>
+        </svg>
+        <svg class="fx-bow" id="bow" viewBox="0 0 120 86" aria-hidden="true">
+          <path d="M56 40 L40 80 L49 76 L55 84 L63 44 Z" fill="#8E2530"/>
+          <path d="M64 40 L80 80 L71 76 L65 84 L57 44 Z" fill="#8E2530"/>
+          <path d="M60 38 C44 14 12 8 10 30 C8 52 40 56 60 38 Z" fill="#B3313A"/>
+          <path d="M60 38 C76 14 108 8 110 30 C112 52 80 56 60 38 Z" fill="#B3313A"/>
+          <path d="M22 26 C30 22 42 26 50 34 M98 26 C90 22 78 26 70 34" stroke="rgba(255,255,255,.35)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <rect x="51" y="29" width="18" height="19" rx="6" fill="#9C2831"/>
+        </svg>
+        <p class="st-label" aria-hidden="true"><b id="st-en">Home</b><small id="st-no">05 / 05</small></p>
+        <span class="cap" id="foam-cap" style="opacity:0">泡の<wbr>写真は<wbr>イメージ</span>
+      </div>
+      <ol class="wsteps" id="wsteps">
+        <li class="on"><span class="no">01</span><h3>一度目の<wbr>シャンプー</h3><p>オプション扱いに<wbr>される<wbr>こともある<wbr>シャンプーを、<wbr>すべての<wbr>わんちゃんに。</p></li>
+        <li><span class="no">02</span><h3>二度目で、<wbr>しっかり</h3><p>もう<wbr>一度ていねいに<wbr>洗って、<wbr>汚れを<wbr>しっかり<wbr>落とします。</p></li>
+        <li><span class="no">03</span><h3>ふんわり<wbr>乾かす</h3><p>洗い<wbr>上がりを、<wbr>ふんわり<wbr>乾かして。</p></li>
+        <li><span class="no">04</span><h3>カットは、<wbr>崩れにくく</h3><p>二度<wbr>洗いの<wbr>おかげで、<wbr>カットも<wbr>崩れにくく<wbr>仕上がります。</p></li>
+        <li><span class="no">05</span><h3>お迎えの<wbr>時に</h3><p>皮膚の<wbr>変化も<wbr>教えて<wbr>もらえて<wbr>助かる、という<wbr>口コミも。</p></li>
+      </ol>
+      <div class="wprog" id="wprog" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <p class="note">※お店の<wbr>サイトの<wbr>「こだわり」と<wbr>口コミを<wbr>もとに<wbr>した<wbr>流れの<wbr>イメージです。<span class="fill-in">実際の<wbr>手順・<wbr>時間に<wbr>差し替えます</span></p>
+    </div>
+  </section>
+
+  <section class="window" aria-labelledby="window-title">
+    <div class="w-pin">
+      <div class="w-img" id="w-img"><img src="img/tools.jpg" alt="リネンの上に並べたスリッカーブラシ、コーム、はさみ、爪切り、小さなリボン（イメージ）" loading="lazy"></div>
+      <svg class="w-rings" id="w-rings" aria-hidden="true"></svg>
+      <span class="cap">写真は<wbr>イメージです</span>
+      <div class="w-card">
+        <p class="eyebrow">Tools &amp; care</p>
+        <h2 id="window-title">一頭ずつ、<br>ていねいに。</h2>
+        <p>とても<wbr>丁寧に、<wbr>きれいに<wbr>仕上げて<wbr>もらえた。<wbr>顔まわりが<wbr>ボサボサだった<wbr>子が、<wbr>予想以上に<wbr>きれいに<wbr>なった。<wbr>口コミには、<wbr>そんな<wbr>声が<wbr>届いています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="price" id="price" aria-labelledby="price-title">
+    <div class="wrap">
+      <div class="left">
+        <div class="sec-head">
+          <p class="eyebrow">Price</p>
+          <h2 id="price-title">うちの<wbr>子は、<br>いくら？</h2>
+          <p>犬種を<wbr>選ぶと、<wbr>シャンプーコースと<wbr>カットコースの<wbr>料金が<wbr>出ます。<wbr>全て<wbr>税込みです。<br>現在の<wbr>サイトの<wbr>記載より</p>
+        </div>
+        <div class="revise">
+          <b>2026.11.02</b>
+          <p>この<wbr>日から、<wbr>料金が<wbr>300円改定されます<wbr>（お店の<wbr>お知らせより）。</p>
+          <small>この<wbr>ページの<wbr>金額は、<wbr>今の<wbr>サイトの<wbr>料金表の<wbr>ままです。<span class="fill-in">改定後の<wbr>金額に<wbr>差し替えます</span></small>
+        </div>
+      </div>
+      <div class="right">
+        <div class="picker" id="picker">
+          <p class="lbl">犬種を<wbr>選ぶ</p>
+          <div class="quick" id="quick">
+            <button type="button" data-name="ミニチュア・シュナウザー">シュナウザー</button>
+            <button type="button" data-name="トイ・プードル">トイ・プードル</button>
+            <button type="button" data-name="マルチーズ">マルチーズ</button>
+            <button type="button" data-name="チワワ（ロング）">チワワ<wbr>（ロング）</button>
+            <button type="button" data-name="ポメラニアン">ポメラニアン</button>
+            <button type="button" data-name="シーズー">シーズー</button>
+          </div>
+          <p class="lbl" style="margin:16px 0 8px">ほかの<wbr>犬種から<wbr>選ぶ</p>
+          <div class="sel"><select id="breed" aria-label="ほかの犬種から選ぶ"></select></div>
+          <div class="result" aria-live="polite">
+            <p class="r-name" id="r-name">ミニチュア・シュナウザー</p>
+            <div class="r-cols">
+              <div><small>シャンプーコース</small><b><i>¥</i><span id="r-sh">5,500</span></b></div>
+              <div id="r-cut-box"><small>カットコース</small><b><i>¥</i><span id="r-cut">7,500</span></b></div>
+            </div>
+            <p class="r-note" id="r-note"></p>
+          </div>
+        </div>
+        <div class="opts">
+          <h3>その<wbr>他の<wbr>オプション</h3>
+          <dl>
+            <div><dt>爪切り・耳掃除・肛門腺絞り・肛門回りカット・<wbr>足回りカット</dt><dd>各 500円</dd></div>
+            <div><dt>泥パック</dt><dd>1,000円〜</dd></div>
+            <div><dt>フットケア</dt><dd>500円〜</dd></div>
+            <div><dt>ゾイックの<wbr>トリートメント</dt><dd>1,000円〜</dd></div>
+            <div><dt>ヒゲ切り・腹バリカン</dt><dd>ご希望で</dd></div>
+          </dl>
+          <ul class="notes">
+            <li>大きさや<wbr>毛の<wbr>状態<wbr>（毛玉など）に<wbr>よって、<wbr>追加料金が<wbr>かかる<wbr>場合が<wbr>あります。</li>
+            <li>MIX犬は、<wbr>ご来店の<wbr>際に<wbr>料金を<wbr>決めます<wbr>（<wbr>大きさや<wbr>近い<wbr>犬種の<wbr>料金が<wbr>目安）。</li>
+            <li>表に<wbr>ない<wbr>犬種は、<wbr>お気軽に<wbr>お問い合わせ<wbr>ください。</li>
+          </ul>
+        </div>
+        <details class="all">
+          <summary>料金表を<wbr>すべて<wbr>見る<wbr>（29犬種）</summary>
+          <table class="ptable" id="ptable">
+            <thead><tr><th>犬種</th><th>シャンプー</th><th>カット</th></tr></thead>
+            <tbody>
+              <tr><th>ミニチュア・ピンシャー</th><td>4,200</td><td>—</td></tr>
+              <tr><th>チワワ<wbr>（スムース）</th><td>4,200</td><td>—</td></tr>
+              <tr><th>チワワ<wbr>（ロング）</th><td>4,700</td><td>5,500</td></tr>
+              <tr><th>ミニチュア・ダックスフンド</th><td>4,700</td><td>5,500</td></tr>
+              <tr><th>パピヨン</th><td>5,000</td><td>6,100</td></tr>
+              <tr><th>ジャック・ラッセル・テリア</th><td>5,000</td><td>6,100</td></tr>
+              <tr><th>マルチーズ</th><td>5,000</td><td>6,400</td></tr>
+              <tr><th>ヨークシャー・テリア</th><td>5,000</td><td>6,400</td></tr>
+              <tr><th>ポメラニアン</th><td>5,200</td><td>6,400</td></tr>
+              <tr><th>ペキニーズ</th><td>5,500</td><td>6,700</td></tr>
+              <tr><th>シーズー</th><td>5,500</td><td>7,200</td></tr>
+              <tr class="fav"><th>トイ・プードル</th><td>5,700</td><td>7,500</td></tr>
+              <tr><th>ノーフォーク・テリア</th><td>5,500</td><td>7,500</td></tr>
+              <tr><th>ワイヤー・フォックス・テリア</th><td>5,500</td><td>7,500</td></tr>
+              <tr class="fav"><th>ミニチュア・シュナウザー</th><td>5,500</td><td>7,500</td></tr>
+              <tr><th>ビション・フリーゼ</th><td>6,100</td><td>8,200</td></tr>
+              <tr><th>ビーグル</th><td>5,700</td><td>—</td></tr>
+              <tr><th>フレンチ・ブルドッグ</th><td>5,700</td><td>—</td></tr>
+              <tr><th>パグ</th><td>5,700</td><td>—</td></tr>
+              <tr><th>ボストン・テリア</th><td>5,700</td><td>—</td></tr>
+              <tr><th>柴犬</th><td>6,100</td><td>—</td></tr>
+              <tr><th>ウェルシュ・コーギー</th><td>6,700</td><td>—</td></tr>
+              <tr><th>日本スピッツ</th><td>6,100</td><td>7,200</td></tr>
+              <tr><th>キャバリア</th><td>6,100</td><td>7,500</td></tr>
+              <tr><th>シェルティー</th><td>7,400</td><td>8,700</td></tr>
+              <tr><th>Aコッカー</th><td>7,700</td><td>9,200</td></tr>
+              <tr><th>ボーダー・コリー</th><td>8,200</td><td>10,700</td></tr>
+              <tr><th>ラブラドール・レトリーバー</th><td>9,200</td><td>—</td></tr>
+              <tr><th>ゴールデン・レトリーバー</th><td>12,700</td><td>15,700</td></tr>
+            </tbody>
+          </table>
+          <p class="src" style="padding-bottom:18px">※全て<wbr>税込み・円。<wbr>現在の<wbr>サイトの<wbr>記載より<wbr>（2026年11月2日の<wbr>改定前の<wbr>金額）。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="handmade" aria-labelledby="hand-title">
+    <p class="bigword" aria-hidden="true">Handmade · Handmade ·</p>
+    <div class="inner">
+      <div>
+        <p class="eyebrow">Handmade</p>
+        <h2 class="big" id="hand-title"><span class="line"><span>店内も<wbr>外観も、</span></span><span class="line"><span>ほとんどが</span></span><span class="line"><span><em>手づくり</em>。</span></span></h2>
+        <p class="lead">木と<wbr>グリーンを<wbr>使った、<wbr>あたたかみの<wbr>ある<wbr>ナチュラルな<wbr>お店です。<wbr>外観には、<wbr>わんちゃんが<wbr>外を<wbr>眺められるように<wbr>大きな<wbr>窓を<wbr>つくりました。</p>
+        <ul class="points">
+          <li><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="7" y="6" width="30" height="30" rx="3" fill="none" stroke="#1E2024" stroke-width="2"/><path d="M22 6v30M7 21h30" stroke="#1E2024" stroke-width="2"/><path d="M4 38h36" stroke="#B98B5E" stroke-width="3" stroke-linecap="round"/></svg><span>わんちゃんが<wbr>外を<wbr>見られる、<wbr>大きな<wbr>窓</span></li>
+          <li><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 38V18" stroke="#1E2024" stroke-width="2" stroke-linecap="round"/><path d="M22 22c-9 0-13-6-13-12 8 0 13 4 13 12zM22 26c8 0 12-5 12-11-7 0-12 4-12 11z" fill="#9CCB86" stroke="#1E2024" stroke-width="1.8"/><path d="M13 38h18" stroke="#B98B5E" stroke-width="3" stroke-linecap="round"/></svg><span>木と<wbr>グリーンの、<wbr>ナチュラルな<wbr>店内</span></li>
+        </ul>
+        <p class="src" style="margin-top:18px">※お店の<wbr>サイトの<wbr>「ラ・ブランシュの<wbr>こだわり」より</p>
+      </div>
+      <div>
+        <figure><img src="img/ribbon.jpg" alt="白いタオルの上に並んだ小さなリボンとコーム（イメージ）" loading="lazy"><span class="cap">イメージ</span></figure>
+        <p class="ph-note"><span class="fill-in">お店の<wbr>中や<wbr>窓の<wbr>写真に<wbr>差し替えます</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="in">
+      <div class="sec-head">
+        <p class="eyebrow">Voices</p>
+        <h2 id="voices-title">口コミから</h2>
+        <div class="score"><b>4.6</b><span>Googleの<wbr>口コミ 13件の<wbr>平均</span></div>
+      </div>
+      <ul class="tags">
+        <li style="--r:-1.6deg"><div class="t-top"><span class="topic">顔まわり</span><span class="st" aria-label="星5">★★★★★</span></div><p>顔まわりが<wbr>ボサボサだった<wbr>マルチーズが、<wbr>予想以上に<wbr>きれいに<wbr>なってうれしかった。</p></li>
+        <li style="--r:1.2deg"><div class="t-top"><span class="topic">人<wbr>見知りの<wbr>子</span><span class="st" aria-label="星5">★★★★★</span></div><p>人<wbr>見知りが<wbr>激しい<wbr>子なのに、<wbr>ここでは<wbr>大人しくしていられた。<wbr>手や<wbr>足先だけ<wbr>お願いした<wbr>日も<wbr>満足。</p></li>
+        <li style="--r:-.8deg"><div class="t-top"><span class="topic">毎月の<wbr>お手入れ</span><span class="st" aria-label="星5">★★★★★</span></div><p>前の<wbr>お店の<wbr>ころから<wbr>毎月<wbr>通っている。<wbr>犬たちも<wbr>お気に入りで、<wbr>皮膚などの<wbr>変化を<wbr>教えて<wbr>もらえて<wbr>助かる。</p></li>
+        <li style="--r:1.5deg"><div class="t-top"><span class="topic">皮膚の<wbr>相談</span><span class="st" aria-label="星4">★★★★<span style="opacity:.25">★</span></span></div><p>皮膚に<wbr>少し<wbr>炎症が<wbr>あったけれど、<wbr>相談したら<wbr>対応して<wbr>もらえた。</p></li>
+        <li style="--r:-1.2deg"><div class="t-top"><span class="topic">仕上がり</span><span class="st" aria-label="星5">★★★★★</span></div><p>ていねいに、<wbr>きれいに<wbr>仕上げて<wbr>もらって、<wbr>すっかり<wbr>美人さんに。<wbr>また<wbr>行きたい。</p></li>
+      </ul>
+      <p class="src">※Googleの<wbr>口コミ<wbr>（2026年9月に<wbr>確認した<wbr>5件）の<wbr>要旨を<wbr>言い換えた<wbr>ものです。</p>
+    </div>
+  </section>
+
+  <section class="visit dark" id="news" aria-labelledby="visit-title">
+    <div class="in">
+      <div class="sec-head">
+        <p class="eyebrow">News &amp; Visit</p>
+        <h2 id="visit-title">お知らせと、<br>ご来店の<wbr>前に</h2>
+        <p>お知らせ・営業日は、<wbr>お店の<wbr>サイトの<wbr>記載より<wbr>（新しい<wbr>順）</p>
+      </div>
+      <ol class="news">
+        <li><time datetime="2026-11-02">2026.11.02</time><div><b>料金を<wbr>300円改定します</b><p>公共料金などの<wbr>値上がりに<wbr>ともない、<wbr>この<wbr>日から<wbr>料金を<wbr>改定します。</p></div></li>
+        <li><time datetime="2025-07-01">2025.07.01</time><div><b>定休日が<wbr>変わりました</b><p>毎週<wbr>日曜日と、<wbr>隔週の<wbr>月曜日が<wbr>お休みです<wbr>（月曜の<wbr>お休みは<wbr>2025年7月7日から）。</p></div></li>
+        <li><time datetime="2023-01-10">2023.01.10</time><div><b>高田町へ<wbr>移転しました</b><p>誉田町の<wbr>前の<wbr>お店から、<wbr>車で<wbr>5分ほどの<wbr>今の<wbr>場所へ。</p></div></li>
+      </ol>
+      <div class="grid">
+        <div>
+          <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業日を<wbr>確認中</b><small id="today-sub"></small></div></div>
+          <ul class="hours" id="hours">
+            <li data-d="1" class="closed"><span>月</span><span>隔週で<wbr>お休み</span></li>
+            <li data-d="2"><span>火</span><span>9:30 – 18:00</span></li>
+            <li data-d="3"><span>水</span><span>9:30 – 18:00</span></li>
+            <li data-d="4"><span>木</span><span>9:30 – 18:00</span></li>
+            <li data-d="5"><span>金</span><span>9:30 – 18:00</span></li>
+            <li data-d="6"><span>土</span><span>9:30 – 18:00</span></li>
+            <li data-d="0" class="closed"><span>日</span><span>定休日</span></li>
+          </ul>
+          <p class="src">営業時間と<wbr>定休日は、<wbr>お店の<wbr>サイトの<wbr>お知らせ<wbr>（2025年7月から）より</p>
+          <div class="book">
+            <b>空き状況を<wbr>見てから、<wbr>ご予約を</b>
+            <p>予約の<wbr>状況は<wbr>カレンダーで<wbr>見られます。<wbr>大型犬は<wbr>4時間かかるので、<wbr>続いた<wbr>2枠の<wbr>「◯」から<wbr>選んでください。</p>
+            <p><span class="fill-in">予約の<wbr>受け付け方法<wbr>（電話・<wbr>お問い合わせフォーム）を<wbr>入れます</span></p>
+            <div class="row">
+              <a class="btn fill" href="https://calendar.google.com/calendar/embed?src=2014.la.blanche%40gmail.com&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener">予約状況の<wbr>カレンダーを<wbr>見る</a>
+              <a class="btn ghost" href="tel:0433095104">電話する<wbr> 043-309-5104</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="addr">〒266-0003<br>千葉県千葉市緑区高田町2297-23</p>
+          <div class="map"><iframe title="ドッグサロン ラ・ブランシュの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E3%83%89%E3%83%83%E3%82%B0%E3%82%B5%E3%83%AD%E3%83%B3%20%E3%83%A9%E3%83%BB%E3%83%96%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%A5%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E7%B7%91%E5%8C%BA%E9%AB%98%E7%94%B0%E7%94%BA2297-23&amp;z=16&amp;output=embed"></iframe></div>
+          <div class="box"><b>前の<wbr>お店から<wbr>移転しています</b>2023年1月10日に、<wbr>誉田町から<wbr>今の<wbr>高田町へ<wbr>移りました。<wbr>前の<wbr>お店から<wbr>車で<wbr>5分ほどです。</div>
+          <div class="box"><b>駐車場</b><span class="fill-in">駐車場の<wbr>有無と<wbr>台数を<wbr>入れます</span></div>
+          <div class="row"><a class="btn fill" href="https://maps.google.com/?cid=11023941840361859173" target="_blank" rel="noopener">Googleマップで<wbr>道順を<wbr>見る</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="in">
+      <div class="sec-head"><p class="eyebrow">Q &amp; A</p><h2 id="faq-title">よく<wbr>ある<wbr>質問</h2></div>
+      <div class="list">
+        <details open><summary>人<wbr>見知りの<wbr>子でも<wbr>大丈夫ですか？</summary><p>口コミには、<wbr>人見知りが<wbr>激しい<wbr>子でも、<wbr>ここでは<wbr>大人しく<wbr>過ごせたという<wbr>声が<wbr>あります。<span class="fill-in">はじめての<wbr>方への<wbr>ご案内<wbr>（事前に<wbr>伝えてほしい<wbr>ことなど）を<wbr>入れます</span></p></details>
+        <details><summary>料金は<wbr>いつ<wbr>変わりますか？</summary><p>2026年11月2日から、<wbr>料金が<wbr>300円改定されます<wbr>（お店の<wbr>お知らせより）。<wbr>この<wbr>ページの<wbr>金額は、<wbr>今の<wbr>サイトに<wbr>載っている<wbr>改定前の<wbr>料金です。</p></details>
+        <details><summary>MIX犬の<wbr>料金は？</summary><p>ご来店の<wbr>際に、<wbr>大きさや<wbr>近い<wbr>犬種の<wbr>料金を<wbr>もとに<wbr>決めます。</p></details>
+        <details><summary>大型犬も<wbr>お願いできますか？</summary><p>大型犬は<wbr>4時間かかります。<wbr>予約状況の<wbr>カレンダーで、<wbr>続いた<wbr>2枠の<wbr>「◯」から<wbr>選んでください。</p></details>
+        <details><summary>皮膚が<wbr>弱い子でも<wbr>相談できますか？</summary><p>口コミには、<wbr>皮膚に<wbr>炎症が<wbr>あった<wbr>時に<wbr>相談して<wbr>対応して<wbr>もらえた、という<wbr>声が<wbr>あります。<span class="fill-in">皮膚の<wbr>弱い子への<wbr>対応を、<wbr>実際の<wbr>内容に<wbr>合わせて<wbr>書きます</span></p></details>
+        <details><summary>支払い<wbr>方法は？</summary><p><span class="fill-in">使える<wbr>支払い<wbr>方法を、<wbr>実際の<wbr>内容に<wbr>合わせて<wbr>書きます</span></p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot dark">
+  <p class="huge" aria-hidden="true">La <span>B</span>lanche</p>
+  <div class="stitch"></div>
+  <p>ドッグサロン ラ・ブランシュ<br>〒266-0003 千葉県千葉市緑区高田町2297-23<br>TEL 043-309-5104<br>9:30–18:00　日曜定休・月曜は<wbr>隔週で<wbr>お休み</p>
+  <p style="margin-top:14px"><span class="fill-in">動物取扱業の<wbr>表示<wbr>（種別・登録番号など）は、<wbr>実際の<wbr>内容を<wbr>入れます</span></p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a href="https://maps.google.com/?cid=11023941840361859173" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>道順</a>
+  <a class="main" href="https://calendar.google.com/calendar/embed?src=2014.la.blanche%40gmail.com&amp;ctz=Asia%2FTokyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>空き状況</a>
+  <a href="tel:0433095104"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>電話</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const body = document.body;
+  const reduced = body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const ease = t => t * t * (3 - 2 * t);
+  const canAnim = !reduced && !!window.gsap && !!window.ScrollTrigger;
+
+  /* ヘッダーを濃くする・下のボタンを出す（動きの有無に関係なく） */
+  const dock = $('#dock'), head = $('#head');
+  const onScroll = () => {
+    head.classList.toggle('solid', scrollY > innerHeight * 0.8);
+    if (scrollY > innerHeight * 0.6) dock.classList.add('show');
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* 営業日（日本時間）。お店のサイトのお知らせ（2025年7月から）: 火〜土 9:30–18:00、日曜定休、月曜は隔週でお休み */
+  const OPEN = [9.5, 18];
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
+  let pill, main, sub, state = '';
+  if (d === 0) { pill = '本日は定休日'; main = '本日（日曜）は定休日'; sub = '火曜〜土曜は 9:30–18:00。月曜は隔週でお休みです'; }
+  else if (d === 1) { state = 'maybe'; pill = '月曜は隔週でお休み'; main = '月曜日は、隔週でお休み'; sub = '今日が営業日かどうかは、予約状況のカレンダーでご確認ください'; }
+  else if (h < OPEN[0]) { pill = `本日 ${fmt(OPEN[0])}から`; main = '本日はこれから開店'; sub = `${fmt(OPEN[0])}から${fmt(OPEN[1])}まで`; }
+  else if (h < OPEN[1]) { state = 'open'; pill = `営業中 ${fmt(OPEN[1])}まで`; main = '本日は営業中'; sub = `${fmt(OPEN[1])}まで`; }
+  else { pill = '本日の営業は終了'; main = '本日の営業は終了'; sub = d === 6 ? '日曜は定休日、月曜は隔週でお休みです' : `次の営業は明日（${NAMES[d + 1]}）${fmt(OPEN[0])}から`; }
+  $('#status span').textContent = pill;
+  if (state) { $('#status').classList.add(state); $('#today').classList.add(state); }
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* 料金: 表から犬種を選ぶ */
+  const rows = $$('#ptable tbody tr');
+  const data = rows.map(r => ({ name: r.cells[0].textContent.trim(), sh: r.cells[1].textContent.trim(), cut: r.cells[2].textContent.trim(), row: r }));
+  const sel = $('#breed');
+  data.forEach(x => { const o = document.createElement('option'); o.textContent = x.name; o.value = x.name; sel.appendChild(o); });
+  const toNum = s => Number(s.replace(/[^0-9]/g, '')) || 0;
+  const yen = n => (Math.round(n / 100) * 100).toLocaleString('ja-JP');
+  const shown = { sh: 0, cut: 0 };
+  let curCut = 0;
+  const renderPrice = () => {
+    $('#r-sh').textContent = yen(shown.sh);
+    $('#r-cut').textContent = curCut ? yen(shown.cut) : '—';
+  };
+  const choose = (name, instant) => {
+    const x = data.find(v => v.name === name) || data[0];
+    sel.value = x.name;
+    $$('#quick button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.name === x.name)));
+    rows.forEach(r => r.classList.toggle('is-sel', r === x.row));
+    $('#r-name').textContent = x.name;
+    const sh = toNum(x.sh), cut = toNum(x.cut);
+    curCut = cut;
+    $('#r-cut-box').classList.toggle('none', !cut);
+    $('#r-note').textContent = cut ? '' : 'この犬種は、料金表にシャンプーコースの料金だけが載っています。';
+    if (!instant && canAnim) gsap.to(shown, { sh, cut, duration: 0.7, ease: 'power3.out', overwrite: true, onUpdate: renderPrice });
+    else { shown.sh = sh; shown.cut = cut; renderPrice(); }
+  };
+  $$('#quick button').forEach(b => b.addEventListener('click', () => choose(b.dataset.name)));
+  sel.addEventListener('change', () => choose(sel.value));
+  choose('ミニチュア・シュナウザー', true);
+
+  /* 二度洗いの章: 泡が立つ → 流す → もう一度 → 乾かす → 毛が整って切りそろう → リボン */
+  const stage = $('#stage'), cv = $('#cv'), ctx = cv.getContext('2d');
+  const foam = $('#stage-foam'), bowEl = $('#bow'), scEl = $('#scissors');
+  const bladeA = $('#blade-a'), bladeB = $('#blade-b');
+  const wsteps = $$('#wsteps li'), wbars = $$('#wprog b');
+  const EN = ['1st wash', '2nd wash', 'Dry', 'Cut', 'Home'];
+  let W = 0, H = 0, P = 1, T = 0, stepNow = -1;
+  let seed = 20230110;
+  const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const R = (a, b) => a + (b - a) * rnd();
+  const dirty = Array.from({ length: 30 }, () => ({ x: R(.06, .94), y: R(.36, .94), r: R(.045, .095), b: R(0, 1), s: R(0, 6.28) }));
+  const clean = Array.from({ length: 80 }, () => ({ x: R(.02, .98), y: R(.12, .98), r: R(.03, .11), b: R(0, 1), s: R(0, 6.28), v: R(.8, 1.7) }));
+  const M = 31;
+  const strands = Array.from({ length: M }, (_, i) => ({ u: i / (M - 1), extra: R(.06, .3), ang: R(-.7, .7), curl: R(-.6, .6), col: ['#2B2E33', '#5B6168', '#8E9398'][i % 3], w: R(2.6, 3.8) }));
+  const streaks = Array.from({ length: 12 }, () => ({ y: R(.24, .92), l: R(.12, .36), o: R(0, 1) }));
+  const DARK = [42, 45, 50], LIGHT = [242, 238, 231];
+  const ph = (a, b) => clamp((P - a) / (b - a));
+  const mix = (c1, c2, t) => c1.map((v, i) => Math.round(v + (c2[i] - v) * t));
+  const neatLen = u => H * (.2 + .17 * Math.sin(u * Math.PI));
+  const baseY = () => H * .9;
+
+  const size = () => {
+    const r = stage.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height;
+    cv.width = Math.max(1, Math.round(W * dpr)); cv.height = Math.max(1, Math.round(H * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  const bubble = (x, y, r, a, isDirty, s) => {
+    if (a <= .01 || r <= .5) return;
+    ctx.globalAlpha = a;
+    const g = ctx.createRadialGradient(x - r * .35, y - r * .4, r * .1, x, y, r);
+    if (isDirty) { g.addColorStop(0, 'rgba(236,224,204,.55)'); g.addColorStop(1, 'rgba(170,150,120,.32)'); }
+    else { g.addColorStop(0, 'rgba(255,255,255,.96)'); g.addColorStop(.7, 'rgba(255,255,255,.6)'); g.addColorStop(1, 'rgba(222,230,238,.38)'); }
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = isDirty ? 'rgba(214,196,168,.8)' : 'rgba(255,255,255,.95)'; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, r * .68, Math.PI * 1.1, Math.PI * 1.45);
+    ctx.strokeStyle = 'rgba(255,255,255,.9)'; ctx.lineWidth = Math.max(1, r * .08); ctx.lineCap = 'round'; ctx.stroke();
+    if (isDirty) {
+      ctx.fillStyle = 'rgba(92,70,48,.55)';
+      for (let k = 0; k < 3; k++) { const an = s + k * 2.1; ctx.beginPath(); ctx.arc(x + Math.cos(an) * r * .45, y + Math.sin(an) * r * .4, Math.max(1, r * .08), 0, Math.PI * 2); ctx.fill(); }
+    }
+    ctx.globalAlpha = 1;
+  };
+  const line = (x0, y0, ang, len, curl, col, w, a, dx = 0, dy = 0) => {
+    const x1 = x0 + Math.sin(ang) * len, y1 = y0 - Math.cos(ang) * len;
+    const cx = (x0 + x1) / 2 + Math.cos(ang) * curl * len * .45, cy = (y0 + y1) / 2 + Math.sin(ang) * curl * len * .45;
+    ctx.globalAlpha = a; ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x0 + dx, y0 + dy); ctx.quadraticCurveTo(cx + dx, cy + dy, x1 + dx, y1 + dy); ctx.stroke();
+    ctx.globalAlpha = 1;
+  };
+  const sparkle = (x, y, r, a) => {
+    ctx.globalAlpha = a; ctx.fillStyle = '#B3313A';
+    ctx.beginPath(); ctx.moveTo(x, y - r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.quadraticCurveTo(x, y, x, y + r); ctx.quadraticCurveTo(x, y, x - r, y); ctx.quadraticCurveTo(x, y, x, y - r); ctx.fill();
+    ctx.globalAlpha = 1;
+  };
+  const drawWash = () => {
+    if (!W || !H) return;
+    ctx.clearRect(0, 0, W, H);
+    const base = Math.min(W, H);
+    const light = ease(ph(.42, .56));
+    stage.style.backgroundColor = `rgb(${mix(DARK, LIGHT, light).join(',')})`;
+    stage.classList.toggle('light', light > .5);
+    const fo = 0.9 * ease(ph(.3, .4)) * (1 - ease(ph(.42, .52))); foam.style.opacity = fo.toFixed(3); $('#foam-cap').style.opacity = fo > .1 ? '1' : '0';
+    const wob = i => Math.sin(T * 1.3 + i) * 2.2;
+
+    /* 一度目の泡（少しくすんだ泡） */
+    const drain = ph(.2, .3);
+    if (P < .31) dirty.forEach((b, i) => {
+      const a = ease(ph(b.b * .15, b.b * .15 + .05));
+      if (!a) return;
+      const y = H * 1.15 + (b.y * H - H * 1.15) * a + drain * drain * H * .9 + wob(i);
+      bubble(b.x * W, y, b.r * base * (.6 + .4 * a), a * (1 - drain), true, b.s);
+    });
+    /* 二度目の泡（まっ白） */
+    if (P > .22 && P < .6) clean.forEach((b, i) => {
+      const a = ease(ph(.22 + b.b * .13, .22 + b.b * .13 + .05));
+      if (!a) return;
+      const w = ph(.42 + (1 - b.x) * .05, .58);
+      const x = b.x * W + w * w * W * 1.3 * b.v;
+      const y = H * 1.1 + (b.y * H - H * 1.1) * a - w * H * .12 * b.v + wob(i + 7);
+      bubble(x, y, b.r * base * (.5 + .5 * a), a * (1 - ph(.52, .58)), false, b.s);
+    });
+    /* 乾かす風 */
+    const wind = ph(.4, .6);
+    if (wind > 0 && wind < 1) {
+      ctx.lineCap = 'round'; ctx.lineWidth = 2;
+      streaks.forEach(s => {
+        const t = (wind * 1.6 + s.o) % 1;
+        const x = -W * .4 + t * W * 1.6;
+        ctx.globalAlpha = Math.sin(Math.PI * wind) * .7;
+        ctx.strokeStyle = light > .5 ? 'rgba(91,97,104,.6)' : 'rgba(255,255,255,.6)';
+        ctx.beginPath(); ctx.moveTo(x, s.y * H); ctx.lineTo(x + s.l * W, s.y * H); ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+    }
+    /* 毛: ふくらむ → とかす → ドームの形に切りそろえる */
+    const grow = ease(ph(.46, .6));
+    const comb = ease(ph(.6, .68));
+    const cutP = ph(.66, .82);
+    const sx = W * (-.08 + 1.16 * cutP);
+    if (grow > 0) {
+      strands.forEach(s => {
+        const x0 = W * (.1 + .8 * s.u), y0 = baseY();
+        const neat = neatLen(s.u), extra = H * s.extra;
+        const ang = s.ang * (1 - comb) + (s.u - .5) * .55 * comb;
+        const curl = s.curl * (1 - comb) + .06 * comb;
+        const cut = cutP > 0 && sx > x0;
+        line(x0, y0, ang, (neat + (cut ? 0 : extra)) * (.25 + .75 * grow), curl, s.col, s.w, 1);
+        if (cut && cutP < 1) {
+          const f = clamp((sx - x0) / (W * .35));
+          if (f < 1) {
+            const tx = x0 + Math.sin(ang) * neat, ty = y0 - Math.cos(ang) * neat;
+            line(tx, ty, ang + f * 1.2, extra, curl, s.col, s.w, 1 - f, f * 14, f * H * .45);
+          }
+        }
+      });
+    }
+    /* はさみ */
+    if (cutP > 0 && cutP < 1) {
+      const u = clamp((sx / W - .1) / .8);
+      const sy = baseY() - neatLen(u);
+      scEl.style.opacity = String(Math.min(1, cutP * 8, (1 - cutP) * 8));
+      scEl.style.transform = `translate(${(sx - 26).toFixed(1)}px, ${(sy - 24).toFixed(1)}px)`;
+      const snip = Math.abs(Math.sin(cutP * 38)) * 12;
+      bladeA.setAttribute('transform', `rotate(${-snip} 24 20)`);
+      bladeB.setAttribute('transform', `rotate(${snip} 24 20)`);
+    } else scEl.style.opacity = '0';
+    /* リボン */
+    const fin = ease(ph(.84, .93));
+    const bw = Math.min(W * .25, 124), bh = bw * 86 / 120;
+    const bx = W * .62, by = baseY() - neatLen(.65) - bh * .18;
+    bowEl.style.opacity = String(fin);
+    bowEl.style.transform = `translate(${(bx - bw / 2).toFixed(1)}px, ${(by - bh / 2).toFixed(1)}px) scale(${(.4 + .6 * fin).toFixed(3)}) rotate(${((1 - fin) * -28).toFixed(1)}deg)`;
+    const sp = ph(.9, .98);
+    if (sp > 0) {
+      sparkle(bx - bw * .75, by - bh * .6, 7 * sp, sp);
+      sparkle(bx + bw * .8, by - bh * .2, 5 * sp, sp);
+      sparkle(bx + bw * .35, by - bh * 1.05, 4 * sp, sp);
+    }
+    /* 段の表示 */
+    const k = Math.min(4, Math.floor(P * 5));
+    wbars.forEach((b, i) => { b.style.transform = `scaleX(${clamp(P * 5 - i).toFixed(3)})`; });
+    if (k !== stepNow) {
+      stepNow = k;
+      wsteps.forEach((li, i) => li.classList.toggle('on', i === k));
+      $('#st-en').textContent = EN[k];
+      $('#st-no').textContent = `0${k + 1} / 05`;
+    }
+  };
+
+  /* 泡の窓（写真を泡の形の窓から広げる） */
+  const wImg = $('#w-img'), rings = $('#w-rings');
+  const HOLES = [[22, 30, 0, 7], [72, 22, .06, 5], [54, 58, .03, 9], [16, 76, .1, 5.5], [84, 72, .14, 6.5], [40, 12, .18, 3.5]];
+  const setWindow = p => {
+    const vw = wImg.clientWidth || innerWidth, vh = wImg.clientHeight || innerHeight;
+    const vmax = Math.max(vw, vh) / 100;
+    const layers = [];
+    let svg = '';
+    HOLES.forEach(([x, y, dl, r0]) => {
+      const t = ease(clamp((p - dl) / (1 - dl)));
+      const r = r0 + (110 - r0) * t;
+      const rp = r * vmax;
+      layers.push(`radial-gradient(circle at ${x}% ${y}%, #000 ${rp.toFixed(1)}px, transparent ${(rp + 1).toFixed(1)}px)`);
+      if (t < .98) {
+        const cx = vw * x / 100, cy = vh * y / 100;
+        svg += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rp.toFixed(1)}" opacity="${(1 - t).toFixed(2)}"/>`;
+        svg += `<path d="M${(cx - rp * .62).toFixed(1)} ${(cy - rp * .3).toFixed(1)} A${(rp * .7).toFixed(1)} ${(rp * .7).toFixed(1)} 0 0 1 ${(cx - rp * .25).toFixed(1)} ${(cy - rp * .64).toFixed(1)}" opacity="${(1 - t).toFixed(2)}"/>`;
+      }
+    });
+    const m = p >= .999 ? 'none' : layers.join(',');
+    wImg.style.webkitMaskImage = m; wImg.style.maskImage = m;
+    rings.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+    rings.innerHTML = svg;
+  };
+
+  if (!canAnim) {
+    document.querySelector('.loader')?.remove();
+    dock.classList.add('show');
+    P = 1; size(); drawWash();
+    addEventListener('resize', () => { size(); drawWash(); });
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  body.classList.add('fx');
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ） */
+  gsap.set('.loader .word span', { yPercent: 115 });
+  gsap.set('.loader .sub', { opacity: 0 });
+  gsap.set('.loader .bub b', { scale: 0, opacity: 0 });
+  gsap.set('.hero h1 .c > span', { yPercent: 112 });
+  gsap.set('.hero .kicker, .hero .jp, .hero .meta, .notice, .hero .caption', { opacity: 0, y: 16 });
+  gsap.set('.hero img', { scale: 1.16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .bub b', { scale: 1, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'back.out(2)' })
+       .to('.loader .word span', { yPercent: 0, duration: 0.9, stagger: 0.045 }, '-=0.5')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.5')
+       .to('.loader .bub b', { y: -40, scale: 1.4, opacity: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out' }, '+=0.15')
+       .to('.loader .ld', { opacity: 0, y: -24, duration: 0.5, ease: 'power2.in' }, '-=0.35')
+       .to('.loader .fold', { xPercent: i => (i % 2 ? 101 : -101), duration: 1.0, stagger: 0.07, ease: 'power4.inOut' }, '-=0.15')
+       .to('.hero img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .c > span', { yPercent: 0, duration: 1.1, stagger: 0.05 }, '-=1.9')
+       .to('.hero .kicker, .hero .jp, .hero .meta, .notice, .hero .caption', { opacity: 1, y: 0, duration: 0.8, stagger: 0.07 }, '-=1.0')
+       .add(() => document.querySelector('.loader')?.remove());
+
+  /* 質問や料金表を開くとページの長さが変わるので、位置を計算し直す */
+  $$('details').forEach(el => el.addEventListener('toggle', () => ScrollTrigger.refresh()));
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero picture', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  $$('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 下からせり上がって開く（clip-path は数値だけを動かして毎回組み立てる） */
+  const rise = (el, start = 'top 86%') => {
+    const o = { p: 100 };
+    const draw = () => { el.style.clipPath = o.p <= 0 ? '' : `inset(${o.p.toFixed(2)}% 0% 0% 0% round 30px)`; };
+    draw();
+    gsap.to(o, { p: 0, duration: 1.4, ease: 'power3.out', onUpdate: draw, scrollTrigger: { trigger: el, start } });
+  };
+  rise($('.story .towel'));
+  gsap.fromTo('.story .towel img', { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.story .towel', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* 二度洗いの章 */
+  P = 0; stepNow = -1;
+  let washInView = false;
+  ScrollTrigger.create({
+    trigger: '.wash', start: 'top top', end: '+=360%', pin: '.wash .pin', scrub: 0.5,
+    onUpdate: s => { P = s.progress; drawWash(); },
+    onRefresh: () => { size(); drawWash(); }
+  });
+  ScrollTrigger.create({ trigger: '.wash', start: 'top bottom', end: 'bottom top', onToggle: s => { washInView = s.isActive; } });
+  gsap.ticker.add((t, dt) => { if (washInView && P < .6) { T += dt / 1000; drawWash(); } });
+  size(); drawWash();
+
+  /* 泡の窓 */
+  setWindow(0);
+  const wt = gsap.timeline({ scrollTrigger: { trigger: '.window', start: 'top top', end: '+=130%', pin: '.window .w-pin', scrub: true, onUpdate: s => setWindow(clamp(s.progress / .8)), onRefresh: s => setWindow(clamp(s.progress / .8)) } });
+  wt.fromTo('.w-card', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .3, ease: 'power2.out' }, .55)
+    .fromTo('.w-img img', { scale: 1.25 }, { scale: 1, duration: 1, ease: 'none' }, 0);
+
+  /* 料金: 見えたら数字を数え上げる */
+  ScrollTrigger.create({ trigger: '.result', start: 'top 85%', once: true, onEnter: () => { shown.sh = 0; shown.cut = 0; choose(sel.value); } });
+
+  /* 手づくりの章 */
+  gsap.fromTo('.handmade .bigword', { xPercent: 0 }, { xPercent: -30, ease: 'none', scrollTrigger: { trigger: '.handmade', start: 'top bottom', end: 'bottom top', scrub: true } });
+  rise($('.handmade figure'));
+  gsap.from('.points li', { opacity: 0, y: 20, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.points', start: 'top 88%' } });
+
+  /* 口コミのタグ: 吊り下がるように揺れて出る */
+  $$('.tags li').forEach((el, i) => {
+    gsap.from(el, { y: 60, rotation: i % 2 ? 9 : -9, opacity: 0, duration: 1.1, ease: 'elastic.out(1, .6)', scrollTrigger: { trigger: el, start: 'top 92%' } });
+  });
+
+  /* お知らせ */
+  gsap.from('.news li', { opacity: 0, x: -24, duration: .8, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.news', start: 'top 85%' } });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+})();
+</script>
+</body>
+</html>
