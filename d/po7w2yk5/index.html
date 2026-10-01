@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0D1320">
+<title>エターナル・ビューティーサロン パシュ｜船橋駅徒歩6分のエステサロン（ご提案用サンプル）</title>
+<meta name="description" content="船橋駅から歩いて6分のエステサロン、エターナル・ビューティーサロン パシュのご提案用サンプルページです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Kaisei+Tokumin:wght@500;700;800&family=IBM+Plex+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #0D1320;     /* 灯りを落とした施術室 */
+  --navy: #151E33;
+  --navy-2: #1F2B45;
+  --gold: #CDAE6E;      /* シャンパンゴールド。大事な所とボタンだけ */
+  --gold-lt: #E8D7A8;
+  --gold-dk: #74571F;   /* 明るい地に置く金の文字 */
+  --porcelain: #F6F3EE; /* 白い器 */
+  --pearl: #ECE5D8;     /* タオルの影 */
+  --ink: #141A28;
+  --body: #4A5163;
+  --mist: #A9B1C3;
+  --line-d: rgba(246,243,238,.14);
+  --line-l: rgba(20,26,40,.12);
+  --latin: "Bodoni Moda", "Times New Roman", serif;
+  --mincho: "Kaisei Tokumin", serif;
+  --sans: "IBM Plex Sans JP", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+main, footer { overflow-x: clip; }
+body { margin: 0; background: var(--porcelain); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.9; overflow-x: clip; line-break: strict; }
+h1, h2, h3, p, summary, li, dt, dd { margin: 0; word-break: auto-phrase; }
+p { text-wrap: pretty; }
+ul, ol, dl { margin: 0; padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
+.nw { white-space: nowrap; }
+.fill-in { background: rgba(205,174,110,.22); color: var(--gold-dk); padding: 1px 6px; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; font-size: .94em; }
+.dark .fill-in { background: rgba(205,174,110,.16); color: var(--gold-lt); }
+.eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--latin); font-size: 12px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--gold-dk); }
+.eyebrow::before { content: ""; width: 8px; height: 8px; background: currentColor; border-radius: 0 50% 50% 50%; transform: rotate(45deg); flex: none; }
+.dark .eyebrow { color: var(--gold); }
+.cap { position: absolute; z-index: 3; right: 12px; bottom: 10px; font-size: 10px; line-height: 1; color: rgba(255,255,255,.92); background: rgba(13,19,32,.45); padding: 5px 9px; border-radius: 999px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--gold); color: var(--night); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: 美容液のしずくが落ちて、波紋から店名が浮かぶ */
+.loader { position: fixed; inset: 0; z-index: 100; background: rgb(13,19,32); display: grid; place-items: center; overflow: hidden; animation: loader-fail .01s linear 7s forwards; }
+@keyframes loader-fail { to { visibility: hidden; opacity: 0; } }
+.loader .drop { position: absolute; left: 50%; top: 46%; width: 16px; height: 24px; margin: -12px 0 0 -8px; }
+.loader .drop svg { width: 100%; height: 100%; display: block; }
+.loader .rings { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.loader .rings circle { fill: none; stroke: var(--gold); stroke-width: 1.2; opacity: 0; }
+.loader .mark { position: relative; display: grid; justify-items: center; gap: 12px; margin-top: -8vh; }
+.loader .word { font-family: var(--latin); font-style: italic; font-weight: 400; color: var(--porcelain); font-size: clamp(84px, 24vw, 200px); line-height: 1; display: flex; overflow: hidden; padding: 0 .1em .1em; letter-spacing: -.01em; }
+.loader .word span { display: inline-block; transform: translateY(115%); }
+.loader .sub { font-size: 11px; letter-spacing: .38em; margin-right: -.38em; color: var(--gold-lt); opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px var(--g); color: var(--porcelain); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(13,19,32,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding-top: 10px; padding-bottom: 10px; box-shadow: 0 1px 0 var(--line-d); }
+.head .mark { font-family: var(--latin); font-style: italic; font-size: 27px; line-height: 1; text-decoration: none; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; line-height: 1.2; padding: 7px 12px; border: 1px solid var(--line-d); border-radius: 999px; background: rgba(13,19,32,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mist); flex: none; }
+.status.open i { background: var(--gold); box-shadow: 0 0 0 4px rgba(205,174,110,.24); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--night); color: var(--porcelain); }
+.hero picture { position: absolute; inset: 0; }
+.hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transform: scale(1.1); transform-origin: 50% 40%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(13,19,32,.62) 0%, rgba(13,19,32,.12) 24%, rgba(13,19,32,0) 42%, rgba(13,19,32,.7) 66%, rgba(13,19,32,.96) 100%); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 100px; font-size: 10px; line-height: 1; padding: 5px 9px; border-radius: 999px; color: rgba(246,243,238,.9); background: rgba(13,19,32,.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 104px; writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 500; font-size: clamp(17px, 4.6vw, 24px); letter-spacing: .26em; line-height: 1.9; text-shadow: 0 2px 16px rgba(13,19,32,.9), 0 0 4px rgba(13,19,32,.6); }
+.hero .title { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(88px + env(safe-area-inset-bottom)); }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--gold-lt); }
+.hero h1 { font-family: var(--latin); font-style: italic; font-weight: 400; font-size: clamp(128px, 40vw, 380px); line-height: .82; letter-spacing: -.02em; margin: 6px 0 0 -.06em; display: flex; }
+.hero h1 .c { display: inline-block; overflow: hidden; padding: 0 .04em .08em 0; }
+.hero h1 .c span { display: inline-block; }
+.hero h1 .c:first-child span { color: var(--gold-lt); }
+.hero .ja { margin-top: 10px; font-family: var(--mincho); font-weight: 500; font-size: 14px; letter-spacing: .12em; }
+.hero .meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line-d); font-size: 13px; color: var(--mist); }
+.hero .meta b { color: var(--gold); font-weight: 700; font-size: 16px; }
+.late { flex: none; padding: 5px 11px; border: 1px solid rgba(205,174,110,.5); border-radius: 999px; color: var(--gold-lt); font-size: 12px; line-height: 1.3; }
+
+/* 流れる帯 */
+.band { background: var(--pearl); color: var(--navy); overflow: hidden; white-space: nowrap; padding: 16px 0 14px; border-bottom: 1px solid var(--line-l); }
+.band .track { display: inline-flex; align-items: center; gap: 24px; animation: slide 36s linear infinite; font-family: var(--latin); font-style: italic; font-size: clamp(30px, 8.4vw, 60px); line-height: 1.1; }
+.band .track .j { font-family: var(--mincho); font-style: normal; font-weight: 500; font-size: .46em; letter-spacing: .08em; color: var(--gold-dk); }
+.band .track svg { width: .26em; height: .38em; flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 丁寧の章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(72px, 12vw, 150px); display: grid; gap: 26px; background: var(--porcelain); }
+.story .lead-in { font-family: var(--mincho); font-weight: 500; font-size: clamp(23px, 6.4vw, 40px); line-height: 1.55; color: var(--navy); }
+.teinei { position: relative; margin: 6px 0 0 -.04em; font-family: var(--mincho); font-weight: 800; font-size: clamp(150px, 41vw, 340px); line-height: 1.1; padding: .04em 0 .14em; letter-spacing: -.02em;
+  background-image: linear-gradient(105deg, #6E531F 0%, #CDAE6E 16%, #F4E7C3 28%, #B9954F 42%, #EAD8A8 58%, #8E6C2C 76%, #D8BD84 100%); background-size: 260% 100%; background-position: 10% 50%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.teinei .en { position: absolute; right: 0; bottom: .08em; font-family: var(--latin); font-style: italic; font-weight: 400; font-size: .22em; letter-spacing: 0; color: var(--navy); -webkit-text-fill-color: var(--navy); }
+.story .side { display: grid; gap: 28px; }
+.story .lead { max-width: 31em; color: var(--body); font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--navy); font-weight: 700; }
+.words-l { font-size: 12px; color: var(--body); letter-spacing: .06em; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { padding: 8px 15px; border-radius: 999px; background: #fff; border: 1px solid var(--line-l); font-size: 14px; line-height: 1.4; color: var(--navy); }
+.chips li:nth-child(3n+1) { background: var(--navy); border-color: var(--navy); color: var(--porcelain); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line-l); font-size: 13px; color: var(--body); }
+.stars b { font-family: var(--latin); font-weight: 400; font-size: 56px; line-height: 1; color: var(--navy); }
+.stars b small { font-size: .42em; color: var(--gold-dk); margin-right: 4px; vertical-align: .5em; }
+
+/* 21日の章（スクロールで一周する） */
+.cycle { position: relative; background: var(--night); color: var(--porcelain); }
+.cycle .pin { padding: 92px var(--g) 64px; display: grid; gap: 22px; }
+.cycle h2 { margin-top: 10px; font-family: var(--mincho); font-weight: 500; font-size: clamp(26px, 7vw, 46px); line-height: 1.45; }
+.cycle h2 em { font-style: normal; color: var(--gold); }
+.dial { position: relative; width: min(66vw, 460px); aspect-ratio: 1; margin: 0 auto; }
+.dial svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ring .track { fill: none; stroke: rgba(246,243,238,.14); stroke-width: 1; }
+.ring .arc { fill: none; stroke: var(--gold); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.ring .d { fill: transparent; stroke: rgba(246,243,238,.34); stroke-width: 1; transition: fill .3s, stroke .3s; }
+.ring .d.on.h { fill: var(--porcelain); stroke: var(--porcelain); }
+.ring .d.on.s { fill: var(--gold); stroke: var(--gold); }
+.ring .bead { fill: var(--gold-lt); filter: drop-shadow(0 0 6px rgba(232,215,168,.9)); }
+.ring .tick { font-family: var(--latin); font-size: 11px; fill: var(--mist); letter-spacing: .08em; }
+.center { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; }
+.center .lbl { font-family: var(--latin); font-size: 11px; letter-spacing: .42em; margin-right: -.42em; color: var(--mist); }
+.center b { font-family: var(--latin); font-weight: 400; font-size: clamp(64px, 19vw, 150px); line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.center .where { margin-top: 6px; font-family: var(--mincho); font-size: 14px; color: var(--porcelain); }
+.center .where.s { color: var(--gold); }
+.steps { display: grid; gap: 26px; }
+.steps li { display: grid; gap: 4px; padding-top: 14px; border-top: 1px solid var(--line-d); }
+.steps .no { font-size: 11.5px; letter-spacing: .14em; color: var(--gold); }
+.steps h3 { font-family: var(--mincho); font-weight: 500; font-size: clamp(20px, 5.4vw, 28px); line-height: 1.5; }
+.steps p { font-size: 14px; line-height: 1.8; color: var(--mist); max-width: 28em; }
+.legend { display: flex; gap: 18px; font-size: 12px; color: var(--mist); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 10px; height: 10px; border-radius: 50%; }
+.legend i.s { background: var(--gold); }
+.legend i.h { width: 6px; height: 6px; background: var(--porcelain); }
+.cycle .note { margin-top: 8px; font-size: 10.5px; line-height: 1.7; color: #7F889C; }
+/* 動きがある時: 1画面に固定して、段を重ねて1つずつ見せる */
+.fx .cycle .pin { height: 100vh; height: 100svh; min-height: 680px; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 12px; padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+.fx .dial { width: auto; height: 100%; max-width: min(72vw, 460px); max-height: 100%; align-self: center; }
+.fx .steps { display: block; position: relative; min-height: 150px; }
+.fx .steps li { position: absolute; inset: 0 0 auto 0; opacity: 0; transform: translateY(14px); transition: opacity .45s, transform .45s; }
+.fx .steps li.on { opacity: 1; transform: none; }
+
+/* 施術 */
+.menu { background: var(--pearl); padding: clamp(88px, 14vw, 170px) 0 clamp(64px, 10vw, 120px); }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 44px; }
+.sec-head h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; color: var(--navy); }
+.sec-head p { font-size: 12.5px; color: var(--body); max-width: 30em; line-height: 1.8; }
+.cards { display: grid; gap: 80px; padding: 0 var(--g); }
+.card .ph { position: relative; overflow: hidden; border-radius: 3px; background: var(--navy); }
+.card .ph img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.12); }
+.card .ph::after { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(232,215,168,.65); pointer-events: none; z-index: 2; }
+.card .la { margin-top: 20px; font-family: var(--latin); font-style: italic; font-size: clamp(40px, 11vw, 60px); line-height: 1; color: var(--navy); }
+.card .kind { margin-top: 12px; font-size: 12px; letter-spacing: .12em; color: var(--gold-dk); }
+.card h3 { font-family: var(--mincho); font-weight: 700; font-size: clamp(24px, 6.6vw, 32px); line-height: 1.4; color: var(--navy); }
+.card .desc { margin-top: 10px; color: var(--body); font-size: 15px; max-width: 28em; }
+.price { margin-top: 16px; border-top: 1px solid var(--line-l); }
+.price div { display: grid; grid-template-columns: 1fr auto auto; gap: 4px 14px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--line-l); font-size: 14px; line-height: 1.6; }
+.price dt { color: var(--ink); }
+.price .min { color: var(--body); font-size: 12.5px; white-space: nowrap; }
+.price .yen { font-family: var(--latin); font-size: 17px; color: var(--navy); white-space: nowrap; font-variant-numeric: lining-nums; }
+.memo { margin-top: 12px; padding-left: 12px; border-left: 2px solid var(--gold); font-size: 12.5px; line-height: 1.75; color: var(--body); }
+.all { margin: 96px var(--g) 0; padding: 30px 20px 22px; background: var(--porcelain); border-radius: 4px; position: relative; }
+.all::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(205,174,110,.4); pointer-events: none; border-radius: 2px; }
+.all .all-t { font-family: var(--mincho); font-weight: 500; font-size: clamp(22px, 6vw, 34px); line-height: 1.4; color: var(--navy); }
+.all .sub { margin-top: 6px; font-size: 12.5px; color: var(--body); line-height: 1.8; }
+.tabs { display: none; gap: 6px; margin: 20px 0 6px; padding: 5px; border-radius: 999px; background: var(--pearl); position: relative; z-index: 1; }
+.tabs button { flex: 1; min-height: 42px; border: 0; border-radius: 999px; background: none; font-weight: 700; font-size: 14px; color: var(--body); cursor: pointer; transition: background .25s, color .25s; }
+.tabs button[aria-selected="true"] { background: var(--navy); color: var(--porcelain); }
+.tabbed .tabs { display: flex; }
+.pnl h4 { margin: 26px 0 4px; font-family: var(--mincho); font-weight: 500; font-size: 18px; color: var(--gold-dk); }
+.tabbed .pnl h4 { display: none; }
+.tabbed .pnl[hidden] { display: none; }
+.pnl details { border-bottom: 1px solid var(--line-l); position: relative; z-index: 1; }
+.pnl summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 16px 30px 16px 0; position: relative; }
+.pnl summary::-webkit-details-marker { display: none; }
+.pnl summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 12px; height: 12px; margin-top: -6px; background: linear-gradient(var(--gold-dk),var(--gold-dk)) center/12px 1.5px no-repeat, linear-gradient(var(--gold-dk),var(--gold-dk)) center/1.5px 12px no-repeat; transition: transform .3s; }
+.pnl details[open] summary::after { transform: rotate(45deg); }
+.pnl .fam { font-family: var(--mincho); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--navy); }
+.pnl .fam small { display: block; font-family: var(--sans); font-weight: 400; font-size: 11.5px; color: var(--body); }
+.pnl .rng { font-size: 12px; color: var(--gold-dk); white-space: nowrap; text-align: right; line-height: 1.5; }
+.pnl .price { margin: 0 0 14px; }
+.pnl .price div { font-size: 13.5px; }
+.pnl .more { padding: 14px 0 4px; font-size: 12.5px; }
+.menu .src { padding: 26px var(--g) 0; font-size: 11px; line-height: 1.8; color: #6B7282; }
+
+/* 写真の見せ場（しずくの輪から、画面いっぱいへ） */
+.scene { position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; background: var(--night); color: var(--porcelain); }
+.scene .clip { position: absolute; inset: 0; overflow: hidden; }
+.scene img { width: 100%; height: 100%; object-fit: cover; object-position: 74% 50%; }
+.scene .clip::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,19,32,.55) 0%, rgba(13,19,32,0) 26%, rgba(13,19,32,0) 40%, rgba(13,19,32,.8) 70%, rgba(13,19,32,.96) 100%); }
+.scene .over { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(104px + env(safe-area-inset-bottom)); }
+.scene h2 { margin-top: 12px; font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.4vw, 72px); line-height: 1.4; text-shadow: 0 2px 24px rgba(13,19,32,.5); }
+.scene .sub { margin-top: 14px; font-size: 14.5px; line-height: 1.85; color: #D6DBE6; max-width: 27em; }
+.scene .cap { top: 100px; bottom: auto; right: var(--g); }
+
+/* 口コミの声 */
+.voices { background: var(--porcelain); padding: clamp(88px, 14vw, 160px) 0 clamp(72px, 10vw, 130px); }
+.voices .sec-head { margin-bottom: 30px; }
+.vrow { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px var(--g) 20px; scroll-padding-left: var(--g); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.vrow::-webkit-scrollbar { display: none; }
+.v { flex: none; width: 80vw; max-width: 380px; scroll-snap-align: start; position: relative; padding: 34px 26px 26px; border-radius: 3px; background: #fff; box-shadow: 0 18px 40px -28px rgba(13,19,32,.45); display: grid; align-content: space-between; gap: 22px; min-height: 300px; }
+.v::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(205,174,110,.45); pointer-events: none; }
+.v .q { font-family: var(--latin); font-style: italic; font-size: 64px; line-height: .5; height: 26px; color: var(--gold); }
+.v p { font-family: var(--mincho); font-weight: 500; font-size: 17.5px; line-height: 1.85; color: var(--navy); }
+.v .who { font-size: 12px; letter-spacing: .06em; color: var(--gold-dk); }
+.v:nth-child(even) { background: var(--navy); }
+.v:nth-child(even) p { color: var(--porcelain); }
+.v:nth-child(even) .who { color: var(--gold-lt); }
+.swipe { padding: 0 var(--g); font-size: 11.5px; color: var(--body); display: flex; align-items: center; gap: 10px; }
+.swipe::after { content: ""; flex: 1; max-width: 80px; height: 1px; background: var(--gold); }
+.voices .src { padding: 14px var(--g) 0; font-size: 11px; color: #6B7282; line-height: 1.8; }
+
+/* 来店 */
+.visit { background: var(--navy); color: var(--porcelain); padding: clamp(88px, 14vw, 170px) var(--g) 72px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--porcelain); }
+.visit .sec-head p { color: var(--mist); }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--line-d); border-radius: 16px; margin-bottom: 24px; background: rgba(13,19,32,.35); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mist); flex: none; }
+.today.open .dot { background: var(--gold); box-shadow: 0 0 0 6px rgba(205,174,110,.2); }
+.today b { display: block; font-family: var(--mincho); font-size: 21px; font-weight: 500; line-height: 1.4; }
+.today small { display: block; color: var(--mist); font-size: 12.5px; line-height: 1.6; }
+.hours li { display: grid; grid-template-columns: 4.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line-d); font-size: 15px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+.hours li span:first-child { color: var(--mist); }
+.hours li.is-today, .hours li.is-today span:first-child { color: var(--gold); }
+.hours li.closed span:last-child { color: #8E97AA; }
+.hours small { color: var(--mist); font-size: 12px; }
+.small { font-size: 11.5px; line-height: 1.8; color: var(--mist); margin-top: 10px; }
+.box { margin-top: 24px; padding: 18px 20px; border-left: 2px solid var(--gold); background: rgba(246,243,238,.05); border-radius: 0 14px 14px 0; font-size: 14px; line-height: 1.8; }
+.box b { display: block; font-family: var(--mincho); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.box .tel { font-family: var(--latin); font-size: 26px; letter-spacing: .02em; color: var(--gold-lt); text-decoration: none; display: inline-block; margin: 2px 0 4px; }
+.addr { margin-top: 44px; font-family: var(--mincho); font-weight: 500; font-size: 19px; line-height: 1.7; }
+.stations { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.stations li { padding: 6px 12px; border: 1px solid var(--line-d); border-radius: 999px; font-size: 13px; line-height: 1.4; }
+.stations b { color: var(--gold); font-weight: 700; }
+.route-t { margin-top: 30px; font-family: var(--mincho); font-weight: 500; font-size: 17px; }
+.route { position: relative; margin-top: 10px; padding-left: 30px; counter-reset: r; }
+.route::before, .route .draw { content: ""; position: absolute; left: 8px; top: 16px; bottom: 26px; width: 1px; background: var(--line-d); }
+.route .draw { background: var(--gold); transform-origin: top; }
+.route li { position: relative; padding: 8px 0 12px; font-size: 14.5px; line-height: 1.75; color: #D5DAE5; }
+.route li::before { counter-increment: r; content: counter(r); position: absolute; left: -30px; top: 10px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center; font-family: var(--latin); font-size: 10px; line-height: 1; background: var(--navy); border: 1px solid var(--gold); color: var(--gold-lt); transition: background .3s, color .3s; }
+.route li.on::before, body:not(.fx) .route li::before { background: var(--gold); color: var(--night); }
+.route li:last-child { color: var(--porcelain); font-weight: 500; }
+.route-n { font-size: 11px; color: var(--mist); }
+.map { margin-top: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line-d); aspect-ratio: 4 / 3; background: #10182A; position: relative; }
+.map::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(205,174,110,.5); pointer-events: none; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.04) brightness(.95); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--gold); color: var(--night); }
+.btn.ghost { border: 1px solid currentColor; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(88px, 14vw, 150px) var(--g) 40px; background: var(--porcelain); }
+.faq .sec-head { padding: 0; margin-bottom: 18px; }
+.faq details { border-bottom: 1px solid var(--line-l); }
+.faq summary { list-style: none; cursor: pointer; padding: 22px 38px 22px 0; position: relative; font-family: var(--mincho); font-size: 18px; font-weight: 500; line-height: 1.6; color: var(--navy); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--gold-dk),var(--gold-dk)) center/14px 1.5px no-repeat, linear-gradient(var(--gold-dk),var(--gold-dk)) center/1.5px 14px no-repeat; transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding: 0 0 22px; color: var(--body); font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(88px, 14vw, 150px); background: var(--porcelain); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 28px; }
+.tiles img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.gram h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(25px, 7vw, 46px); line-height: 1.45; color: var(--navy); }
+.gram p { margin-top: 10px; color: var(--body); font-size: 15px; }
+.gram .btn.fill { background: var(--navy); color: var(--porcelain); }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--mist); padding: 72px var(--g) calc(128px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--latin); font-style: italic; font-weight: 400; color: var(--porcelain); font-size: clamp(130px, 42vw, 440px); line-height: .8; letter-spacing: -.02em; margin: 0 0 8px -.06em; }
+.foot .huge span { color: var(--gold); }
+.foot .huge-sub { font-family: var(--latin); font-size: 12px; letter-spacing: .38em; color: var(--gold-lt); margin-bottom: 36px; text-transform: uppercase; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line-d); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1fr 1.3fr 1.15fr; gap: 4px; padding: 5px; border-radius: 22px; background: rgba(13,19,32,.84); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 10px 30px rgba(0,0,0,.3), inset 0 0 0 1px rgba(205,174,110,.22); transform: translateY(150%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 52px; border-radius: 17px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; font-size: 11.5px; font-weight: 700; line-height: 1.1; color: var(--porcelain); white-space: nowrap; }
+.dock a svg { width: 18px; height: 18px; flex: none; }
+.dock a.main { background: var(--gold); color: var(--night); font-size: 12.5px; }
+
+@media (min-width: 900px) {
+  .hero img { object-position: 50% 50%; }
+  .hero::after { background: linear-gradient(90deg, rgba(13,19,32,.9) 0%, rgba(13,19,32,.55) 34%, rgba(13,19,32,0) 58%), linear-gradient(180deg, rgba(13,19,32,.5) 0%, rgba(13,19,32,0) 24%, rgba(13,19,32,0) 62%, rgba(13,19,32,.7) 100%); }
+  .hero .title { right: auto; width: min(760px, 52vw); bottom: 64px; }
+  .hero h1 { font-size: min(21vw, 36vh); }
+  .hero .vert { right: auto; left: var(--g); top: 138px; font-size: 22px; }
+  .hero .caption { left: auto; right: var(--g); }
+  .story { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); column-gap: 88px; row-gap: 24px; align-items: start; max-width: 1360px; margin: 0 auto; }
+  .story > .eyebrow, .story .lead-in, .story .teinei { grid-column: 1; }
+  .story .teinei { font-size: min(19vw, 300px); }
+  .story .side { grid-column: 2; grid-row: 1 / span 3; align-self: end; display: grid; gap: 30px; padding-bottom: 20px; }
+  .cycle .pin { max-width: 1320px; margin: 0 auto; }
+  .fx .cycle .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 80px; padding-top: 112px; padding-bottom: 56px; }
+  .fx .cycle header { grid-column: 1 / -1; }
+  .fx .dial { grid-column: 1; grid-row: 2; justify-self: center; }
+  .fx .steps { grid-column: 2; grid-row: 2; align-self: center; min-height: 220px; }
+  .fx .cycle .bottom { grid-column: 1 / -1; }
+  .steps h3 { font-size: 30px; }
+  .steps p { font-size: 15.5px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; column-gap: 40px; max-width: 1320px; margin-left: auto; margin-right: auto; }
+  .sec-head .eyebrow { grid-column: 1 / -1; }
+  .sec-head p { text-align: right; max-width: 26em; }
+  .cards { grid-template-columns: repeat(3, 1fr); column-gap: 44px; max-width: 1320px; margin: 0 auto; }
+  .card:nth-child(2) { margin-top: 140px; }
+  .card:nth-child(3) { margin-top: 60px; }
+  .all { max-width: 1100px; margin: 120px auto 0; padding: 48px 56px 40px; }
+  .tabs { max-width: 480px; }
+  .menu .src { max-width: 1100px; margin: 0 auto; padding-left: 0; padding-right: 0; }
+  .scene .clip::after { background: linear-gradient(90deg, rgba(13,19,32,.85) 0%, rgba(13,19,32,.4) 36%, rgba(13,19,32,0) 58%), linear-gradient(180deg, rgba(13,19,32,.4) 0%, rgba(13,19,32,0) 30%, rgba(13,19,32,0) 60%, rgba(13,19,32,.6) 100%); }
+  .scene img { object-position: 50% 50%; }
+  .scene .over { right: auto; max-width: 720px; bottom: 96px; }
+  .vrow { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; max-width: 1320px; margin: 0 auto; gap: 20px; }
+  .v { width: auto; max-width: none; }
+  .v:nth-child(even) { transform: translateY(40px); }
+  .swipe { display: none; }
+  .voices .src { max-width: 1320px; margin: 40px auto 0; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1240px; margin: 0 auto; }
+  .visit .sec-head { max-width: 1240px; margin: 0 auto 44px; }
+  .addr { margin-top: 0; }
+  .faq, .gram { padding-left: max(var(--g), calc((100vw - 980px) / 2)); padding-right: max(var(--g), calc((100vw - 980px) / 2)); }
+  .tiles { max-width: 560px; }
+  .dock { left: auto; right: 24px; width: 470px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .band .track { animation: none; }
+  .hero img, .card .ph img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <svg class="rings"><circle cx="50%" cy="46%" r="4"/><circle cx="50%" cy="46%" r="4"/><circle cx="50%" cy="46%" r="4"/></svg>
+  <div class="drop"><svg viewBox="0 0 16 24"><path d="M8 0 C8 0 16 11 16 16 A8 8 0 0 1 0 16 C0 11 8 0 8 0Z" fill="#CDAE6E"/><path d="M4.4 15.2 a3.8 3.8 0 0 0 2.6 4" stroke="#F4E7C3" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+  <div class="mark">
+    <div class="word"><span>P</span><span>o</span><span>s</span><span>h</span></div>
+    <div class="sub">ETERNAL BEAUTY SALON</div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">Posh</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="エターナル・ビューティーサロン パシュ">
+    <picture>
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="白いタオルをかけた施術用ベッドと、美容液のボトル（イメージ）">
+    </picture>
+    <span class="caption">写真はイメージです</span>
+    <p class="vert" aria-hidden="true">本気で自分の肌を<br>変えたい方に。</p>
+    <div class="title">
+      <p class="kicker">Eternal Beauty Salon ／ 船橋駅 徒歩6分</p>
+      <h1 aria-label="Posh"><span class="c"><span>P</span></span><span class="c"><span>o</span></span><span class="c"><span>s</span></span><span class="c"><span>h</span></span></h1>
+      <p class="ja">エターナル・ビューティーサロン パシュ</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.9</b>（18件）</span>
+        <span class="late">平日は21時まで</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true">
+    <div class="track">
+      <span>Green Peel</span><span class="j">グリーンピール</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>7B Spicule</span><span class="j">7Bスピキュール</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>24K Gold</span><span class="j">24Kゴールド</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Cupping</span><span class="j">美容カッピング</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Head Spa</span><span class="j">ヘッドスパ</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Home Care</span><span class="j">ホームケア</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Green Peel</span><span class="j">グリーンピール</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>7B Spicule</span><span class="j">7Bスピキュール</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>24K Gold</span><span class="j">24Kゴールド</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Cupping</span><span class="j">美容カッピング</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Head Spa</span><span class="j">ヘッドスパ</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+      <span>Home Care</span><span class="j">ホームケア</span><svg viewBox="0 0 16 24"><path d="M8 0C8 0 16 11 16 16A8 8 0 0 1 0 16C0 11 8 0 8 0Z" fill="#B9954F"/></svg>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <p class="eyebrow">Concept</p>
+    <h2 class="lead-in" id="story-title"><span class="line"><span>お客さまから、</span></span><span class="line"><span>いちばん多く届く言葉。</span></span></h2>
+    <p class="teinei" aria-label="丁寧（Polite）">丁寧<span class="en" aria-hidden="true">Polite</span></p>
+    <div class="side">
+      <p class="lead">細かなところまで、心をこめて。パシュが大切にしているのは、その「丁寧」です。Googleの口コミにも <q>タオルや美容液の使い方まで行き届いている</q> <q>疑問にもていねいに答えてくれる</q> という声が並びます。</p>
+      <div>
+        <p class="words-l">口コミに並ぶ言葉</p>
+        <ul class="chips">
+          <li>きめ細やか</li>
+          <li>ていねいな説明</li>
+          <li>品のある雰囲気</li>
+          <li>アットホーム</li>
+          <li>ホームケアの相談</li>
+          <li>癒しの時間</li>
+        </ul>
+      </div>
+      <div class="stars"><b><small>★</small>4.9</b><span>Googleの口コミ 18件の平均（2026年9月）</span></div>
+    </div>
+  </section>
+
+  <section class="cycle dark" aria-labelledby="cycle-title">
+    <div class="pin">
+      <header>
+        <p class="eyebrow">Salon &amp; Home</p>
+        <h2 id="cycle-title">サロンの日と、<br><em>家での毎日</em>。</h2>
+      </header>
+      <div class="dial" aria-hidden="true">
+        <svg class="ring" viewBox="0 0 300 300">
+          <circle class="track" cx="150" cy="150" r="118"/>
+          <circle class="arc" id="arc" cx="150" cy="150" r="118" pathLength="1" transform="rotate(-90 150 150)"/>
+          <g id="dots"></g>
+          <text class="tick" x="150" y="12" text-anchor="middle">DAY 1 · 21</text>
+          <circle class="bead" id="bead" cx="150" cy="32" r="4.5"/>
+        </svg>
+        <div class="center">
+          <span class="lbl">DAY</span>
+          <b id="dayNum">21</b>
+          <span class="where s" id="where">また、サロンへ</span>
+        </div>
+      </div>
+      <ol class="steps" id="steps">
+        <li><span class="no">01 ／ サロンの日</span><h3>まず、今の肌を知る。</h3><p>フェイシャルは、スコープで肌のきめを確かめるところから。今の自分の肌を知ってから、お手入れを決めます。</p></li>
+        <li><span class="no">02 ／ サロンの日</span><h3>その日の肌に、合わせて。</h3><p>要望や肌の調子に向き合って施術を決めてくれる、という口コミ。POSH美顔は、悩みと肌の状態に合わせて内容を組み立てるコースです。</p></li>
+        <li><span class="no">03 ／ サロンの日</span><h3>ハーブティーと、家での話。</h3><p>帰る前に、家でのお手入れの方法を。ハーブティーを飲みながら教わる、という口コミもあります。</p></li>
+        <li><span class="no">04 ／ 家での毎日</span><h3>教わったお手入れを、続ける。</h3><p>サロンでのケアと、家でのケア。エステティシャンとの二人三脚で、肌を育てていく考え方です。</p></li>
+        <li><span class="no">05 ／ また、サロンへ</span><h3>3週間ごとに、通う人も。</h3><p>すぐに劇的に変わるものではなく、続けることが大切だと感じている。そんな口コミも届いています。</p></li>
+      </ol>
+      <div class="bottom">
+        <p class="legend"><span><i class="s"></i>サロンの日</span><span><i class="h"></i>家でのお手入れ</span></p>
+        <p class="note">※通う間隔や内容は人によって違います。口コミと現在のサイトの内容から組み立てたイメージで、実際の内容に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <p class="eyebrow">Treatment</p>
+      <h2 id="menu-title">口コミに<br>名前が挙がる施術</h2>
+      <p>料金・時間は現在のサイトの記載より（2026年9月）。はじめての方は20%OFF、とサイトに案内があります。</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="ph"><img src="img/herb.jpg" alt="器に入った緑色のハーブの粉と木のへら（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="la">Green Peel</p>
+        <p class="kind">天然ハーブ ／ 顔・首・頭皮</p>
+        <h3>グリーンピール</h3>
+        <p class="desc">天然ハーブを使うトリートメント。口コミでよく名前が挙がる施術で、顔のコースのほかに、頭皮のコース（ヘッドグロウ）もあります。サロンでのケアと家でのケアを組み合わせて進めます。</p>
+        <dl class="price">
+          <div><dt>ソフト 1day（顔首）</dt><dd class="min">80分</dd><dd class="yen">16,500円</dd></div>
+          <div><dt>クイック55sec（顔のみ）</dt><dd class="min">60分</dd><dd class="yen">10,450円</dd></div>
+          <div><dt>ヘッドグロウ 1day（シングル）</dt><dd class="min">70分</dd><dd class="yen">16,500円</dd></div>
+        </dl>
+        <p class="memo">施術の当日は、メイクと洗顔をお休みして、専用の基礎化粧品でケアします。</p>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/serum.jpg" alt="スポイトから白い器に落ちる美容液のしずく（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="la">7B Spicule</p>
+        <p class="kind">天然微細針 ／ 顔・首</p>
+        <h3>7B スピキュール</h3>
+        <p class="desc">天然の微細な針「スピキュール」を含む美容液を使うトリートメント。フェイシャルでは7Bのコースがお気に入り、という口コミもあります。</p>
+        <dl class="price">
+          <div><dt>ベストコース（顔首）</dt><dd class="min">75分</dd><dd class="yen">26,400円</dd></div>
+          <div><dt>ベストコース（顔のみ）</dt><dd class="min">65分</dd><dd class="yen">23,100円</dd></div>
+          <div><dt>シンプルコース（顔のみ）</dt><dd class="min">45分</dd><dd class="yen">18,700円</dd></div>
+        </dl>
+        <p class="memo">施術のあと2〜3日は、肌にチクチクとした感触があります。</p>
+      </article>
+      <article class="card">
+        <div class="ph"><img src="img/cups.jpg" alt="たたんだタオルの上に並ぶガラスのカッピング用のカップ（イメージ）" loading="lazy"><span class="cap">イメージ</span></div>
+        <p class="la">Cupping</p>
+        <p class="kind">吸い玉 ／ 背中・腰</p>
+        <h3>美容カッピング</h3>
+        <p class="desc">やさしい吸圧で、背中や腰のこわばりをゆるめることを目的にしたトリートメント。グリーンピールやカッピングをよく受ける、という口コミもあります。</p>
+        <dl class="price">
+          <div><dt>3カッピング（背中・腰）</dt><dd class="min">50分</dd><dd class="yen">7,150円</dd></div>
+          <div><dt>2カッピング（背中のみ）</dt><dd class="min">40分</dd><dd class="yen">4,730円</dd></div>
+          <div><dt>3カッピング＋ハーフフット</dt><dd class="min">60分</dd><dd class="yen">9,350円</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="all" id="all">
+      <h3 class="all-t">すべてのメニューと料金</h3>
+      <p class="sub">気になるところから選べます。迷ったら、予約の時に相談を。</p>
+      <div class="tabs" role="tablist" aria-label="メニューの種類">
+        <button type="button" role="tab" aria-selected="true" data-t="face">顔・首</button>
+        <button type="button" role="tab" aria-selected="false" data-t="body">からだ</button>
+        <button type="button" role="tab" aria-selected="false" data-t="head">頭</button>
+      </div>
+
+      <div class="pnl" data-p="face" role="tabpanel">
+        <h4>顔・首</h4>
+        <details>
+          <summary><span class="fam">グリーンピール<small>天然ハーブ</small></span><span class="rng">9コース<br>10,450円〜</span></summary>
+          <dl class="price">
+            <div><dt>5day's（顔首）</dt><dd class="min">90分</dd><dd class="yen">55,000円</dd></div>
+            <div><dt>3day's（顔首）</dt><dd class="min">90分</dd><dd class="yen">38,500円</dd></div>
+            <div><dt>スペシャル 1day（顔首）</dt><dd class="min">90分</dd><dd class="yen">38,500円</dd></div>
+            <div><dt>ソフト 1day（顔首）</dt><dd class="min">80分</dd><dd class="yen">16,500円</dd></div>
+            <div><dt>クイック55sec（顔のみ）</dt><dd class="min">60分</dd><dd class="yen">10,450円</dd></div>
+            <div><dt>エナジー 1day（顔首デコルテ）</dt><dd class="min">90分</dd><dd class="yen">38,500円</dd></div>
+            <div><dt>フレッシュアップ 1day（顔首）</dt><dd class="min">80分</dd><dd class="yen">22,000円</dd></div>
+            <div><dt>プレミアムメラホワイト 2day's（顔首）</dt><dd class="min">90分</dd><dd class="yen">35,200円</dd></div>
+            <div><dt>メラホワイト 1day（顔首）</dt><dd class="min">80分</dd><dd class="yen">22,000円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">7B スピキュール<small>天然微細針</small></span><span class="rng">3コース<br>18,700円〜</span></summary>
+          <dl class="price">
+            <div><dt>ベストコース（顔首）</dt><dd class="min">75分</dd><dd class="yen">26,400円</dd></div>
+            <div><dt>ベストコース（顔のみ）</dt><dd class="min">65分</dd><dd class="yen">23,100円</dd></div>
+            <div><dt>シンプルコース（顔のみ）</dt><dd class="min">45分</dd><dd class="yen">18,700円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">POSH美顔<small>その日の肌に合わせる、お店のオリジナル</small></span><span class="rng">5コース<br>13,200円〜</span></summary>
+          <dl class="price">
+            <div><dt>ショート（顔首）</dt><dd class="min">65分</dd><dd class="yen">13,200円</dd></div>
+            <div><dt>ベーシック（顔首）</dt><dd class="min">85分</dd><dd class="yen">16,500円</dd></div>
+            <div><dt>スタンダード（顔首）</dt><dd class="min">105分</dd><dd class="yen">19,800円</dd></div>
+            <div><dt>デラックス（顔首）</dt><dd class="min">125分</dd><dd class="yen">23,100円</dd></div>
+            <div><dt>ラグジュアリー（顔首デコルテ）</dt><dd class="min">130分</dd><dd class="yen">26,400円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">24Kゴールド<small>金箔</small></span><span class="rng">2コース<br>19,800円〜</span></summary>
+          <dl class="price">
+            <div><dt>ヒト幹細胞＆24Kゴールド（顔首）</dt><dd class="min">85分</dd><dd class="yen">23,100円</dd></div>
+            <div><dt>24Kゴールド（顔首）</dt><dd class="min">60分</dd><dd class="yen">19,800円</dd></div>
+          </dl>
+        </details>
+      </div>
+
+      <div class="pnl" data-p="body" role="tabpanel">
+        <h4>からだ</h4>
+        <details>
+          <summary><span class="fam">美容カッピング<small>背中・腰</small></span><span class="rng">4コース<br>4,730円〜</span></summary>
+          <dl class="price">
+            <div><dt>3カッピング（背中・腰）＋ハーフフット</dt><dd class="min">60分</dd><dd class="yen">9,350円</dd></div>
+            <div><dt>3カッピング（背中・腰）</dt><dd class="min">50分</dd><dd class="yen">7,150円</dd></div>
+            <div><dt>2カッピング（背中のみ）</dt><dd class="min">40分</dd><dd class="yen">4,730円</dd></div>
+            <div><dt>2カッピング（腰のみ）</dt><dd class="min">40分</dd><dd class="yen">4,730円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">高濃度オイルケア<small>首・肩・背中・腕・足</small></span><span class="rng">8コース<br>3,850円〜</span></summary>
+          <dl class="price">
+            <div><dt>腸セラピー（ガウンの上から）</dt><dd class="min">20分</dd><dd class="yen">3,850円</dd></div>
+            <div><dt>首（ショート）</dt><dd class="min">20分</dd><dd class="yen">3,850円</dd></div>
+            <div><dt>首（ロング）</dt><dd class="min">45分</dd><dd class="yen">6,600円</dd></div>
+            <div><dt>デコルテ＋首肩＋背中（ショート）</dt><dd class="min">35分</dd><dd class="yen">5,500円</dd></div>
+            <div><dt>デコルテ＋首肩＋背中（ロング）</dt><dd class="min">45分</dd><dd class="yen">6,600円</dd></div>
+            <div><dt>腕全体</dt><dd class="min">40分</dd><dd class="yen">5,940円</dd></div>
+            <div><dt>足・足浴付き（フット：膝〜足先）</dt><dd class="min">60分</dd><dd class="yen">6,600円</dd></div>
+            <div><dt>足・足浴付き（レッグ：ヒップ〜足先）</dt><dd class="min">80分</dd><dd class="yen">8,800円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">深部温活・水素吸入<small>超短波・ひざ下の温浴・水素</small></span><span class="rng">6コース<br>1,650円〜</span></summary>
+          <dl class="price">
+            <div><dt>水素吸入＆腸深部温活DX</dt><dd class="min">40分</dd><dd class="yen">6,600円</dd></div>
+            <div><dt>腸深部温活</dt><dd class="min">35分</dd><dd class="yen">3,300円</dd></div>
+            <div><dt>高濃度水素ダイレクト吸入</dt><dd class="min">15分</dd><dd class="yen">1,650円</dd></div>
+            <div><dt>高濃度水素ダイレクト吸入</dt><dd class="min">30分</dd><dd class="yen">3,300円</dd></div>
+            <div><dt>高濃度水素ダイレクト吸入</dt><dd class="min">45分</dd><dd class="yen">4,950円</dd></div>
+            <div><dt>高濃度水素ダイレクト吸入</dt><dd class="min">60分</dd><dd class="yen">5,940円</dd></div>
+          </dl>
+        </details>
+        <p class="more">7B スピキュールとグリーンピールには、からだのコースもあります。<span class="fill-in">料金を実際の内容で載せます</span></p>
+      </div>
+
+      <div class="pnl" data-p="head" role="tabpanel">
+        <h4>頭</h4>
+        <details>
+          <summary><span class="fam">グリーンピール ヘッドグロウ<small>頭皮のためのハーブのコース</small></span><span class="rng">2コース<br>16,500円〜</span></summary>
+          <dl class="price">
+            <div><dt>1day（シングル）</dt><dd class="min">70分</dd><dd class="yen">16,500円</dd></div>
+            <div><dt>1day（ダブル・ハーブ量2倍）</dt><dd class="min">70分</dd><dd class="yen">27,500円</dd></div>
+          </dl>
+        </details>
+        <details>
+          <summary><span class="fam">リラックスヘッドスパ<small>クリームを使うヘッドスパ</small></span><span class="rng">1コース<br>9,900円</span></summary>
+          <dl class="price">
+            <div><dt>リラックスヘッドスパ</dt><dd class="min">60分</dd><dd class="yen">9,900円</dd></div>
+          </dl>
+        </details>
+      </div>
+    </div>
+    <p class="src">※料金・時間は、現在のサイトの記載をそのまま載せています（2026年9月）。表記（税込かどうかなど）と最新の内容は、実際の内容に合わせます。写真はすべてイメージです。</p>
+  </section>
+
+  <section class="scene dark" aria-labelledby="show-title">
+    <div class="clip"><img src="img/tea.jpg" alt="金色のトレーにのせたハーブティーと、丸めた白いタオル（イメージ）" loading="lazy"></div>
+    <span class="cap">写真はイメージです</span>
+    <div class="over">
+      <p class="eyebrow">After care</p>
+      <h2 id="show-title">ハーブティーと、<br>家でのお手入れの話。</h2>
+      <p class="sub">施術のあとに、ホームケアの方法を教わる時間がある、という口コミから。サロンの雰囲気にも品があって、癒しの時間になっている、という声も届いています。</p>
+    </div>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="sec-head">
+      <p class="eyebrow">Voices</p>
+      <h2 id="voices-title">通っている方の声</h2>
+      <p>Googleの口コミ（★5）の要旨を言い換えたものです</p>
+    </div>
+    <div class="vrow">
+      <article class="v"><span class="q" aria-hidden="true">“</span><p>タオルひとつ、美容液の使い方ひとつにも、大手のエステにはない細やかな気づかいがある。</p><span class="who">長く通っている方</span></article>
+      <article class="v"><span class="q" aria-hidden="true">“</span><p>要望や肌の調子に、真剣に向き合ってくれる。疑問にもていねいに説明してもらえて、安心して任せられる。</p><span class="who">カウンセリング</span></article>
+      <article class="v"><span class="q" aria-hidden="true">“</span><p>すぐに劇的に変わるものではなく、続けることが大切だと感じている。家でのお手入れも、相談しながら続けている。</p><span class="who">3週間ごとに通う方</span></article>
+      <article class="v"><span class="q" aria-hidden="true">“</span><p>アットホームで、肩の力を抜いて過ごせた。カウンセリングも施術もていねいで、家でのケアの説明もわかりやすかった。</p><span class="who">はじめての方</span></article>
+    </div>
+    <p class="swipe">横にスワイプして読めます</p>
+    <p class="src">※口コミの本文ではなく、要旨を言い換えたものです。感じ方には個人差があります。</p>
+  </section>
+
+  <section class="visit dark" id="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <p class="eyebrow">Visit</p>
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業時間とアクセスは、現在のサイトとGoogleマップの情報（2026年9月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="2"><span>火</span><span>9:00 – 21:00</span></li>
+          <li data-d="3"><span>水</span><span>9:00 – 21:00</span></li>
+          <li data-d="4"><span>木</span><span>9:00 – 21:00</span></li>
+          <li data-d="5"><span>金</span><span>9:00 – 21:00</span></li>
+          <li data-d="6"><span>土</span><span>9:00 – 18:00</span></li>
+          <li data-d="0"><span>日</span><span>9:00 – 18:00</span></li>
+          <li data-d="hol"><span>祝日</span><span>9:00 – 16:00</span></li>
+          <li data-d="1" class="closed"><span>月</span><span>定休日 <small>（祝日と重なる日は営業）</small></span></li>
+        </ul>
+        <p class="small">年末年始・臨時のお休みは <span class="fill-in">実際の内容に合わせます</span></p>
+        <div class="box"><b>お電話でのご予約・お問い合わせ</b><a class="tel" href="tel:0474253051">047-425-3051</a><br>施術中は電話に出られないことがあります。留守番電話に用件を残すと、折り返しの連絡がきます。</div>
+        <div class="row"><a class="btn fill" href="https://beauty.hotpepper.jp/kr/slnH000304621/" target="_blank" rel="noopener">ホットペッパービューティーで予約</a></div>
+      </div>
+      <div>
+        <p class="addr">〒273-0005<br>千葉県船橋市本町6丁目9-6<br>R FIELDS FUNABASHI Ⅱ 401</p>
+        <ul class="stations">
+          <li>JR船橋駅 <b>徒歩6分</b></li>
+          <li>東葉高速線 東海神駅 <b>徒歩7分</b></li>
+          <li>京成船橋駅 <b>徒歩11分</b></li>
+        </ul>
+        <p class="route-t">JR船橋駅からの道順</p>
+        <div class="route" id="route">
+          <span class="draw" aria-hidden="true"></span>
+          <ol>
+            <li>北口を出て、大通りの右側の歩道をまっすぐ。</li>
+            <li>右手に、ファミリーマート、船橋情報ビジネス専門学校と続きます。</li>
+            <li>湘南ゼミナールを過ぎたら、右へ。</li>
+            <li>右手の2軒目、赤と青のデザインが入った5階建てのマンション「R FIELDS FUNABASHI Ⅱ」の4階です。</li>
+            <li>エレベーターの右手にあるインターフォンで「401」を呼び出してください。</li>
+          </ol>
+        </div>
+        <p class="route-n">※道順は現在のサイトの案内より。目印のお店は変わることがあります。</p>
+        <div class="map"><iframe title="エターナル・ビューティーサロン パシュの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E3%82%A8%E3%82%BF%E3%83%BC%E3%83%8A%E3%83%AB%E3%83%BB%E3%83%93%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%82%B5%E3%83%AD%E3%83%B3%20%E3%83%91%E3%82%B7%E3%83%A5%20%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82%E6%9C%AC%E7%94%BA6%E4%B8%81%E7%9B%AE9-6&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row"><a class="btn ghost" href="https://maps.google.com/?cid=11186777890874830540" target="_blank" rel="noopener">Googleマップで道順を見る</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><p class="eyebrow">Q&amp;A</p><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>はじめてでも大丈夫ですか？</summary><p>フェイシャルは、スコープで肌のきめを確かめ、今の肌の状態を知るところから始まります。口コミにも、はじめてでもアットホームで落ち着いて過ごせた、という声があります。現在のサイトには、はじめての方は20%OFFの案内があります。</p></details>
+    <details><summary>メニューが多くて、選べません。</summary><p>悩みや肌の状態に合わせて相談できる、と現在のサイトにも案内があります。迷ったら、予約の時にそのまま相談してみてください。</p></details>
+    <details><summary>男性も受けられますか？</summary><p>はい。メンズの方も受けられる、と現在のサイトに案内があります。</p></details>
+    <details><summary>グリーンピールの当日、メイクはできますか？</summary><p>当日はメイクと洗顔をお休みして、専用の基礎化粧品でケアします（現在のサイトの記載より）。</p></details>
+    <details><summary>家でのお手入れも相談できますか？</summary><p>施術とあわせて、一人ひとりに合わせたホームケアの方法も伝えている、と現在のサイトにあります。LINEでサポートを受けながら進める、オンラインのコース（7日間の体験コースなど）もあります。</p></details>
+    <details><summary>予約はどうすればいいですか？</summary><p>ホットペッパービューティーの予約ページか、お電話で。施術中は電話に出られないことがあるので、留守番電話に用件を残すと、折り返しの連絡がきます。<span class="fill-in">予約方法の案内は、実際の内容に合わせます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles"><img src="img/herb.jpg" alt="" loading="lazy"><img src="img/tea.jpg" alt="" loading="lazy"><img src="img/cups.jpg" alt="" loading="lazy"></div>
+    <h2 id="gram-title">サロンの様子は、<br>Instagramでも。</h2>
+    <p>@posh___salon</p>
+    <div class="row"><a class="btn fill" href="https://www.instagram.com/posh___salon/" target="_blank" rel="noopener">Instagramを見る</a></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true"><span>P</span>osh</p>
+  <p class="huge-sub" aria-hidden="true">Eternal Beauty Salon</p>
+  <p>エターナル・ビューティーサロン パシュ<br>〒273-0005 千葉県船橋市本町6丁目9-6<br><span class="nw">R FIELDS FUNABASHI Ⅱ 401</span><br><span class="nw">火〜金 9:00–21:00</span>　<span class="nw">土・日 9:00–18:00</span><br><span class="nw">祝日 9:00–16:00</span>　<span class="nw">月曜定休（祝日と重なる日は営業）</span></p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージで、口コミは要旨を言い換えたものです。料金などは現在のサイトの記載をもとにしています。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a href="https://maps.google.com/?cid=11186777890874830540" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>道順</a>
+  <a href="tel:0474253051"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>電話</a>
+  <a class="main" href="https://beauty.hotpepper.jp/kr/slnH000304621/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>ネット予約</a>
+  <a href="https://www.instagram.com/posh___salon/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const body = document.body;
+  const reduced = body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+  /* 営業中かどうか（日本時間）。祝日は 9:00–16:00、月曜が祝日なら営業（現在のサイトの記載） */
+  const HOL = new Set(['2026-10-12','2026-11-03','2026-11-23','2027-01-01','2027-01-11','2027-02-11','2027-02-23','2027-03-21','2027-03-22','2027-04-29','2027-05-03','2027-05-04','2027-05-05','2027-07-19','2027-08-11','2027-09-20','2027-09-23','2027-10-11','2027-11-03','2027-11-23']);
+  const WEEK = { 0: [9, 18], 2: [9, 21], 3: [9, 21], 4: [9, 21], 5: [9, 21], 6: [9, 18] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const isHol = d => HOL.has(ymd(d));
+  const hoursOf = d => isHol(d) ? [9, 16] : (WEEK[d.getDay()] || null);
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const h = now.getHours() + now.getMinutes() / 60, t = hoursOf(now), hol = isHol(now);
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで${hol ? '（祝日の営業時間）' : ''}`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1, nd;
+    for (; k <= 8; k++) { nd = new Date(now); nd.setDate(now.getDate() + k); if (hoursOf(nd)) break; }
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : `${nd.getMonth() + 1}/${nd.getDate()}（${NAMES[nd.getDay()]}）`} ${fmt(hoursOf(nd)[0])}から`;
+  }
+  $('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  const todayRow = $(`#hours li[data-d="${hol ? 'hol' : now.getDay()}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* メニューのタブ（JS が動かない時は3つとも縦に並ぶ） */
+  const all = $('#all'), tabs = $$('#all .tabs button'), pnls = $$('#all .pnl');
+  all.classList.add('tabbed');
+  const showTab = key => {
+    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.t === key)));
+    pnls.forEach(p => { p.hidden = p.dataset.p !== key; });
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  };
+  tabs.forEach(b => b.addEventListener('click', () => showTab(b.dataset.t)));
+  showTab('face');
+
+  /* 21日の輪。Day 1 と Day 21 がサロンの日（金）、あいだが家でのお手入れ */
+  const NS = 'http://www.w3.org/2000/svg', N = 21, R = 118, C = 150;
+  const dotsG = $('#dots'), dots = [];
+  for (let i = 0; i < N; i++) {
+    const a = (-90 + i * 360 / N) * Math.PI / 180;
+    const c = document.createElementNS(NS, 'circle');
+    const salon = i === 0 || i === N - 1;
+    c.setAttribute('cx', (C + R * Math.cos(a)).toFixed(2));
+    c.setAttribute('cy', (C + R * Math.sin(a)).toFixed(2));
+    c.setAttribute('r', salon ? 8 : 3.4);
+    c.setAttribute('class', salon ? 'd s' : 'd h');
+    dotsG.appendChild(c); dots.push(c);
+  }
+  const arc = $('#arc'), bead = $('#bead'), dayNum = $('#dayNum'), where = $('#where');
+  const steps = $$('#steps li');
+  let curStep = -1, curDay = -1;
+  const setCycle = p => {
+    let pos, step;
+    if (p < 0.36) { pos = 0; step = Math.min(2, Math.floor(p / 0.12)); }
+    else if (p < 0.84) { pos = 1 + (p - 0.36) / 0.48 * 19; step = 3; }
+    else { pos = 20; step = 4; }
+    pos = clamp(pos, 0, 20);
+    const day = Math.min(21, Math.floor(pos) + 1);
+    arc.style.strokeDashoffset = (1 - pos / N).toFixed(4);
+    const a = (-90 + pos * 360 / N) * Math.PI / 180;
+    bead.setAttribute('cx', (C + R * Math.cos(a)).toFixed(2));
+    bead.setAttribute('cy', (C + R * Math.sin(a)).toFixed(2));
+    if (day !== curDay) {
+      curDay = day;
+      dots.forEach((d, i) => d.classList.toggle('on', i < day));
+      dayNum.textContent = String(day).padStart(2, '0');
+      where.textContent = day === 1 ? 'サロンの日' : day === 21 ? 'また、サロンへ' : '家での毎日';
+      where.classList.toggle('s', day === 1 || day === 21);
+    }
+    if (step !== curStep) { curStep = step; steps.forEach((li, i) => li.classList.toggle('on', i === step)); }
+  };
+  setCycle(1);
+
+  /* ヘッダーを濃くする・下のボタンを出す（動きの有無に関係なく） */
+  const showDock = () => $('#dock').classList.add('show');
+  const onScroll = () => {
+    $('#head').classList.toggle('solid', scrollY > innerHeight * 0.8);
+    if (scrollY > innerHeight * 0.5) showDock();
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) { $('.loader')?.remove(); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  body.classList.add('fx');
+  setCycle(0);
+  setTimeout(() => { const l = $('.loader'); if (l) { l.remove(); $('.hero picture').style.clipPath = ''; } }, 6500);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: しずくが落ちる → 波紋 → 店名 → 波紋の輪から写真が広がる。
+     clip-path は文字列をそのまま動かさず、数値を動かして毎回組み立てる */
+  const pic = $('.hero picture');
+  const rv = { r: 0 };
+  const drawRv = () => { pic.style.clipPath = rv.r >= 79.5 ? '' : `circle(${rv.r.toFixed(2)}% at 50% 46%)`; };
+  drawRv();
+  gsap.set('.loader .drop', { y: () => -innerHeight * 0.55 });
+  gsap.set('.hero h1 .c span', { yPercent: 112 });
+  gsap.set('.hero .kicker, .hero .ja, .hero .meta, .hero .vert, .hero .caption', { opacity: 0, y: 14 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .drop', { y: 0, duration: 0.75, ease: 'power2.in' })
+       .to('.loader .drop', { scaleX: 1.8, scaleY: 0.2, opacity: 0, duration: 0.18, ease: 'power1.out' })
+       .fromTo('.loader .rings circle', { attr: { r: 4 } }, { attr: { r: i => Math.max(innerWidth, innerHeight) * (0.22 + i * 0.2) }, duration: 1.9, stagger: 0.15, ease: 'power2.out' }, '<')
+       .fromTo('.loader .rings circle', { opacity: 1 }, { opacity: 0, duration: 1.9, stagger: 0.15, ease: 'power2.in' }, '<')
+       .to('.loader .word span', { y: 0, duration: 0.9, stagger: 0.06 }, '<+0.1')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.5')
+       .to('.loader .mark', { opacity: 0, y: -18, duration: 0.5, ease: 'power2.in' }, '+=0.35')
+       .to('.loader', { backgroundColor: 'rgba(13,19,32,0)', duration: 0.5, ease: 'none' }, '<+0.1')
+       .to(rv, { r: 80, duration: 1.5, ease: 'power3.inOut', onUpdate: drawRv }, '<')
+       .fromTo('.hero img', { scale: 1.18 }, { scale: 1, duration: 2.2, ease: 'power3.out' }, '<')
+       .to('.hero h1 .c span', { yPercent: 0, duration: 1.2, stagger: 0.07 }, '-=1.5')
+       .to('.hero .kicker, .hero .ja, .hero .meta, .hero .vert, .hero .caption', { opacity: 1, y: 0, duration: 0.9, stagger: 0.07 }, '-=1.0')
+       .add(() => { $('.loader')?.remove(); pic.style.clipPath = ''; });
+
+  /* 開いた・閉じたで長さが変わるので、位置を計算し直す */
+  $$('details').forEach(el => el.addEventListener('toggle', () => ScrollTrigger.refresh()));
+
+  /* ScrollTrigger はページの上から順に作る（下の固定区間の長さを正しく数えるため） */
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero picture', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  $$('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* 「丁寧」の金箔が、スクロールで光を流す */
+  const foil = { x: 10 }, teinei = $('.teinei');
+  gsap.to(foil, { x: 92, ease: 'none', onUpdate: () => { teinei.style.backgroundPosition = `${foil.x.toFixed(2)}% 50%`; }, scrollTrigger: { trigger: teinei, start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.teinei', { opacity: 0, y: 40, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: teinei, start: 'top 85%' } });
+  gsap.from('.chips li', { opacity: 0, y: 16, scale: 0.92, duration: 0.6, stagger: 0.06, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.chips', start: 'top 88%' } });
+
+  /* 21日の章: 固定して、スクロールで Day 1 → Day 21 と一周する */
+  ScrollTrigger.create({
+    trigger: '.cycle', start: 'top top', end: '+=300%', pin: '.cycle .pin', scrub: true,
+    onUpdate: s => setCycle(s.progress)
+  });
+
+  /* 施術の写真: 真ん中から左右に開いて、枠の中で少しずつ動く */
+  $$('.card .ph').forEach(ph => {
+    const o = { k: 1 };
+    const draw = () => { ph.style.clipPath = o.k <= 0 ? '' : `inset(0% ${(50 * o.k).toFixed(2)}% 0% ${(50 * o.k).toFixed(2)}%)`; };
+    draw();
+    gsap.to(o, { k: 0, duration: 1.3, ease: 'power3.inOut', onUpdate: draw, scrollTrigger: { trigger: ph, start: 'top 82%' } });
+    gsap.fromTo(ph.querySelector('img'), { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: ph, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+  $$('.card .la').forEach(el => {
+    gsap.from(el, { xPercent: -8, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+  });
+
+  /* 写真の見せ場: しずくの輪から、画面いっぱいへ広げる */
+  const clipEl = $('.scene .clip'), sc = { r: 14 };
+  const drawSc = () => { clipEl.style.clipPath = sc.r >= 79.5 ? '' : `circle(${sc.r.toFixed(2)}% at 50% 46%)`; };
+  drawSc();
+  const showTl = gsap.timeline({ scrollTrigger: { trigger: '.scene', start: 'top top', end: '+=130%', pin: true, scrub: true } });
+  showTl.to(sc, { r: 80, ease: 'none', duration: 1, onUpdate: drawSc })
+        .fromTo('.scene img', { scale: 1.3 }, { scale: 1, ease: 'none', duration: 1 }, 0)
+        .fromTo('.scene .over > *', { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.1, ease: 'power2.out', duration: 0.35 }, 0.55);
+
+  /* 声のカード */
+  gsap.from('.v', { y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.vrow', start: 'top 85%' } });
+
+  /* 道順: スクロールで線を引き、番号を順に灯す */
+  const routeLis = $$('#route li');
+  gsap.fromTo('#route .draw', { scaleY: 0 }, {
+    scaleY: 1, ease: 'none',
+    scrollTrigger: { trigger: '#route', start: 'top 78%', end: 'bottom 55%', scrub: true,
+      onUpdate: s => routeLis.forEach((li, i) => li.classList.toggle('on', s.progress >= i / (routeLis.length - 1) - 0.02)) }
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+
+  document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
