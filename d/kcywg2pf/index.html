@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14201B">
+<title>富安茶楼（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #14201B;    /* 夜の屋台の暗がり */
+  --jade: #2E6B56;     /* 翡翠・花磚の緑 */
+  --jade-deep: #1D3F33;
+  --red: #CF3B2A;      /* 朱。看板とボタン */
+  --amber: #F2A93B;    /* 裸電球の灯り */
+  --paper: #F3E9D6;    /* 手書きメニューの紙 */
+  --ink: #1E1814;
+  --sauce: #5B2A13;
+  --mute: #B7C2B8;
+  --line: rgba(243,233,214,.16);
+  --display: "Zen Antique", serif;
+  --block: "Dela Gothic One", sans-serif;
+  --sans: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; line-break: strict; }
+h1, h2, h3, .panel b { word-break: keep-all; overflow-wrap: anywhere; }
+svg { display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+
+/* 紙のざらつき */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--amber); color: var(--night); font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: 4文字が判子のように押される */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--red); display: grid; place-items: center; }
+.loader .seal { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 14px; border: 4px solid var(--paper); border-radius: 10px; }
+.loader .seal span { font-family: var(--display); color: var(--paper); font-size: clamp(58px, 17vw, 120px); line-height: 1; width: 1em; text-align: center; opacity: 0; transform: scale(1.6); }
+.loader .sub { position: absolute; bottom: 14vh; color: var(--paper); font-family: var(--block); font-size: 12px; letter-spacing: .4em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--paper); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(20,32,27,.88); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--display); font-size: 22px; text-decoration: none; line-height: 1; letter-spacing: .06em; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20,32,27,.45); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mute); flex: none; }
+.status.open i { background: #7BD389; box-shadow: 0 0 0 4px rgba(123,211,137,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: var(--night); color: var(--paper); }
+.tiles-bg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .38; }
+.hero .glow { position: absolute; width: 130vmax; height: 130vmax; left: 50%; top: 38%; transform: translate(-50%,-50%); background: radial-gradient(circle, rgba(242,169,59,.42) 0%, rgba(242,169,59,.12) 30%, rgba(20,32,27,0) 55%); }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,32,27,.6) 0%, rgba(20,32,27,0) 26%, rgba(20,32,27,0) 50%, rgba(20,32,27,.94) 82%); pointer-events: none; }
+.bowl-wrap { position: absolute; z-index: 1; left: 44%; top: 41%; width: min(80vw, 56svh, 620px); transform: translate(-50%, -50%); }
+.bowl { width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
+.steam { position: absolute; left: 22%; right: 22%; top: -14%; height: 46%; }
+.steam path { fill: none; stroke: rgba(243,233,214,.4); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 60 240; animation: steam 4.2s linear infinite; }
+.steam path:nth-child(2) { animation-delay: -1.4s; }
+.steam path:nth-child(3) { animation-delay: -2.8s; }
+@keyframes steam { from { stroke-dashoffset: 300; opacity: 0; } 20% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 0; } }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { display: inline-flex; gap: 10px; align-items: center; font-size: 12px; letter-spacing: .1em; color: var(--paper); margin-bottom: 10px; }
+.hero .kicker b { background: var(--red); padding: 2px 8px; border-radius: 3px; font-weight: 700; letter-spacing: .14em; }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(76px, 22.4vw, 220px); line-height: 1; letter-spacing: -.02em; display: flex; }
+.hero h1 .c { display: inline-block; overflow: hidden; }
+.hero h1 .c span { display: inline-block; }
+.hero h1 .c:nth-child(2) span { color: var(--amber); }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 14px; font-size: 13px; color: var(--mute); }
+.hero .meta b { color: var(--amber); font-family: var(--block); font-weight: 400; font-size: 18px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 116px; writing-mode: vertical-rl; font-family: var(--display); font-size: clamp(17px, 4.6vw, 26px); letter-spacing: .3em; line-height: 1.9; text-shadow: 0 2px 16px rgba(0,0,0,.5); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 116px; font-size: 10px; color: rgba(243,233,214,.72); }
+.cue { width: 1px; height: 44px; background: rgba(243,233,214,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--amber); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--red); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.marquee .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--display); font-size: clamp(30px, 8vw, 60px); line-height: 1; }
+.marquee .track i { font-style: normal; color: var(--amber); font-size: .5em; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(84px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; position: relative; }
+.story .big { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 11.4vw, 100px); line-height: 1.3; color: var(--jade-deep); }
+.story .big em { font-style: normal; color: var(--red); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #4E453D; font-size: 15.5px; }
+.story .lead q { white-space: nowrap; quotes: "「" "」"; color: var(--red); font-weight: 700; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.facts div { border: 1.5px solid var(--jade-deep); border-radius: 12px; padding: 14px 10px 12px; text-align: center; }
+.facts b { display: block; font-family: var(--display); font-size: 22px; color: var(--jade-deep); line-height: 1.3; }
+.facts small { font-size: 11px; color: #6A5F55; line-height: 1.5; display: block; margin-top: 4px; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(30,24,20,.16); font-size: 13px; color: #6A5F55; }
+.stars b { font-family: var(--block); font-weight: 400; font-size: 46px; color: var(--red); line-height: 1; }
+.tilecard { border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 5; position: relative; background: var(--jade); }
+.tilecard svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tilecard .milk { position: absolute; top: auto; left: 6%; right: 6%; bottom: 8%; width: 88%; height: auto; filter: drop-shadow(0 16px 20px rgba(0,0,0,.3)); }
+.tilecard .milk-cap { position: absolute; left: 8%; top: 8%; font-family: var(--display); font-size: clamp(30px, 8.6vw, 46px); line-height: 1.35; color: var(--paper); text-shadow: 0 2px 12px rgba(0,0,0,.35); }
+.tilecard .cap { position: absolute; right: 10px; bottom: 8px; font-size: 10px; color: rgba(243,233,214,.85); }
+
+/* 南北の章（スクロールで皿の北と南を切り替える） */
+.nanbei { position: relative; background: var(--jade-deep); color: var(--paper); }
+.nanbei .pin { height: 100svh; min-height: 680px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) 84px; position: relative; overflow: hidden; }
+.nanbei h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 7.2vw, 52px); line-height: 1.4; position: relative; z-index: 2; }
+.nanbei h2 em { font-style: normal; color: var(--amber); }
+.stage { position: relative; display: grid; place-items: center; padding-top: 40px; }
+.plate-box { position: relative; width: min(76vw, 36svh, 460px); aspect-ratio: 1; }
+.plate-box svg.plate { width: 100%; height: 100%; filter: drop-shadow(0 24px 30px rgba(0,0,0,.4)); }
+.dir { position: absolute; z-index: 3; top: -9%; font-family: var(--display); font-size: clamp(50px, 14vw, 110px); line-height: 1; color: var(--paper); opacity: .25; text-shadow: 0 4px 16px rgba(0,0,0,.4); transition: opacity .35s, color .35s; pointer-events: none; }
+.dir.n { left: -1%; }
+.dir.s { right: -1%; }
+.dir.on { opacity: 1; color: var(--amber); }
+.needle { position: absolute; left: 50%; top: -38px; width: 56px; height: 56px; margin-left: -28px; z-index: 3; }
+.needle svg { width: 100%; height: 100%; }
+.panel { position: relative; min-height: 9.6em; z-index: 2; }
+.panel .pg { position: absolute; inset: 0 0 auto 0; opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .35s; }
+.panel .pg.on { opacity: 1; transform: none; }
+.panel b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(22px, 6vw, 34px); line-height: 1.35; color: var(--amber); margin-bottom: 6px; }
+.panel p { font-size: 15px; color: var(--paper); max-width: 26em; }
+.steps { display: flex; gap: 6px; margin-top: 12px; }
+.steps i { height: 3px; flex: 1; background: var(--line); border-radius: 2px; transition: background .3s; }
+.steps i.on { background: var(--amber); }
+.nanbei .note { font-size: 11px; color: var(--mute); margin-top: 10px; }
+
+/* お昼の席の章（スクロールで時刻が進み席が埋まる） */
+.seats { position: relative; background: var(--night); color: var(--paper); }
+.seats .pin { height: 100svh; min-height: 680px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) 84px; }
+.seats h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 7.2vw, 52px); line-height: 1.4; }
+.seats h2 em { font-style: normal; color: var(--amber); }
+.seats .face { align-self: center; display: grid; gap: 14px; }
+.time-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.time { font-family: var(--block); font-weight: 400; white-space: nowrap; font-size: clamp(60px, 17vw, 170px); line-height: .95; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.time.busy { color: var(--red); }
+.occ { text-align: right; white-space: nowrap; font-size: 12px; color: var(--mute); line-height: 1.4; }
+.occ b { display: block; white-space: nowrap; font-family: var(--display); font-weight: 400; font-size: 22px; color: var(--paper); }
+.floor { width: 100%; max-width: 560px; height: auto; }
+.floor .seat { fill: transparent; stroke: rgba(243,233,214,.35); stroke-width: 2; transition: fill .25s, stroke .25s; }
+.floor .seat.on { fill: var(--amber); stroke: var(--amber); }
+.floor .furn { fill: none; stroke: rgba(243,233,214,.5); stroke-width: 2; }
+.floor text { fill: var(--mute); font-family: var(--sans); font-size: 12px; }
+.msg { min-height: 3.4em; font-size: 15px; color: var(--paper); }
+.bar { height: 2px; background: var(--line); position: relative; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--amber); }
+.ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--mute); margin-top: 8px; }
+.seats .note { font-size: 11px; color: #8FA197; margin-top: 10px; }
+
+/* 料理 */
+.dishes { padding: clamp(84px, 14vw, 160px) 0 0; }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 9.4vw, 68px); line-height: 1.25; color: var(--jade-deep); }
+.sec-head p { font-size: 12px; color: #6A5F55; max-width: 18em; }
+.rail { display: grid; gap: 56px; padding: 0 var(--g) 40px; }
+.card { position: relative; }
+.card .ph { position: relative; overflow: hidden; border-radius: 18px; aspect-ratio: 4 / 5; display: grid; place-items: center; }
+.card .ph svg { width: 82%; height: auto; transform: rotate(-8deg); }
+.card .ph .cap { position: absolute; right: 12px; bottom: 9px; font-size: 10px; color: rgba(243,233,214,.85); }
+.card .ph .tag { position: absolute; left: 14px; top: 12px; font-family: var(--block); font-size: 13px; color: var(--paper); letter-spacing: .1em; }
+.card .no { font-family: var(--block); font-size: 13px; color: var(--red); margin: 18px 0 2px; letter-spacing: .12em; }
+.card h3 { font-family: var(--display); font-size: clamp(26px, 7vw, 32px); font-weight: 400; color: var(--jade-deep); line-height: 1.35; }
+.card p { margin-top: 8px; color: #4E453D; font-size: 15px; max-width: 24em; }
+.bg-red { background: var(--red); } .bg-jade { background: var(--jade); } .bg-night { background: var(--night); } .bg-amber { background: #D98A1F; } .bg-deep { background: var(--jade-deep); }
+.src { padding: 0 var(--g) 20px; font-size: 11px; color: #7A6E63; }
+
+/* 来店 */
+.visit { background: var(--jade-deep); color: var(--paper); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--paper); }
+.visit .sec-head p { color: var(--mute); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; background: rgba(20,32,27,.35); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mute); flex: none; }
+.today.open .dot { background: #7BD389; box-shadow: 0 0 0 6px rgba(123,211,137,.15); }
+.today b { font-family: var(--display); font-size: 21px; font-weight: 400; }
+.today small { display: block; color: var(--mute); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 2.6em 1fr; padding: 11px 4px; border-bottom: 1px solid var(--line); font-size: 15px; font-variant-numeric: tabular-nums; }
+.hours li.is-today { color: var(--amber); }
+.hours li.closed span:last-child { color: #8FA197; }
+.small { font-size: 11.5px; color: var(--mute); }
+.addr { margin-top: 40px; font-family: var(--display); font-size: 20px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #1A2D25; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.05) brightness(.95); }
+.tip { margin-top: 14px; padding: 16px 18px; border-left: 3px solid var(--amber); background: rgba(243,233,214,.05); border-radius: 0 14px 14px 0; font-size: 14.5px; }
+.tip b { display: block; font-family: var(--display); font-size: 18px; font-weight: 400; margin-bottom: 2px; color: var(--amber); }
+.nw { white-space: nowrap; }
+.fill-in { background: rgba(242,169,59,.18); color: var(--amber); padding: 0 4px; border-radius: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--red); color: var(--paper); }
+.btn.ghost { border: 1px solid currentColor; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(30,24,20,.16); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--display); font-size: 19px; font-weight: 400; color: var(--jade-deep); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--red),var(--red)) center/14px 2px no-repeat, linear-gradient(var(--red),var(--red)) center/2px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4E453D; font-size: 15px; }
+details .fill-in { color: #8A4E0A; background: rgba(242,169,59,.28); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.gram .box { background: var(--red); color: var(--paper); border-radius: 22px; padding: 30px 24px 28px; position: relative; overflow: hidden; }
+.gram .box svg.bgt { position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; opacity: .25; }
+.gram h2 { font-family: var(--display); font-size: clamp(26px, 7vw, 44px); font-weight: 400; line-height: 1.4; position: relative; }
+.gram p { margin-top: 10px; font-size: 15px; position: relative; }
+.gram .btn.fill { background: var(--paper); color: var(--red); }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--mute); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--display); color: var(--paper); font-size: clamp(84px, 23vw, 300px); line-height: 1; letter-spacing: -.02em; margin: 0 0 36px -.04em; white-space: nowrap; }
+.foot .huge span { color: var(--amber); }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(20,32,27,.82); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.28); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--paper); }
+.dock a.main { background: var(--red); }
+
+@media (min-width: 900px) {
+  .bowl-wrap { left: auto; right: 9vw; top: 52%; transform: translateY(-50%); width: min(44vw, 72svh, 640px); }
+  .hero::after { background: linear-gradient(90deg, rgba(20,32,27,.88) 0%, rgba(20,32,27,.5) 34%, rgba(20,32,27,0) 58%), linear-gradient(180deg, rgba(20,32,27,.5) 0%, rgba(20,32,27,0) 25%, rgba(20,32,27,0) 65%, rgba(20,32,27,.7) 100%); }
+  .hero .glow { left: 70%; top: 52%; }
+  .hero .title { right: auto; max-width: 46vw; }
+  .hero h1 { font-size: clamp(100px, 10vw, 180px); }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .nanbei .pin { grid-template-columns: 1fr 1.1fr; grid-template-rows: auto 1fr; column-gap: 40px; }
+  .nanbei h2 { grid-column: 1; grid-row: 1; }
+  .nanbei .stage { grid-column: 2; grid-row: 1 / 3; }
+  .nanbei .foot-p { grid-column: 1; grid-row: 2; align-self: center; }
+  .plate-box { width: min(40vw, 62svh, 560px); }
+  .seats .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto; column-gap: 60px; }
+  .seats h2 { grid-column: 1 / -1; }
+  .seats .face { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; align-items: center; column-gap: 60px; }
+  .seats .bottom { grid-column: 1 / -1; }
+  .rail { grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .card:nth-child(even) { margin-top: 110px; }
+  .card h3 { font-size: 21px; }
+  .tilecard { aspect-ratio: 5 / 4; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .gram .box { padding: 48px; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after, .steam path { animation: none; }
+  .steam path { stroke-dasharray: none; opacity: .5; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+
+<!-- 共通の絵の部品 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 台湾の花磚（マジョリカタイル）風の模様 -->
+    <pattern id="tile" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#1D3F33"/>
+      <rect x="2" y="2" width="116" height="116" fill="none" stroke="#2E6B56" stroke-width="2"/>
+      <g transform="translate(60 60)">
+        <circle r="34" fill="none" stroke="#2E6B56" stroke-width="3"/>
+        <g fill="#CF3B2A"><ellipse rx="9" ry="22" cy="-26"/><ellipse rx="9" ry="22" cy="26"/><ellipse rx="22" ry="9" cx="-26"/><ellipse rx="22" ry="9" cx="26"/></g>
+        <circle r="11" fill="#F2A93B"/><circle r="4" fill="#1D3F33"/>
+      </g>
+      <g fill="#F2A93B" opacity=".9"><path d="M0 0h18L0 18z"/><path d="M120 0h-18l18 18z"/><path d="M0 120h18L0 102z"/><path d="M120 120h-18l18-18z"/></g>
+    </pattern>
+    <pattern id="tile2" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="#CF3B2A"/>
+      <g transform="translate(60 60)" fill="none" stroke="#F3E9D6" stroke-width="3" opacity=".7">
+        <path d="M0-40C14-20 20-14 40 0 20 14 14 20 0 40-14 20-20 14-40 0-20-14-14-20 0-40z"/>
+        <circle r="10"/>
+      </g>
+      <g fill="#F3E9D6" opacity=".55"><circle cx="0" cy="0" r="8"/><circle cx="120" cy="0" r="8"/><circle cx="0" cy="120" r="8"/><circle cx="120" cy="120" r="8"/></g>
+    </pattern>
+    <!-- ワンタン -->
+    <g id="wonton">
+      <path d="M-24 6C-30-6-18-20 0-20S30-6 24 6C30 10 34 18 26 22 20 25 14 18 10 16 6 22-6 22-10 16-14 18-20 25-26 22-34 18-30 10-24 6z" fill="#F4E6CB" stroke="#D9C29A" stroke-width="2"/>
+      <path d="M-14-4C-8 2 8 2 14-4" fill="none" stroke="#E7C9A0" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="0" cy="-8" rx="10" ry="6" fill="#F0A58E" opacity=".55"/>
+    </g>
+    <!-- ねぎの輪切り -->
+    <g id="negi"><circle r="5" fill="none" stroke="#4E9A5B" stroke-width="3"/></g>
+    <!-- 角切りの豚肉 -->
+    <g id="cube"><rect x="-11" y="-9" width="22" height="18" rx="5" fill="#8C4720"/><rect x="-11" y="-9" width="22" height="7" rx="3.5" fill="#E9C7A0" opacity=".8"/></g>
+    <radialGradient id="broth" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#E9B866"/><stop offset="1" stop-color="#B9772C"/></radialGradient>
+    <radialGradient id="sauceN" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7A3A17"/><stop offset="1" stop-color="#3E1B0A"/></radialGradient>
+    <clipPath id="halfL"><rect x="0" y="0" width="200" height="400"/></clipPath>
+    <clipPath id="halfR"><rect x="200" y="0" width="200" height="400"/></clipPath>
+  </defs>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="seal"><span>富</span><span>安</span><span>茶</span><span>楼</span></div>
+  <div class="sub">TAIWANESE KITCHEN</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">富安茶楼</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="富安茶楼">
+    <svg class="tiles-bg" aria-hidden="true"><rect width="100%" height="100%" fill="url(#tile)"/></svg>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="bowl-wrap" aria-hidden="true">
+      <svg class="steam" viewBox="0 0 200 120" preserveAspectRatio="none"><path d="M50 120C30 90 70 70 50 40S60 10 50 0"/><path d="M100 120C80 90 120 70 100 40S110 10 100 0"/><path d="M150 120C130 90 170 70 150 40S160 10 150 0"/></svg>
+      <svg class="bowl" viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="196" fill="#F3EEE4"/>
+        <circle cx="200" cy="200" r="184" fill="none" stroke="#2C5F8A" stroke-width="7"/>
+        <circle cx="200" cy="200" r="174" fill="none" stroke="#2C5F8A" stroke-width="2"/>
+        <g fill="#2C5F8A" opacity=".85"><circle cx="200" cy="18" r="5"/><circle cx="382" cy="200" r="5"/><circle cx="200" cy="382" r="5"/><circle cx="18" cy="200" r="5"/></g>
+        <circle cx="200" cy="200" r="160" fill="url(#broth)"/>
+        <ellipse cx="160" cy="140" rx="70" ry="28" fill="#FFF2C9" opacity=".22" transform="rotate(-25 160 140)"/>
+        <use href="#wonton" transform="translate(150 150) rotate(-20) scale(1.5)"/>
+        <use href="#wonton" transform="translate(248 140) rotate(25) scale(1.45)"/>
+        <use href="#wonton" transform="translate(130 245) rotate(160) scale(1.45)"/>
+        <use href="#wonton" transform="translate(235 245) rotate(200) scale(1.5)"/>
+        <use href="#wonton" transform="translate(196 196) rotate(80) scale(1.35)"/>
+        <use href="#wonton" transform="translate(290 210) rotate(110) scale(1.25)"/>
+        <use href="#wonton" transform="translate(190 300) rotate(-40) scale(1.25)"/>
+        <use href="#wonton" transform="translate(110 195) rotate(70) scale(1.2)"/>
+        <g><use href="#negi" x="176" y="120"/><use href="#negi" x="214" y="104"/><use href="#negi" x="278" y="270"/><use href="#negi" x="102" y="120"/><use href="#negi" x="160" y="268"/><use href="#negi" x="298" y="170"/><use href="#negi" x="230" y="196"/><use href="#negi" x="84" y="248"/><use href="#negi" x="252" y="312"/></g>
+        <g fill="#C2361F" opacity=".75"><circle cx="270" cy="105" r="3"/><circle cx="276" cy="112" r="2"/><circle cx="118" cy="290" r="3"/><circle cx="305" cy="255" r="2.5"/></g>
+      </svg>
+    </div>
+    <span class="caption">イラストはイメージです</span>
+    <p class="vert" aria-hidden="true">台湾の屋台が、猫実の住宅街に。</p>
+    <div class="title">
+      <p class="kicker"><b>台湾料理</b>浦安市猫実</p>
+      <h1><span class="c"><span>富</span></span><span class="c"><span>安</span></span><span class="c"><span>茶</span></span><span class="c"><span>楼</span></span></h1>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（125件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>魯肉飯</span><i>●</i><span>香港式ワンタン</span><i>●</i><span>海南鶏飯</span><i>●</i><span>汁なし麺</span><i>●</i><span>ネギ餅</span><i>●</i>
+      <span>魯肉飯</span><i>●</i><span>香港式ワンタン</span><i>●</i><span>海南鶏飯</span><i>●</i><span>汁なし麺</span><i>●</i><span>ネギ餅</span><i>●</i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>元・牛乳屋さんで、</span></span><span class="line"><span><em>台湾</em>の屋台ごはん。</span></span></h2>
+    <div>
+      <p class="lead">牛乳の配達所だった建物を、ほとんど手を加えずに改装したお店。手書きのメニューに、カウンターとテーブル、外にはテラス席。口コミには <q>台湾の屋台みたい</q> <q>調味料からこだわった本格派</q> <q>気さくで明るい接客</q> という声が並びます。</p>
+      <div class="facts" style="margin-top:26px">
+        <div><b>テラス席</b><small>外の席もあります</small></div>
+        <div><b>シェア</b><small>みんなで<br>取り分けて</small></div>
+        <div><b>ビール</b><small>冷蔵庫から<br>自分で取る</small></div>
+      </div>
+      <div class="stars" style="margin-top:28px"><b>4.5</b><span>Googleの口コミ 125件の平均（2026年10月）</span></div>
+    </div>
+    <div class="tilecard" aria-hidden="true">
+      <svg><rect width="100%" height="100%" fill="url(#tile2)"/></svg>
+      <svg class="milk" viewBox="0 0 400 260" aria-hidden="true">
+        <g transform="translate(0 40)"><g transform="translate(80 0)"><path d="M-22 120v-40c0-14 10-18 10-30v-18h24v18c0 12 10 16 10 30v40z" transform="translate(0 0)" fill="#FBF8F1" stroke="#1D3F33" stroke-width="4"/><rect x="-13" y="24" width="26" height="12" rx="3" fill="#CF3B2A" stroke="#1D3F33" stroke-width="4"/><path d="M-14 74h28" stroke="#E6DCC8" stroke-width="10" stroke-linecap="round"/></g><g transform="translate(140 0)"><path d="M-22 120v-40c0-14 10-18 10-30v-18h24v18c0 12 10 16 10 30v40z" transform="translate(0 0)" fill="#FBF8F1" stroke="#1D3F33" stroke-width="4"/><rect x="-13" y="24" width="26" height="12" rx="3" fill="#CF3B2A" stroke="#1D3F33" stroke-width="4"/><path d="M-14 74h28" stroke="#E6DCC8" stroke-width="10" stroke-linecap="round"/></g><g transform="translate(200 0)"><path d="M-22 120v-40c0-14 10-18 10-30v-18h24v18c0 12 10 16 10 30v40z" transform="translate(0 0)" fill="#FBF8F1" stroke="#1D3F33" stroke-width="4"/><rect x="-13" y="24" width="26" height="12" rx="3" fill="#CF3B2A" stroke="#1D3F33" stroke-width="4"/><path d="M-14 74h28" stroke="#E6DCC8" stroke-width="10" stroke-linecap="round"/></g><g transform="translate(260 0)"><path d="M-22 120v-40c0-14 10-18 10-30v-18h24v18c0 12 10 16 10 30v40z" transform="translate(0 0)" fill="#FBF8F1" stroke="#1D3F33" stroke-width="4"/><rect x="-13" y="24" width="26" height="12" rx="3" fill="#CF3B2A" stroke="#1D3F33" stroke-width="4"/><path d="M-14 74h28" stroke="#E6DCC8" stroke-width="10" stroke-linecap="round"/></g><g transform="translate(320 0)"><path d="M-22 120v-40c0-14 10-18 10-30v-18h24v18c0 12 10 16 10 30v40z" transform="translate(0 0)" fill="#FBF8F1" stroke="#1D3F33" stroke-width="4"/><rect x="-13" y="24" width="26" height="12" rx="3" fill="#CF3B2A" stroke="#1D3F33" stroke-width="4"/><path d="M-14 74h28" stroke="#E6DCC8" stroke-width="10" stroke-linecap="round"/></g></g>
+        <rect x="40" y="150" width="320" height="80" rx="10" fill="#1D3F33"/>
+        <g fill="#2E6B56"><rect x="58" y="166" width="52" height="48" rx="6"/><rect x="122" y="166" width="52" height="48" rx="6"/><rect x="186" y="166" width="52" height="48" rx="6"/><rect x="250" y="166" width="52" height="48" rx="6"/><rect x="314" y="166" width="30" height="48" rx="6"/></g>
+      </svg>
+      <p class="milk-cap">元は、<br>牛乳の配達所。</p>
+      <span class="cap">イラストはイメージです</span>
+    </div>
+  </section>
+
+  <section class="nanbei" aria-labelledby="nb-title">
+    <div class="pin">
+      <h2 id="nb-title">ひと皿で、<br>台湾の<em>北</em>と<em>南</em>。</h2>
+      <div class="stage">
+        <div class="plate-box">
+          <div class="needle" id="needle" aria-hidden="true"><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#14201B" stroke="#F2A93B" stroke-width="2"/><path d="M28 6l7 22H21z" fill="#CF3B2A"/><path d="M28 50l-7-22h14z" fill="#F3E9D6"/><circle cx="28" cy="28" r="3.5" fill="#F2A93B"/></svg></div>
+          <span class="dir n" id="dirN" aria-hidden="true">北</span>
+          <span class="dir s" id="dirS" aria-hidden="true">南</span>
+          <svg class="plate" id="plate" viewBox="0 0 400 400" role="img" aria-label="北部風と南部風の魯肉飯をひと皿に盛ったイラスト">
+            <circle cx="200" cy="200" r="196" fill="#F6F1E7"/>
+            <circle cx="200" cy="200" r="186" fill="none" stroke="#CF3B2A" stroke-width="4"/>
+            <circle cx="200" cy="200" r="150" fill="#FBF6EA"/>
+            <!-- 北: 細かいひき肉と濃いめのたれ -->
+            <g id="halfN" clip-path="url(#halfL)">
+              <circle cx="200" cy="200" r="142" fill="url(#sauceN)"/>
+              <g fill="#2E1307" opacity=".9">
+                <circle cx="110" cy="150" r="7"/><circle cx="135" cy="120" r="6"/><circle cx="160" cy="160" r="8"/><circle cx="95" cy="200" r="7"/><circle cx="128" cy="230" r="8"/><circle cx="170" cy="210" r="6"/><circle cx="150" cy="270" r="7"/><circle cx="105" cy="260" r="5"/><circle cx="180" cy="110" r="6"/><circle cx="182" cy="280" r="6"/><circle cx="85" cy="170" r="5"/><circle cx="140" cy="190" r="5"/>
+              </g>
+              <g fill="#A2582A" opacity=".85">
+                <circle cx="120" cy="175" r="4"/><circle cx="150" cy="140" r="3.5"/><circle cx="168" cy="240" r="4"/><circle cx="112" cy="225" r="3.5"/><circle cx="140" cy="300" r="3"/><circle cx="185" cy="175" r="3.5"/>
+              </g>
+              <ellipse cx="135" cy="135" rx="40" ry="14" fill="#FFE2B0" opacity=".2" transform="rotate(-30 135 135)"/>
+              <g fill="#5DA35E"><path d="M118 196c6-10 18-10 22-2-8 2-14 6-22 2z"/><path d="M150 250c4-11 16-13 22-6-7 3-13 8-22 6z"/><path d="M160 125c8-8 19-5 21 3-8 0-14 2-21-3z"/></g>
+            </g>
+            <!-- 南: 大きめの豚肉、あっさりめのたれ -->
+            <g id="halfS" clip-path="url(#halfR)">
+              <circle cx="200" cy="200" r="142" fill="#F7EEDC"/>
+              <circle cx="200" cy="200" r="142" fill="#C98A4E" opacity=".28"/>
+              <use href="#cube" transform="translate(240 140) rotate(12) scale(1.35)"/>
+              <use href="#cube" transform="translate(290 170) rotate(-18) scale(1.4)"/>
+              <use href="#cube" transform="translate(250 205) rotate(30) scale(1.3)"/>
+              <use href="#cube" transform="translate(300 235) rotate(5) scale(1.35)"/>
+              <use href="#cube" transform="translate(245 270) rotate(-25) scale(1.3)"/>
+              <use href="#cube" transform="translate(222 105) rotate(-8) scale(1.1)"/>
+              <use href="#cube" transform="translate(318 140) rotate(40) scale(1.05)"/>
+              <use href="#cube" transform="translate(285 295) rotate(18) scale(1.1)"/>
+              <g fill="#B66E35" opacity=".45"><circle cx="270" cy="250" r="12"/><circle cx="230" cy="175" r="10"/><circle cx="315" cy="200" r="9"/></g>
+            </g>
+            <line x1="200" y1="58" x2="200" y2="342" stroke="#F6F1E7" stroke-width="6"/>
+            <circle id="shadeN" cx="200" cy="200" r="143" fill="#14201B" opacity="0" clip-path="url(#halfL)"/>
+            <circle id="shadeS" cx="200" cy="200" r="143" fill="#14201B" opacity="0" clip-path="url(#halfR)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="foot-p">
+        <div class="panel" aria-live="off">
+          <div class="pg on" data-p="0"><b>南北あいもりの魯肉飯</b><p>台湾の北部風と南部風、2種類の魯肉飯をひとつのプレートで。台北と台南で味の違いを知った人ほど楽しめる、という声があります。</p></div>
+          <div class="pg" data-p="1"><b>北部風は、濃いめのたれ</b><p>たれは濃いめ。香菜か香辛料か、ふわっと立つ香りがいい具合、という感想が寄せられています。</p></div>
+          <div class="pg" data-p="2"><b>南部風は、あっさりめ</b><p>口当たりはあっさり。それでも味はしっかり。どちらもおいしい、という声が届いています。</p></div>
+        </div>
+        <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        <p class="note">※Googleの口コミの感想をもとにした説明です。料理の内容と盛りつけは実際のものに差し替えます。イラストはイメージです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seats" aria-labelledby="seats-title">
+    <div class="pin">
+      <h2 id="seats-title">お昼は、<em>開店すぐ</em>が<br>座りやすい。</h2>
+      <div class="face">
+        <div>
+          <div class="time-row">
+            <div class="time" id="time" aria-live="off">11:30</div>
+            <div class="occ"><b id="occ">空きあり</b>席の様子（目安）</div>
+          </div>
+          <p class="msg" id="msg">開店直後。カウンターに空きがあることも。</p>
+        </div>
+        <svg class="floor" id="floor" viewBox="0 0 360 250" aria-hidden="true">
+          <text x="10" y="18">カウンター</text>
+          <rect class="furn" x="10" y="28" width="210" height="22" rx="4"/>
+          <g id="seat-counter"></g>
+          <text x="10" y="112">テーブル</text>
+          <g id="seat-tables"></g>
+          <text x="268" y="18">テラス</text>
+          <rect class="furn" x="268" y="28" width="82" height="214" rx="12" stroke-dasharray="5 5"/>
+          <g id="seat-terrace"></g>
+        </svg>
+      </div>
+      <div class="bottom">
+        <div class="bar"><i id="bar"></i></div>
+        <div class="ticks"><span>11:30 開店</span><span>12:30</span><span>14:00</span></div>
+        <p class="note">※口コミの体験談（日曜の開店すぐはカウンターが空いていて、ほどなく満席に）をもとにした目安です。日によって変わります。席の配置と数はイメージで、実際のものに差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dishes" aria-labelledby="dishes-title">
+    <div class="sec-head">
+      <h2 id="dishes-title">口コミで<br>名前が挙がる<br>料理</h2>
+      <p>料理名と値段は、実際の手書きメニューに合わせて差し替えます</p>
+    </div>
+    <div class="rail">
+      <article class="card">
+        <div class="ph bg-deep"><span class="tag">01</span>
+          <svg viewBox="0 0 400 400" aria-hidden="true"><use href="#plateMini"/></svg>
+          <span class="cap">イラストはイメージです</span></div>
+        <p class="no">LU ROU FAN</p>
+        <h3>魯肉飯（南北あいもり）</h3>
+        <p>北部風と南部風をひと皿で。口コミでいちばん多く名前が挙がる一品。</p>
+      </article>
+      <article class="card">
+        <div class="ph bg-red"><span class="tag">02</span>
+          <svg viewBox="0 0 400 400" aria-hidden="true"><use href="#bowlMini"/></svg>
+          <span class="cap">イラストはイメージです</span></div>
+        <p class="no">WONTON</p>
+        <h3>香港式ワンタン</h3>
+        <p>つるっとした皮に、具がしっかり。これだけで主食になる、という声も。海老入りをほめる口コミもあります。</p>
+      </article>
+      <article class="card">
+        <div class="ph bg-jade"><span class="tag">03</span>
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="200" cy="200" r="190" fill="#F6F1E7"/><circle cx="200" cy="200" r="180" fill="none" stroke="#2E6B56" stroke-width="4"/>
+            <ellipse cx="200" cy="215" rx="120" ry="105" fill="#F2DFA6"/>
+            <g fill="#EAD38F" opacity=".8"><circle cx="150" cy="190" r="6"/><circle cx="240" cy="260" r="6"/><circle cx="190" cy="290" r="5"/><circle cx="270" cy="180" r="5"/></g>
+            <g transform="translate(200 190) rotate(-18)">
+              <rect x="-120" y="-30" width="48" height="66" rx="10" fill="#FBF3E4" stroke="#E8CFA6" stroke-width="3"/>
+              <rect x="-72" y="-34" width="48" height="70" rx="10" fill="#FBF3E4" stroke="#E8CFA6" stroke-width="3"/>
+              <rect x="-24" y="-36" width="48" height="72" rx="10" fill="#FBF3E4" stroke="#E8CFA6" stroke-width="3"/>
+              <rect x="24" y="-34" width="48" height="70" rx="10" fill="#FBF3E4" stroke="#E8CFA6" stroke-width="3"/>
+              <rect x="72" y="-30" width="48" height="66" rx="10" fill="#FBF3E4" stroke="#E8CFA6" stroke-width="3"/>
+              <path d="M-118-28h236" stroke="#E9C08A" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+            </g>
+            <g><use href="#negi" x="150" y="270"/><use href="#negi" x="240" y="290"/><use href="#negi" x="290" y="250"/></g>
+          </svg>
+          <span class="cap">イラストはイメージです</span></div>
+        <p class="no">HAINAN CHICKEN RICE</p>
+        <h3>海南鶏飯</h3>
+        <p>鶏のスープで炊いたような味のしみたごはんに、やわらかい蒸し鶏。</p>
+      </article>
+      <article class="card">
+        <div class="ph bg-night"><span class="tag">04</span>
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="200" cy="200" r="190" fill="#F3EEE4"/><circle cx="200" cy="200" r="178" fill="none" stroke="#2C5F8A" stroke-width="6"/>
+            <circle cx="200" cy="200" r="160" fill="#E9C27A"/>
+            <g fill="none" stroke="#F6DFA0" stroke-width="9" stroke-linecap="round">
+              <path d="M70 170c40-30 60 30 100 0s60 30 100 0 50 20 60 10"/>
+              <path d="M66 210c40-30 60 30 100 0s60 30 100 0 50 20 66 10"/>
+              <path d="M76 250c40-30 60 30 100 0s60 30 100 0 40 20 52 10"/>
+              <path d="M100 130c30-20 50 20 80 0s50 20 80 0 40 10 50 6"/>
+              <path d="M104 290c30-20 50 20 80 0s50 20 80 0 30 10 40 6"/>
+            </g>
+            <g fill="#7A3A17"><circle cx="190" cy="190" r="9"/><circle cx="210" cy="205" r="8"/><circle cx="198" cy="222" r="9"/><circle cx="222" cy="186" r="7"/><circle cx="176" cy="212" r="7"/></g>
+            <g fill="#4E9A5B"><path d="M240 230c10-18 32-16 34-2-12 0-22 6-34 2z"/><path d="M150 160c10-18 32-16 34-2-12 0-22 6-34 2z"/></g>
+            <g fill="#C2361F"><circle cx="260" cy="150" r="4"/><circle cx="140" cy="250" r="4"/><circle cx="230" cy="270" r="3"/></g>
+          </svg>
+          <span class="cap">イラストはイメージです</span></div>
+        <p class="no">DRY NOODLES</p>
+        <h3>汁なしの混ぜ麺</h3>
+        <p>ワンタンと並んで「特においしかった」と名前が挙がる麺料理。</p>
+      </article>
+      <article class="card">
+        <div class="ph bg-amber"><span class="tag">05</span>
+          <svg viewBox="0 0 400 400" aria-hidden="true">
+            <circle cx="200" cy="200" r="190" fill="#F6F1E7"/><circle cx="200" cy="200" r="180" fill="none" stroke="#CF3B2A" stroke-width="4"/>
+            <circle cx="200" cy="200" r="148" fill="#E3A954"/>
+            <circle cx="200" cy="200" r="148" fill="none" stroke="#B9772C" stroke-width="6"/>
+            <path d="M200 200m-10 0a10 10 0 1 1 20 0a24 24 0 1 1-44 0a40 40 0 1 1 76 0a58 58 0 1 1-112 0a78 78 0 1 1 152 0a98 98 0 1 1-192 0" fill="none" stroke="#C98A3A" stroke-width="5" opacity=".7"/>
+            <g stroke="#F6F1E7" stroke-width="6"><line x1="200" y1="52" x2="200" y2="348"/><line x1="52" y1="200" x2="348" y2="200"/><line x1="95" y1="95" x2="305" y2="305"/><line x1="305" y1="95" x2="95" y2="305"/></g>
+            <g fill="#4E9A5B"><rect x="140" y="120" width="10" height="5" rx="2"/><rect x="250" y="150" width="10" height="5" rx="2" transform="rotate(30 255 152)"/><rect x="170" y="260" width="10" height="5" rx="2"/><rect x="260" y="250" width="10" height="5" rx="2" transform="rotate(-20 265 252)"/><rect x="120" y="210" width="10" height="5" rx="2"/><rect x="220" y="110" width="10" height="5" rx="2"/><rect x="290" y="210" width="10" height="5" rx="2"/></g>
+            <g fill="#F7D79A" opacity=".8"><circle cx="160" cy="160" r="8"/><circle cx="250" cy="230" r="10"/><circle cx="215" cy="290" r="7"/></g>
+          </svg>
+          <span class="cap">イラストはイメージです</span></div>
+        <p class="no">SCALLION PANCAKE</p>
+        <h3>ネギ餅</h3>
+        <p>口コミで、これは必ず食べてほしいと強くすすめられているひと品。</p>
+      </article>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がった料理から選んでいます。値段は載せていません。絵はすべてイメージです。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年10月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>お休み</span></li>
+          <li data-d="2" class="closed"><span>火</span><span>お休み</span></li>
+          <li data-d="3"><span>水</span><span>11:30 – 14:00 ／ 17:30 – 21:30</span></li>
+          <li data-d="4"><span>木</span><span>11:30 – 14:00 ／ 17:30 – 21:30</span></li>
+          <li data-d="5"><span>金</span><span>11:30 – 14:00 ／ 17:30 – 21:30</span></li>
+          <li data-d="6"><span>土</span><span>11:30 – 14:00 ／ 17:30 – 21:30</span></li>
+          <li data-d="0"><span>日</span><span>11:30 – 14:00 ／ 17:30 – 21:30</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram でお知らせします。</p>
+        <div class="tip"><b>夜は、予約がおすすめ</b>店内はこぢんまりとしているので、夜は予約しておくと安心、という声があります。閉店まぎわのお昼も、電話で空きを確かめてからが確実です。<br><span class="fill-in">予約の受け方（電話・DM など）をお店のやり方に合わせて書きます</span></div>
+      </div>
+      <div>
+        <p class="addr">〒279-0004<br>千葉県浦安市猫実1丁目15-1</p>
+        <div class="map"><iframe title="富安茶楼の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E5%AF%8C%E5%AE%89%E8%8C%B6%E6%A5%BC%20%E5%8D%83%E8%91%89%E7%9C%8C%E6%B5%A6%E5%AE%89%E5%B8%82%E7%8C%AB%E5%AE%9F1%E4%B8%81%E7%9B%AE15-1&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="tip"><b>車で</b>お店から歩いて1分ほどのところに<span style="white-space:nowrap">コインパーキング</span>があります。お店の駐車場の有無は<span class="fill-in">実際の内容に差し替えます</span></div>
+        <div class="tip"><b>バスで</b>浦安駅からバスで来たという口コミがあります。時間帯によってはかなり混み合うようです。<span class="fill-in">最寄りのバス停名と歩く時間を入れます</span></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=6571544997680977305" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>予約はできますか？</summary><p><span class="fill-in">予約の受け方（電話・Instagram の DM など）と、何人から受けるかを、お店のやり方に合わせて書きます。</span></p></details>
+    <details><summary>お昼は混みますか？</summary><p>開店してしばらくすると満席になりやすい、という口コミがあります。待たずに座りたい日は開店すぐが目安です。</p></details>
+    <details><summary>大人数でも行けますか？</summary><p>テーブル席があり、5人でいろいろ頼んで取り分けた、という口コミがあります。人数が多い日は前もって連絡すると安心です。</p></details>
+    <details><summary>台湾料理がはじめてでも大丈夫？</summary><p>台湾料理をはじめて食べる友人がすっかり気に入った、という口コミがあります。迷ったら南北あいもりの魯肉飯からどうぞ。</p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <svg class="bgt" aria-hidden="true"><rect width="100%" height="100%" fill="url(#tile)"/></svg>
+      <h2 id="gram-title">お休みとお知らせは、<br>Instagramで。</h2>
+      <p>臨時のお休みや、お店からのお知らせを発信しています。</p>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/fu_an_teabase/" target="_blank" rel="noopener">@fu_an_teabase を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">富<span>安</span>茶楼</p>
+  <p>富安茶楼（台湾料理）<br>千葉県浦安市猫実1丁目15-1<br>水〜日 11:30–14:00／17:30–21:30　月・火 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。絵はイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="tel:09027669877">電話で空きを確認</a>
+  <a href="https://maps.google.com/?cid=6571544997680977305" target="_blank" rel="noopener">道順</a>
+  <a href="https://www.instagram.com/fu_an_teabase/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const loader = () => document.querySelector('.loader');
+  // CDN が読めない時も幕を残さない保険
+  setTimeout(() => { if (!window.gsap) loader()?.remove(); }, 2500);
+
+  /* 料理カードの絵は章の絵を使い回す */
+  const plateSvg = document.getElementById('plate');
+  const bowlSvg = document.querySelector('.hero .bowl');
+  document.querySelectorAll('use[href="#plateMini"]').forEach(u => { u.parentNode.innerHTML = plateSvg.innerHTML.replace(/id="[^"]+"/g, ''); });
+  document.querySelectorAll('use[href="#bowlMini"]').forEach(u => { u.parentNode.innerHTML = bowlSvg.innerHTML; });
+
+  /* 営業中かどうか（日本時間・昼と夜の2回） */
+  const DAY = [[11.5, 14], [17.5, 21.5]];
+  const HOURS = { 0: DAY, 3: DAY, 4: DAY, 5: DAY, 6: DAY };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  const cur = t && t.find(r => h >= r[0] && h < r[1]);
+  const later = t && t.find(r => h < r[0]);
+  if (cur) { open = true; main = '本日は営業中'; sub = `${fmt(cur[1])}まで${cur[0] < 15 ? '（夜は17:30から）' : ''}`; }
+  else if (later) { main = later[0] < 15 ? '本日はこれから開店' : 'ただいま休憩中'; sub = `${fmt(later[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(cur[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  document.querySelector(`#hours li[data-d="${d}"]`)?.classList.add('is-today');
+
+  /* 席の図（カウンター6・4人卓3・テラス1卓。配置はイメージ） */
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (g, attrs) => { const el = document.createElementNS(NS, 'circle'); for (const k in attrs) el.setAttribute(k, attrs[k]); el.setAttribute('class', 'seat'); el.setAttribute('r', 11); g.appendChild(el); return el; };
+  const furn = (g, x, y, w, hh) => { const r = document.createElementNS(NS, 'rect'); Object.entries({ x, y, width: w, height: hh, rx: 6, class: 'furn' }).forEach(([k, v]) => r.setAttribute(k, v)); g.appendChild(r); };
+  const counter = [], tables = [], terrace = [];
+  const gC = document.getElementById('seat-counter'), gT = document.getElementById('seat-tables'), gR = document.getElementById('seat-terrace');
+  for (let i = 0; i < 6; i++) counter.push(mk(gC, { cx: 28 + i * 35, cy: 70 }));
+  [[14, 124], [138, 124], [76, 188]].forEach(([x, y]) => {
+    furn(gT, x + 20, y + 2, 52, 46);
+    const ss = [[x + 6, y + 12], [x + 6, y + 38], [x + 86, y + 12], [x + 86, y + 38]];
+    ss.forEach(([cx, cy]) => tables.push(mk(gT, { cx, cy })));
+  });
+  furn(gR, 286, 112, 46, 40);
+  [[309, 92], [309, 172]].forEach(([cx, cy]) => terrace.push(mk(gR, { cx, cy })));
+  // 埋まる順番: テーブル → テラス → カウンター（開店すぐはカウンターが空いていた、という口コミ）
+  const order = [...tables.slice(0, 4), ...tables.slice(8, 12), ...tables.slice(4, 8), ...terrace, counter[2], counter[3], counter[0], counter[5], counter[1], counter[4]];
+  const occFn = hr => hr <= 11.75 ? 0.25 + 0.4 * (hr - 11.5) / 0.25 : hr <= 12.1 ? 0.65 + 0.35 * (hr - 11.75) / 0.35 : hr <= 13.25 ? 1 : Math.max(0.3, 1 - 0.7 * (hr - 13.25) / 0.75);
+  const timeEl = document.getElementById('time'), msgEl = document.getElementById('msg'), barEl = document.getElementById('bar'), occEl = document.getElementById('occ');
+  const setTime = hr => {
+    const s = Math.round(hr * 12) / 12; // 5分きざみ
+    timeEl.textContent = fmt(s);
+    const f = occFn(s), n = Math.round(f * order.length);
+    order.forEach((el, i) => el.classList.toggle('on', i < n));
+    timeEl.classList.toggle('busy', f >= 0.99);
+    occEl.textContent = f >= 0.99 ? '満席' : f >= 0.65 ? '残りわずか' : '空きあり';
+    barEl.style.width = `${(s - 11.5) / 2.5 * 100}%`;
+    msgEl.textContent =
+      s < 11.75 ? '開店直後。カウンターに空きがあることも。' :
+      s < 12.1 ? 'ほどなく、席が埋まっていきます。' :
+      s < 13.25 ? 'お昼どきは満席になりやすい時間。' :
+      s < 14 ? '閉店まぎわは、電話で空きを確かめてからが安心。' : 'お昼の営業はここまで。夜は17:30から。';
+  };
+  setTime(11.5);
+
+  /* 南北の章の状態 */
+  const pgs = [...document.querySelectorAll('.panel .pg')], steps = [...document.querySelectorAll('.steps i')];
+  const shadeN = document.getElementById('shadeN'), shadeS = document.getElementById('shadeS');
+  const dirN = document.getElementById('dirN'), dirS = document.getElementById('dirS'), needle = document.getElementById('needle');
+  let curP = -1;
+  const setPhase = p => {
+    if (p === curP) return; curP = p;
+    pgs.forEach((el, i) => el.classList.toggle('on', i === p));
+    steps.forEach((el, i) => el.classList.toggle('on', i <= p));
+    shadeN.setAttribute('opacity', p === 2 ? .62 : 0);
+    shadeS.setAttribute('opacity', p === 1 ? .62 : 0);
+    dirN.classList.toggle('on', p === 1);
+    dirS.classList.toggle('on', p === 2);
+  };
+  setPhase(0);
+
+  if (reduced || !window.gsap) {
+    loader()?.remove(); showDock(); setTime(12.5);
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出: 4文字を判子のように押してから幕を上げる */
+  const wipe = { v: 0 };
+  gsap.set('.hero h1 .c span', { yPercent: 105 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .meta', { opacity: 0, y: 16 });
+  gsap.set('.bowl-wrap', { scale: .82, rotate: -25, opacity: 0 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .seal span', { opacity: 1, scale: 1, duration: .45, ease: 'back.out(2.2)', stagger: .12 })
+       .to('.loader .sub', { opacity: 1, duration: .4 }, '-=0.2')
+       .to(wipe, { v: 100, duration: 1, ease: 'power4.inOut', onUpdate: () => { const l = loader(); if (l) l.style.clipPath = `inset(0 0 ${wipe.v}% 0)`; } }, '+=0.3')
+       .to('.bowl-wrap', { scale: 1, rotate: 0, opacity: 1, duration: 1.8, ease: 'power3.out' }, '-=0.6')
+       .to('.hero h1 .c span', { yPercent: 0, duration: 1.1, stagger: .08 }, '-=1.5')
+       .to('.hero .vert, .hero .kicker, .hero .meta', { opacity: 1, y: 0, duration: .8, stagger: .08 }, '-=0.9')
+       .add(() => loader()?.remove());
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const headEl = document.getElementById('head');
+  const onScroll = () => headEl.classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  function showDock() { document.getElementById('dock').classList.add('show'); }
+  ScrollTrigger.create({ start: () => innerHeight * 0.5, onEnter: showDock });
+
+  /* ファーストビューの器をスクロールで回す */
+  gsap.to('.hero .bowl', { rotate: 40, yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+  gsap.from('.facts div', { y: 24, opacity: 0, duration: .8, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.facts', start: 'top 88%' } });
+
+  /* 南北の章: 皿を回しながら 全体 → 北 → 南 */
+  const plateRot = gsap.quickSetter('#plate', 'rotate', 'deg');
+  ScrollTrigger.create({
+    trigger: '.nanbei', start: 'top top', end: '+=200%', pin: '.nanbei .pin', scrub: true,
+    onUpdate: s => {
+      const p = s.progress;
+      setPhase(p < .3 ? 0 : p < .65 ? 1 : 2);
+      plateRot(-12 + p * 12);
+      needle.style.transform = `rotate(${p < .3 ? -90 * p / .3 : p < .65 ? -90 : -90 + Math.min(180, (p - .65) / .15 * 180)}deg)`;
+    }
+  });
+
+  /* お昼の席の章: 11:30 → 14:00 */
+  ScrollTrigger.create({
+    trigger: '.seats', start: 'top top', end: '+=170%', pin: '.seats .pin', scrub: true,
+    onUpdate: s => setTime(11.5 + s.progress * 2.5)
+  });
+
+  /* 料理カード */
+  gsap.utils.toArray('.card .ph').forEach(ph => {
+    const art = ph.querySelector('svg');
+    gsap.fromTo(art, { rotate: -30, scale: .86 }, { rotate: 10, scale: 1, ease: 'none', scrollTrigger: { trigger: ph, start: 'top bottom', end: 'bottom top', scrub: true } });
+    const box = { v: 14 };
+    gsap.to(box, { v: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: ph, start: 'top 88%' }, onUpdate: () => { ph.style.clipPath = `inset(${box.v}% 0 ${box.v}% 0 round 18px)`; } });
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
