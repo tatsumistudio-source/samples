@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141C17">
+<title>Boo Flower&amp;Green（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Zen+Old+Mincho:wght@500;700&family=Zen+Kaku+Gothic+Antique:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #141C17;    /* 閉店後の作業場の暗さ */
+  --moss: #26352B;     /* 葉の影 */
+  --fern: #4E6A55;
+  --sage: #A9B8A2;
+  --paper: #F3EEE4;    /* 包み紙 */
+  --paper2: #E8E0D1;
+  --ink: #1B221D;
+  --apricot: #EE8C68;  /* 大事な所とボタンだけ */
+  --lilac: #B7A3D3;
+  --line: rgba(243,238,228,.16);
+  --serif-en: "Bodoni Moda", serif;
+  --serif-jp: "Zen Old Mincho", serif;
+  --sans: "Zen Kaku Gothic Antique", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+  /* 花束の色（3つの言葉で変わる） */
+  --c1: #9A8FA0; --c2: #C9C0C8; --c3: #E9E3E6;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--apricot); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.en { font-family: var(--serif-en); font-style: italic; font-weight: 400; }
+.kp { word-break: keep-all; overflow-wrap: anywhere; }
+
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--apricot); color: var(--night); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; animation: loaderOff .01s 4.5s forwards; }
+@keyframes loaderOff { to { visibility: hidden; opacity: 0; } }
+.loader .in { display: grid; justify-items: center; gap: 6px; }
+.loader svg { width: 96px; height: 96px; overflow: visible; }
+.loader .word { font-family: var(--serif-en); font-style: italic; color: var(--paper); font-size: clamp(72px, 20vw, 170px); line-height: 1; display: flex; overflow: hidden; padding: 0 .08em .06em; }
+.loader .word span { display: inline-block; transform: translateY(110%); }
+.loader .sub { color: var(--sage); font-size: 11px; letter-spacing: .4em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--paper); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(20,28,23,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--serif-en); font-style: italic; font-size: 24px; text-decoration: none; line-height: 1; }
+.head .mark small { font-size: 12px; font-style: normal; letter-spacing: .08em; margin-left: 6px; opacity: .8; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(20,28,23,.35); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); }
+.status.open i { background: #8EDB9A; box-shadow: 0 0 0 4px rgba(142,219,154,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--night); color: var(--paper); }
+.hero .glow { position: absolute; inset: 0; overflow: hidden; }
+.hero .glow i { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; }
+.hero .glow i:nth-child(1) { width: 80vw; height: 80vw; left: 30%; top: 4%; background: #A4513A; }
+.hero .glow i:nth-child(2) { width: 60vw; height: 60vw; left: -20%; top: 26%; background: #5B4A7A; opacity: .45; }
+.hero .glow i:nth-child(3) { width: 70vw; height: 50vw; left: 10%; top: 60%; background: #2F4A36; }
+.hero .art { position: absolute; left: 50%; top: 40px; width: 112vw; max-width: 760px; transform: translateX(-60%) rotate(-16deg); }
+.hero .art svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 30px 40px rgba(0,0,0,.45)); }
+.fall { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.fall span { position: absolute; top: -6%; width: 12px; height: 18px; border-radius: 60% 0 60% 0; opacity: .8; animation: fall linear infinite; }
+@keyframes fall { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(var(--dx), 112vh) rotate(var(--r)); } }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,28,23,.4) 0%, rgba(20,28,23,0) 22%, rgba(20,28,23,0) 40%, rgba(20,28,23,.9) 62%, rgba(20,28,23,.97) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--sage); margin-bottom: 4px; }
+.hero h1 { font-weight: 400; line-height: .78; margin-left: -.05em; }
+.hero h1 .w { display: block; overflow: hidden; padding: 0 .16em .04em 0; }
+.hero h1 .w > span { display: inline-block; }
+.hero h1 .boo { font-family: var(--serif-en); font-style: italic; font-size: clamp(150px, 47vw, 400px); letter-spacing: -.05em; }
+.hero h1 .fg { font-family: var(--serif-en); font-size: clamp(30px, 9.4vw, 76px); letter-spacing: -.01em; line-height: 1.1; margin-top: 8px; }
+.hero h1 .fg em { color: var(--apricot); font-style: italic; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 18px; font-size: 13px; color: var(--sage); }
+.hero .meta b { color: var(--apricot); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 112px; writing-mode: vertical-rl; font-family: var(--serif-jp); font-size: clamp(17px, 4.6vw, 26px); letter-spacing: .26em; line-height: 1.9; text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 112px; font-size: 10px; color: rgba(243,238,228,.75); }
+.cue { width: 1px; height: 44px; background: rgba(243,238,228,.25); position: relative; overflow: hidden; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--apricot); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--moss); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.marquee .track { display: inline-flex; gap: 30px; align-items: center; animation: slide 30s linear infinite; font-family: var(--serif-en); font-style: italic; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--serif-jp); font-style: normal; font-size: .5em; color: var(--sage); }
+.marquee .track i { width: .32em; height: .32em; border-radius: 50%; background: var(--apricot); display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(84px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; }
+.story .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(36px, 10.4vw, 92px); line-height: 1.32; letter-spacing: .01em; color: var(--moss); }
+.story .big em { font-style: normal; color: #C9653F; }
+.line { display: block; overflow: hidden; padding-bottom: .05em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #4C5650; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--moss); font-weight: 700; }
+.story figure { margin: 0; position: relative; overflow: hidden; border-radius: 4px; }
+.story .wall { background: var(--moss); aspect-ratio: 4 / 5; border-radius: 20px; }
+.story .wall svg { width: 100%; height: 100%; display: block; }
+.cap { position: absolute; right: 10px; bottom: 8px; font-size: 10px; color: rgba(255,255,255,.85); text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(27,34,29,.14); font-size: 13px; color: #5E6862; }
+.stars b { font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 48px; color: var(--moss); line-height: 1; }
+
+/* 3つの言葉の章（スクロールで花束ができる） */
+.three { position: relative; background: var(--night); color: var(--paper); }
+.three .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 88px var(--g) 90px; gap: 6px; }
+.three h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(22px, 6.2vw, 42px); line-height: 1.5; }
+.three h2 em { font-style: normal; color: var(--apricot); }
+.stage { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 0; }
+.stage svg { flex: 1 1 auto; min-height: 0; height: 100%; max-height: 36vh; width: auto; max-width: 100%; overflow: visible; }
+.done { flex: none; text-align: center; line-height: 1.4; font-family: var(--serif-jp); font-size: clamp(20px, 5.6vw, 34px); color: var(--paper); }
+.done small { display: block; font-family: var(--sans); font-size: 12px; color: var(--sage); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.steps li { display: grid; grid-template-columns: 2.4em 4.2em 1fr; align-items: baseline; padding: 7px 0; border-top: 1px solid var(--line); color: rgba(243,238,228,.35); transition: color .35s; }
+.steps li.on { color: var(--paper); }
+.steps .n { font-family: var(--serif-en); font-style: italic; font-size: 18px; }
+.steps .k { font-size: 12px; letter-spacing: .1em; }
+.steps .v { font-family: var(--serif-jp); font-size: clamp(20px, 5.6vw, 30px); line-height: 1.3; }
+.steps li.on .v { color: var(--apricot); }
+.three .note { font-size: 11px; color: #8D9A90; margin-top: 8px; line-height: 1.6; }
+
+/* 自分の3つを選ぶ */
+.make { padding: clamp(84px, 14vw, 160px) var(--g) clamp(72px, 12vw, 140px); background: var(--paper); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.28; color: var(--moss); }
+.sec-head p { font-size: 13px; color: #66706A; max-width: 22em; }
+.sec-head .en { color: #C9653F; font-size: 20px; line-height: 1; }
+.builder { display: grid; gap: 28px; }
+.preview { position: relative; background: var(--moss); border-radius: 22px; padding: 22px 18px 18px; display: grid; justify-items: center; overflow: hidden; }
+.preview::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 40%, rgba(238,140,104,.18), transparent 70%); }
+.preview svg { position: relative; width: 74%; max-width: 300px; height: auto; overflow: visible; }
+.memo { position: relative; width: 100%; margin-top: 14px; background: var(--paper); color: var(--ink); border-radius: 14px; padding: 16px 18px; font-family: var(--serif-jp); font-size: 16px; line-height: 1.8; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.memo small { display: block; font-family: var(--sans); font-size: 11px; color: #7A847E; margin-bottom: 4px; letter-spacing: .08em; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+legend { padding: 0; font-size: 12px; letter-spacing: .14em; color: #66706A; margin-bottom: 10px; }
+legend b { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 22px; color: #C9653F; margin-right: 8px; letter-spacing: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(27,34,29,.22); font-size: 14.5px; cursor: pointer; background: #fff8; transition: background .2s, color .2s, border-color .2s; }
+.chips label i { width: 14px; height: 14px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+.chips input:checked + label { background: var(--moss); color: var(--paper); border-color: var(--moss); }
+.chips input:focus-visible + label { outline: 2px solid var(--apricot); outline-offset: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; transition: transform .2s, background .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--apricot); color: var(--night); }
+.btn.dark { background: var(--moss); color: var(--paper); }
+.btn.ghost { background: transparent; border: 1px solid currentColor; color: inherit; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.fine { font-size: 11.5px; color: #7A847E; margin-top: 12px; line-height: 1.7; }
+.fill-in { background: rgba(238,140,104,.2); color: #A9482A; padding: 0 4px; border-radius: 3px; }
+
+/* 予約のすすめ */
+.early { background: var(--apricot); color: var(--night); padding: clamp(72px, 12vw, 130px) var(--g); position: relative; overflow: hidden; }
+.early .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(34px, 9.6vw, 84px); line-height: 1.3; }
+.early p { margin-top: 22px; max-width: 28em; font-size: 15px; }
+.early .cal { position: absolute; right: -6vw; top: 50%; transform: translateY(-50%); font-family: var(--serif-en); font-style: italic; font-size: clamp(200px, 60vw, 520px); line-height: .8; color: rgba(20,28,23,.08); pointer-events: none; }
+
+/* お正月の見せ場 */
+.ny { overflow: hidden; background: var(--night); color: var(--paper); padding: 0 0 clamp(72px, 12vw, 140px); }
+.ny figure { margin: 0; position: relative; overflow: hidden; height: 92svh; min-height: 520px; }
+.ny figure { background: radial-gradient(70% 50% at 50% 38%, #2C3A2F 0%, var(--night) 70%); }
+.ny figure svg { position: absolute; left: 0; right: 0; top: 70px; width: 100%; height: calc(100% - 250px); }
+.ny figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,28,23,0) 45%, rgba(20,28,23,.95) 100%); }
+.ny .over { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: 30px; }
+.ny .over .en { font-size: clamp(54px, 16vw, 150px); line-height: .9; letter-spacing: -.03em; color: var(--paper); }
+.ny .over h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(24px, 6.8vw, 50px); line-height: 1.45; margin-top: 12px; }
+.ny .body { padding: 36px var(--g) 0; }
+.ny .body > p { color: #C7D0C5; font-size: 15px; max-width: 30em; }
+.years { display: grid; gap: 12px; margin-top: 30px; }
+.year { display: grid; grid-template-columns: 5.6em 1fr; align-items: center; gap: 16px; padding: 14px; border-radius: 18px; background: rgba(243,238,228,.05); border: 1px solid var(--line); }
+.year .y { font-family: var(--serif-en); font-style: italic; font-size: 30px; line-height: 1; }
+.year .sw { display: flex; gap: 6px; margin-bottom: 6px; }
+.year .sw i { width: 28px; height: 28px; border-radius: 50%; }
+.year b { font-family: var(--serif-jp); font-weight: 500; font-size: 18px; }
+.ny .fine { color: #8D9A90; }
+
+/* 頼めるもの */
+.menu { padding: clamp(84px, 14vw, 160px) var(--g) clamp(64px, 10vw, 120px); }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(27,34,29,.16); }
+.list li { display: grid; grid-template-columns: 3.2em 1fr; gap: 6px 10px; padding: 22px 0; border-bottom: 1px solid rgba(27,34,29,.16); }
+.list .n { font-family: var(--serif-en); font-style: italic; font-size: 30px; line-height: 1; color: #C9653F; }
+.list h3 { font-family: var(--serif-jp); font-weight: 500; font-size: 21px; line-height: 1.4; color: var(--moss); }
+.list p { grid-column: 2; font-size: 14.5px; color: #4C5650; }
+
+/* 口コミ */
+.voices { background: var(--paper2); padding: clamp(84px, 14vw, 150px) 0 clamp(64px, 10vw, 110px); }
+.voices .sec-head { padding: 0 var(--g); }
+.cards { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 18px; scrollbar-width: none; }
+.cards::-webkit-scrollbar { display: none; }
+.vc { flex: 0 0 82%; max-width: 380px; scroll-snap-align: start; background: var(--paper); border-radius: 20px; padding: 26px 22px; display: grid; gap: 14px; align-content: start; }
+.vc .q { font-family: var(--serif-en); font-style: italic; font-size: 64px; line-height: .5; color: var(--apricot); height: 26px; }
+.vc p { font-family: var(--serif-jp); font-size: 17px; line-height: 1.85; color: var(--moss); }
+.vc small { font-size: 12px; color: #7A847E; }
+.voices .fine { padding: 0 var(--g); }
+
+/* 来店 */
+.visit { background: var(--moss); color: var(--paper); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head h2 { color: var(--paper); }
+.visit .sec-head p { color: var(--sage); }
+.visit .sec-head .en { color: var(--apricot); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage); flex: none; }
+.today.open .dot { background: #8EDB9A; box-shadow: 0 0 0 6px rgba(142,219,154,.15); }
+.today b { font-family: var(--serif-jp); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--sage); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--apricot); }
+.small { font-size: 11.5px; color: var(--sage); }
+.addr { margin-top: 40px; font-family: var(--serif-jp); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #1E2A22; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.05) brightness(.95); }
+.visit .fill-in { background: rgba(238,140,104,.18); color: var(--apricot); }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(27,34,29,.16); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--serif-jp); font-size: 18px; font-weight: 500; color: var(--moss); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(#C9653F,#C9653F) center/14px 1.5px no-repeat, linear-gradient(#C9653F,#C9653F) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4C5650; font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.gram .box { border-radius: 24px; background: var(--night); color: var(--paper); padding: 34px 24px; position: relative; overflow: hidden; }
+.gram .box::after { content: "@"; position: absolute; right: -10px; bottom: -60px; font-family: var(--serif-en); font-style: italic; font-size: 240px; line-height: 1; color: rgba(243,238,228,.06); }
+.gram h2 { font-family: var(--serif-jp); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; }
+.gram p { margin-top: 10px; color: #C7D0C5; font-size: 15px; }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--sage); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif-en); font-style: italic; color: var(--paper); font-size: clamp(140px, 46vw, 440px); line-height: .8; letter-spacing: -.05em; margin: 0 0 40px -.05em; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(20,28,23,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--paper); }
+.dock a.main { background: var(--apricot); color: var(--night); }
+
+/* 花束（SVG） */
+.bq .petal-1 { fill: var(--c1); } .bq .petal-2 { fill: var(--c2); } .bq .petal-3 { fill: var(--c3); }
+.bq .petal-1, .bq .petal-2, .bq .petal-3 { transition: fill .7s ease; }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(90deg, rgba(20,28,23,.85) 0%, rgba(20,28,23,.35) 38%, rgba(20,28,23,0) 58%), linear-gradient(180deg, rgba(20,28,23,.4) 0%, rgba(20,28,23,0) 25%, rgba(20,28,23,0) 70%, rgba(20,28,23,.6) 100%); }
+  .hero .art { left: auto; right: 2vw; top: 50%; width: 52vw; max-width: 820px; transform: translateY(-46%) rotate(-12deg); }
+  .hero .glow i:nth-child(1) { width: 50vw; height: 50vw; left: 50%; top: 10%; }
+  .hero .glow i:nth-child(2) { width: 34vw; height: 34vw; left: 38%; top: 50%; }
+  .hero h1 .boo { font-size: clamp(200px, 22vw, 360px); }
+  .hero h1 .fg { font-size: clamp(40px, 4.4vw, 72px); }
+  .hero .title { right: auto; max-width: 720px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: center; column-gap: 80px; }
+  .story .wall { max-width: 480px; justify-self: end; width: 100%; }
+  .story .big { grid-column: 1 / -1; }
+  .three .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 64px; padding-top: 110px; padding-bottom: 50px; }
+  .three h2 { grid-column: 1 / -1; }
+  .three .stage { grid-column: 2; grid-row: 2; }
+  .three .stage svg { max-height: 62vh; }
+  .three .side { grid-column: 1; grid-row: 2; align-self: center; }
+  .steps .v { font-size: 34px; }
+  .make .inner, .menu .inner, .faq, .gram { max-width: 1100px; margin: 0 auto; }
+  .builder { grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+  .preview { position: sticky; top: 100px; }
+  .ny figure { height: 100svh; }
+  .ny figure svg { left: 36%; right: auto; width: 60%; top: 70px; height: calc(100% - 110px); }
+  .ny .body { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; max-width: 1200px; margin: 0 auto; }
+  .years { margin-top: 0; }
+  .list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+  .vc { flex-basis: 360px; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1200px; margin: 0 auto; }
+  .visit .sec-head { max-width: 1200px; margin-left: auto; margin-right: auto; }
+  .dock { left: auto; right: 24px; width: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after, .fall span { animation: none; }
+  .fall { display: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="in">
+    <svg viewBox="-50 -50 100 100" id="bud"></svg>
+    <div class="word"><span>B</span><span>o</span><span>o</span></div>
+    <div class="sub">FLOWER &amp; GREEN</div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">Boo<small>Flower&amp;Green</small></a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Boo Flower&amp;Green">
+    <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="art" aria-hidden="true"><svg viewBox="0 0 400 470" class="bq" id="bq-hero"></svg></div>
+    <div class="fall" id="fall" aria-hidden="true"></div>
+    <span class="caption">図はイメージです</span>
+    <p class="vert" aria-hidden="true">用途と、色と、雰囲気だけで。</p>
+    <div class="title">
+      <p class="kicker">Flower shop ／ 松戸市 新松戸</p>
+      <h1>
+        <span class="w"><span class="boo">Boo</span></span>
+        <span class="w"><span class="fg">Flower <em>&amp;</em> Green</span></span>
+      </h1>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.6</b>（42件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Arrangement</span><span>アレンジメント</span><i></i><span>Bouquet</span><span>花束</span><i></i><span>New Year</span><span>お正月の花</span><i></i><span>Offering</span><span>お供えの花</span><i></i>
+      <span>Arrangement</span><span>アレンジメント</span><i></i><span>Bouquet</span><span>花束</span><i></i><span>New Year</span><span>お正月の花</span><i></i><span>Offering</span><span>お供えの花</span><i></i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big kp" id="story-title"><span class="line"><span>伝えたのは、</span></span><span class="line"><span>ざっくり。</span></span><span class="line"><span>届いたのは、</span></span><span class="line"><span><em>想像以上。</em></span></span></h2>
+    <div>
+      <p class="lead">口コミに何度も出てくるのは、電話でイメージを言葉にするのは難しかったのに <q>意図をくんでくれた</q> <q>思っていた以上だった</q> という声。記念日の花も、お世話になった方への供花も、店主のセンスにまかせて頼む人が多いお店です。</p>
+      <div class="stars" style="margin-top:28px"><b>4.6</b><span>Googleの口コミ 42件の平均（2026年10月）</span></div>
+    </div>
+    <figure class="wall" aria-hidden="true"><svg viewBox="0 0 400 500" id="wall"></svg><span class="cap">図はイメージです</span></figure>
+  </section>
+
+  <section class="three" aria-labelledby="three-title">
+    <div class="pin">
+      <h2 id="three-title" class="kp">電話で伝えるのは、<br><em>3つの言葉</em>だけ。</h2>
+      <div class="stage">
+        <svg viewBox="0 0 400 470" class="bq" id="bq-main" aria-hidden="true"></svg>
+        <p class="done" id="done">あとは、おまかせ。<small>口コミでは、これだけで想像以上の仕上がりに</small></p>
+      </div>
+      <div class="side">
+        <ol class="steps" id="steps">
+          <li class="on"><span class="n">01</span><span class="k">用途</span><span class="v">記念日に</span></li>
+          <li class="on"><span class="n">02</span><span class="k">色</span><span class="v">紫を中心に</span></li>
+          <li class="on"><span class="n">03</span><span class="k">雰囲気</span><span class="v">落ち着いた感じで</span></li>
+        </ol>
+        <p class="note">※口コミで「用途と色と雰囲気をざっくり伝えただけで、すてきに仕上がった」という声をもとにした例です。図はイメージです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="make" aria-labelledby="make-title">
+    <div class="inner">
+      <div class="sec-head">
+        <h2 id="make-title" class="kp">あなたの<br>3つを、<br>メモにする。</h2>
+        <p>選ぶと、電話や来店のときにそのまま読めるメモができます。<br><span class="en">Try it</span></p>
+      </div>
+      <div class="builder">
+        <div class="preview">
+          <svg viewBox="0 0 400 470" class="bq" id="bq-mini" aria-hidden="true"></svg>
+          <div class="memo" aria-live="polite"><small>ご相談メモ</small><span id="memo-text"></span></div>
+        </div>
+        <form id="picker" onsubmit="return false">
+          <fieldset>
+            <legend><b>01</b>用途</legend>
+            <div class="chips" data-name="use">
+              <input type="radio" name="use" id="u1" value="記念日" checked><label for="u1">記念日</label>
+              <input type="radio" name="use" id="u2" value="お祝い"><label for="u2">お祝い</label>
+              <input type="radio" name="use" id="u3" value="お世話になった方へのお礼"><label for="u3">お礼</label>
+              <input type="radio" name="use" id="u4" value="お供え"><label for="u4">お供え・お悔やみ</label>
+              <input type="radio" name="use" id="u5" value="お正月の飾り"><label for="u5">お正月の飾り</label>
+            </div>
+          </fieldset>
+          <fieldset style="margin-top:26px">
+            <legend><b>02</b>色</legend>
+            <div class="chips" data-name="color">
+              <input type="radio" name="color" id="c1" value="purple" checked><label for="c1"><i style="background:#8B67A8"></i>紫</label>
+              <input type="radio" name="color" id="c2" value="warm"><label for="c2"><i style="background:#E0A03A"></i>黄と赤</label>
+              <input type="radio" name="color" id="c3" value="kohaku"><label for="c3"><i style="background:linear-gradient(90deg,#C2363B 50%,#F4F1EA 50%)"></i>紅白</label>
+              <input type="radio" name="color" id="c4" value="pink"><label for="c4"><i style="background:#E3A1AC"></i>やわらかいピンク</label>
+              <input type="radio" name="color" id="c5" value="white"><label for="c5"><i style="background:#EEF0E6"></i>白とグリーン</label>
+            </div>
+          </fieldset>
+          <fieldset style="margin-top:26px">
+            <legend><b>03</b>雰囲気</legend>
+            <div class="chips" data-name="mood">
+              <input type="radio" name="mood" id="m1" value="落ち着いた雰囲気" checked><label for="m1">落ち着いた</label>
+              <input type="radio" name="mood" id="m2" value="華やかな雰囲気"><label for="m2">華やか</label>
+              <input type="radio" name="mood" id="m3" value="和の雰囲気"><label for="m3">和風</label>
+              <input type="radio" name="mood" id="m4" value="おまかせ"><label for="m4">おまかせ</label>
+            </div>
+          </fieldset>
+          <fieldset style="margin-top:26px">
+            <legend><b>+</b>かたち</legend>
+            <div class="chips" data-name="form">
+              <input type="radio" name="form" id="f1" value="アレンジメント" checked><label for="f1">アレンジメント</label>
+              <input type="radio" name="form" id="f2" value="花束"><label for="f2">花束</label>
+            </div>
+          </fieldset>
+          <div class="row">
+            <button type="button" class="btn dark" id="copy">メモをコピー</button>
+            <a class="btn fill" href="tel:0477015152">電話で相談する</a>
+          </div>
+          <p class="fine">※ご予算・お届け日などの伝え方、注文の受け付け方法は、お店の実際のルールに差し替えます。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="early" aria-labelledby="early-title">
+    <span class="cal" aria-hidden="true">31</span>
+    <h2 class="big kp" id="early-title"><span class="line"><span>日にちが</span></span><span class="line"><span>決まったら、</span></span><span class="line"><span>早めにひと声。</span></span></h2>
+    <p>口コミには「用途と日にちが決まっているなら予約がおすすめ」という声が複数あります。もちろん、店に並んだ花を見ながら選ぶ楽しさもあります。</p>
+  </section>
+
+  <section class="ny" aria-labelledby="ny-title">
+    <figure>
+      <svg viewBox="0 0 400 520" id="ny-art" class="bq" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+      <span class="cap" style="top:110px;bottom:auto">図はイメージです</span>
+      <div class="over">
+        <p class="en">New Year</p>
+        <h2 id="ny-title" class="kp">毎年ちがう、<br>お正月の花。</h2>
+      </div>
+    </figure>
+    <div class="body">
+      <p>ある方は、毎年師走の1か月ほど前に「お正月をテーマに、おまかせで」と頼んで、ご実家へ届けているそうです。同じテーマでも、年ごとに色も表情も変わります。</p>
+      <div class="years" id="years">
+        <div class="year"><span class="y">2024</span><div><div class="sw"><i style="background:#E0A03A"></i><i style="background:#C8452F"></i><i style="background:#F2D27C"></i></div><b>黄と赤をベースに</b></div></div>
+        <div class="year"><span class="y">2025</span><div><div class="sw"><i style="background:#5E3F7A"></i><i style="background:#8B67A8"></i><i style="background:#C3AEDB"></i></div><b>紫づくし</b></div></div>
+        <div class="year"><span class="y">2026</span><div><div class="sw"><i style="background:#C2363B"></i><i style="background:#F4F1EA"></i><i style="background:#3F5B3E"></i></div><b>紅白で和風に</b></div></div>
+      </div>
+    </div>
+    <p class="fine" style="padding:18px var(--g) 0;max-width:1200px;margin:0 auto">※Googleの口コミにある、ひとりのお客さまのお話をもとにしています。色の丸は内容を表したイメージです。お正月の花の受け付け時期は実際の内容に差し替えます。</p>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="inner">
+      <div class="sec-head">
+        <h2 id="menu-title" class="kp">口コミに<br>出てくる<br>頼みごと</h2>
+        <p>実際の取り扱いに合わせて差し替えます</p>
+      </div>
+      <ul class="list">
+        <li><span class="n">01</span><h3>記念日のアレンジメント</h3><p>何度も記念日に頼んでいて、毎回すてきだったという声。</p></li>
+        <li><span class="n">02</span><h3>お祝いの花束</h3><p>お祝いの花束はいつもここ、という常連さんも。長く楽しめる花を選んでくれる、という声もあります。</p></li>
+        <li><span class="n">03</span><h3>お彼岸・お悔やみの花</h3><p>「落ち着いた雰囲気で」の希望どおりだった、ラッピングもすてきだった、という声。</p></li>
+        <li><span class="n">04</span><h3>お正月の飾り花</h3><p>毎年テーマを変えて、おまかせで作ってもらっている方も。</p></li>
+        <li><span class="n">05</span><h3>贈りものの花</h3><p>プレゼントにも、仕事がていねいで新鮮な花がずらりと並ぶ、という声。</p></li>
+        <li><span class="n">06</span><h3>花瓶</h3><p>ベルギーの Henri Dean（ヘンリーディーン）の花瓶を扱っている、という口コミもあります。</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="sec-head">
+      <h2 id="voices-title" class="kp">お客さまの声</h2>
+      <p>Googleの口コミの要旨をもとにしたイメージです</p>
+    </div>
+    <div class="cards">
+      <article class="vc"><span class="q">“</span><p>都内の花屋でボリュームやイメージにがっかりしたことがあるけれど、ここでは一度もない。</p><small>記念日に数回利用した方</small></article>
+      <article class="vc"><span class="q">“</span><p>口コミの写真に惹かれて初めて頼んだ供花が、希望どおりの落ち着いた雰囲気だった。</p><small>遠方から利用した方</small></article>
+      <article class="vc"><span class="q">“</span><p>近くに良い花屋がなく都内で買っていたけれど、知ってからは通い続けている。</p><small>近所の常連の方</small></article>
+      <article class="vc"><span class="q">“</span><p>お店の雰囲気がすてきで、店員さんも親切。行くたびに気持ちが明るくなる。</p><small>お祝いの花束をよく頼む方</small></article>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title" class="kp">お店へ<br>行く前に</h2>
+      <p>営業時間はGoogleマップの情報（2026年10月）<br><span class="en">Visit</span></p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1"><span>月</span><span>11:00 – 19:00</span></li>
+          <li data-d="2"><span>火</span><span>11:00 – 19:00</span></li>
+          <li data-d="3"><span>水</span><span>11:00 – 19:00</span></li>
+          <li data-d="4"><span>木</span><span>11:00 – 19:00</span></li>
+          <li data-d="5"><span>金</span><span>11:00 – 19:00</span></li>
+          <li data-d="6"><span>土</span><span>10:00 – 19:00</span></li>
+          <li data-d="0"><span>日</span><span>10:00 – 18:00</span></li>
+        </ul>
+        <p class="small">定休日・臨時のお休みは <span class="fill-in">実際の内容に差し替えます</span></p>
+      </div>
+      <div>
+        <p class="addr">〒270-0034<br>千葉県松戸市新松戸3丁目279<br>VOCCAビル 103</p>
+        <div class="map"><iframe title="Boo Flower&amp;Greenの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Boo%20Flower%26Green%20%E5%8D%83%E8%91%89%E7%9C%8C%E6%9D%BE%E6%88%B8%E5%B8%82%E6%96%B0%E6%9D%BE%E6%88%B83%E4%B8%81%E7%9B%AE279&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=17803887444036062" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+          <a class="btn ghost" href="tel:0477015152">047-701-5152</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>予約はどうすればいいですか？</summary><p><span class="fill-in">電話・Instagram の DM など、受け付けている方法と、何日前までに連絡すればよいかを書きます。</span></p></details>
+    <details><summary>当日に行っても買えますか？</summary><p>店頭に並んだ花を見ながら選ぶのも楽しい、という口コミがあります。用途と日にちが決まっている時は、予約しておくと安心です。</p></details>
+    <details><summary>イメージをうまく伝えられるか不安です</summary><p>口コミでは「用途・色・雰囲気をざっくり伝えただけで、思っていた以上の仕上がりだった」という声が多くあります。上のメモも使ってみてください。</p></details>
+    <details><summary>予算はどう伝えればいいですか？</summary><p><span class="fill-in">ご予算の伝え方や目安を、お店の実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>配達や発送はできますか？</summary><p><span class="fill-in">配達・発送の可否と範囲を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <h2 id="gram-title" class="kp">これまでの花は、<br>Instagramで。</h2>
+      <p>口コミでも「Instagram の写真がどれもすてき」という声が。頼む前に、好みの雰囲気を探してみてください。</p>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/boo_flower.green" target="_blank" rel="noopener">@boo_flower.green を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">Boo</p>
+  <p>Boo Flower&amp;Green<br>千葉県松戸市新松戸3丁目279 VOCCAビル 103<br>月〜金 11:00–19:00　土 10:00–19:00　日 10:00–18:00</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。花の図はすべてイメージで、実際の商品ではありません。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="tel:0477015152">電話で相談</a>
+  <a href="https://maps.google.com/?cid=17803887444036062" target="_blank" rel="noopener">道順</a>
+  <a href="https://www.instagram.com/boo_flower.green" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 0: [10, 18], 1: [11, 19], 2: [11, 19], 3: [11, 19], 4: [11, 19], 5: [11, 19], 6: [10, 19] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* 花束を SVG で組み立てる */
+  const PAL = {
+    purple: ['#7A5598', '#B49AD0', '#E9E0F2'],
+    warm:   ['#D9532F', '#E8A23A', '#F5D985'],
+    kohaku: ['#C2363B', '#F6F2EA', '#E59AA0'],
+    pink:   ['#C9707F', '#EBB3BA', '#F7E3E2'],
+    white:  ['#F6F4EC', '#DCE6CC', '#FFFFFF'],
+    grey:   ['#8F8A92', '#BDB7BE', '#DEDADF'],
+    hero:   ['#E8775A', '#F3C2B0', '#C9B6E0']
+  };
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+  // 花の位置: x, y, 大きさ, 色の役, 形
+  const FLOWERS = [
+    [200, 150, 46, 1, 'rose'], [132, 180, 38, 2, 'daisy'], [268, 176, 40, 2, 'rose'],
+    [168, 98, 30, 3, 'ball'], [240, 102, 32, 1, 'daisy'], [104, 122, 24, 3, 'ball'],
+    [298, 120, 26, 3, 'daisy'], [206, 222, 34, 3, 'ball'], [148, 240, 26, 1, 'rose'], [262, 236, 28, 1, 'daisy']
+  ];
+  const LEAVES = [
+    [86, 200, -55, 34], [318, 196, 55, 34], [70, 150, -75, 30], [330, 146, 75, 30], [120, 70, -30, 28], [282, 66, 30, 28],
+    [200, 50, 0, 26], [58, 104, -95, 24], [344, 100, 95, 24], [110, 268, -40, 26], [292, 266, 40, 26]
+  ];
+  function flower(g, r, role, type, fill) {
+    const p = fill ? { fill } : { class: `petal-${role}` };
+    if (type === 'rose') {
+      el('circle', { r, ...p }, g);
+      el('circle', { r: r * .72, fill: '#000', opacity: .1 }, g);
+      el('circle', { r: r * .62, ...p }, g);
+      el('path', { d: `M${-r*.35} 0a${r*.35} ${r*.35} 0 1 1 ${r*.35} ${r*.35}a${r*.22} ${r*.22} 0 1 1 -${r*.1} -${r*.4}`, fill: 'none', stroke: '#000', 'stroke-opacity': .18, 'stroke-width': Math.max(1, r / 20) }, g);
+    } else if (type === 'daisy') {
+      for (let i = 0; i < 9; i++) el('ellipse', { rx: r * .3, ry: r * .62, cy: -r * .48, transform: `rotate(${i * 40})`, ...p }, g);
+      el('circle', { r: r * .26, fill: '#3E4A2E' }, g);
+      el('circle', { r: r * .14, fill: '#C9A54A' }, g);
+    } else {
+      [[0, 0], [-.45, -.3], [.45, -.3], [-.5, .3], [.5, .3], [0, -.55], [0, .55]].forEach(([x, y]) => {
+        el('circle', { cx: x * r, cy: y * r, r: r * .42, ...p }, g);
+        el('circle', { cx: x * r, cy: y * r, r: r * .1, fill: '#000', opacity: .12 }, g);
+      });
+    }
+  }
+  function buildBouquet(svg) {
+    const back = el('g', { class: 'wrap-back' }, svg);
+    el('path', { d: 'M78 228 L200 20 L322 228 Z', fill: '#D9CDB8', opacity: .0 }, back);
+    const stems = el('g', { class: 'stems' }, svg);
+    FLOWERS.forEach(([x, y]) => el('path', { d: `M${x} ${y} Q${(x + 200) / 2} ${(y + 400) / 2 - 10} 200 420`, stroke: '#5F7A55', 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }, stems));
+    const greens = el('g', { class: 'greens' }, svg);
+    LEAVES.forEach(([x, y, rot, s], i) => {
+      const o = el('g', { transform: `translate(${x} ${y}) rotate(${rot})` }, greens);
+      const inner = el('g', { class: 'leaf' }, o);
+      el('path', { d: `M0 ${s} C ${-s*.7} ${s*.2}, ${-s*.5} ${-s*.8}, 0 ${-s} C ${s*.5} ${-s*.8}, ${s*.7} ${s*.2}, 0 ${s} Z`, fill: i % 3 ? '#6E8B62' : '#4E6A4A' }, inner);
+      el('path', { d: `M0 ${s} L0 ${-s*.8}`, stroke: '#2F4430', 'stroke-width': 1.4, opacity: .5 }, inner);
+    });
+    const fl = el('g', { class: 'flowers' }, svg);
+    FLOWERS.forEach(([x, y, r, role, type]) => {
+      const o = el('g', { transform: `translate(${x} ${y})` }, fl);
+      const inner = el('g', { class: 'fl' }, o);
+      flower(inner, r, role, type);
+    });
+    const wrap = el('g', { class: 'wrap' }, svg);
+    el('path', { d: 'M92 236 L308 236 L226 446 L174 446 Z', fill: '#EFE6D6' }, wrap);
+    el('path', { d: 'M92 236 L200 262 L308 236 L292 262 L200 290 L108 262 Z', fill: '#E2D6C1' }, wrap);
+    el('path', { d: 'M150 262 L188 446 M250 262 L212 446', stroke: '#CDBFA6', 'stroke-width': 1.5, fill: 'none' }, wrap);
+    const rib = el('g', { class: 'ribbon', transform: 'translate(200 352)' }, wrap);
+    el('path', { d: 'M0 0 C -26 -24, -52 -10, -40 8 C -30 22, -10 8, 0 0 Z', fill: 'var(--c1)', class: 'petal-1' }, rib);
+    el('path', { d: 'M0 0 C 26 -24, 52 -10, 40 8 C 30 22, 10 8, 0 0 Z', fill: 'var(--c1)', class: 'petal-1' }, rib);
+    el('path', { d: 'M-2 2 L-16 46 M2 2 L18 44', style: 'stroke:var(--c1);transition:stroke .7s', fill: 'none', 'stroke-width': 5, 'stroke-linecap': 'round' }, rib);
+    el('circle', { r: 6, class: 'petal-2' }, rib);
+    return svg;
+  }
+  const bqMain = buildBouquet(document.getElementById('bq-main'));
+  const bqMini = buildBouquet(document.getElementById('bq-mini'));
+  const setPal = (target, key) => { const p = PAL[key]; target.style.setProperty('--c1', p[0]); target.style.setProperty('--c2', p[1]); target.style.setProperty('--c3', p[2]); };
+  setPal(bqMain, 'purple');
+  const bqHero = buildBouquet(document.getElementById('bq-hero'));
+  setPal(bqHero, 'hero');
+
+  /* 花の舞い（ファーストビュー） */
+  const fall = document.getElementById('fall');
+  const FALL_C = ['#EE8C68', '#F3C2B0', '#B7A3D3', '#F3EEE4'];
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span');
+    s.style.left = `${(i * 61) % 100}%`;
+    s.style.background = FALL_C[i % 4];
+    s.style.animationDuration = `${9 + (i * 37) % 9}s`;
+    s.style.animationDelay = `${-((i * 53) % 14)}s`;
+    s.style.setProperty('--dx', `${((i * 29) % 40) - 20}vw`);
+    s.style.setProperty('--r', `${180 + (i * 47) % 360}deg`);
+    s.style.transform = `scale(${0.6 + (i % 5) * 0.15})`;
+    fall.appendChild(s);
+  }
+
+  /* ずらりと並ぶ花（図） */
+  const wall = document.getElementById('wall');
+  const WALL_C = ['#EE8C68', '#F3EEE4', '#B7A3D3', '#E3A1AC', '#E8A23A', '#C2363B', '#DCE6CC', '#7A5598', '#F5D985', '#F2B8A2'];
+  const TYPES = ['rose', 'daisy', 'ball'];
+  for (let row = 0; row < 4; row++) {
+    const by = 112 + row * 118;
+    el('rect', { x: 0, y: by, width: 400, height: 4, fill: '#1A251E' }, wall);
+    for (let col = 0; col < 5; col++) {
+      const bx = 44 + col * 78, k = row * 5 + col, c = WALL_C[(k * 3 + row) % WALL_C.length], ty = TYPES[(k + row) % 3];
+      const bucket = el('g', { class: 'bk' }, wall);
+      [[-18, -80, 13], [16, -86, 12], [0, -66, 14], [-4, -100, 10], [20, -62, 9]].forEach(([x, y, r], j) => {
+        el('path', { d: `M${bx + x} ${by + y} L${bx + x * .3} ${by - 22}`, stroke: '#6E8B62', 'stroke-width': 2 }, bucket);
+        if (j === 1) el('ellipse', { cx: bx + x * .6 - 6, cy: by + y * .5, rx: 4, ry: 10, fill: '#6E8B62', transform: `rotate(-30 ${bx + x * .6 - 6} ${by + y * .5})` }, bucket);
+        const fg = el('g', { transform: `translate(${bx + x} ${by + y})` }, bucket);
+        flower(fg, r, 1, j === 4 ? 'ball' : ty, c);
+      });
+      el('path', { d: `M${bx - 22} ${by - 30} C ${bx - 22} ${by - 52}, ${bx + 22} ${by - 52}, ${bx + 22} ${by - 30}`, stroke: '#AEB8B3', 'stroke-width': 1.5, fill: 'none' }, bucket);
+      el('path', { d: `M${bx - 24} ${by - 34} L${bx + 24} ${by - 34} L${bx + 19} ${by} L${bx - 19} ${by} Z`, fill: '#8C9893' }, bucket);
+      el('path', { d: `M${bx - 22} ${by - 20} L${bx + 22} ${by - 20} M${bx - 20} ${by - 10} L${bx + 20} ${by - 10}`, stroke: '#7A8681', 'stroke-width': 1.2 }, bucket);
+      el('path', { d: `M${bx - 24} ${by - 34} L${bx + 24} ${by - 34} L${bx + 23} ${by - 29} L${bx - 23} ${by - 29} Z`, fill: '#AEB8B3' }, bucket);
+    }
+  }
+
+  /* お正月の花（図） */
+  const ny = document.getElementById('ny-art');
+  ny.style.setProperty('--c1', '#C2363B'); ny.style.setProperty('--c2', '#F6F2EA'); ny.style.setProperty('--c3', '#E59AA0');
+  el('circle', { cx: 262, cy: 178, r: 118, fill: 'none', stroke: '#C9A54A', 'stroke-width': 1.4, opacity: .55, class: 'sun' }, ny);
+  el('circle', { cx: 262, cy: 178, r: 96, fill: '#C9A54A', opacity: .08 }, ny);
+  const pine = (cx, cy, s, rot, col) => {
+    const g = el('g', { transform: `translate(${cx} ${cy}) rotate(${rot})`, class: 'pn' }, ny);
+    for (let i = 0; i < 11; i++) { const a = (-55 + i * 11) * Math.PI / 180, L = s * (0.62 + ((i * 7) % 5) * 0.09); el('line', { x1: Math.sin(a) * s * .12, y1: -Math.cos(a) * s * .12, x2: Math.sin(a) * L, y2: -Math.cos(a) * L, stroke: col, 'stroke-width': 2, 'stroke-linecap': 'round' }, g); }
+  };
+  el('path', { d: 'M200 400 C 170 330, 120 280, 70 210', stroke: '#4A3A2A', 'stroke-width': 6, fill: 'none', 'stroke-linecap': 'round' }, ny);
+  el('path', { d: 'M206 400 C 240 320, 270 250, 330 196', stroke: '#4A3A2A', 'stroke-width': 5, fill: 'none', 'stroke-linecap': 'round' }, ny);
+  el('path', { d: 'M196 396 C 200 330, 196 270, 210 180', stroke: '#4A3A2A', 'stroke-width': 4, fill: 'none', 'stroke-linecap': 'round' }, ny);
+  [[70, 210, 34, -40], [104, 250, 30, -30], [140, 290, 26, -20], [330, 196, 34, 40], [296, 230, 30, 30], [262, 270, 26, 20], [210, 180, 30, 0], [204, 230, 26, -10]].forEach(([x, y, s, r], i) => {
+    pine(x, y, s, r, i % 2 ? '#3F6B47' : '#2C5236');
+    pine(x + 6, y + 8, s * .8, r + 10, '#5C8A5E');
+  });
+  [[150, 342, 30, 1, 'rose'], [222, 330, 36, 2, 'rose'], [264, 352, 26, 1, 'daisy'], [186, 296, 22, 3, 'ball'], [116, 368, 20, 2, 'daisy'], [290, 312, 18, 2, 'ball'], [248, 292, 16, 1, 'rose']].forEach(([x, y, r, role, type]) => {
+    const o = el('g', { transform: `translate(${x} ${y})` }, ny);
+    flower(el('g', { class: 'nf' }, o), r, role, type);
+  });
+  [[300, 372], [308, 362], [316, 374], [94, 330], [86, 340], [100, 344], [240, 262], [232, 254]].forEach(([x, y]) => el('circle', { cx: x, cy: y, r: 5, fill: '#B3202B' }, ny));
+  [[320, 340, 40], [84, 300, -40], [180, 372, -70]].forEach(([x, y, r]) => el('ellipse', { cx: 0, cy: 0, rx: 7, ry: 20, fill: '#C9A54A', opacity: .9, transform: `translate(${x} ${y}) rotate(${r})` }, ny));
+  el('path', { d: 'M96 392 L304 392 C 300 430, 270 446, 200 446 C 130 446, 100 430, 96 392 Z', fill: '#2B2B2A' }, ny);
+  el('path', { d: 'M96 392 L304 392 L300 402 L100 402 Z', fill: '#4A4845' }, ny);
+
+  /* ローダーの小さな花 */
+  const bud = document.getElementById('bud');
+  for (let i = 0; i < 8; i++) el('ellipse', { rx: 11, ry: 26, cy: -22, transform: `rotate(${i * 45})`, fill: i % 2 ? '#EE8C68' : '#F3EEE4', class: 'bp' }, bud);
+  el('circle', { r: 9, fill: '#26352B' }, bud);
+
+  /* メモを作る */
+  const picker = document.getElementById('picker'), memo = document.getElementById('memo-text');
+  const COLOR_WORD = { purple: '紫を中心に', warm: '黄色と赤をベースに', kohaku: '紅白で', pink: 'やわらかいピンクで', white: '白とグリーンで' };
+  function updateMemo() {
+    const f = new FormData(picker);
+    setPal(bqMini, f.get('color'));
+    const mood = f.get('mood') === 'おまかせ' ? '雰囲気はおまかせで' : `${f.get('mood')}で`;
+    memo.textContent = `${f.get('use')}の${f.get('form')}をお願いしたいです。色は${COLOR_WORD[f.get('color')]}、${mood}。日にちは〇月〇日です。`;
+  }
+  picker.addEventListener('change', updateMemo);
+  updateMemo();
+  document.getElementById('copy').addEventListener('click', async e => {
+    const b = e.currentTarget, txt = memo.textContent;
+    try { await navigator.clipboard.writeText(txt); b.textContent = 'コピーしました'; }
+    catch (_) { const r = document.createRange(); r.selectNodeContents(memo); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = '選択しました'; }
+    setTimeout(() => { b.textContent = 'メモをコピー'; }, 1800);
+  });
+
+  function showDock() { document.getElementById('dock').classList.add('show'); }
+  if (reduced || !window.gsap || !window.ScrollTrigger) { document.querySelector('.loader')?.remove(); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: 花が開いて、店名が上がる */
+  const cover = { b: 0 };
+  const paintCover = () => { const l = document.querySelector('.loader'); if (l) l.style.clipPath = `inset(0 0 ${cover.b}% 0)`; };
+  gsap.set('.loader .bp', { scale: 0, transformOrigin: '50% 100%' });
+  gsap.set('.hero h1 .w > span', { yPercent: 108 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .meta', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('#bud', { rotate: 45, duration: 1.4, ease: 'power2.out' })
+       .to('.loader .bp', { scale: 1, duration: 0.9, stagger: 0.05, ease: 'back.out(1.6)' }, 0)
+       .to('.loader .word span', { y: 0, duration: 0.9, stagger: 0.07 }, 0.35)
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.4')
+       .to(cover, { b: 100, duration: 1.1, ease: 'power4.inOut', onUpdate: paintCover }, '+=0.2')
+       .from('#bq-hero .fl', { scale: 0, rotate: -60, transformOrigin: '50% 50%', duration: 1.4, stagger: 0.07, ease: 'back.out(1.4)' }, '-=0.9')
+       .from('#bq-hero .leaf', { scale: 0, transformOrigin: '50% 100%', duration: 1.0, stagger: 0.03, ease: 'power3.out' }, '<')
+       .to('.hero h1 .w > span', { yPercent: 0, duration: 1.2, stagger: 0.12 }, '-=2.0')
+       .to('.hero .vert, .hero .kicker, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => document.querySelector('.loader')?.remove());
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const headEl = document.getElementById('head');
+  const solid = () => headEl.classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', solid, { passive: true }); solid();
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero .art svg', { yPercent: 16, rotate: 8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(n => {
+    gsap.from(n, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: n, start: 'top 88%' } });
+  });
+
+  /* 写真を枠の中で動かす（clip-path は数値を動かして毎回組み立てる） */
+  gsap.utils.toArray('.story figure, .ny figure').forEach(fig => {
+    const v = { c: 14 };
+    fig.style.clipPath = 'inset(14% 0 14% 0)';
+    gsap.to(v, { c: 0, duration: 1.3, ease: 'power3.out', onUpdate: () => { fig.style.clipPath = `inset(${v.c}% 0 ${v.c}% 0)`; }, scrollTrigger: { trigger: fig, start: 'top 85%' } });
+  });
+  /* 棚の花をバケツごとに順に出す */
+  gsap.from('#wall .bk', { y: 24, opacity: 0, duration: 0.7, stagger: 0.04, ease: 'power3.out', scrollTrigger: { trigger: '#wall', start: 'top 80%' } });
+  /* お正月の図: 松から花へ */
+  gsap.from('#ny-art .pn', { scale: 0, transformOrigin: '50% 100%', duration: 0.9, stagger: 0.03, ease: 'back.out(1.6)', scrollTrigger: { trigger: '#ny-art', start: 'top 70%' } });
+  gsap.from('#ny-art .nf', { scale: 0, rotate: -45, transformOrigin: '50% 50%', duration: 1, stagger: 0.08, delay: 0.4, ease: 'back.out(1.5)', scrollTrigger: { trigger: '#ny-art', start: 'top 70%' } });
+  gsap.to('#ny-art .sun', { rotate: 30, transformOrigin: '50% 50%', ease: 'none', scrollTrigger: { trigger: '.ny', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* 3つの言葉の章: スクロールで花束ができていく */
+  const steps = [...document.querySelectorAll('#steps li')];
+  const setStep = i => steps.forEach((s, k) => s.classList.toggle('on', k <= i));
+  setPal(bqMain, 'grey');
+  gsap.set('#bq-main .stems path', { strokeDasharray: 400, strokeDashoffset: 400 });
+  gsap.set('#bq-main .leaf', { scale: 0, transformOrigin: '50% 100%' });
+  gsap.set('#bq-main .fl', { scale: 0, rotate: -40, transformOrigin: '50% 50%' });
+  gsap.set('#bq-main .wrap', { y: 60, opacity: 0 });
+  gsap.set('#done', { opacity: 0, y: 14 });
+  setStep(-1);
+  const build = gsap.timeline({ defaults: { ease: 'none' } });
+  build.to('#bq-main .stems path', { strokeDashoffset: 0, duration: 1, stagger: 0.04 }, 0)
+       .to('#bq-main .leaf', { scale: 1, duration: 0.6, stagger: 0.06, ease: 'back.out(1.4)' }, 0.3)
+       .to('#bq-main .fl', { scale: 1, rotate: 0, duration: 0.7, stagger: 0.12, ease: 'back.out(1.5)' }, 1.4)
+       .to('#bq-main .wrap', { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }, 3.0)
+       .to('#done', { opacity: 1, y: 0, duration: 0.5 }, 3.8)
+       .to({}, { duration: 0.4 });
+  ScrollTrigger.create({
+    trigger: '.three', start: 'top top', end: '+=200%', pin: '.three .pin', scrub: 0.6, animation: build,
+    onUpdate: s => {
+      const p = s.progress, i = p < 0.04 ? -1 : p < 0.33 ? 0 : p < 0.66 ? 1 : 2;
+      setStep(i);
+      setPal(bqMain, i >= 1 ? 'purple' : 'grey');
+      bqMain.style.filter = i >= 2 ? 'saturate(.85)' : '';
+    }
+  });
+
+  /* お正月の3年を順に出す */
+  gsap.from('#years .year', { x: 40, opacity: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '#years', start: 'top 85%' } });
+  gsap.from('.early .cal', { yPercent: -30, ease: 'none', scrollTrigger: { trigger: '.early', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* 頼みごとの番号を順に */
+  gsap.utils.toArray('.list li').forEach(li => gsap.from(li, { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 90%' } }));
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
