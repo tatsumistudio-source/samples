@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111829">
+<title>Cafe Orbit（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Zen+Maru+Gothic:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #111829;    /* 夜空の紺。orbit の宇宙 */
+  --deep: #1B2540;
+  --milk: #F5EEE2;     /* ミルクの泡 */
+  --foam: #FFFBF4;
+  --crema: #C98B4E;    /* クレマの茶 */
+  --bean: #3B2417;     /* 深煎り */
+  --rasp: #E4587E;     /* ラズベリー。大事な所とボタンだけ */
+  --ink: #1A1F2C;
+  --haze: #A9B2C8;
+  --line: rgba(245,238,226,.16);
+  --round: "Zen Maru Gothic", system-ui, sans-serif;
+  --display: "Fraunces", serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--milk); color: var(--ink); font-family: var(--round); font-size: 16px; line-height: 1.9; overflow-x: hidden; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--rasp); outline-offset: 4px; border-radius: 8px; }
+h1, h2, h3, p { margin: 0; }
+h2, h3, .kw { word-break: keep-all; overflow-wrap: anywhere; }
+.it { font-family: var(--display); font-style: italic; font-weight: 300; letter-spacing: -.01em; }
+.mono { font-family: var(--mono); letter-spacing: .08em; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--rasp); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; }
+.loader .orbit { position: relative; width: min(64vw, 300px); aspect-ratio: 1; }
+.loader .ring { position: absolute; inset: 0; border: 1px solid rgba(245,238,226,.22); border-radius: 50%; }
+.loader .sat { position: absolute; inset: 0; animation: spin 1.6s cubic-bezier(.6,.1,.3,.9) infinite; }
+.loader .sat::before { content: ""; position: absolute; left: 50%; top: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--rasp); box-shadow: 0 0 18px rgba(228,88,126,.7); }
+.loader .word { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: var(--display); font-style: italic; font-weight: 300; color: var(--milk); font-size: clamp(54px, 15vw, 110px); line-height: 1; }
+.loader .word span { display: inline-block; transform: translateY(110%); }
+.no-js .loader, .reduced .loader { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--milk); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(17,24,41,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-style: italic; font-weight: 400; font-size: 22px; text-decoration: none; line-height: 1; }
+.head .mark i { width: 18px; height: 18px; border: 1.5px solid currentColor; border-radius: 50%; position: relative; }
+.head .mark i::after { content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--rasp); right: -3px; top: 1px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(17,24,41,.4); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--haze); }
+.status.open i { background: #7BD3A0; box-shadow: 0 0 0 4px rgba(123,211,160,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: radial-gradient(120% 70% at 60% 30%, #22305A 0%, var(--night) 62%); color: var(--milk); }
+.stars-bg { position: absolute; inset: 0; opacity: .55; background-image:
+  radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 78% 12%, #fff 50%, transparent 51%),
+  radial-gradient(1.4px 1.4px at 88% 46%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 58%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 52% 8%, #fff 50%, transparent 51%), radial-gradient(1.2px 1.2px at 6% 40%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 64% 66%, #fff 50%, transparent 51%), radial-gradient(1.3px 1.3px at 36% 28%, #fff 50%, transparent 51%); }
+.hero .cupwrap { position: absolute; left: 50%; top: 92px; width: min(116vw, 560px); margin-left: calc(min(116vw, 560px) / -2); aspect-ratio: 1; }
+.hero .cupwrap .cup-svg { width: 100%; height: 100%; }
+.spin-slow { transform-box: view-box; transform-origin: 50% 50%; animation: spin 60s linear infinite; }
+.spin-rev { transform-box: view-box; transform-origin: 50% 50%; animation: spin 90s linear infinite reverse; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(17,24,41,0) 45%, rgba(17,24,41,.75) 70%, rgba(17,24,41,.96) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(88px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 11px; color: var(--haze); margin-bottom: 4px; }
+.hero h1 { font-family: var(--display); font-weight: 300; font-style: italic; line-height: .8; letter-spacing: -.04em; }
+.hero h1 .w { display: block; overflow: hidden; padding: 0 .08em .06em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero h1 .small { font-size: clamp(40px, 11vw, 96px); color: var(--haze); }
+.hero h1 .big { font-size: clamp(112px, 33vw, 300px); margin-left: -.05em; }
+.hero .tag { margin-top: 14px; font-size: clamp(16px, 4.4vw, 22px); font-weight: 500; letter-spacing: .04em; }
+.hero .meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 12px; font-size: 12.5px; color: var(--haze); }
+.hero .meta b { color: var(--rasp); font-weight: 700; font-size: 15px; }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); top: 96px; font-size: 10px; color: rgba(245,238,226,.6); }
+.cue { width: 1px; height: 40px; background: rgba(245,238,226,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--rasp); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* ラテアートの部品 */
+.part { transform-box: fill-box; transform-origin: 50% 50%; }
+.cup-svg .bear, .cup-svg .rose { transition: opacity .5s ease; }
+.cup-svg[data-style="art"] .bear { opacity: 0; }
+.cup-svg[data-style="cute"] .rose { opacity: 0; }
+
+
+/* 写真がある時のファーストビュー */
+.hero .photo { position: absolute; inset: 0; display: none; }
+.hero .photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero.has-photo .photo { display: block; }
+.hero.has-photo .caption { top: auto; bottom: calc(26px + env(safe-area-inset-bottom)); color: rgba(245,238,226,.75); }
+.hero.has-photo .cupwrap, .hero.has-photo .stars-bg { display: none; }
+.hero.has-photo::after { background: linear-gradient(180deg, rgba(17,24,41,.45) 0%, rgba(17,24,41,0) 22%, rgba(17,24,41,0) 48%, rgba(17,24,41,.7) 72%, rgba(17,24,41,.95) 100%); }
+
+/* 写真の見せ場 */
+.showcase { background: #24160F; color: var(--milk); padding: clamp(88px, 14vw, 160px) var(--g) clamp(64px, 10vw, 120px); }
+.showcase[hidden] { display: none; }
+.showcase .sec-head { padding: 0; }
+.showcase .sec-head h2 { color: var(--milk); }
+.showcase .sec-head p { color: #C7B3A3; }
+.shots { display: grid; gap: 56px; }
+.shot { margin: 0; }
+.shot.wide img { aspect-ratio: 4 / 3; object-position: 74% 50%; }
+.shot .frame { position: relative; overflow: hidden; border-radius: 28px; }
+.shot img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.12); }
+.shot .cap { position: absolute; right: 14px; bottom: 10px; font-size: 10px; color: rgba(255,255,255,.85); text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+.shot figcaption { display: flex; align-items: baseline; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.shot figcaption .it { font-size: clamp(34px, 9vw, 56px); line-height: 1; color: var(--crema); }
+.shot figcaption b { font-size: 16px; }
+.shot figcaption small { word-break: keep-all; overflow-wrap: anywhere; flex-basis: 100%; color: #D9C9BC; font-size: 14px; }
+.shot .no { position: absolute; left: 16px; top: 12px; font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,.85); text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+
+/* 流れる帯 */
+.marquee { background: var(--rasp); color: #fff; overflow: hidden; white-space: nowrap; padding: 14px 0 12px; }
+.marquee .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(30px, 8vw, 60px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--round); font-style: normal; font-weight: 700; font-size: .5em; }
+.marquee .track b { width: .36em; height: .36em; border-radius: 50%; border: 2px solid #fff; display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 40px; position: relative; overflow: hidden; }
+.story .big { font-weight: 700; font-size: clamp(40px, 11.5vw, 104px); line-height: 1.25; letter-spacing: .01em; color: var(--night); }
+.story .big em { font-style: normal; color: var(--rasp); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #4A4F5E; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--night); font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { padding: 8px 14px; border-radius: 999px; background: var(--foam); border: 1px solid rgba(17,24,41,.1); font-size: 13.5px; font-weight: 500; }
+.rating { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid rgba(17,24,41,.14); font-size: 13px; color: #5D6272; }
+.rating b { font-family: var(--display); font-weight: 400; font-size: 52px; color: var(--night); line-height: 1; }
+.story .deco { position: absolute; right: -120px; top: 40px; width: 320px; height: 320px; border: 1px dashed rgba(17,24,41,.18); border-radius: 50%; pointer-events: none; }
+.story .deco::after { content: ""; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--crema); left: 30px; top: 60px; }
+
+/* ラテアートの章（スクロールで描ける） */
+.art { position: relative; background: var(--night); color: var(--milk); }
+.art .pin { height: 100svh; min-height: 680px; display: grid; grid-template-rows: auto 1fr auto; padding: 88px var(--g) calc(92px + env(safe-area-inset-bottom)); gap: 8px; }
+.art h2 { font-weight: 700; font-size: clamp(26px, 7.4vw, 48px); line-height: 1.4; }
+.art h2 em { font-style: normal; color: var(--rasp); }
+.art .stage { position: relative; align-self: center; justify-self: center; width: min(74vw, 38svh, 460px); aspect-ratio: 1; }
+.art .stage .cup-svg { width: 100%; height: 100%; }
+.art .step-no { position: absolute; left: -4px; top: -6px; font-family: var(--display); font-style: italic; font-weight: 300; font-size: 64px; line-height: 1; color: rgba(245,238,226,.18); }
+.art .msg { word-break: keep-all; overflow-wrap: anywhere; min-height: 5.2em; font-size: 15px; color: #D7DCEA; max-width: 30em; }
+.art .msg b { display: block; color: var(--milk); font-size: 18px; margin-bottom: 2px; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.steps span { height: 3px; border-radius: 3px; background: rgba(245,238,226,.16); position: relative; overflow: hidden; }
+.steps span i { position: absolute; inset: 0; width: 0; background: var(--rasp); }
+.steps-l { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 6px; font-size: 10.5px; color: var(--haze); }
+.toggle { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(245,238,226,.08); border: 1px solid var(--line); margin-top: 12px; }
+.toggle button { font: inherit; font-size: 13px; font-weight: 700; color: var(--milk); background: none; border: 0; border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--milk); color: var(--night); }
+.art .note { font-size: 11px; color: #8D96AE; margin-top: 10px; }
+
+/* メニュー */
+.menu { padding: clamp(88px, 14vw, 160px) 0 clamp(40px, 8vw, 80px); background: var(--milk); }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 34px; }
+.sec-head .mono { font-size: 11px; color: var(--crema); }
+.sec-head h2 { font-weight: 700; font-size: clamp(30px, 8.6vw, 64px); line-height: 1.3; color: var(--night); }
+.sec-head p { font-size: 12.5px; color: #6A6F7E; max-width: 22em; }
+.rail { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px var(--g) 22px; scroll-padding: 0 var(--g); scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.card { scroll-snap-align: start; background: var(--foam); border-radius: 28px; padding: 14px 14px 22px; border: 1px solid rgba(17,24,41,.08); position: relative; }
+.card .ph { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 1; display: grid; place-items: center; }
+.card .ph svg { width: 78%; height: auto; }
+.card .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card .cap { position: absolute; right: 12px; bottom: 9px; font-size: 10px; color: rgba(17,24,41,.55); }
+.card .no { position: absolute; left: 14px; top: 12px; font-size: 11px; color: rgba(17,24,41,.5); }
+.card .en { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 34px; line-height: 1.1; color: var(--crema); margin: 16px 6px 2px; }
+.card h3 { font-size: 20px; font-weight: 700; color: var(--night); margin: 0 6px; }
+.card p { margin: 8px 6px 0; color: #4A4F5E; font-size: 14.5px; line-height: 1.8; }
+.c1 .ph { background: #F1D9B5; } .c2 .ph { background: #F6C9A4; } .c3 .ph { background: #E9DFCF; } .c4 .ph { background: #F6CBD6; } .c5 .ph { background: #D9DEEA; }
+.swipe { padding: 0 var(--g); display: flex; align-items: center; gap: 10px; font-size: 11px; color: #7A7F8E; }
+.swipe i { flex: 1; height: 1px; background: rgba(17,24,41,.15); position: relative; }
+.swipe i b { position: absolute; left: 0; top: -1px; height: 3px; width: 20%; border-radius: 3px; background: var(--night); }
+.src { padding: 18px var(--g) 0; font-size: 11px; color: #7A7F8E; }
+
+/* 2層の章 */
+.layers { position: relative; overflow: clip; background: linear-gradient(180deg, var(--milk), #EADFCB); }
+.layers .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 90px var(--g) calc(96px + env(safe-area-inset-bottom)); overflow: hidden; }
+.layers h2 { font-weight: 700; font-size: clamp(34px, 10vw, 92px); line-height: 1.22; color: var(--bean); }
+.layers .glass { align-self: center; justify-self: center; height: min(52svh, 520px); aspect-ratio: 240 / 360; position: relative; }
+.layers .glass svg { width: 100%; height: 100%; }
+.layers .glass .cap { position: absolute; right: -36px; bottom: 6px; font-size: 10px; color: rgba(59,36,23,.5); }
+.layers .txt { display: grid; gap: 14px; }
+.layers p { color: #5B4A3E; font-size: 15px; max-width: 26em; }
+.layers .ring { position: absolute; width: 140vw; max-width: 1300px; aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(59,36,23,.12); left: 50%; top: 52%; transform: translate(-50%, -50%); pointer-events: none; }
+.layers .ring.r2 { width: 100vw; max-width: 900px; border-style: dashed; }
+
+/* はじめての方へ */
+.first { background: var(--deep); color: var(--milk); padding: clamp(88px, 14vw, 160px) var(--g); }
+.first .sec-head { padding: 0; }
+.first .sec-head h2 { color: var(--milk); }
+.first .sec-head p { color: var(--haze); }
+.tips { display: grid; gap: 14px; }
+.tip { display: grid; grid-template-columns: 54px 1fr; gap: 14px; align-items: start; padding: 22px 20px; border-radius: 24px; background: rgba(245,238,226,.05); border: 1px solid var(--line); }
+.tip .n { width: 54px; height: 54px; border-radius: 50%; border: 1px solid rgba(245,238,226,.3); display: grid; place-items: center; font-family: var(--display); font-style: italic; font-size: 22px; position: relative; }
+.tip .n::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--rasp); top: 2px; right: 4px; }
+.tip h3 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.tip p { font-size: 14px; color: #C9CFDE; margin-top: 4px; }
+
+/* 来店 */
+.visit { background: var(--night); color: var(--milk); padding: clamp(88px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--milk); }
+.visit .sec-head p { color: var(--haze); }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 20px; margin-bottom: 24px; background: rgba(245,238,226,.04); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--haze); flex: none; }
+.today.open .dot { background: #7BD3A0; box-shadow: 0 0 0 6px rgba(123,211,160,.15); }
+.today b { font-size: 20px; font-weight: 700; }
+.today small { display: block; color: var(--haze); font-size: 12px; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 14px; }
+.week div { border-radius: 14px; padding: 10px 0 9px; text-align: center; border: 1px solid var(--line); font-size: 14px; font-weight: 700; }
+.week div small { display: block; font-size: 9.5px; font-weight: 400; color: var(--haze); margin-top: 2px; font-family: var(--mono); letter-spacing: 0; }
+.week div.closed { color: #6F7894; border-style: dashed; }
+.week div.is-today { background: var(--milk); color: var(--night); border-color: var(--milk); }
+.week div.is-today small { color: #4A4F5E; }
+.week div.closed.is-today { background: rgba(245,238,226,.12); color: var(--milk); }
+.hours-txt { font-size: 15px; }
+.hours-txt span { color: var(--rasp); font-weight: 700; }
+.insta-note { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--rasp); background: rgba(245,238,226,.05); border-radius: 0 14px 14px 0; font-size: 13.5px; }
+.addr { margin-top: 40px; font-size: 18px; font-weight: 500; line-height: 1.7; }
+.map { margin-top: 16px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: var(--deep); }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.05) brightness(.9); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--rasp); color: #fff; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.fill-in { background: rgba(228,88,126,.14); color: #B23A5C; padding: 1px 6px; border-radius: 4px; }
+.visit .fill-in, .first .fill-in, .art .fill-in { color: #FF9DB5; background: rgba(228,88,126,.18); }
+
+/* 質問 */
+.faq { padding: clamp(88px, 14vw, 150px) var(--g) 40px; }
+.faq .sec-head { padding: 0; }
+details { border-bottom: 1px solid rgba(17,24,41,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 38px 22px 0; position: relative; font-size: 17px; font-weight: 700; color: var(--night); line-height: 1.6; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; border: 1px solid rgba(17,24,41,.2); background: linear-gradient(var(--night),var(--night)) center/10px 1.5px no-repeat, linear-gradient(var(--night),var(--night)) center/1.5px 10px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4A4F5E; font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(88px, 14vw, 150px); }
+.gram .box { position: relative; overflow: hidden; border-radius: 32px; background: var(--rasp); color: #fff; padding: 40px 26px 30px; }
+.gram .box::before { content: ""; position: absolute; width: 360px; height: 360px; right: -160px; top: -160px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); }
+.gram .box::after { content: ""; position: absolute; width: 220px; height: 220px; right: -90px; top: -90px; border-radius: 50%; border: 1px dashed rgba(255,255,255,.45); }
+.gram h2 { font-size: clamp(26px, 7.4vw, 46px); font-weight: 700; line-height: 1.4; position: relative; }
+.gram p { margin-top: 10px; font-size: 15px; position: relative; opacity: .95; }
+.gram .btn { background: #fff; color: var(--rasp); position: relative; }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--haze); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--display); font-style: italic; font-weight: 300; color: var(--milk); font-size: clamp(120px, 40vw, 440px); line-height: .8; letter-spacing: -.05em; margin: 0 0 40px -.05em; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(17,24,41,.82); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--milk); }
+.dock a.main { background: var(--rasp); color: #fff; }
+
+@media (min-width: 900px) {
+  .hero .cupwrap { left: auto; right: -2vw; top: 50%; width: min(60vw, 820px); margin: 0; transform: translateY(-46%); }
+  .hero::after { background: linear-gradient(90deg, rgba(17,24,41,.9) 0%, rgba(17,24,41,.4) 40%, rgba(17,24,41,0) 60%), linear-gradient(180deg, rgba(17,24,41,0) 70%, rgba(17,24,41,.6) 100%); }
+  .hero .title { right: auto; width: 52vw; bottom: 72px; }
+  .hero h1 .big { font-size: clamp(160px, 17vw, 300px); }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .sec-head .mono { grid-column: 1 / -1; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .art .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 64px; padding-top: 110px; }
+  .art h2 { grid-column: 1; align-self: end; }
+  .art .stage { grid-column: 2; grid-row: 1 / 3; width: min(42vw, 70svh, 620px); }
+  .art .side { grid-column: 1; grid-row: 2; align-self: start; padding-top: 24px; }
+  .rail { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; }
+  .card:nth-child(even) { margin-top: 90px; }
+  .card .en { font-size: 28px; }
+  .swipe { display: none; }
+  .layers .pin { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; align-items: center; column-gap: 40px; }
+  .layers .glass { grid-column: 2; grid-row: 1; height: min(70svh, 640px); }
+  .layers .txt { grid-column: 1; grid-row: 1; gap: 24px; }
+  .shots { grid-template-columns: 1fr 1fr; column-gap: 64px; row-gap: 40px; max-width: 1000px; margin: 0 auto; }
+  .shot.wide { grid-column: 1 / -1; }
+  .shot.wide img { aspect-ratio: 16 / 9; }
+  .shot:nth-child(3) { margin-top: 140px; }
+  .hero.has-photo::after { background: linear-gradient(90deg, rgba(17,24,41,.85) 0%, rgba(17,24,41,.35) 42%, rgba(17,24,41,0) 62%), linear-gradient(180deg, rgba(17,24,41,.35) 0%, rgba(17,24,41,0) 20%, rgba(17,24,41,0) 70%, rgba(17,24,41,.6) 100%); }
+  .tips { grid-template-columns: 1fr 1fr; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .faq, .gram { max-width: 1000px; margin: 0 auto; }
+  .gram .box { padding: 64px 56px 52px; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after, .spin-slow, .spin-rev, .loader .sat { animation: none; }
+  .shot img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced'); setTimeout(() => document.querySelector('.loader')?.remove(), 6000);</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="orbit"><div class="ring"></div><div class="sat"></div>
+    <div class="word"><span>O</span><span>r</span><span>b</span><span>i</span><span>t</span></div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top"><i></i>Orbit</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<!-- ラテアートのカップ（上から見た図）。ファーストビューと章で使い回す -->
+<template id="cup-tpl">
+  <svg class="cup-svg" viewBox="0 0 400 400" data-style="cute" role="img" aria-label="ラテアートのイラスト（イメージ）">
+    <defs>
+      <radialGradient id="cremaG" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#D79A5C"/><stop offset=".7" stop-color="#A86A39"/><stop offset="1" stop-color="#5E3520"/></radialGradient>
+      <radialGradient id="saucerG" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#FFFBF4"/><stop offset="1" stop-color="#DCD2C2"/></radialGradient>
+      <clipPath id="surfaceClip"><circle cx="200" cy="200" r="122"/></clipPath>
+    </defs>
+    <g class="spin-rev" opacity=".55">
+      <circle cx="200" cy="200" r="196" fill="none" stroke="#F5EEE2" stroke-opacity=".28" stroke-dasharray="2 7"/>
+      <circle cx="200" cy="4" r="5" fill="#E4587E"/>
+    </g>
+    <circle cx="206" cy="210" r="172" fill="#000" opacity=".25"/>
+    <circle cx="200" cy="200" r="168" fill="url(#saucerG)"/>
+    <circle cx="200" cy="200" r="150" fill="none" stroke="#CFC4B2" stroke-width="1.5"/>
+    <rect x="318" y="182" width="64" height="36" rx="18" fill="#1F2B4D"/>
+    <circle cx="200" cy="200" r="140" fill="#1F2B4D"/>
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#33426D" stroke-width="3"/>
+    <g clip-path="url(#surfaceClip)">
+      <circle class="part coffee" cx="200" cy="200" r="122" fill="url(#cremaG)"/>
+      <g class="bear">
+        <circle class="part ear" cx="146" cy="146" r="30" fill="#FFF8EE"/>
+        <circle class="part ear" cx="254" cy="146" r="30" fill="#FFF8EE"/>
+        <circle class="part ear-in" cx="146" cy="146" r="14" fill="#B8784A"/>
+        <circle class="part ear-in" cx="254" cy="146" r="14" fill="#B8784A"/>
+        <circle class="part face" cx="200" cy="212" r="76" fill="#FFF8EE"/>
+        <circle class="part eye" cx="174" cy="198" r="7.5" fill="#5E3520"/>
+        <circle class="part eye" cx="226" cy="198" r="7.5" fill="#5E3520"/>
+        <ellipse class="part muzzle" cx="200" cy="236" rx="30" ry="22" fill="#EBC9A0"/>
+        <ellipse class="part nose" cx="200" cy="228" rx="9" ry="6.5" fill="#5E3520"/>
+        <path class="part mouth" d="M200 234 v8 M190 246 q10 8 20 0" stroke="#5E3520" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="rose">
+        <path d="M200 312 L200 104" stroke="#8C5530" stroke-width="3"/>
+        <path class="part leaf" d="M116 286 Q200 336 284 286 Q200 310 116 286Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M124 262.6 Q200 307.6 276 262.6 Q200 284.2 124 262.6Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M132 239.9 Q200 282.4 268 239.9 Q200 260.3 132 239.9Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M140 218.5 Q200 256 260 218.5 Q200 236.5 140 218.5Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M149 197.8 Q200 232.8 251 197.8 Q200 214.6 149 197.8Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M158 178.4 Q200 208.4 242 178.4 Q200 192.8 158 178.4Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M167 160.7 Q200 188.2 233 160.7 Q200 173.9 167 160.7Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="1.5"/>
+        <path class="part leaf" d="M200 150 C178 140 176 112 200 104 C224 112 222 140 200 150Z" fill="#FFF8EE" stroke="#A86A39" stroke-width="3"/>
+        <path d="M200 312 L200 104" stroke="#A86A39" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+    </g>
+    <ellipse cx="150" cy="118" rx="38" ry="10" fill="#fff" opacity=".12" transform="rotate(-38 150 118)"/>
+    <g class="spin-slow">
+      <circle cx="200" cy="200" r="186" fill="none" stroke="#F5EEE2" stroke-opacity=".22"/>
+      <g transform="translate(200 14)"><path d="M-12 6 C-12 -6 -6 -11 0 -11 C6 -11 12 -6 12 6 Z" fill="#E7B76C"/><path d="M-12 6 H12" stroke="#B8784A" stroke-width="2"/></g>
+      <g transform="translate(386 200)"><circle r="7" fill="#E4587E"/></g>
+      <g transform="translate(40 300)"><path d="M-10 6 L0 -10 L10 6 Z" fill="#F0A35E"/><path d="M-10 6 L10 6" stroke="#FFF8EE" stroke-width="3"/></g>
+    </g>
+  </svg>
+</template>
+
+<main id="top">
+  <section class="hero" aria-label="Cafe Orbit">
+    <div class="stars-bg" aria-hidden="true"></div>
+    <div class="photo" id="hero-photo"></div>
+    <div class="cupwrap" id="hero-cup"></div>
+    <span class="caption" id="hero-cap">イラストはイメージです</span>
+    <div class="title">
+      <p class="kicker mono">CAFE ／ 千葉県市川市市川南</p>
+      <h1><span class="w small"><span>Cafe</span></span><span class="w big"><span>Orbit</span></span></h1>
+      <p class="tag">ラテアートと、焼き菓子と。</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（24件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Latte art</span><b></b><span>ラテアート</span><b></b><span>Scone</span><b></b><span>スコーン</span><b></b><span>Carrot cake</span><b></b><span>キャロットケーキ</span><b></b><span>Cheesecake</span><b></b><span>チーズケーキ</span><b></b>
+      <span>Latte art</span><b></b><span>ラテアート</span><b></b><span>Scone</span><b></b><span>スコーン</span><b></b><span>Carrot cake</span><b></b><span>キャロットケーキ</span><b></b><span>Cheesecake</span><b></b><span>チーズケーキ</span><b></b>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <span class="deco" aria-hidden="true"></span>
+    <h2 class="big" id="story-title"><span class="line"><span>飲むのが、</span></span><span class="line"><span><em>もったいない</em></span></span><span class="line"><span>一杯。</span></span></h2>
+    <div>
+      <p class="lead">口コミでいちばん多く語られているのは、ラテアートの可愛さ。<q>ただ可愛いだけでなく、ちゃんとおいしい</q>という声も並びます。手作りのスコーンや焼き菓子と一緒に、気さくな店員さんとの会話まで楽しめるカフェです。</p>
+      <div class="chips" style="margin-top:22px"><span>ラテアート</span><span>手作りスコーン</span><span>落ち着いた店内</span><span>子連れ歓迎</span></div>
+      <div class="rating" style="margin-top:26px"><b>4.5</b><span>Googleの口コミ 24件の平均（2026年10月）</span></div>
+    </div>
+  </section>
+
+  <section class="art" aria-labelledby="art-title">
+    <div class="pin">
+      <h2 id="art-title">注いで、描いて、<br><em>くま</em>が来る。</h2>
+      <div class="stage"><span class="step-no" id="step-no">01</span><div id="art-cup"></div></div>
+      <div class="side">
+        <p class="msg" id="msg"><b>可愛い系か、アート系か。</b>口コミには、好みを伝えて描いてもらえた、という声もあります。</p>
+        <div class="toggle" role="group" aria-label="絵柄を切り替える">
+          <button type="button" data-style="cute" aria-pressed="true">可愛い系</button>
+          <button type="button" data-style="art" aria-pressed="false">アート系</button>
+        </div>
+        <div class="steps" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+        <div class="steps-l" aria-hidden="true"><span>コーヒー</span><span>ミルク</span><span>くま</span><span>アート</span></div>
+        <p class="note">※絵柄は口コミをもとにしたイメージです。<span class="fill-in">描けるドリンクと頼み方を、お店に合わせて書きます。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <span class="mono">FROM THE REVIEWS</span>
+      <h2 id="menu-title">口コミに<br>名前が出てくる、<br>ひと皿と一杯</h2>
+      <p>値段と季節の品は、実際の内容に差し替えます</p>
+    </div>
+    <div class="rail" id="rail">
+      <article class="card c1">
+        <div class="ph" data-photo="scone">
+          <svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="86" ry="14" fill="#000" opacity=".08"/><ellipse cx="100" cy="130" rx="92" ry="20" fill="#FFFBF4"/><path d="M42 124 C38 110 38 92 42 80 L118 80 C122 92 122 110 118 124 Q80 132 42 124Z" fill="#E2A75A"/><path d="M42 82 C40 60 56 46 80 46 C104 46 120 60 118 82 C100 76 92 90 80 84 C68 90 58 76 42 82Z" fill="#C98840"/><path d="M42 84 C58 78 68 92 80 86 C92 92 100 78 118 84 L118 96 C100 92 92 104 80 98 C68 104 58 92 42 98Z" fill="#F7E2B8"/><path d="M60 58 q6 -4 12 0 M88 56 q6 -4 12 0" stroke="#A86A2E" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M128 118 C128 104 140 96 152 98 C158 90 172 94 170 104 C180 108 178 120 168 122 L132 122Z" fill="#FFF8EE" stroke="#EADFCB" stroke-width="1.5"/><ellipse cx="150" cy="134" rx="20" ry="7" fill="#C2334F"/><circle cx="144" cy="132" r="3" fill="#E86A86"/><circle cx="156" cy="134" r="2.5" fill="#E86A86"/></svg>
+          <span class="no mono">01</span><span class="cap">イメージ</span>
+        </div>
+        <p class="en">Scone</p>
+        <h3>スコーン</h3>
+        <p>温めてもらえて、外はサクッと、中はしっとり。クロテッドクリームとジャムを追加できます。</p>
+      </article>
+      <article class="card c2">
+        <div class="ph" data-photo="carrot">
+          <svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="86" ry="14" fill="#000" opacity=".08"/><ellipse cx="100" cy="130" rx="92" ry="20" fill="#FFFBF4"/><path d="M36 122 L36 70 L160 52 L160 104 Z" fill="#C9813F"/><path d="M36 92 L160 74" stroke="#FFF4E2" stroke-width="7"/><path d="M36 70 L160 52 L164 44 L40 60 Z" fill="#FFF4E2"/><path d="M30 64 L160 46 L168 40 L36 56 Z" fill="#FFF8EE"/><g fill="#E8853A"><circle cx="60" cy="108" r="3"/><circle cx="96" cy="100" r="3"/><circle cx="130" cy="96" r="3"/><circle cx="80" cy="84" r="2.5"/></g><g fill="#B8784A" opacity=".6"><circle cx="70" cy="56" r="1.6"/><circle cx="100" cy="51" r="1.6"/><circle cx="130" cy="47" r="1.6"/></g></svg>
+          <span class="no mono">02</span><span class="cap">イメージ</span>
+        </div>
+        <p class="en">Carrot cake</p>
+        <h3>キャロットケーキ</h3>
+        <p>ふわっと軽い生地に、シナモンの香り。上のフロスティングは甘めで、しゃりっとした食感。</p>
+      </article>
+      <article class="card c3">
+        <div class="ph" data-photo="cheesecake">
+          <svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="86" ry="14" fill="#000" opacity=".08"/><ellipse cx="100" cy="130" rx="92" ry="20" fill="#1F2B4D"/><path d="M58 126 L58 46 L142 30 L142 110 Z" fill="#F4E3B8"/><path d="M58 126 L58 110 L142 94 L142 110 Z" fill="#9B6A3C"/><path d="M58 46 L142 30 L150 24 L66 40 Z" fill="#B87A3A"/><path d="M58 46 L66 40 L66 120 L58 126 Z" fill="#E8D4A2"/><path d="M70 70 L132 58 M74 88 L128 78" stroke="#EAD39A" stroke-width="2" opacity=".6"/></svg>
+          <span class="no mono">03</span><span class="cap">イメージ</span>
+        </div>
+        <p class="en">Cheesecake</p>
+        <h3>濃厚チーズケーキ</h3>
+        <p>見た目からずっしり。チーズのコクが広がるのに、甘さは控えめ。下の生地がいいアクセント。</p>
+      </article>
+      <article class="card c4">
+        <div class="ph" data-photo="raspberry">
+          <svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="84" rx="70" ry="70" fill="#FFFBF4"/><rect x="146" y="72" width="40" height="22" rx="11" fill="#F2F0EC"/><circle cx="100" cy="84" r="54" fill="#F2F0EC"/><circle cx="100" cy="84" r="46" fill="#D9718C"/><path d="M100 112 C70 92 72 66 88 64 C96 63 100 70 100 74 C100 70 104 63 112 64 C128 66 130 92 100 112Z" fill="#FFF0F3"/></svg>
+          <span class="no mono">04</span><span class="cap">イメージ</span>
+        </div>
+        <p class="en">Raspberry latte</p>
+        <h3>ラズベリーラテ</h3>
+        <p>ラズベリーの味がしっかり。この一杯にも、可愛いラテアートがのったという声。</p>
+      </article>
+      <article class="card c5">
+        <div class="ph" data-photo="hotsand">
+          <svg viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="138" rx="86" ry="14" fill="#000" opacity=".08"/><ellipse cx="100" cy="130" rx="92" ry="20" fill="#FFFBF4"/><path d="M28 120 L72 40 L116 120 Z" fill="#D9A25A"/><path d="M36 112 L72 48 L108 112 Z" fill="#E9BB72"/><path d="M50 96 l20 -18 M62 106 l26 -24 M44 84 l14 -12" stroke="#A8692E" stroke-width="4" stroke-linecap="round"/><path d="M92 120 L132 44 L176 120 Z" fill="#D9A25A"/><path d="M98 122 L176 122" stroke="#F4D35E" stroke-width="6"/><path d="M98 116 L172 116" stroke="#8FBF6A" stroke-width="5"/><path d="M112 98 l20 -18 M126 108 l26 -24" stroke="#A8692E" stroke-width="4" stroke-linecap="round"/></svg>
+          <span class="no mono">05</span><span class="cap">イメージ</span>
+        </div>
+        <p class="en">Hot sandwich</p>
+        <h3>ホットサンド</h3>
+        <p>ボリュームがあって、食べごたえのあるひと皿。</p>
+      </article>
+    </div>
+    <div class="swipe" aria-hidden="true"><span>横にスワイプ</span><i><b id="swipe-bar"></b></i><span class="mono">05</span></div>
+    <p class="src">※Googleの口コミで名前が挙がったものから選んでいます。イラストはイメージです。</p>
+  </section>
+
+  <section class="layers" aria-labelledby="layers-title">
+    <span class="ring" aria-hidden="true"></span><span class="ring r2" aria-hidden="true"></span>
+    <div class="pin">
+      <div class="txt">
+        <h2 id="layers-title">白と茶色の、<br>2層の<br>アイスラテ。</h2>
+        <p>ミルクの上にコーヒーが重なる、きれいなグラデーション。口コミでは、濃厚なチーズケーキとの相性もほめられています。</p>
+      </div>
+      <div class="glass" id="glass">
+        <svg viewBox="0 0 240 360" role="img" aria-label="2層のアイスカフェラテのイラスト（イメージ）">
+          <defs>
+            <clipPath id="glassClip"><path d="M44 34 L196 34 L182 326 Q181 340 166 340 L74 340 Q59 340 58 326 Z"/></clipPath>
+            <linearGradient id="coffeeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B2417"/><stop offset=".55" stop-color="#7A4A2A"/><stop offset="1" stop-color="#D9B48C"/></linearGradient>
+          </defs>
+          <ellipse cx="120" cy="350" rx="80" ry="8" fill="#3B2417" opacity=".12"/>
+          <g clip-path="url(#glassClip)">
+            <rect x="0" y="0" width="240" height="360" fill="#FFFFFF" opacity=".35"/>
+            <rect id="milk" x="0" y="160" width="240" height="200" fill="#FFF8EE"/>
+            <rect id="coffee" x="0" y="70" width="240" height="140" fill="url(#coffeeG)"/>
+            <g id="ice" fill="#FFFFFF" fill-opacity=".38" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="2">
+              <rect x="70" y="58" width="52" height="48" rx="8" transform="rotate(-12 96 82)"/>
+              <rect x="122" y="80" width="48" height="46" rx="8" transform="rotate(14 146 103)"/>
+              <rect x="88" y="118" width="46" height="44" rx="8" transform="rotate(6 111 140)"/>
+            </g>
+          </g>
+          <path d="M44 34 L196 34 L182 326 Q181 340 166 340 L74 340 Q59 340 58 326 Z" fill="none" stroke="#3B2417" stroke-opacity=".35" stroke-width="2.5"/>
+          <path d="M58 52 L70 300" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="120" cy="34" rx="76" ry="6" fill="none" stroke="#3B2417" stroke-opacity=".3" stroke-width="2"/>
+        </svg>
+        <span class="cap">イメージ</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase" id="showcase" aria-labelledby="show-title" hidden>
+    <div class="sec-head">
+      <span class="mono" style="color:var(--rasp)">CLOSE UP</span>
+      <h2 id="show-title">ひと皿ずつ、<br>近くで。</h2>
+      <p>写真はすべてイメージです</p>
+    </div>
+    <div class="shots" id="shots"></div>
+  </section>
+  <section class="first" aria-labelledby="first-title">
+    <div class="sec-head">
+      <span class="mono" style="color:var(--rasp)">FIRST VISIT</span>
+      <h2 id="first-title">はじめての方へ、<br>4つのこと</h2>
+      <p>口コミに書かれていたことから</p>
+    </div>
+    <div class="tips">
+      <div class="tip"><span class="n">1</span><div><h3>注文とお会計は、<br>先にレジで</h3><p>レジで頼んでから、席でゆっくり待ちます。</p></div></div>
+      <div class="tip"><span class="n">2</span><div><h3>赤ちゃん連れも<br>歓迎です</h3><p>ベビーチェアがあり、子連れで過ごしやすいという声があります。</p></div></div>
+      <div class="tip"><span class="n">3</span><div><h3>スコーンは<br>温めてもらえます</h3><p>クロテッドクリームとジャムの追加もできます。クリームをつけるか、注文の時に聞いてもらえたという声も。</p></div></div>
+      <div class="tip"><span class="n">4</span><div><h3>ひとりでも、<br>おしゃべりでも</h3><p>時間帯によっては、ほかにお客さんがいなくて静かに過ごせたという声。店員さんに話しかけると、気さくに話してくれます。</p></div></div>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">今日は、<br>開いてる？</h2>
+      <p>営業日・時間はGoogleマップの情報<span style="white-space:nowrap">（2026年10月）</span></p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <div class="week" id="week">
+          <div data-d="1">月<small>11-19</small></div>
+          <div data-d="2">火<small>11-19</small></div>
+          <div data-d="3" class="closed">水<small>休み</small></div>
+          <div data-d="4">木<small>11-19</small></div>
+          <div data-d="5">金<small>11-19</small></div>
+          <div data-d="6">土<small>11-19</small></div>
+          <div data-d="0">日<small>11-19</small></div>
+        </div>
+        <p class="hours-txt">11:00 – 19:00　<span>水曜お休み</span></p>
+        <p class="insta-note">最新の営業日・時間は、お店の Instagram でご確認ください。</p>
+      </div>
+      <div>
+        <p class="addr">〒272-0033<br>千葉県市川市市川南1丁目2-21</p>
+        <div class="map"><iframe title="Cafe Orbit の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Cafe%20Orbit%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%B8%82%E5%B7%9D%E5%8D%971%E4%B8%81%E7%9B%AE2-21&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row"><a class="btn fill" href="https://maps.google.com/?cid=14049443171981450372" target="_blank" rel="noopener">Googleマップで道順を見る</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><span class="mono" style="color:var(--crema)">Q &amp; A</span><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>ラテアートの絵柄は頼めますか？</summary><p>口コミでは、可愛い系かアート系かを伝えて描いてもらえた、という声があります。<span class="fill-in">頼み方と描ける絵柄を、お店に合わせて書きます。</span></p></details>
+    <details><summary>アイスのドリンクにも<br>ラテアートは描いてもらえますか？</summary><p><span class="fill-in">ラテアートが描けるドリンク（ホット・アイス）を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>赤ちゃん連れでも入れますか？</summary><p>はい。ベビーチェアがあり、子連れで過ごしやすいという口コミがあります。</p></details>
+    <details><summary>テイクアウトはできますか？</summary><p><span class="fill-in">テイクアウトできる商品を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <h2 id="gram-title">今日の焼き菓子と<br>お休みの日は、<br>Instagramで。</h2>
+      <p>最新の営業日やメニューは、お店の Instagram でお知らせしています。</p>
+      <div class="row"><a class="btn" href="https://www.instagram.com/cafeorbit/" target="_blank" rel="noopener">@cafeorbit を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">Orbit</p>
+  <p>Cafe Orbit<br>千葉県市川市市川南1丁目2-21<br>11:00–19:00　水曜お休み（最新の営業日は Instagram で）</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真とイラストはイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=14049443171981450372" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0477125583">電話</a>
+  <a href="https://www.instagram.com/cafeorbit/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const loader = document.querySelector('.loader');
+
+  /* 写真: site/img/ に置いた写真の名前。無い名前は書かない（読み込みエラーになる） */
+  const PHOTOS = ['hero', 'hero-tall', 'set', 'scone', 'scone2'];
+  const has = n => PHOTOS.includes(n);
+  if (has('hero')) {
+    document.getElementById('hero-photo').innerHTML = `<picture><source media="(min-width: 900px)" srcset="img/hero.jpg"><img src="img/${has('hero-tall') ? 'hero-tall' : 'hero'}.jpg" alt="ラテアートのカフェラテとスコーン（イメージ）"></picture>`;
+    document.querySelector('.hero').classList.add('has-photo');
+    document.getElementById('hero-cap').textContent = '写真はイメージです';
+  }
+  const SHOTS = [
+    ['set', 'Latte &amp; scone', 'ラテとスコーン', '温めてもらったスコーンに、クリームとジャム。ラテアートの一杯と一緒に。', 'wide'],
+    ['scone', 'Scone', 'スコーン', '割ると、外はサクッと、中はしっとり。'],
+    ['scone2', 'Cream &amp; jam', 'クリームとジャム', '具の大きなジャムと、クロテッドクリームをたっぷりと。'],
+    ['iced', 'Iced latte', 'アイスカフェラテ', 'ミルクとコーヒーの2層のグラデーション。'],
+    ['carrot', 'Carrot cake', 'キャロットケーキ', 'シナモンの香る、ふわっと軽い生地。'],
+    ['cheesecake', 'Cheesecake', '濃厚チーズケーキ', '見た目からずっしり、甘さは控えめ。']
+  ].filter(x => has(x[0]));
+  if (SHOTS.length) {
+    document.getElementById('shots').innerHTML = SHOTS.map((x, i) => `<figure class="shot ${x[4] || ''}"><div class="frame"><img src="img/${x[0]}.jpg" alt="${x[2]}（イメージ）" loading="lazy"><span class="no">0${i + 1}</span><span class="cap">イメージ</span></div><figcaption><span class="it">${x[1]}</span><b>${x[2]}</b><small>${x[3]}</small></figcaption></figure>`).join('');
+    document.getElementById('showcase').hidden = false;
+  }
+
+  /* カップを2か所に置く（id が重ならないように付け替える） */
+  const tpl = document.getElementById('cup-tpl').innerHTML;
+  const mount = (el, suffix) => {
+    el.innerHTML = tpl.replace(/(cremaG|saucerG|surfaceClip)/g, `$1${suffix}`);
+    return el.querySelector('svg');
+  };
+  const heroCup = mount(document.getElementById('hero-cup'), 'h');
+  const artCup = mount(document.getElementById('art-cup'), 'a');
+  heroCup.setAttribute('aria-label', 'くまのラテアートのイラスト（イメージ）');
+
+  /* 絵柄の切り替え */
+  const btns = [...document.querySelectorAll('.toggle button')];
+  const setStyle = s => {
+    artCup.dataset.style = s;
+    btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.style === s)));
+  };
+  btns.forEach(b => b.addEventListener('click', () => setStyle(b.dataset.style)));
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 0: [11, 19], 1: [11, 19], 2: [11, 19], 4: [11, 19], 5: [11, 19], 6: [11, 19] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  document.querySelector(`#week [data-d="${d}"]`)?.classList.add('is-today');
+
+  /* メニューの横スワイプの位置 */
+  const rail = document.getElementById('rail'), sbar = document.getElementById('swipe-bar');
+  rail.addEventListener('scroll', () => {
+    const max = rail.scrollWidth - rail.clientWidth;
+    sbar.style.left = `${max > 0 ? rail.scrollLeft / max * 80 : 0}%`;
+  }, { passive: true });
+
+  const dock = document.getElementById('dock');
+  const showDock = () => dock.classList.add('show');
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const head = document.getElementById('head');
+  const onScroll = () => { head.classList.toggle('solid', scrollY > innerHeight * 0.8); if (scrollY > innerHeight * 0.6) showDock(); };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) { loader?.remove(); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: 幕は円が広がって開く。clip-path は数値を動かして毎回組み立てる */
+  const curtain = { r: 150 };
+  const drawCurtain = () => { if (loader) loader.style.clipPath = `circle(${curtain.r}% at 50% 50%)`; };
+  gsap.set('.hero h1 .w span', { yPercent: 105 });
+  gsap.set('.hero .kicker, .hero .tag, .hero .meta', { opacity: 0, y: 14 });
+  gsap.set('#hero-cup', { scale: .82, rotate: -30, opacity: 0 });
+  const heroImg = document.querySelector('#hero-photo img');
+  if (heroImg) gsap.set(heroImg, { scale: 1.18 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .word span', { y: 0, duration: 0.8, stagger: 0.06 })
+       .to(curtain, { r: 0, duration: 1.0, ease: 'power3.inOut', onUpdate: drawCurtain }, '+=0.35')
+       .to('#hero-cup', { scale: 1, rotate: 0, opacity: 1, duration: 1.8, ease: 'expo.out' }, '-=0.45')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2, stagger: 0.1 }, '-=1.5')
+       .to('.hero .kicker, .hero .tag, .hero .meta', { opacity: 1, y: 0, duration: 0.8, stagger: 0.08 }, '-=0.9')
+       .add(() => loader?.remove());
+  if (heroImg) intro.to(heroImg, { scale: 1, duration: 2.2, ease: 'power3.out' }, 1.2);
+
+
+  /* ファーストビューのカップがスクロールで回りながら沈む */
+  if (heroImg) gsap.to('#hero-photo', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.utils.toArray('.shot .frame').forEach(fr => {
+    const img = fr.querySelector('img');
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: fr, start: 'top bottom', end: 'bottom top', scrub: true } });
+    const c = { v: 14 };
+    fr.style.clipPath = 'inset(14% 0 14% 0 round 28px)';
+    gsap.to(c, { v: 0, duration: 1.3, ease: 'power3.out', onUpdate: () => { fr.style.clipPath = `inset(${c.v}% 0 ${c.v}% 0 round 28px)`; }, scrollTrigger: { trigger: fr, start: 'top 85%' } });
+  });
+  gsap.to('#hero-cup .cup-svg', { rotate: 50, yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+  gsap.utils.toArray('.sec-head h2, .tip, details, .gram .box').forEach(el => {
+    gsap.from(el, { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* ラテアートの章: スクロールで コーヒー → ミルク → くま → アート と描く */
+  const q = s => artCup.querySelectorAll(s);
+  const stepNo = document.getElementById('step-no'), msgEl = document.getElementById('msg');
+  const bars = [...document.querySelectorAll('.steps i')];
+  const STEPS = [
+    ['まずはコーヒーを。', 'カップの中に、香りのいい茶色が広がります。'],
+    ['ミルクを、まるく。', 'あたためたミルクを注いで、白い丸をつくります。'],
+    ['耳と目を描くと、くま。', '口コミには、何も頼まなくても可愛いくまを描いてもらえた、という声。'],
+    ['可愛い系か、アート系か。', '口コミには、好みを伝えて描いてもらえた、という声もあります。']
+  ];
+  let cur = -1;
+  const setStep = i => {
+    if (i === cur) return; cur = i;
+    stepNo.textContent = `0${i + 1}`;
+    msgEl.innerHTML = `<b>${STEPS[i][0]}</b>${STEPS[i][1]}`;
+  };
+  gsap.set(q('.coffee'), { scale: .12 });
+  gsap.set(q('.bear .part'), { scale: 0 });
+  const draw = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
+  draw.to(q('.coffee'), { scale: 1, duration: 1 })
+      .to(q('.face'), { scale: 1, duration: 1, ease: 'back.out(1.4)' })
+      .to(q('.ear'), { scale: 1, duration: .35, stagger: .1, ease: 'back.out(2)' })
+      .to(q('.ear-in'), { scale: 1, duration: .2 }, '<.15')
+      .to(q('.eye'), { scale: 1, duration: .2, stagger: .05 })
+      .to(q('.muzzle'), { scale: 1, duration: .15 })
+      .to(q('.nose, .mouth'), { scale: 1, duration: .1 })
+      .to({}, { duration: 1 });
+  ScrollTrigger.create({
+    trigger: '.art', start: 'top top', end: '+=220%', pin: '.art .pin', scrub: true,
+    onUpdate: s => {
+      const p = s.progress;
+      draw.progress(Math.min(1, p / 0.97));
+      const i = Math.min(3, Math.floor(p * 4));
+      setStep(i);
+      setStyle(p > 0.8 ? 'art' : 'cute');
+      bars.forEach((b, k) => { b.style.width = `${Math.max(0, Math.min(1, p * 4 - k)) * 100}%`; });
+    }
+  });
+  setStep(0);
+
+  /* メニューのカードを順に出す */
+  gsap.from('.card', { y: 40, opacity: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: '.rail', start: 'top 85%' } });
+
+  /* 2層の章: ミルクが入って、上からコーヒーが重なる */
+  const milk = document.getElementById('milk'), coffee = document.getElementById('coffee');
+  gsap.set(milk, { attr: { y: 340 } });
+  gsap.set(coffee, { attr: { y: -150 }, opacity: 0 });
+  gsap.set('#ice', { y: -120, opacity: 0 });
+  const pour = gsap.timeline({ defaults: { ease: 'none' } });
+  pour.to('#ice', { y: 0, opacity: 1, duration: .6, ease: 'bounce.out' })
+      .to(milk, { attr: { y: 160 }, duration: 1 }, '<.2')
+      .to(coffee, { attr: { y: 70 }, opacity: 1, duration: 1 })
+      .to({}, { duration: .3 });
+  ScrollTrigger.create({ trigger: '.layers', start: 'top top', end: '+=140%', pin: '.layers .pin', scrub: true, animation: pour });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
