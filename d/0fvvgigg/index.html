@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#24150F">
+<title>patisserie One（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Zen+Old+Mincho:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cocoa: #24150F;    /* 焦がしたカカオ */
+  --marron: #5E3726;   /* 栗のクリーム */
+  --chestnut: #8C5A3C; /* 栗の皮 */
+  --berry: #C9434F;    /* ショートケーキのいちご。大事なところだけ */
+  --custard: #F0D9A6;  /* カスタード */
+  --cream: #F6EFE4;    /* 生クリーム */
+  --ink: #2A1A13;
+  --mute: #CDB8A7;
+  --line: rgba(246,239,228,.16);
+  --display: "Fraunces", serif;
+  --mincho: "Zen Old Mincho", serif;
+  --sans: "Zen Maru Gothic", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; overflow-wrap: anywhere; }
+h1, h2, h3, summary, .route .step b, .v p { word-break: keep-all; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--berry); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.dsp { font-family: var(--display); font-style: italic; font-weight: 300; letter-spacing: -.02em; font-variation-settings: "SOFT" 100, "WONK" 1; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--berry); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--cocoa); display: grid; place-items: center; }
+.loader .ring { position: relative; width: min(64vw, 340px); aspect-ratio: 1; display: grid; place-items: center; }
+.loader svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.loader circle { fill: none; stroke: var(--berry); stroke-width: 1.2; stroke-linecap: round; }
+.loader .word { font-family: var(--display); font-style: italic; font-weight: 300; color: var(--cream); font-size: clamp(64px, 20vw, 150px); line-height: 1; display: flex; overflow: hidden; padding: 0 .08em .12em; }
+.loader .word span { display: inline-block; transform: translateY(115%); }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--mute); font-size: 11px; letter-spacing: .4em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--cream); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(36,21,15,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 24px; text-decoration: none; line-height: 1; }
+.head .mark small { font-size: 11px; font-style: normal; letter-spacing: .2em; margin-right: 6px; opacity: .7; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(36,21,15,.35); backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mute); }
+.status.open i { background: #8FD49B; box-shadow: 0 0 0 4px rgba(143,212,155,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 580px; overflow: hidden; background: var(--cocoa); color: var(--cream); }
+.hero { background: radial-gradient(120% 70% at 50% 34%, #6A402C 0%, #3E2519 45%, var(--cocoa) 78%); }
+.hero .art { position: absolute; left: 50%; top: 92px; width: min(96vw, 520px); transform: translateX(-50%); z-index: 1; }
+.hero .art svg { width: 100%; height: auto; overflow: visible; }
+.hero .halo { position: absolute; left: 50%; top: 34%; width: 120vw; max-width: 900px; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(246,239,228,.08); box-shadow: 0 0 0 60px rgba(246,239,228,.02), 0 0 0 140px rgba(246,239,228,.015); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(36,21,15,0) 0%, rgba(36,21,15,0) 52%, rgba(36,21,15,.85) 78%, rgba(36,21,15,.96) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--mute); margin-bottom: 4px; }
+.hero h1 { font-family: var(--display); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: clamp(150px, 46vw, 400px); line-height: .78; letter-spacing: -.05em; margin-left: -.05em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .08em .08em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero h1 .dot { color: var(--berry); }
+.hero .lead1 { font-family: var(--mincho); font-size: clamp(17px, 4.6vw, 24px); margin-top: 14px; line-height: 1.6; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 16px; font-size: 13px; color: var(--mute); }
+.hero .meta b { color: var(--custard); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 112px; writing-mode: vertical-rl; font-family: var(--mincho); font-size: clamp(16px, 4.4vw, 24px); letter-spacing: .3em; line-height: 1.9; text-shadow: 0 2px 18px rgba(0,0,0,.4); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 112px; font-size: 10px; color: rgba(246,239,228,.75); }
+.cue { width: 1px; height: 44px; background: rgba(246,239,228,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--berry); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--marron); color: var(--cream); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.marquee .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--mincho); font-style: normal; font-size: .5em; color: var(--custard); }
+.marquee .track i { width: .22em; height: .22em; border-radius: 50%; background: var(--berry); display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 40px; }
+.eyebrow { font-family: var(--display); font-style: italic; color: var(--berry); font-size: 18px; }
+.story .big { font-family: var(--mincho); font-weight: 500; font-size: clamp(36px, 10.4vw, 92px); line-height: 1.32; letter-spacing: .02em; color: var(--marron); }
+.line { display: block; overflow: hidden; padding-bottom: .05em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #5E4A3F; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--marron); font-weight: 700; }
+.points { display: grid; gap: 0; border-top: 1px solid rgba(42,26,19,.14); }
+.points div { display: grid; grid-template-columns: 3.4em 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid rgba(42,26,19,.14); }
+.points b { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 30px; color: var(--berry); line-height: 1; }
+.points p { font-size: 15px; color: #4D3B32; }
+.points p strong { display: block; font-family: var(--mincho); font-size: 18px; color: var(--marron); font-weight: 700; margin-bottom: 2px; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; font-size: 13px; color: #6E5A4E; }
+.stars b { font-family: var(--display); font-weight: 400; font-size: 56px; color: var(--marron); line-height: 1; letter-spacing: -.03em; }
+
+/* 道案内の章（スクロールで道をたどる） */
+.route { position: relative; background: var(--cocoa); color: var(--cream); }
+.route .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 88px var(--g) calc(96px + env(safe-area-inset-bottom)); gap: 10px; }
+.route h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(22px, 6.2vw, 40px); line-height: 1.5; }
+.route h2 em { font-style: normal; color: var(--custard); }
+.route .stage { position: relative; min-height: 0; display: grid; place-items: center; }
+.route svg.rmap { width: 100%; height: 100%; max-height: 44svh; max-width: 560px; overflow: visible; }
+.route .road { fill: none; stroke: rgba(246,239,228,.12); stroke-width: 26; stroke-linecap: round; stroke-linejoin: round; }
+.route .alley { fill: none; stroke: rgba(246,239,228,.09); stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+.route .walk { fill: none; stroke: var(--custard); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 7; }
+.route .walk-solid { fill: none; stroke: var(--custard); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.route .house { fill: #3A2519; stroke: rgba(246,239,228,.18); stroke-width: 1; transition: fill .4s; }
+.route .shop .house { transition: fill .5s, stroke .5s; }
+.route .shop.lit .house { fill: var(--berry); stroke: #F3A7AE; }
+.route .shop .glow { fill: var(--berry); opacity: 0; transition: opacity .5s; }
+.route .shop.lit .glow { opacity: .25; }
+.route .lbl { font-family: var(--sans); font-size: 13px; font-weight: 700; fill: var(--cream); opacity: 0; transition: opacity .4s; }
+.route .lbl.on { opacity: 1; }
+.route .park rect { fill: none; stroke: rgba(246,239,228,.3); stroke-width: 1.5; stroke-dasharray: 4 3; transition: stroke .4s, fill .4s; }
+.route .park.lit rect { stroke: var(--custard); fill: rgba(240,217,166,.12); }
+.route .park text { font-family: var(--display); font-weight: 600; font-size: 22px; fill: rgba(246,239,228,.35); transition: fill .4s; }
+.route .park.lit text { fill: var(--custard); }
+.route .me { fill: var(--custard); }
+.route .steps { position: relative; min-height: 9.2em; }
+.route .step { position: absolute; inset: 0; opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .35s; }
+.route .step.on { opacity: 1; transform: none; }
+.route .step .no { font-family: var(--display); font-style: italic; color: var(--berry); font-size: 15px; letter-spacing: .04em; }
+.route .step b { display: block; font-family: var(--mincho); font-size: clamp(19px, 5.2vw, 26px); font-weight: 500; line-height: 1.5; }
+.route .step span { display: block; color: var(--mute); font-size: 14px; margin-top: 4px; }
+.route .bar { height: 2px; background: var(--line); position: relative; margin-top: 12px; }
+.route .bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--berry); }
+.route .note { font-size: 11px; color: #9C8678; margin-top: 8px; }
+
+/* シュークリームの見せ場 */
+.chou { position: relative; background: var(--custard); color: var(--ink); overflow: hidden; padding: clamp(84px, 14vw, 160px) 0; }
+.chou .huge { font-family: var(--display); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: clamp(88px, 27vw, 300px); line-height: .82; letter-spacing: -.045em; color: var(--marron); white-space: nowrap; padding-left: var(--g); position: relative; z-index: 2; }
+.chou .huge.r { text-align: right; padding: 0 var(--g) 0 0; color: var(--berry); margin-top: .1em; position: relative; z-index: 2; }
+.chou figure { margin: -40px var(--g) 0; position: relative; overflow: hidden; border-radius: 999px 999px 18px 18px; z-index: 1; background: radial-gradient(90% 70% at 50% 60%, #FFF4DA 0%, #F6E2B6 60%, #EBCB8C 100%); aspect-ratio: 4 / 5; display: grid; place-items: center; }
+.chou figure svg { width: 86%; height: auto; overflow: visible; }
+.cap { position: absolute; right: 12px; bottom: 10px; font-size: 10px; color: rgba(255,255,255,.85); text-shadow: 0 1px 4px rgba(0,0,0,.4); }
+.chou .body { padding: 40px var(--g) 0; display: grid; gap: 26px; }
+.chou h2 { font-family: var(--mincho); font-weight: 700; font-size: clamp(28px, 7.8vw, 56px); line-height: 1.4; color: var(--cocoa); }
+.chou p { font-size: 15.5px; color: #4A372B; max-width: 28em; }
+.fill { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: center; padding: 18px; border-radius: 20px; background: rgba(255,255,255,.45); }
+.gauge { height: 10px; border-radius: 99px; background: rgba(94,55,38,.15); overflow: hidden; } .gauge i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #FFF4D6, #FFFDF5); border-radius: 99px; box-shadow: inset 0 0 0 1px #E6C887; }
+.fill .lv { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1; color: var(--marron); font-variant-numeric: tabular-nums; }
+.fill small { display: block; font-size: 13px; color: #5E4A3F; margin-top: 4px; }
+
+/* ケーキの一覧 */
+.cakes { padding: clamp(88px, 14vw, 160px) 0 0; background: var(--cream); }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 30px; }
+.sec-head h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(30px, 8.6vw, 64px); line-height: 1.3; color: var(--marron); }
+.sec-head p { font-size: 12px; color: #7D695C; max-width: 24em; }
+.wide { position: relative; overflow: hidden; margin: 0 var(--g) 8px; border-radius: 22px; background: linear-gradient(180deg, #4A2B1D, var(--cocoa)); padding: 26px 18px 18px; }
+.wide::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.07) 38%, rgba(255,255,255,0) 46%); pointer-events: none; z-index: 2; }
+.case-t { font-family: var(--display); font-style: italic; color: var(--custard); font-size: 15px; text-align: center; margin-bottom: 10px; letter-spacing: .04em; }
+.shelfrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px 4px 0; border-bottom: 3px solid rgba(246,239,228,.22); margin-bottom: 16px; }
+.shelfrow svg { width: 100%; height: auto; }
+.shelfrow figcaption { font-size: 11px; color: var(--mute); text-align: center; margin: -4px 0 8px; }
+.shelfrow div { display: grid; }
+.wide .cap { position: static; display: block; text-align: right; color: var(--mute); text-shadow: none; }
+.menu { list-style: none; margin: 0; padding: 0 var(--g); }
+.menu li { display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; padding: 24px 0 22px; border-bottom: 1px solid rgba(42,26,19,.14); align-items: baseline; }
+.menu .fr { font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(34px, 9.6vw, 60px); line-height: 1.05; color: var(--marron); letter-spacing: -.02em; }
+.menu .tag { font-size: 11px; color: var(--berry); border: 1px solid currentColor; border-radius: 999px; padding: 1px 10px; white-space: nowrap; align-self: center; }
+.menu h3 { grid-column: 1 / -1; font-family: var(--mincho); font-size: 18px; font-weight: 700; color: var(--cocoa); }
+.menu p { grid-column: 1 / -1; font-size: 14.5px; color: #5E4A3F; }
+.src { padding: 18px var(--g) 0; font-size: 11px; color: #8A7668; }
+.fill-in { background: rgba(201,67,79,.12); color: #9E2F3A; padding: 0 5px; border-radius: 4px; font-size: .92em; }
+
+/* お客様の声 */
+.voices { padding: clamp(88px, 14vw, 150px) var(--g) clamp(72px, 12vw, 130px); }
+.vlist { display: grid; gap: 16px; }
+.v { background: #fff; border-radius: 22px; padding: 26px 24px 22px; position: relative; box-shadow: 0 1px 0 rgba(42,26,19,.06); }
+.v::before { content: "“"; position: absolute; top: -8px; left: 18px; font-family: var(--display); font-size: 70px; line-height: 1; color: var(--berry); }
+.v p { font-family: var(--mincho); font-size: 17px; line-height: 1.8; color: var(--cocoa); }
+.v small { display: block; margin-top: 10px; font-size: 12px; color: #8A7668; }
+
+/* 来店 */
+.visit { background: var(--marron); color: var(--cream); padding: clamp(88px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--cream); }
+.visit .sec-head p { color: var(--mute); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; margin-bottom: 26px; background: rgba(36,21,15,.25); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mute); flex: none; }
+.today.open .dot { background: #8FD49B; box-shadow: 0 0 0 6px rgba(143,212,155,.15); }
+.today b { font-family: var(--mincho); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--mute); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--custard); font-weight: 700; }
+.hours li.closed span:last-child { color: #B39C8D; }
+.small { font-size: 11.5px; color: var(--mute); }
+.addr { margin-top: 40px; font-family: var(--mincho); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #4A2B1D; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: sepia(.25) saturate(.8) contrast(1.02); }
+.cards2 { display: grid; gap: 10px; margin-top: 18px; }
+.park { padding: 18px 20px; border-left: 3px solid var(--custard); background: rgba(246,239,228,.06); border-radius: 0 16px 16px 0; font-size: 14.5px; }
+.park b { display: block; font-family: var(--mincho); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.visit .fill-in { background: rgba(240,217,166,.16); color: var(--custard); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.solid { background: var(--berry); color: #fff; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(88px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(42,26,19,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--mincho); font-size: 18px; font-weight: 500; color: var(--marron); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--berry),var(--berry)) center/14px 1.5px no-repeat, linear-gradient(var(--berry),var(--berry)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #5E4A3F; font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(88px, 14vw, 150px); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 26px; }
+.tiles span { display: grid; place-items: center; aspect-ratio: 1; }
+.tiles span:nth-child(1) { background: var(--custard); }
+.tiles span:nth-child(2) { background: var(--marron); }
+.tiles span:nth-child(3) { background: #F2C9CC; }
+.tiles svg { width: 78%; height: auto; }
+.gram h2 { font-family: var(--mincho); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; color: var(--marron); }
+.gram p { margin-top: 10px; color: #5E4A3F; font-size: 15px; }
+.gram .btn.solid { background: var(--marron); }
+
+/* 最後 */
+.foot { background: var(--cocoa); color: var(--mute); padding: 72px var(--g) calc(124px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--display); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--cream); font-size: clamp(160px, 52vw, 480px); line-height: .78; letter-spacing: -.05em; margin: 0 0 40px -.05em; }
+.foot .huge span { color: var(--berry); }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(36,21,15,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--cream); }
+.dock a.main { background: var(--berry); color: #fff; }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(90deg, rgba(36,21,15,.85) 0%, rgba(36,21,15,.45) 36%, rgba(36,21,15,0) 60%), linear-gradient(180deg, rgba(36,21,15,.4) 0%, rgba(36,21,15,0) 25%, rgba(36,21,15,0) 60%, rgba(36,21,15,.6) 100%); }
+  .hero .title { right: auto; max-width: 760px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.1fr .9fr; column-gap: 90px; align-items: start; }
+  .story .big, .story .eyebrow { grid-column: 1 / -1; }
+  .route .pin { grid-template-columns: 1fr 1.1fr; grid-template-rows: auto 1fr; column-gap: 72px; padding-top: 110px; }
+  .route h2 { grid-column: 1 / -1; }
+  .route .stage { grid-column: 2; grid-row: 2; }
+  .route .side { grid-column: 1; grid-row: 2; align-self: center; }
+  .route svg.rmap { max-height: 62svh; }
+  .chou .wrap { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; column-gap: 72px; }
+  .chou figure { margin: -60px 0 0 var(--g); }
+  .chou .body { padding: 0 var(--g) 0 0; }
+  .cakes .grid2 { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; padding-right: var(--g); align-items: start; }
+  .wide { margin: 0 0 0 var(--g); position: sticky; top: 120px; padding: 36px 30px 24px; }
+  .hero .art { left: auto; right: 4vw; top: 50%; width: min(48vw, 680px); transform: translateY(-46%); }
+  .hero .halo { left: 74%; top: 52%; }
+  .hero::after { background: linear-gradient(90deg, rgba(36,21,15,.7) 0%, rgba(36,21,15,0) 50%); }
+  .menu { padding: 0; }
+  .vlist { grid-template-columns: repeat(3, 1fr); }
+  .voices { max-width: 1240px; margin: 0 auto; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .cards2 { grid-template-columns: 1fr 1fr; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- お菓子のイラスト（イメージ） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="s-plate" viewBox="0 0 120 100"><ellipse cx="60" cy="86" rx="50" ry="7" fill="#F6EFE4" opacity=".92"/></symbol>
+  <symbol id="s-mb" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <path d="M34 84 L86 84 L82 70 L38 70 Z" fill="#C98F4E"/>
+    <path d="M37 72 C37 44 48 30 60 30 C72 30 83 44 83 72 Z" fill="#5A3322"/>
+    <g fill="none" stroke-linecap="round" stroke-width="3.4">
+      <path d="M38 71 Q52 22 74 71" stroke="#8C5A3C"/><path d="M45 71 Q64 20 82 70" stroke="#A06C48"/><path d="M40 70 Q60 34 70 71" stroke="#7A4A30"/><path d="M50 71 Q70 30 80 64" stroke="#8C5A3C"/><path d="M42 60 Q58 26 66 71" stroke="#A06C48"/><path d="M56 71 Q66 36 82 70" stroke="#7A4A30"/>
+    </g>
+    <ellipse cx="60" cy="29" rx="9" ry="7" fill="#6E3418"/><ellipse cx="57" cy="27" rx="2.4" ry="1.4" fill="#F3C08C" opacity=".8"/>
+  </symbol>
+  <symbol id="s-short" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <path d="M30 84 V48 L90 40 V84 Z" fill="#FFF8EE"/>
+    <rect x="30" y="72" width="60" height="12" fill="#F1D49A"/>
+    <rect x="30" y="58" width="60" height="9" fill="#F1D49A"/>
+    <g fill="#D8404C"><path d="M36 67 a5 5 0 0 1 10 0z"/><path d="M52 67 a5 5 0 0 1 10 0z"/><path d="M68 67 a5 5 0 0 1 10 0z"/><path d="M82 67 a4 4 0 0 1 8 0z"/></g>
+    <path d="M30 48 L90 40 L90 44 L30 52 Z" fill="#FFFFFF"/>
+    <path d="M52 44 C48 34 52 26 60 26 C68 26 72 34 66 44 C62 48 56 48 52 44 Z" fill="#D8404C"/>
+    <path d="M54 27 L60 22 L66 27 L60 29 Z" fill="#6E9B5A"/>
+    <g fill="#F7C9A0"><circle cx="57" cy="34" r="1"/><circle cx="63" cy="36" r="1"/><circle cx="59" cy="40" r="1"/></g>
+  </symbol>
+  <symbol id="s-chou" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <path d="M24 66 H96 C94 80 82 86 60 86 C38 86 26 80 24 66 Z" fill="#D49A4E"/>
+    <path d="M26 64 Q34 56 42 64 Q50 56 58 64 Q66 56 74 64 Q82 56 90 64 Q94 62 96 66 H24 Z" fill="#FFF4D6"/>
+    <path d="M28 60 C24 38 42 24 60 26 C80 24 96 38 92 60 C80 54 40 54 28 60 Z" fill="#C88A3E"/>
+    <path d="M40 38 C48 30 58 28 66 30" fill="none" stroke="#E9B86E" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#FFFDF7"><circle cx="50" cy="32" r="1.4"/><circle cx="70" cy="30" r="1.2"/><circle cx="80" cy="40" r="1.3"/></g>
+  </symbol>
+  <symbol id="s-pudding" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <path d="M36 84 L84 84 L77 44 L43 44 Z" fill="#F0C46A"/>
+    <path d="M43 44 L77 44 L75 34 L45 34 Z" fill="#7A3E1C"/>
+    <path d="M43 44 C46 52 50 46 52 54 C54 46 60 50 62 46 C66 54 70 46 77 44 Z" fill="#7A3E1C"/>
+    <path d="M47 56 L44 78" stroke="#FFF2C8" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+  </symbol>
+  <symbol id="s-cheese" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <path d="M28 84 V54 L92 46 V84 Z" fill="#F5DFA0"/>
+    <path d="M28 54 L92 46 L92 52 L28 60 Z" fill="#C27A3A"/>
+    <rect x="28" y="78" width="64" height="6" fill="#B98552"/>
+    <g fill="#E8CB80"><circle cx="44" cy="68" r="1.4"/><circle cx="62" cy="64" r="1.2"/><circle cx="78" cy="70" r="1.4"/></g>
+  </symbol>
+  <symbol id="s-choco" viewBox="0 0 120 100">
+    <use href="#s-plate"/>
+    <rect x="30" y="46" width="60" height="38" fill="#4A281A"/>
+    <rect x="30" y="58" width="60" height="5" fill="#7A4A30"/>
+    <rect x="30" y="71" width="60" height="5" fill="#7A4A30"/>
+    <rect x="30" y="42" width="60" height="6" rx="2" fill="#2C140C"/>
+    <path d="M36 44 H64" stroke="#8A5A40" stroke-width="1.6" stroke-linecap="round"/>
+    <rect x="56" y="36" width="8" height="6" rx="1" fill="#D9B45A"/>
+  </symbol>
+</svg>
+
+<div class="loader" aria-hidden="true">
+  <div class="ring">
+    <svg viewBox="0 0 100 100"><circle id="ring" cx="50" cy="50" r="48"/></svg>
+    <div class="word"><span>O</span><span>n</span><span>e</span></div>
+  </div>
+  <div class="sub">PÂTISSERIE</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top"><small>patisserie</small>One</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="patisserie One">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="art" role="img" aria-label="皿にのったモンブランのイラスト（イメージ）">
+      <svg viewBox="0 0 400 400" id="mb">
+        <ellipse cx="200" cy="338" rx="176" ry="30" fill="#000" opacity=".25"/>
+        <ellipse cx="200" cy="328" rx="172" ry="28" fill="#F6EFE4"/>
+        <ellipse cx="200" cy="324" rx="138" ry="18" fill="none" stroke="#E4D6C2" stroke-width="2"/>
+        <path d="M112 318 L288 318 L276 266 L124 266 Z" fill="#C98F4E"/>
+        <path d="M112 318 L288 318 L286 310 L114 310 Z" fill="#A9733A"/>
+        <g stroke="#A9733A" stroke-width="3" stroke-linecap="round" opacity=".7"><path d="M140 272 L136 308"/><path d="M164 272 L162 308"/><path d="M188 272 L187 308"/><path d="M212 272 L213 308"/><path d="M236 272 L238 308"/><path d="M260 272 L264 308"/></g>
+        <path d="M118 270 C118 160 160 112 200 112 C240 112 282 160 282 270 Z" fill="#7A4A30"/>
+        <g id="strands" fill="none" stroke-linecap="round" stroke-width="9"></g>
+        <g id="sugar" fill="#FFF8EC"></g>
+        <g id="kuri">
+          <ellipse cx="200" cy="104" rx="30" ry="23" fill="#6E3418"/>
+          <path d="M178 92 C186 80 214 80 222 92" fill="none" stroke="#B2683A" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <ellipse cx="190" cy="96" rx="7" ry="4" fill="#F3C08C" opacity=".7"/>
+        </g>
+      </svg>
+    </div>
+    <span class="caption">イラストはイメージです</span>
+    <p class="vert" aria-hidden="true">住宅街に、そっと一軒。</p>
+    <div class="title">
+      <p class="kicker">Pâtisserie ／ 千葉県松戸市五香</p>
+      <h1><span class="w"><span>One<span class="dot">.</span></span></span></h1>
+      <p class="lead1">甘さはすっきり、仕上げはていねいに。<br>民家の中の、小さなケーキ屋さん。</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（105件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Mont-blanc</span><span>モンブラン</span><i></i><span>Chou à la crème</span><span>シュークリーム</span><i></i><span>Shortcake</span><span>ショートケーキ</span><i></i><span>Pudding</span><span>固めのプリン</span><i></i>
+      <span>Mont-blanc</span><span>モンブラン</span><i></i><span>Chou à la crème</span><span>シュークリーム</span><i></i><span>Shortcake</span><span>ショートケーキ</span><i></i><span>Pudding</span><span>固めのプリン</span><i></i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <p class="eyebrow">— hidden in the neighborhood</p>
+    <h2 class="big" id="story-title"><span class="line"><span>通り過ぎるほど</span></span><span class="line"><span>小さくて、</span></span><span class="line"><span>忘れられない味。</span></span></h2>
+    <div>
+      <p class="lead">口コミに並ぶのは <q>甘さがちょうどいい</q> <q>上品な味</q> <q>見た目もきれい</q> という言葉。クリームが苦手だった人まで通うようになった、という声もあります。外から見るとほとんど民家ですが、扉を開けると、ガラスの向こうでケーキが作られていく小さなお店です。</p>
+      <div class="stars" style="margin-top:30px"><b>4.5</b><span>Googleの口コミ 105件の平均（2026年10月）</span></div>
+    </div>
+    <div class="points">
+      <div><b>01</b><p><strong>工房がガラス越しに見える</strong>ケーキを作っているところを眺められます。お子さんと一緒だと喜ばれる、という声も。</p></div>
+      <div><b>02</b><p><strong>甘さ控えめで、上品</strong>スポンジもクリームも甘すぎない。ケーキが苦手な人にも好まれています。</p></div>
+      <div><b>03</b><p><strong>接客がていねい</strong>お菓子が好きなことが伝わる、親切な対応だという声が多いお店です。</p></div>
+    </div>
+  </section>
+
+  <section class="route" aria-labelledby="route-title">
+    <div class="pin">
+      <h2 id="route-title">「この先に本当にある？」<br>と思ったら、<em>もう少しだけ</em>。</h2>
+      <div class="stage">
+        <svg class="rmap" viewBox="0 0 360 300" aria-hidden="true">
+          <!-- 大通りと路地（イメージ図） -->
+          <path class="road" d="M-20 270 H380"/>
+          <path class="alley" d="M70 270 V150 H300"/>
+          <!-- 家並み -->
+          <g>
+            <path class="house" d="M20 205 h36 v-26 l-18 -14 l-18 14z"/>
+            <path class="house" d="M20 245 h36 v-24 l-18 -13 l-18 13z"/>
+            <path class="house" d="M90 245 h40 v-26 l-20 -15 l-20 15z"/>
+            <path class="house" d="M146 245 h40 v-24 l-20 -14 l-20 14z"/>
+            <path class="house" d="M90 125 h40 v-28 l-20 -15 l-20 15z"/>
+            <path class="house" d="M146 125 h40 v-26 l-20 -14 l-20 14z"/>
+            <path class="house" d="M262 125 h40 v-26 l-20 -14 l-20 14z"/>
+            <path class="house" d="M318 125 h36 v-24 l-18 -13 l-18 13z"/>
+            <path class="house" d="M318 205 h36 v-26 l-18 -14 l-18 14z"/>
+          </g>
+          <!-- お店（見た目は民家） -->
+          <g class="shop" id="shop">
+            <circle class="glow" cx="224" cy="200" r="34"/>
+            <path class="house" d="M204 220 h40 v-30 l-20 -16 l-20 16z"/>
+            <rect x="219" y="206" width="10" height="14" fill="#24150F" opacity=".6"/>
+          </g>
+          <text class="lbl" id="lbl-shop" x="224" y="244" text-anchor="middle">ここがお店</text>
+          <!-- 駐車場（お店に向かって右手の先） -->
+          <g class="park" id="park">
+            <rect x="268" y="168" width="22" height="34" rx="3"/>
+            <rect x="294" y="168" width="22" height="34" rx="3"/>
+            <text x="292" y="234" text-anchor="middle">P</text>
+          </g>
+          <text class="lbl" id="lbl-park" x="292" y="256" text-anchor="middle">2台分</text>
+          <!-- 歩く線 -->
+          <path class="walk" d="M10 270 H70 V150 H224 V178"/>
+          <path class="walk-solid" id="walk" d="M10 270 H70 V150 H224 V178"/>
+          <circle class="me" id="me" cx="10" cy="270" r="6"/>
+        </svg>
+      </div>
+      <div class="side">
+        <div class="steps" id="steps">
+          <div class="step on"><span class="no">01 / 04</span><b>大きな通りから、住宅街の路地へ。</b><span>不安になる細さですが、そのまま進んで大丈夫です。</span></div>
+          <div class="step"><span class="no">02 / 04</span><b>見た目はほとんど民家。<br>この家がお店です。</b><span>前まで来ないと気づかないくらい、街になじんでいます。</span></div>
+          <div class="step"><span class="no">03 / 04</span><b>玄関を開けて、そのまま中へ。</b><span>中はガラス張りの工房が見える、ケーキ屋さんの空間です。</span></div>
+          <div class="step"><span class="no">04 / 04</span><b>車は、お店に向かって右手の先に2台。</b><span>お店から20mほど先。台数が少ないので、満車のこともあります。</span></div>
+        </div>
+        <div class="bar"><i id="bar"></i></div>
+        <p class="note">※図はイメージです（Googleの口コミの内容をもとにしています）。実際の道順と目印の写真に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chou" aria-labelledby="chou-title">
+    <p class="huge" aria-hidden="true">Chou à</p>
+    <div class="wrap">
+      <figure role="img" aria-label="クリームを詰めていくシュークリームのイラスト（イメージ）">
+        <svg viewBox="0 0 300 260">
+          <ellipse cx="150" cy="232" rx="132" ry="16" fill="#C9943F" opacity=".35"/>
+          <!-- 下の皮 -->
+          <path d="M22 160 H278 C274 200 236 222 150 222 C64 222 26 200 22 160 Z" fill="#D49A4E"/>
+          <path d="M22 160 H278 C276 172 268 180 258 186 C200 196 100 196 42 186 C32 180 24 172 22 160 Z" fill="#E7B46A"/>
+          <!-- クリーム（スクロールで満ちる） -->
+          <path id="cream" d="M24 168 L276 168 Z" fill="#FFF4D6" stroke="#EFD9A4" stroke-width="2" stroke-linejoin="round"/>
+          <!-- 上の皮（ふた） -->
+          <g id="lid">
+            <path d="M30 150 C20 92 70 50 150 54 C230 50 280 92 270 150 C250 140 200 132 150 134 C100 132 50 140 30 150 Z" fill="#C88A3E"/>
+            <path d="M58 104 C80 76 120 66 150 70 M168 70 C200 68 236 82 252 110" fill="none" stroke="#E9B86E" stroke-width="7" stroke-linecap="round"/>
+            <path d="M92 86 l14 -8 M190 74 l16 6 M130 64 l12 -4 M224 96 l12 10" stroke="#9A6127" stroke-width="5" stroke-linecap="round"/>
+            <g fill="#FFFDF7"><circle cx="110" cy="72" r="3"/><circle cx="150" cy="62" r="2.5"/><circle cx="190" cy="68" r="3"/><circle cx="84" cy="92" r="2.5"/><circle cx="220" cy="84" r="2.5"/><circle cx="168" cy="76" r="2"/></g>
+          </g>
+        </svg>
+        <span class="cap" style="color:#7A5A3A;text-shadow:none">イラストはイメージです</span>
+      </figure>
+      <div class="body">
+        <h2 id="chou-title">クリームを詰めるのは、<br>注文を受けてから。</h2>
+        <p>口コミで何度も名前が挙がるシュークリーム。注文のあとにクリームを絞るので、皮はザクッと固いまま。ちぎってクリームをつけながら食べる、という楽しみ方の声もあります。早い時間に売り切れることがあるので、お目当ての日は早めに。</p>
+        <div class="fill" aria-hidden="true">
+          <div class="gauge"><i id="gauge"></i></div>
+          <div><span class="lv" id="lv">0%</span><small id="lvmsg">ご注文を受けてから、クリームを絞ります。</small></div>
+        </div>
+      </div>
+    </div>
+    <p class="huge r" aria-hidden="true">la crème</p>
+  </section>
+
+  <section class="cakes" aria-labelledby="cakes-title">
+    <div class="sec-head">
+      <h2 id="cakes-title">口コミで<br>名前が挙がる<br>お菓子</h2>
+      <p>価格と季節の品は、実際の内容に差し替えます</p>
+    </div>
+    <div class="grid2">
+      <figure class="wide" style="margin-top:0" role="img" aria-label="ショーケースに並ぶケーキのイラスト（イメージ）">
+        <p class="case-t">— la vitrine —</p>
+        <div class="shelfrow">
+          <div><svg viewBox="0 0 120 100"><use href="#s-mb"/></svg><figcaption>モンブラン</figcaption></div>
+          <div><svg viewBox="0 0 120 100"><use href="#s-short"/></svg><figcaption>ショートケーキ</figcaption></div>
+          <div><svg viewBox="0 0 120 100"><use href="#s-chou"/></svg><figcaption>シュークリーム</figcaption></div>
+        </div>
+        <div class="shelfrow">
+          <div><svg viewBox="0 0 120 100"><use href="#s-pudding"/></svg><figcaption>プリン</figcaption></div>
+          <div><svg viewBox="0 0 120 100"><use href="#s-cheese"/></svg><figcaption>チーズケーキ</figcaption></div>
+          <div><svg viewBox="0 0 120 100"><use href="#s-choco"/></svg><figcaption>チョコケーキ</figcaption></div>
+        </div>
+        <span class="cap">イラストはイメージです</span>
+      </figure>
+      <ul class="menu">
+        <li><span class="fr">Mont-blanc</span><span class="tag">人気</span><h3>モンブラン</h3><p>「人気にうなずける」という声。すっきりした甘さが好評です。</p></li>
+        <li><span class="fr">Shortcake</span><span class="tag">定番</span><h3>ショートケーキ</h3><p>小ぶりで、スポンジもクリームも甘すぎない。</p></li>
+        <li><span class="fr">Chou à la crème</span><span class="tag">早めに</span><h3>シュークリーム</h3><p>皮も、クリームも、底まで。売り切れる前に。</p></li>
+        <li><span class="fr">Pudding</span><span class="tag">固め</span><h3>プリン</h3><p>昔ながらの、しっかり固めのプリン。</p></li>
+        <li><span class="fr">Cheese &amp; Chocolat</span><span class="tag">ほかにも</span><h3>チーズケーキ・チョコケーキ</h3><p>どれも甘さがちょうどいい、という声があります。</p></li>
+        <li><span class="fr">Whole cake</span><span class="tag">ご注文</span><h3>ホールケーキ</h3><p>注文を受けて、ていねいに作ります。<span class="fill-in">ご予約の方法と締め切りを入れます</span></p></li>
+      </ul>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がったお菓子から選んでいます。価格は載せていません（実際の価格に差し替えます）。</p>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="sec-head" style="padding:0"><h2 id="voices-title">食べた人の声</h2><p>Googleの口コミの要旨をもとにしたイメージです</p></div>
+    <div class="vlist">
+      <div class="v"><p>ケーキもクリームも苦手だったのに、ひと口でとりこに。人に贈っても喜ばれます。</p><small>★5 の口コミより</small></div>
+      <div class="v"><p>モンブランとショートケーキを。すっきりした甘さで、こぢんまりした可愛いお店でした。</p><small>★4 の口コミより</small></div>
+      <div class="v"><p>ガラス越しに、パティシエさんがケーキを作るところまで見られました。どれも甘さがちょうどいい。</p><small>★5 の口コミより</small></div>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年10月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>お休み</span></li>
+          <li data-d="2" class="closed"><span>火</span><span>お休み</span></li>
+          <li data-d="3"><span>水</span><span>10:00 – 18:30</span></li>
+          <li data-d="4"><span>木</span><span>10:00 – 18:30</span></li>
+          <li data-d="5"><span>金</span><span>10:00 – 18:30</span></li>
+          <li data-d="6"><span>土</span><span>10:00 – 18:30</span></li>
+          <li data-d="0"><span>日</span><span>10:00 – 18:30</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram でお知らせします。</p>
+      </div>
+      <div>
+        <p class="addr">〒270-2213<br>千葉県松戸市五香2丁目39-22</p>
+        <div class="map"><iframe title="patisserie One の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=patisserie%20One%20%E5%8D%83%E8%91%89%E7%9C%8C%E6%9D%BE%E6%88%B8%E5%B8%82%E4%BA%94%E9%A6%992%E4%B8%81%E7%9B%AE39-22&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="cards2">
+          <div class="park"><b>駐車場</b>お店に向かって右手、20mほど先に2台分。<span class="fill-in">駐車場の写真と目印を入れます</span></div>
+          <div class="park"><b>自転車・イートイン</b>敷地内に駐輪スペースとイートインのスペースがあります。</div>
+        </div>
+        <div class="row">
+          <a class="btn solid" href="https://maps.google.com/?cid=9152173392736227111" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>ホールケーキは予約できますか？</summary><p>ご注文を受けてお作りしています。<span class="fill-in">予約の方法（電話・Instagram の DM など）と、何日前までかを書きます。</span></p></details>
+    <details><summary>シュークリームの取り置きはできますか？</summary><p><span class="fill-in">取り置きの可否と方法を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>お店の場所が分かりにくいと聞きました</summary><p>住宅街の路地の中にあり、外から見るとほとんど民家です。上の道案内と地図を目印に、そのまま玄関からお入りください。</p></details>
+    <details><summary>子ども連れでも楽しめますか？</summary><p>ガラス越しに工房が見えるので、ケーキを作るところを一緒に眺められることがあります。</p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles" aria-hidden="true"><span><svg viewBox="0 0 120 100"><use href="#s-chou"/></svg></span><span><svg viewBox="0 0 120 100"><use href="#s-mb"/></svg></span><span><svg viewBox="0 0 120 100"><use href="#s-short"/></svg></span></div>
+    <h2 id="gram-title">今日のケーキと<br>お休みの日は、Instagramで。</h2>
+    <p>その日のケーキ、季節の新作、臨時のお休みをお知らせしています。</p>
+    <div class="row"><a class="btn solid" href="https://www.instagram.com/patisserie_one/" target="_blank" rel="noopener">@patisserie_one を見る</a></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">One<span>.</span></p>
+  <p>patisserie One<br>千葉県松戸市五香2丁目39-22<br>水〜日 10:00–18:30　月・火 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。イラストはイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=9152173392736227111" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0473854235">電話</a>
+  <a href="https://www.instagram.com/patisserie_one/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  // CDN が読めない・途中で止まった時も幕を残さない
+  setTimeout(() => { document.querySelector('.loader')?.remove(); showDock(); }, 6000);
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 0: [10, 18.5], 3: [10, 18.5], 4: [10, 18.5], 5: [10, 18.5], 6: [10, 18.5] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* 道案内: 進み具合 0〜1 で線・点・目印・説明を合わせる */
+  const walk = document.getElementById('walk'), me = document.getElementById('me');
+  const len = walk.getTotalLength();
+  walk.style.strokeDasharray = len;
+  const steps = [...document.querySelectorAll('#steps .step')];
+  const shop = document.getElementById('shop'), park = document.getElementById('park');
+  const lblShop = document.getElementById('lbl-shop'), lblPark = document.getElementById('lbl-park');
+  const barEl = document.getElementById('bar');
+  let cur = -1;
+  const setRoute = p => {
+    const walkP = Math.min(1, p / 0.7);
+    walk.style.strokeDashoffset = len * (1 - walkP);
+    const pt = walk.getPointAtLength(len * walkP);
+    me.setAttribute('cx', pt.x); me.setAttribute('cy', pt.y);
+    const idx = p < 0.25 ? 0 : p < 0.55 ? 1 : p < 0.78 ? 2 : 3;
+    if (idx !== cur) { steps.forEach((s, i) => s.classList.toggle('on', i === idx)); cur = idx; }
+    shop.classList.toggle('lit', p >= 0.4);
+    lblShop.classList.toggle('on', p >= 0.4);
+    park.classList.toggle('lit', p >= 0.78);
+    lblPark.classList.toggle('on', p >= 0.78);
+    barEl.style.width = `${p * 100}%`;
+  };
+
+  /* シュークリームのクリーム */
+  const cream = document.getElementById('cream'), lid = document.getElementById('lid'), gauge = document.getElementById('gauge');
+  const lv = document.getElementById('lv'), lvmsg = document.getElementById('lvmsg');
+  const setCream = p => {
+    const lift = 14 - 40 * p;              // ふたが持ち上がる
+    lid.setAttribute('transform', `translate(0 ${lift})`);
+    const top = 168 - (20 + 40 * p) * p;   // クリームの山の高さ
+    let d = 'M24 168';
+    const n = 7, w = 252 / n;
+    for (let i = 0; i < n; i++) { const x0 = 24 + w * i; d += ` L${x0} ${top + 6} Q${x0 + w / 2} ${top - 12 * p} ${x0 + w} ${top + 6}`; }
+    cream.setAttribute('d', d + ' L276 168 Z');
+    gauge.style.width = `${p * 100}%`;
+    lv.textContent = `${Math.round(p * 100)}%`;
+    lvmsg.textContent = p < 1 ? 'ご注文を受けてから、クリームを絞ります。' : '絞りたてを、そのままお渡し。';
+  };
+
+  /* ファーストビューのモンブラン: 栗のクリームを線で描く */
+  const strands = document.getElementById('strands'), sugar = document.getElementById('sugar');
+  const COLORS = ['#8C5A3C', '#A06C48', '#7A4A30', '#9A6440'];
+  let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  // 土台からてっぺんを越えて反対側へ垂れる線（細く絞った栗のクリーム）
+  for (let i = 0; i < 40; i++) {
+    const inner = i % 4 === 3;
+    const a = inner ? 150 + rnd() * 40 : 120 + rnd() * 46, b = inner ? 210 + rnd() * 40 : 234 + rnd() * 46;
+    const top = 116 + rnd() * 22 + (i % 3) * 6;
+    const cy = 268 - (268 - top) / 0.75;
+    const k = (rnd() - .5) * 70;
+    strands.insertAdjacentHTML('beforeend', `<path d="M${a.toFixed(1)} 268 C${(a + k).toFixed(1)} ${cy.toFixed(1)} ${(b + k).toFixed(1)} ${cy.toFixed(1)} ${b.toFixed(1)} 268" stroke="${COLORS[i % 4]}"/>`);
+  }
+  for (let i = 0; i < 26; i++) {
+    const ang = Math.PI * (0.2 + rnd() * 0.6), r = 30 + rnd() * 48;
+    sugar.insertAdjacentHTML('beforeend', `<circle cx="${(200 + Math.cos(ang) * r).toFixed(1)}" cy="${(190 - Math.sin(ang) * r).toFixed(1)}" r="${(1.2 + rnd() * 1.6).toFixed(1)}"/>`);
+  }
+  const strandEls = [...strands.children];
+  strandEls.forEach(el => { const L = el.getTotalLength(); el.style.strokeDasharray = L; el.dataset.len = L; });
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) { setRoute(1); setCream(1); document.querySelector('.loader')?.remove(); showDock(); return; }
+  setRoute(0); setCream(0);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: 皿のような輪を描いてから店名 */
+  const ring = document.getElementById('ring');
+  const rlen = ring.getTotalLength();
+  gsap.set(ring, { strokeDasharray: rlen, strokeDashoffset: rlen });
+  const cover = { v: 0 };
+  const setCover = () => { const el = document.querySelector('.loader'); if (el) el.style.clipPath = `circle(${(1 - cover.v) * 150}% at 50% 50%)`; };
+  gsap.set('.hero h1 .w > span', { yPercent: 105 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .lead1, .hero .meta', { opacity: 0, y: 16 });
+  strandEls.forEach(el => { el.style.strokeDashoffset = el.dataset.len; });
+  gsap.set('#kuri', { y: -60, opacity: 0 });
+  gsap.set('#sugar circle', { opacity: 0 });
+  gsap.set('.hero .art', { scale: .94, transformOrigin: '50% 70%' });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to(ring, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' })
+       .to('.loader .word span', { y: 0, duration: 0.9, stagger: 0.07 }, '-=0.5')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.5')
+       .to(cover, { v: 1, duration: 1.1, ease: 'power3.inOut', onUpdate: setCover }, '+=0.2')
+       .to('.hero .art', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.8')
+       .to(strandEls, { strokeDashoffset: 0, duration: 0.9, stagger: 0.045, ease: 'power2.inOut' }, '<')
+       .to('#kuri', { y: 0, opacity: 1, duration: 0.8, ease: 'bounce.out' }, '-=0.3')
+       .to('#sugar circle', { opacity: 1, duration: 0.4, stagger: 0.02 }, '-=0.4')
+       .to('.hero h1 .w > span', { yPercent: 0, duration: 1.2 }, '-=1.9')
+       .to('.hero .vert, .hero .kicker, .hero .lead1, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => document.querySelector('.loader')?.remove());
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const headEl = document.getElementById('head');
+  ScrollTrigger.create({ start: () => innerHeight * 0.8, end: 'max', onEnter: () => headEl.classList.add('solid'), onLeaveBack: () => headEl.classList.remove('solid') });
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  /* ファーストビューの絵をゆっくり沈める */
+  gsap.to('.hero .art svg', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+  gsap.utils.toArray('.points > div, .v').forEach((el, i) => {
+    gsap.from(el, { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* 道案内の章: 画面に留めてスクロールで道をたどる */
+  ScrollTrigger.create({
+    trigger: '.route', start: 'top top', end: '+=200%', pin: '.route .pin', scrub: true,
+    onUpdate: s => setRoute(s.progress)
+  });
+
+  /* シュークリーム: 大きな文字を左右に流し、写真を枠の中で動かし、クリームを満たす */
+  gsap.fromTo('.chou .huge:not(.r)', { xPercent: 8 }, { xPercent: -14, ease: 'none', scrollTrigger: { trigger: '.chou', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.fromTo('.chou .huge.r', { xPercent: -8 }, { xPercent: 10, ease: 'none', scrollTrigger: { trigger: '.chou', start: 'top bottom', end: 'bottom top', scrub: true } });
+  const fillState = { p: 0 };
+  gsap.to(fillState, { p: 1, ease: 'none', onUpdate: () => setCream(fillState.p), scrollTrigger: { trigger: '.chou figure', start: 'top 65%', end: 'bottom 55%', scrub: true } });
+
+  /* 枠を上下から開いて見せる */
+  gsap.utils.toArray('.chou figure, .wide').forEach(box0 => {
+    const box = { v: 14 };
+    const setClip = () => { box0.style.clipPath = `inset(${box.v}% 0 ${box.v}% 0)`; };
+    setClip();
+    gsap.to(box, { v: 0, duration: 1.3, ease: 'power3.out', onUpdate: setClip, onComplete: () => { box0.style.clipPath = ''; }, scrollTrigger: { trigger: box0, start: 'top 85%' } });
+  });
+  /* ショーケースのお菓子を順に並べる */
+  gsap.from('.shelfrow > div', { y: 24, opacity: 0, duration: 0.7, stagger: 0.09, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.wide', start: 'top 75%' } });
+
+  /* お菓子の名前を横からずらして出す */
+  gsap.utils.toArray('.menu li').forEach(el => {
+    gsap.from(el.querySelector('.fr'), { xPercent: 10, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+function showDock() { document.getElementById('dock').classList.add('show'); }
+</script>
+</body>
+</html>
