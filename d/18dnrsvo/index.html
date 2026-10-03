@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0F1424">
+<title>Boulangerie Sens（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Zen+Old+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #0F1424;    /* 夜明け前の窯場 */
+  --deep: #18203A;     /* 青い影 */
+  --linen: #F2ECE1;    /* 麻布と粉 */
+  --crust: #B8662F;    /* 焼き色 */
+  --ember: #E8783E;    /* 窯の火。ボタンと大事な数字だけ */
+  --bleu: #4C66E8;     /* パン屋の青 */
+  --fog: #A9B0C2;
+  --ink: #161A26;
+  --sub: #5A5E6B;
+  --line: rgba(242,236,225,.16);
+  --serif: "Fraunces", serif;
+  --mincho: "Zen Old Mincho", serif;
+  --sans: "Noto Sans JP", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+main { overflow-x: clip; }
+body { margin: 0; background: var(--linen); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.it { font-family: var(--serif); font-style: italic; font-weight: 300; }
+.kw { word-break: keep-all; overflow-wrap: anywhere; }
+
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--linen); color: var(--night); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; border-bottom: 1px solid rgba(15,20,36,.12); }
+
+/* 読み込みの演出: クープ（切り込み）を3本入れて、斜めに開く */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; }
+.loader svg { width: min(72vw, 520px); height: auto; overflow: visible; }
+.loader .cut { fill: none; stroke: var(--ember); stroke-width: 3; stroke-linecap: round; }
+.loader .name { position: absolute; font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--linen); font-size: clamp(56px, 16vw, 150px); line-height: 1; opacity: 0; letter-spacing: -.02em; }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--fog); font-size: 11px; letter-spacing: .4em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--linen); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(15,20,36,.84); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 26px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(15,20,36,.4); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--fog); }
+.status.open i { background: #7BD3A0; box-shadow: 0 0 0 4px rgba(123,211,160,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 580px; overflow: hidden; background: var(--night); color: var(--linen); }
+.hero { background: radial-gradient(90% 60% at 60% 32%, #3A2A2A 0%, #1C1E30 45%, var(--night) 80%); }
+.hero::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(242,236,225,.035) 0 1px, transparent 1px 64px); pointer-events: none; }
+.hero .art { position: absolute; left: calc(50% - min(128vw, 760px) * .46); top: 10%; width: min(128vw, 760px); }
+.hero .art svg { width: 100%; height: auto; display: block; transform: scale(1.14) rotate(-6deg); transform-origin: 50% 45%; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,20,36,.4) 0%, rgba(15,20,36,0) 28%, rgba(15,20,36,.1) 50%, rgba(15,20,36,.94) 82%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(40px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--fog); }
+.hero h1 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(132px, 42vw, 380px); line-height: .8; letter-spacing: -.05em; margin: 6px 0 0 -.05em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .08em .04em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero .ja { font-family: var(--mincho); font-size: 14px; letter-spacing: .3em; margin-top: 12px; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--fog); }
+.hero .meta b { color: var(--ember); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 108px; writing-mode: vertical-rl; font-family: var(--mincho); font-size: clamp(17px, 4.6vw, 26px); letter-spacing: .3em; line-height: 1.9; text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 110px; font-size: 10px; color: rgba(242,236,225,.72); }
+.cue { width: 1px; height: 44px; background: rgba(242,236,225,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--ember); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯（斜め） */
+.marquee { background: var(--bleu); color: var(--linen); overflow: hidden; white-space: nowrap; padding: 14px 0 12px; transform: rotate(-2.2deg); margin: -18px -20px 0; position: relative; z-index: 3; box-shadow: 0 12px 30px rgba(15,20,36,.18); }
+.marquee .track { display: inline-flex; gap: 30px; animation: slide 30s linear infinite; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--mincho); font-style: normal; font-size: .5em; align-self: center; letter-spacing: .1em; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(96px, 18vw, 200px) var(--g) clamp(72px, 12vw, 140px); display: grid; gap: 40px; }
+.story .big { font-family: var(--mincho); font-weight: 500; font-size: clamp(44px, 13vw, 120px); line-height: 1.2; letter-spacing: .02em; color: var(--night); }
+.story .big em { font-style: normal; color: var(--crust); }
+.line { display: block; overflow: hidden; padding-bottom: .05em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: var(--sub); font-size: 15.5px; }
+.story .lead q { white-space: nowrap; quotes: "「" "」"; color: var(--night); font-weight: 700; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(22,26,38,.14); font-size: 13px; color: var(--sub); }
+.stars b { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 52px; color: var(--crust); line-height: 1; }
+.cuts { display: flex; gap: 10px; }
+.cuts i { display: block; width: 46px; height: 2px; background: var(--crust); transform: rotate(-28deg); transform-origin: left; }
+
+/* 週の章（スクロールで曜日が進む） */
+.week { position: relative; background: var(--night); color: var(--linen); }
+.week .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) calc(96px + env(safe-area-inset-bottom)); }
+.week h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(24px, 6.6vw, 44px); line-height: 1.45; }
+.week h2 em { font-style: normal; color: var(--ember); }
+.week .face { align-self: center; display: grid; gap: 14px; }
+.dayrow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.dayname { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(72px, 23vw, 200px); line-height: .85; letter-spacing: -.03em; }
+.dayja { font-family: var(--mincho); font-size: 18px; color: var(--fog); }
+.clockline { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.tnow { font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 10vw, 72px); line-height: 1; font-variant-numeric: tabular-nums; color: var(--ember); }
+.tnow.off { color: var(--fog); }
+.range { font-size: 13px; color: var(--fog); }
+.case { position: relative; border: 1px solid rgba(242,236,225,.28); border-radius: 10px; padding: 14px 12px 10px; background: linear-gradient(160deg, rgba(76,102,232,.10), rgba(242,236,225,.03)); overflow: hidden; max-width: 560px; }
+.case::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.10) 42%, transparent 54%); pointer-events: none; }
+.tray { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; align-items: end; padding-bottom: 8px; border-bottom: 2px solid rgba(242,236,225,.22); }
+.tray + .tray { margin-top: 12px; }
+.tray svg { width: 100%; height: auto; opacity: .1; transform: translateY(6px) scale(.8); transition: opacity .25s, transform .25s; }
+.tray svg.on { opacity: 1; transform: none; }
+.shutter { position: absolute; inset: 0; background: repeating-linear-gradient(180deg, #2A3352 0 14px, #1E2640 14px 16px); transform-origin: top; transform: scaleY(0); transition: transform .45s cubic-bezier(.6,0,.2,1); display: grid; place-items: center; }
+.shutter span { font-family: var(--mincho); font-size: 20px; letter-spacing: .4em; color: var(--linen); background: var(--night); padding: 6px 16px; border-radius: 4px; }
+.closed-day .shutter { transform: scaleY(1); }
+.msg { min-height: 3.6em; font-size: 15px; color: var(--linen); }
+.strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.strip span { text-align: center; font-family: var(--mincho); font-size: 15px; padding: 8px 0 6px; border-radius: 6px; color: var(--fog); border: 1px solid transparent; transition: background .25s, color .25s, border-color .25s; }
+.strip span.o { color: var(--linen); background: rgba(242,236,225,.07); }
+.strip span.cur { border-color: var(--ember); color: var(--ember); }
+.strip span.x { text-decoration: line-through; text-decoration-color: rgba(169,176,194,.5); }
+.week .note { font-size: 11px; color: #7E869C; margin-top: 10px; }
+
+/* ガラスの章 */
+.glass { position: relative; background: var(--night); color: var(--linen); padding: 0 0 clamp(84px, 12vw, 140px); }
+.glass figure { margin: 0; position: relative; overflow: hidden; height: 88svh; min-height: 520px; }
+.glass figure .caseart { width: 100%; height: 100%; display: block; transform: scale(1.12); transform-origin: 50% 40%; }
+.glass figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,20,36,.2), rgba(15,20,36,0) 40%, rgba(15,20,36,.85)); }
+.glare { position: absolute; top: -20%; bottom: -20%; width: 40%; left: -60%; z-index: 2; background: linear-gradient(100deg, transparent, rgba(255,255,255,.22) 45%, rgba(255,255,255,.05) 55%, transparent); transform: skewX(-12deg); pointer-events: none; }
+.glass .cap { position: absolute; right: 12px; top: 12px; z-index: 3; font-size: 10px; color: rgba(255,255,255,.8); }
+.glass .over { position: absolute; left: var(--g); right: var(--g); bottom: 34px; z-index: 3; }
+.glass .over h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(36px, 10.5vw, 96px); line-height: 1.22; }
+.glass .body { padding: 36px var(--g) 0; display: grid; gap: 22px; max-width: 980px; }
+.glass .body p { color: #C9CEDA; font-size: 15.5px; max-width: 30em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font-size: 13px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--linen); }
+
+/* 口コミに出てくるパン */
+.breads { padding: clamp(96px, 14vw, 170px) var(--g) clamp(60px, 10vw, 120px); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 40px; }
+.sec-head h2 { font-family: var(--mincho); font-weight: 500; font-size: clamp(32px, 9vw, 68px); line-height: 1.25; color: var(--night); }
+.sec-head p { font-size: 12px; color: var(--sub); max-width: 22em; }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(22,26,38,.18); }
+.list li { display: grid; grid-template-columns: 2.6em 1fr; gap: 4px 12px; padding: 24px 0 22px; border-bottom: 1px solid rgba(22,26,38,.18); position: relative; }
+.list .no { font-family: var(--serif); font-style: italic; color: var(--crust); font-size: 18px; line-height: 1.6; }
+.list h3 { font-family: var(--mincho); font-weight: 500; font-size: clamp(22px, 6.2vw, 36px); line-height: 1.35; color: var(--night); word-break: keep-all; }
+.list h3 small { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: .5em; color: var(--sub); margin-left: .5em; letter-spacing: 0; }
+.list p { grid-column: 2; color: var(--sub); font-size: 15px; }
+.list li::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--crust); transform: scaleX(0); transform-origin: left; }
+.list li.lit::after { transform: scaleX(1); transition: transform 1s cubic-bezier(.2,.8,.2,1); }
+.src { margin-top: 18px; font-size: 11px; color: #7C808C; }
+
+/* 来店 */
+.visit { background: var(--deep); color: var(--linen); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head h2 { color: var(--linen); }
+.visit .sec-head p { color: var(--fog); }
+.days { margin: 0 calc(var(--g) * -1) 44px; padding: 26px var(--g) 22px; background: var(--bleu); color: rgba(242,236,225,.38); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(34px, 10vw, 88px); line-height: 1.05; letter-spacing: -.02em; }
+.days span:not(.on) { text-decoration: line-through; text-decoration-thickness: 2px; }
+.days .on { color: var(--linen); }
+.days b { flex-basis: 100%; font-style: normal; font-weight: 300; font-size: .62em; color: var(--linen); margin-top: 10px; font-variant-numeric: tabular-nums; }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; background: rgba(15,20,36,.35); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--fog); flex: none; }
+.today.open .dot { background: #7BD3A0; box-shadow: 0 0 0 6px rgba(123,211,160,.15); }
+.today b { font-family: var(--mincho); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--fog); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--ember); }
+.hours li.closed span:last-child { color: #8890A6; }
+.small { font-size: 11.5px; color: var(--fog); }
+.addr { margin-top: 40px; font-family: var(--mincho); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #10162A; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) contrast(1.05) brightness(.95); }
+.tip { margin-top: 18px; padding: 18px 20px; border-left: 3px solid var(--ember); background: rgba(242,236,225,.05); border-radius: 0 14px 14px 0; font-size: 14.5px; }
+.tip b { display: block; font-family: var(--mincho); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.fill-in { background: rgba(232,120,62,.18); color: #F3A27A; padding: 0 4px; border-radius: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--ember); color: var(--night); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(22,26,38,.16); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--mincho); font-size: 18px; font-weight: 500; color: var(--night); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--crust),var(--crust)) center/14px 1.5px no-repeat, linear-gradient(var(--crust),var(--crust)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: var(--sub); font-size: 15px; }
+details .fill-in { color: #9A4A1E; background: rgba(232,120,62,.2); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.gram .box { border-radius: 20px; background: var(--night); color: var(--linen); padding: 36px 26px; position: relative; overflow: hidden; }
+.gram .box::after { content: "@"; position: absolute; right: -10px; bottom: -70px; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 260px; line-height: 1; color: rgba(76,102,232,.35); }
+.gram h2 { font-family: var(--mincho); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; position: relative; z-index: 1; }
+.gram p { margin-top: 10px; color: var(--fog); font-size: 15px; position: relative; z-index: 1; }
+.gram .row { position: relative; z-index: 1; }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--fog); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--linen); font-size: clamp(150px, 48vw, 480px); line-height: .8; letter-spacing: -.05em; margin: 0 0 40px -.06em; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(15,20,36,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.28); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--linen); }
+.dock a.main { background: var(--ember); color: var(--night); }
+
+@media (min-width: 900px) {
+  .hero { background: radial-gradient(60% 80% at 72% 45%, #3A2A2A 0%, #1C1E30 50%, var(--night) 85%); }
+  .hero .art { left: auto; right: 8vw; top: calc(50% - min(52vw, 780px) * .5); width: min(52vw, 780px); }
+  .hero::after { background: linear-gradient(90deg, rgba(15,20,36,.7) 0%, rgba(15,20,36,.2) 40%, rgba(15,20,36,0) 60%), linear-gradient(180deg, rgba(15,20,36,.4) 0%, rgba(15,20,36,0) 25%, rgba(15,20,36,0) 60%, rgba(15,20,36,.6) 100%); }
+  .hero .title { bottom: 56px; right: auto; width: 60%; }
+  .story { grid-template-columns: 1.2fr .8fr; align-items: end; column-gap: 80px; max-width: 1400px; margin: 0 auto; }
+  .week .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 80px; padding-top: 110px; }
+  .week h2 { grid-column: 1 / -1; }
+  .week .face { grid-column: 1; }
+  .week .pin > .foot-w { grid-column: 2; align-self: center; }
+  .week .msg { font-family: var(--mincho); font-size: 28px; line-height: 1.6; min-height: 3.4em; margin-bottom: 28px; }
+  .strip span { font-size: 18px; padding: 14px 0 12px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .breads, .faq, .gram { max-width: 1100px; margin: 0 auto; }
+  .list li { grid-template-columns: 4em 1fr 1fr; align-items: baseline; }
+  .list p { grid-column: 3; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1200px; margin: 0 auto; }
+  .visit .sec-head { max-width: 1200px; margin: 0 auto 40px; }
+  .days { margin: 0 auto 56px; border-radius: 8px; max-width: 1200px; padding: 36px 48px 30px; }
+  .glass .body { grid-template-columns: 1fr auto; align-items: end; margin: 0 auto; }
+  .glass figure { height: 92svh; background: linear-gradient(180deg, #4A3328, #2A2230 50%, #121729); }
+  .glass figure .caseart { width: 62%; margin-left: auto; margin-right: 4%; }
+  .glass figure .caseart > rect:nth-of-type(1), .glass figure .caseart > rect:nth-of-type(2) { display: none; }
+  .glass .over { right: auto; bottom: 64px; }
+  .gram .box { padding: 56px 64px; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero .art svg, .glass figure .caseart { transform: none; }
+  .glare { display: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <svg viewBox="0 0 520 200"><path class="cut" d="M60 150 L170 50"/><path class="cut" d="M205 160 L315 40"/><path class="cut" d="M350 150 L460 50"/></svg>
+  <div class="name">Sens</div>
+  <div class="sub">BOULANGERIE ・ URAYASU</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">Sens</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="ブーランジェリー サンス">
+    <div class="art" role="img" aria-label="切り込みの入った丸いパンとバゲットのイラスト（イメージ）">
+      <svg viewBox="0 0 700 760" aria-hidden="true">
+        <defs>
+          <radialGradient id="crustG" cx="45%" cy="25%" r="85%"><stop offset="0" stop-color="#E8AC66"/><stop offset=".45" stop-color="#BF7536"/><stop offset=".85" stop-color="#7E4019"/><stop offset="1" stop-color="#4A230C"/></radialGradient>
+          <radialGradient id="flourG" cx="36%" cy="30%" r="55%"><stop offset="0" stop-color="#FFF6E6" stop-opacity=".55"/><stop offset=".6" stop-color="#FFF6E6" stop-opacity=".12"/><stop offset="1" stop-color="#FFF6E6" stop-opacity="0"/></radialGradient>
+          <linearGradient id="bagG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2A55F"/><stop offset=".55" stop-color="#B86B2E"/><stop offset="1" stop-color="#6E3713"/></linearGradient>
+          <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
+          <filter id="dust"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .97  0 0 0 0 .9  0 0 0 -2.4 1.25"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+          <clipPath id="bouleClip"><path d="M92 360 C92 230 210 168 360 168 C510 168 628 230 628 360 C628 420 560 448 360 448 C160 448 92 420 92 360Z"/></clipPath>
+        </defs>
+        <ellipse cx="360" cy="470" rx="280" ry="40" fill="#000" opacity=".55" filter="url(#soft)"/>
+        <g transform="rotate(-24 330 610)">
+          <ellipse cx="300" cy="640" rx="330" ry="54" fill="#000" opacity=".4" filter="url(#soft)"/>
+          <rect x="-20" y="560" width="640" height="88" rx="44" fill="url(#bagG)"/>
+          <g fill="#F1CF97" opacity=".92"><ellipse cx="70" cy="598" rx="46" ry="9" transform="rotate(-14 70 598)"/><ellipse cx="190" cy="598" rx="46" ry="9" transform="rotate(-14 190 598)"/><ellipse cx="310" cy="598" rx="46" ry="9" transform="rotate(-14 310 598)"/><ellipse cx="430" cy="598" rx="46" ry="9" transform="rotate(-14 430 598)"/><ellipse cx="545" cy="598" rx="40" ry="8" transform="rotate(-14 545 598)"/></g>
+        </g>
+        <g transform="rotate(-16 360 330)">
+          <path d="M92 360 C92 230 210 168 360 168 C510 168 628 230 628 360 C628 420 560 448 360 448 C160 448 92 420 92 360Z" fill="url(#crustG)"/>
+          <g clip-path="url(#bouleClip)">
+            <g fill="#2E1406" fill-opacity=".55" transform="translate(4 9)">
+              <path d="M150 330 Q215 268 300 262 Q232 312 150 330Z"/><path d="M270 318 Q350 250 440 250 Q365 300 270 318Z"/><path d="M410 316 Q490 256 572 268 Q500 306 410 316Z"/>
+            </g>
+            <g fill="#F2D6A2">
+              <path d="M150 330 Q215 268 300 262 Q232 312 150 330Z"/><path d="M270 318 Q350 250 440 250 Q365 300 270 318Z"/><path d="M410 316 Q490 256 572 268 Q500 306 410 316Z"/>
+            </g>
+            <g fill="none" stroke="#7A3D15" stroke-width="3" stroke-linecap="round" opacity=".8">
+              <path d="M150 330 Q215 268 300 262"/><path d="M270 318 Q350 250 440 250"/><path d="M410 316 Q490 256 572 268"/>
+            </g>
+            <rect x="80" y="150" width="560" height="310" fill="#fff" filter="url(#dust)" opacity=".45"/>
+          </g>
+          <path d="M92 360 C92 230 210 168 360 168 C510 168 628 230 628 360 C628 420 560 448 360 448 C160 448 92 420 92 360Z" fill="url(#flourG)"/>
+        </g>
+      </svg>
+    </div>
+    <span class="caption">イラストはイメージです</span>
+    <p class="vert" aria-hidden="true">住宅街で焼く、本格のパン</p>
+    <div class="title">
+      <p class="kicker">Boulangerie ／ 浦安市富士見</p>
+      <h1><span class="w"><span>Sens</span></span></h1>
+      <p class="ja">ブーランジェリー サンス</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（87件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Baguette</span><span>バゲット</span><span>Pain dur</span><span>ハード系</span><span>Melon pan</span><span>メロンパン</span><span>Oignon</span><span>オニョン</span><span>Tarte aux pommes</span><span>アップルパイ</span>
+      <span>Baguette</span><span>バゲット</span><span>Pain dur</span><span>ハード系</span><span>Melon pan</span><span>メロンパン</span><span>Oignon</span><span>オニョン</span><span>Tarte aux pommes</span><span>アップルパイ</span>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>凛とした、</span></span><span class="line"><span><em>焼き色</em>。</span></span></h2>
+    <div>
+      <div class="cuts" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="lead" style="margin-top:22px">口コミに並ぶのは <q>表皮が美しい</q> <q>外はカリカリ、中はふわふわ</q> <q>本格的な味</q> という言葉。ハード系のパンを目当てに通う常連さんもいる、浦安・富士見の住宅街の<span style="white-space:nowrap">ブーランジェリーです。</span></p>
+      <div class="stars" style="margin-top:28px"><b>4.5</b><span>Googleの口コミ 87件の平均（2026年10月）</span></div>
+    </div>
+  </section>
+
+  <section class="week" aria-labelledby="week-title">
+    <div class="pin">
+      <h2 id="week-title">開いているのは、<br><em>土曜から火曜</em>までの4日。</h2>
+      <div class="face" id="face">
+        <div class="dayrow"><span class="dayname" id="dayname">Sam.</span><span class="dayja" id="dayja">土曜日</span></div>
+        <div class="clockline"><span class="tnow" id="tnow">13:00</span><span class="range" id="range">10:00 – 18:00</span></div>
+        <div class="case" aria-hidden="true">
+          <div class="tray" id="tray1"></div>
+          <div class="tray" id="tray2"></div>
+          <div class="shutter"><span>お休み</span></div>
+        </div>
+      </div>
+      <div class="foot-w">
+        <p class="msg" id="msg">土曜の13時で残りわずかだった、という口コミも。</p>
+        <div class="strip" id="strip" aria-label="営業日">
+          <span class="o" data-d="6">土</span><span class="o" data-d="0">日</span><span class="o" data-d="1">月</span><span class="o" data-d="2">火</span><span class="x" data-d="3">水</span><span class="x" data-d="4">木</span><span class="x" data-d="5">金</span>
+        </div>
+        <p class="note">※営業日・時間はGoogleマップの情報（2026年10月）。棚の減り方はイメージで、実際の焼き上がり時間に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass" aria-labelledby="glass-title">
+    <figure>
+      <svg class="caseart" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ショーケースに並ぶパンのイラスト（イメージ）">
+        <defs>
+          <linearGradient id="roomG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A3328"/><stop offset=".5" stop-color="#2A2230"/><stop offset="1" stop-color="#121729"/></linearGradient>
+          <linearGradient id="lampG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2AE" stop-opacity=".55"/><stop offset="1" stop-color="#FFE2AE" stop-opacity="0"/></linearGradient>
+          <radialGradient id="melonG" cx="40%" cy="30%" r="75%"><stop offset="0" stop-color="#F6D79A"/><stop offset="1" stop-color="#C98F45"/></radialGradient>
+          <linearGradient id="carreG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7B26C"/><stop offset="1" stop-color="#9C5A26"/></linearGradient>
+          <linearGradient id="bagG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2A55F"/><stop offset="1" stop-color="#8A4A1C"/></linearGradient>
+          <radialGradient id="bouleG2" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#DDA05E"/><stop offset="1" stop-color="#6E3713"/></radialGradient>
+          <symbol id="melon" viewBox="0 0 120 70"><path d="M8 66C8 30 30 8 60 8s52 22 52 58z" fill="url(#melonG)"/><g stroke="#B57A36" stroke-width="2" opacity=".7" fill="none"><path d="M30 20l50 46M52 10l52 48M18 38l34 28M90 20l-50 46M68 10l-52 48M102 38l-34 28"/></g></symbol>
+          <symbol id="carre" viewBox="0 0 110 80"><rect x="8" y="16" width="94" height="60" rx="12" fill="url(#carreG)"/><path d="M28 30l54 32M82 30l-54 32" stroke="#F3D7A4" stroke-width="4" stroke-linecap="round"/><ellipse cx="55" cy="22" rx="16" ry="12" fill="#6B3A1C"/><ellipse cx="51" cy="18" rx="5" ry="3" fill="#A8683A"/></symbol>
+          <symbol id="pie" viewBox="0 0 120 70"><path d="M6 66a54 54 0 0 1 108 0z" fill="#D6964F"/><path d="M14 66a46 46 0 0 1 92 0" fill="none" stroke="#F0C78A" stroke-width="4"/><g stroke="#8A4A1C" stroke-width="3" stroke-linecap="round"><path d="M40 38l8 12M58 30l2 14M76 36l-6 12"/></g></symbol>
+          <symbol id="bag" viewBox="0 0 300 50"><rect x="4" y="6" width="292" height="40" rx="20" fill="url(#bagG2)"/><g fill="#F1CF97"><ellipse cx="50" cy="24" rx="26" ry="5" transform="rotate(-14 50 24)"/><ellipse cx="115" cy="24" rx="26" ry="5" transform="rotate(-14 115 24)"/><ellipse cx="180" cy="24" rx="26" ry="5" transform="rotate(-14 180 24)"/><ellipse cx="245" cy="24" rx="24" ry="5" transform="rotate(-14 245 24)"/></g></symbol>
+          <symbol id="boule" viewBox="0 0 130 90"><path d="M6 86C6 40 32 6 65 6s59 34 59 80z" fill="url(#bouleG2)"/><path d="M30 52q35-14 70 0M44 26q20 30 42 0" stroke="#F3D39E" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
+        </defs>
+        <rect width="900" height="900" fill="url(#roomG)"/>
+        <rect x="0" y="0" width="900" height="300" fill="url(#lampG)"/>
+        <rect x="70" y="190" width="760" height="640" rx="18" fill="#0D1222" opacity=".55"/>
+        <rect x="70" y="190" width="760" height="640" rx="18" fill="none" stroke="#C8CEDD" stroke-opacity=".35" stroke-width="4"/>
+        <rect x="90" y="205" width="720" height="10" rx="5" fill="#FFE2AE" opacity=".7"/>
+        <g fill="#6B4A2F"><rect x="90" y="402" width="720" height="10" rx="3"/><rect x="90" y="602" width="720" height="10" rx="3"/><rect x="90" y="802" width="720" height="10" rx="3"/></g>
+        <use href="#melon" x="120" y="330" width="150" height="88"/><use href="#melon" x="300" y="330" width="150" height="88"/><use href="#melon" x="480" y="330" width="150" height="88"/><use href="#melon" x="650" y="342" width="130" height="76" opacity=".95"/>
+        <use href="#carre" x="115" y="510" width="135" height="98"/><use href="#carre" x="270" y="510" width="135" height="98"/><use href="#pie" x="440" y="526" width="150" height="88"/><use href="#pie" x="615" y="526" width="150" height="88"/>
+        <use href="#bag" x="100" y="730" width="380" height="64"/><use href="#bag" x="120" y="752" width="360" height="60"/><use href="#boule" x="520" y="700" width="150" height="104"/><use href="#boule" x="670" y="716" width="130" height="90"/>
+        <g opacity=".14" fill="#fff"><path d="M180 190h120L120 830H70V780z"/><path d="M360 190h40L220 830h-40z"/><path d="M640 190h90L560 830h-90z"/></g>
+      </svg>
+      <span class="glare" aria-hidden="true"></span>
+      <span class="cap">イラストはイメージです</span>
+      <div class="over"><h2 id="glass-title"><span class="line"><span>ガラスの</span></span><span class="line"><span>向こうから、</span></span><span class="line"><span>選ぶ。</span></span></h2></div>
+    </figure>
+    <div class="body">
+      <p>パンは、ケーキ屋さんのようなショーケースの奥に並んでいます。小さな子がパンに直接さわれないので、子ども連れでも安心だった、という声があります。</p>
+      <div class="chips"><span>店内は清潔</span><span>イートインなし</span><span>お持ち帰り</span></div>
+    </div>
+  </section>
+
+  <section class="breads" aria-labelledby="breads-title">
+    <div class="sec-head">
+      <h2 id="breads-title">口コミに<br>名前が出てくる<br>パン</h2>
+      <p>並ぶパンは日によって変わります。<br>実際のラインナップに差し替えます</p>
+    </div>
+    <ol class="list">
+      <li><span class="no">01</span><h3>バゲット<small>Baguette</small></h3><p>ハード系が好きで通う常連さんが、特においしいと名前を挙げる一本。</p></li>
+      <li><span class="no">02</span><h3>カレ（マロン）<small>Carré</small></h3><p>形がかわいくて、味も本格的。デザート系のパンが得意なのでは、という声も。</p></li>
+      <li><span class="no">03</span><h3>アップルパイ</h3><p>カレと一緒に買って、すっかりお店のファンになったという口コミに登場。</p></li>
+      <li><span class="no">04</span><h3>メロンパン・オニョン</h3><p>どちらも外はカリッと、中はふんわり。</p></li>
+      <li><span class="no">05</span><h3>練乳クリームパン<br>ピーナッツクリームパン</h3><p>クリームの塩気と甘さのバランスがいい、という声。</p></li>
+    </ol>
+    <p class="src">※Googleの口コミで名前が挙がったパンから選んでいます（内容は口コミの要旨）。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間は<br>Googleマップの情報（2026年10月）</p>
+    </div>
+    <div class="days" aria-hidden="true">
+      <span class="on">Sam.</span><span class="on">Dim.</span><span class="on">Lun.</span><span class="on">Mar.</span><span>Mer.</span><span>Jeu.</span><span>Ven.</span>
+      <b>10:00 — 18:00</b>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1"><span>月</span><span>10:00 – 18:00</span></li>
+          <li data-d="2"><span>火</span><span>10:00 – 18:00</span></li>
+          <li data-d="3" class="closed"><span>水</span><span>お休み</span></li>
+          <li data-d="4" class="closed"><span>木</span><span>お休み</span></li>
+          <li data-d="5" class="closed"><span>金</span><span>お休み</span></li>
+          <li data-d="6"><span>土</span><span>10:00 – 18:00</span></li>
+          <li data-d="0"><span>日</span><span>10:00 – 18:00</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram でお知らせします。</p>
+      </div>
+      <div>
+        <p class="addr">〒279-0043<br>千葉県浦安市富士見4-15-10</p>
+        <div class="map"><iframe title="ブーランジェリー サンスの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Boulangerie%20Sens%20%E5%8D%83%E8%91%89%E7%9C%8C%E6%B5%A6%E5%AE%89%E5%B8%82%E5%AF%8C%E5%A3%AB%E8%A6%8B4-15-10&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="tip"><b>住宅街の中にあります</b>初めての方は通り過ぎてしまうことも。地図を見ながら、ゆっくりお越しください。<span class="fill-in">目印になるものを入れます</span></div>
+        <div class="tip"><b>車でお越しの方へ</b>道幅がせまいので、停める時はご注意ください。<span class="fill-in">駐車の可否と停める場所を、お店の案内に合わせて書きます</span></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=8143465390879468449" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>パンの取り置きはできますか？</summary><p>予約して取り置きしてもらえた、という口コミがあります。<span class="fill-in">予約の方法（電話・Instagram の DM など）と受け取りの時間を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p>口コミでは、現金と PayPay が使えたという声があります。<span class="fill-in">最新の対応に合わせて書き直します。</span></p></details>
+    <details><summary>午後に行っても買えますか？</summary><p>土曜の午後には残りわずかだった、という口コミがあります。種類を選びたい日は早めの時間か、取り置きがおすすめです。</p></details>
+    <details><summary>店内で食べられますか？</summary><p>イートインはなく、お持ち帰りのお店です（口コミより）。<span class="fill-in">変更があれば差し替えます。</span></p></details>
+    <details><summary>子ども連れでも大丈夫ですか？</summary><p>パンはショーケースの奥に並んでいて、お子さんが直接さわれない作りです。</p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <h2 id="gram-title">今日のパンと<br>臨時のお休みは、<br>Instagramで。</h2>
+      <p>その日の焼き上がりやお知らせは、Instagram で発信しています。</p>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/boulangerie_sens/" target="_blank" rel="noopener">@boulangerie_sens を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">Sens</p>
+  <p>ブーランジェリー サンス<br>千葉県浦安市富士見4-15-10<br>土・日・月・火 10:00–18:00　水・木・金 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。イラストはイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=8143465390879468449" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0477201015">電話</a>
+  <a href="https://www.instagram.com/boulangerie_sens/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const killLoader = () => document.querySelector('.loader')?.remove();
+  setTimeout(killLoader, 6000); /* 何があっても幕は6秒で外す */
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 6: [10, 18], 0: [10, 18], 1: [10, 18], 2: [10, 18] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  document.querySelector(`#hours li[data-d="${d}"]`)?.classList.add('is-today');
+
+  /* 週の章: ショーケースのパン（6個×2段） */
+  const baguette = '<svg viewBox="0 0 64 30"><path d="M4 22c0-8 12-13 28-13s28 5 28 13c0 3-12 5-28 5S4 25 4 22z" fill="#C98A4B"/><path d="M16 16l7-5M28 15l7-5M40 15l7-5" stroke="#7A4520" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  const boule = '<svg viewBox="0 0 64 30"><path d="M12 27C12 13 21 4 32 4s20 9 20 23z" fill="#B8662F"/><path d="M22 18l20-8M24 10l16 12" stroke="#6B3818" stroke-width="2.2" stroke-linecap="round"/><path d="M10 27h44" stroke="#F2ECE1" stroke-opacity=".3" stroke-width="2"/></svg>';
+  const bun = '<svg viewBox="0 0 64 30"><ellipse cx="32" cy="20" rx="17" ry="9" fill="#E3B072"/><path d="M22 18c6-4 14-4 20 0" stroke="#B8662F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  const pick = [baguette, bun, boule, bun, baguette, boule, boule, bun, baguette, bun, boule, bun];
+  pick.forEach((s, i) => document.getElementById(i < 6 ? 'tray1' : 'tray2').insertAdjacentHTML('beforeend', s));
+  const items = [...document.querySelectorAll('.tray svg')];
+  const ORDER = [6, 0, 1, 2, 3, 4, 5];
+  const FR = { 6: 'Sam.', 0: 'Dim.', 1: 'Lun.', 2: 'Mar.', 3: 'Mer.', 4: 'Jeu.', 5: 'Ven.' };
+  const face = document.getElementById('face'), dayname = document.getElementById('dayname'), dayja = document.getElementById('dayja');
+  const tnow = document.getElementById('tnow'), range = document.getElementById('range'), msg = document.getElementById('msg');
+  const stripEls = [...document.querySelectorAll('#strip span')];
+  let lastKey = '';
+  const setWeek = p => {
+    const x = Math.min(6.999, Math.max(0, p * 7));
+    const idx = Math.floor(x), sub = x - idx, day = ORDER[idx], hrs = HOURS[day];
+    const hr = hrs ? Math.round((10 + sub * 8) * 2) / 2 : null;
+    const key = `${day}-${hr}`;
+    if (key === lastKey) return; lastKey = key;
+    dayname.textContent = FR[day];
+    dayja.textContent = NAMES[day] + '曜日';
+    stripEls.forEach(el => el.classList.toggle('cur', +el.dataset.d === day));
+    face.classList.toggle('closed-day', !hrs);
+    if (!hrs) {
+      tnow.textContent = 'お休み'; tnow.classList.add('off'); range.textContent = '定休日';
+      items.forEach(el => el.classList.remove('on'));
+      msg.textContent = day === 5 ? '水・木・金はお休み。次に開くのは土曜日の10時です。' : '水・木・金はお休みです。';
+      return;
+    }
+    tnow.classList.remove('off');
+    tnow.textContent = fmt(Math.min(hr, 18)); range.textContent = '10:00 – 18:00';
+    const sat = day === 6;
+    const left = sat ? Math.max(1, Math.round(12 - (hr - 10) * 3.4)) : Math.max(3, Math.round(12 - (hr - 10) * 1.2));
+    items.forEach((el, i) => el.classList.toggle('on', i < left));
+    msg.textContent =
+      hr < 11 ? '10時、開店。ショーケースが焼きたてで埋まります。' :
+      sat && hr >= 13 ? '土曜の13時で残りわずかだった、という口コミも。' :
+      hr < 15 ? '人気のパンから、少しずつ減っていきます。' :
+      '確実に買いたいパンは、予約で取り置きを（口コミより）。';
+  };
+  setWeek((0 + 3 / 8) / 7); /* 土曜 13:00 */
+  if (matchMedia('(min-width: 900px)').matches) document.querySelector('.caseart').setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) { killLoader(); document.getElementById('dock').classList.add('show'); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出: 切り込みを3本入れ、斜めに幕を開ける */
+  const cuts = [...document.querySelectorAll('.loader .cut')];
+  cuts.forEach(c => { const L = c.getTotalLength(); c.style.strokeDasharray = L; c.style.strokeDashoffset = L; });
+  const loader = document.querySelector('.loader');
+  const wipe = { p: 0 };
+  const setWipe = () => { const a = wipe.p * 140; loader.style.clipPath = `polygon(${a}% 0, 100% 0, 100% 100%, ${a - 40}% 100%)`; };
+  setWipe();
+  gsap.set('.hero h1 .w span', { yPercent: 105 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .ja, .hero .meta', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to(cuts, { strokeDashoffset: 0, duration: 0.45, stagger: 0.16, ease: 'power2.inOut' })
+       .to('.loader .name', { opacity: 1, duration: 0.6 }, '-=0.1')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '<')
+       .to(wipe, { p: 1, duration: 1.1, ease: 'power3.inOut', onUpdate: setWipe }, '+=0.3')
+       .to('.hero .art svg', { scale: 1, rotation: 0, duration: 2.2, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2 }, '-=2')
+       .to('.hero .vert, .hero .kicker, .hero .ja, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(killLoader);
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const headEl = document.getElementById('head');
+  const solid = () => headEl.classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', solid, { passive: true }); solid();
+  ScrollTrigger.create({ start: () => innerHeight * 0.5, onEnter: () => document.getElementById('dock').classList.add('show') });
+
+  gsap.to('.hero .art', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+  gsap.from('.cuts i', { scaleX: 0, duration: 0.6, stagger: 0.12, ease: 'power2.out', scrollTrigger: { trigger: '.cuts', start: 'top 90%' } });
+
+  /* 週の章: スクロールで 土→金 と1日ずつ進める */
+  ScrollTrigger.create({
+    trigger: '.week', start: 'top top', end: '+=320%', pin: '.week .pin', scrub: true,
+    onUpdate: s => setWeek(s.progress)
+  });
+
+  /* ガラスの章: 写真が中央から開き、ガラスの映り込みが横切る */
+  const fig = document.querySelector('.glass figure');
+  const open2 = { v: 18 };
+  const setOpen = () => { fig.style.clipPath = `inset(${open2.v}% ${open2.v * 0.6}% ${open2.v}% ${open2.v * 0.6}% round ${open2.v}px)`; };
+  setOpen();
+  gsap.to(open2, { v: 0, ease: 'none', onUpdate: setOpen, scrollTrigger: { trigger: '.glass', start: 'top 95%', end: 'top 15%', scrub: true } });
+  gsap.fromTo('.glass figure .caseart', { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.glass', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.fromTo('.glare', { left: '-60%' }, { left: '130%', ease: 'none', scrollTrigger: { trigger: '.glass figure', start: 'top 60%', end: 'bottom 30%', scrub: true } });
+
+  /* パンの一覧: 1行ずつ下線が走る */
+  gsap.utils.toArray('.list li').forEach(li => {
+    ScrollTrigger.create({ trigger: li, start: 'top 82%', onEnter: () => li.classList.add('lit') });
+    gsap.from(li.children, { y: 24, opacity: 0, duration: 0.9, stagger: 0.06, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 90%' } });
+  });
+
+  gsap.from('.days > *', { y: 30, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.out', scrollTrigger: { trigger: '.days', start: 'top 85%' } });
+
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
