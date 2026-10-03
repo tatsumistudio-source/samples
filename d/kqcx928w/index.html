@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#16213D">
+<title>crepe ＆ bake AN（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Kaisei+Decol:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #16213D;     /* 紺色のひさし */
+  --deep: #0C1328;     /* 鉄板の黒に近い紺 */
+  --navy2: #24345F;
+  --batter: #FBF4E6;   /* 生地のクリーム */
+  --paper: #F3E8D2;
+  --caramel: #DE9B4C;  /* 焼き色。ボタンと大事な語だけ */
+  --toast: #A9662A;
+  --berry: #D8434F;
+  --ink: #1A2036;
+  --mist: #AEB6CF;
+  --line: rgba(251,244,230,.16);
+  --display: "Kaisei Decol", serif;
+  --latin: "Fraunces", serif;
+  --sans: "Zen Maru Gothic", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--batter); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; line-break: strict; }
+h1, h2, h3, summary, .tip b, .steps li b, .tag { word-break: keep-all; overflow-wrap: anywhere; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--caramel); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.la { font-family: var(--latin); font-style: italic; font-weight: 400; font-variation-settings: "SOFT" 100, "WONK" 1; letter-spacing: -.01em; }
+.nw { white-space: nowrap; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--caramel); color: var(--deep); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: 鉄板に生地がひろがる */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--navy); display: grid; place-items: center; }
+.loader svg { width: min(64vw, 340px); height: auto; overflow: visible; }
+.loader .word { font-family: var(--latin); font-style: italic; font-weight: 600; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 112px; fill: var(--navy); }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--mist); font-size: 12px; letter-spacing: .32em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--batter); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(22,33,61,.88); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--latin); font-style: italic; font-weight: 600; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 26px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(12,19,40,.4); backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mist); }
+.status.open i { background: #7FD49A; box-shadow: 0 0 0 4px rgba(127,212,154,.2); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--navy); color: var(--batter); }
+.hero picture, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero img { object-position: 50% 85%; transform: scale(1.14); transform-origin: 50% 70%; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,19,40,.55) 0%, rgba(12,19,40,0) 42%, rgba(12,19,40,0) 66%, rgba(12,19,40,.85) 100%); }
+.hero .title { position: absolute; z-index: 2; left: var(--g); right: var(--g); top: 92px; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--mist); }
+.hero h1 { font-weight: 400; line-height: 1; margin-top: 8px; }
+.hero h1 .small { display: block; font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: clamp(30px, 9vw, 64px); letter-spacing: -.01em; }
+.hero h1 .small b { font-weight: 300; color: var(--caramel); }
+.hero h1 .big { display: block; font-family: var(--latin); font-style: italic; font-weight: 600; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: clamp(132px, 44vw, 360px); line-height: .78; letter-spacing: -.05em; margin-left: -.05em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .16em .06em 0; vertical-align: top; }
+.hero h1 .w > span { display: inline-block; }
+.hero .bottom { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: calc(88px + env(safe-area-inset-bottom)); display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.hero .tag { font-family: var(--display); font-size: clamp(18px, 5vw, 28px); line-height: 1.6; text-shadow: 0 2px 18px rgba(0,0,0,.4); }
+.hero .rate { text-align: right; font-size: 12px; color: var(--mist); line-height: 1.4; flex: none; }
+.hero .rate b { display: block; font-family: var(--latin); font-style: italic; font-weight: 600; font-size: 40px; color: var(--caramel); line-height: 1; }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); bottom: calc(66px + env(safe-area-inset-bottom)); font-size: 10px; color: rgba(251,244,230,.7); }
+
+/* ひさし（紺の帯＋波の縁）と流れる文字 */
+.awning { position: relative; background: var(--navy); color: var(--batter); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.awning .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--latin); font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: clamp(30px, 8.4vw, 66px); line-height: 1; }
+.awning .track span:nth-child(even) { font-family: var(--sans); font-style: normal; font-weight: 700; font-size: .42em; color: var(--caramel); letter-spacing: .08em; }
+@keyframes slide { to { transform: translateX(-50%); } }
+.scallop { height: 22px; background: radial-gradient(circle at 50% 0, var(--navy) 12px, transparent 12.5px) 0 0 / 26px 22px repeat-x; }
+.scallop.deep { background-image: radial-gradient(circle at 50% 0, var(--deep) 12px, transparent 12.5px); }
+
+/* 語りの章 */
+.story { padding: clamp(72px, 14vw, 170px) var(--g) clamp(56px, 10vw, 120px); display: grid; gap: 40px; }
+.story .big { font-family: var(--display); font-weight: 500; font-size: clamp(44px, 13vw, 112px); line-height: 1.22; letter-spacing: .02em; color: var(--navy); }
+.story .big em { font-style: normal; color: var(--toast); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #4A4F63; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--navy); font-weight: 700; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(26,32,54,.14); font-size: 13px; color: #5D6278; }
+.stars b { font-family: var(--latin); font-style: italic; font-weight: 600; font-size: 48px; color: var(--navy); line-height: 1; }
+.words { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.words span { padding: 6px 14px; border-radius: 999px; background: var(--paper); color: var(--navy); font-size: 13px; font-weight: 700; }
+
+/* 大きな写真の見せ場 */
+.showcase { position: relative; height: 110svh; min-height: 640px; overflow: hidden; background: var(--deep); color: var(--batter); }
+.showcase .ph { position: absolute; inset: 0; }
+.showcase img { width: 100%; height: 120%; object-fit: cover; }
+.showcase::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,19,40,.65) 0%, rgba(12,19,40,.1) 40%, rgba(12,19,40,.1) 60%, rgba(12,19,40,.75) 100%); }
+.showcase .txt { position: absolute; z-index: 2; left: var(--g); right: var(--g); top: 14svh; }
+.showcase h2 { font-family: var(--display); font-weight: 500; font-size: clamp(34px, 10vw, 92px); line-height: 1.3; }
+.showcase .foot-txt { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: 10svh; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; font-size: 13px; color: var(--mist); }
+.showcase .foot-txt .la { font-size: clamp(26px, 7vw, 54px); color: var(--batter); line-height: 1; }
+.cap { position: absolute; right: 10px; bottom: 8px; z-index: 3; font-size: 10px; color: rgba(255,255,255,.82); }
+
+/* 一枚が焼けるまで（スクロールで工程が進む） */
+.bake { position: relative; background: var(--deep); color: var(--batter); }
+.bake .pin { min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; gap: 10px; padding: 84px var(--g) calc(104px + env(safe-area-inset-bottom)); }
+.bake h2 { font-family: var(--display); font-weight: 500; font-size: clamp(24px, 6.6vw, 44px); line-height: 1.45; }
+.bake h2 em { font-style: normal; color: var(--caramel); }
+.stage { align-self: center; justify-self: center; position: relative; width: min(78vw, 34svh, 460px); aspect-ratio: 1; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 2.4em 1fr; column-gap: 6px; padding: 7px 0; border-top: 1px solid var(--line); opacity: .38; transition: opacity .35s; }
+.steps li .n { font-family: var(--latin); font-style: italic; font-size: 15px; color: var(--caramel); line-height: 1.6; }
+.steps li b { font-weight: 700; font-size: 15px; line-height: 1.6; }
+.steps li p { grid-column: 2; font-size: 13.5px; color: var(--mist); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.steps li.on { opacity: 1; }
+.steps li.on p { max-height: 6em; }
+.static .steps li { opacity: 1; }
+.static .steps li p { max-height: none; }
+.bake .meter { height: 2px; background: var(--line); margin-top: 12px; position: relative; }
+.bake .meter i { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: var(--caramel); }
+.bake .note { font-size: 11px; color: #7E87A6; margin-top: 8px; }
+
+/* メニュー */
+.menu { padding: clamp(80px, 13vw, 160px) 0 0; overflow-x: clip; }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-family: var(--display); font-weight: 500; font-size: clamp(32px, 9vw, 72px); line-height: 1.3; color: var(--navy); }
+.sec-head p { font-size: 12px; color: #6A6F84; max-width: 18em; }
+.feature { display: none; position: relative; overflow: hidden; border-radius: 22px; background: var(--navy); aspect-ratio: 4 / 5; }
+.feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .7s ease, transform 1.2s ease; }
+.feature img.on { opacity: 1; transform: scale(1); }
+.feature .cap { z-index: 2; }
+.feature .label { position: absolute; z-index: 2; left: 16px; bottom: 14px; font-family: var(--latin); font-style: italic; font-size: 22px; color: var(--batter); text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+.item .pic { grid-column: 1 / -1; margin: 14px 0 6px; position: relative; overflow: hidden; border-radius: 18px; background: var(--navy); }
+.item .pic img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.list { padding: 0 var(--g); }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 22px 0 20px; border-top: 1px solid rgba(26,32,54,.14); position: relative; }
+.item:last-child { border-bottom: 1px solid rgba(26,32,54,.14); }
+.item .la { grid-column: 1; font-size: clamp(32px, 9.2vw, 72px); min-width: 0; line-height: 1.02; color: var(--navy); }
+.item .no { font-family: var(--latin); font-style: italic; font-size: 14px; color: var(--toast); align-self: start; padding-top: 6px; }
+.item h3 { grid-column: 1 / -1; font-size: 17px; font-weight: 700; color: var(--navy); margin-top: 6px; }
+.item h3 small { font-size: 12px; font-weight: 500; color: var(--toast); margin-left: 8px; }
+.item p { grid-column: 1 / -1; color: #4A4F63; font-size: 14.5px; max-width: 30em; }
+.item .price { grid-column: 1 / -1; margin-top: 6px; }
+.fill-in { background: rgba(222,155,76,.22); color: #8A4E14; padding: 1px 6px; border-radius: 4px; font-size: .92em; }
+.src { padding: 18px var(--g) 0; font-size: 11px; color: #7A7F94; }
+
+/* 来店 */
+.visit { background: var(--navy); color: var(--batter); padding: clamp(72px, 12vw, 150px) var(--g) 64px; margin-top: clamp(80px, 12vw, 140px); position: relative; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--batter); }
+.visit .sec-head p { color: var(--mist); }
+.tips { display: grid; gap: 12px; margin-bottom: 44px; }
+.tip { display: grid; grid-template-columns: 52px 1fr; gap: 14px; align-items: start; padding: 18px; border-radius: 18px; background: rgba(251,244,230,.06); border: 1px solid var(--line); }
+.tip svg { width: 52px; height: 52px; }
+.tip b { display: block; font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.45; margin-bottom: 4px; }
+.tip div > span { font-size: 14px; color: #D7DCEA; line-height: 1.75; display: block; }
+.tip .fill-in { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--caramel); background: rgba(222,155,76,.16); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 26px; background: rgba(12,19,40,.35); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mist); flex: none; }
+.today.open .dot { background: #7FD49A; box-shadow: 0 0 0 6px rgba(127,212,154,.16); }
+.today b { font-family: var(--display); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--mist); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--caramel); font-weight: 700; }
+.hours li.closed span:last-child { color: #8C95B3; }
+.small { font-size: 11.5px; color: var(--mist); }
+.addr { margin-top: 40px; font-family: var(--display); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #1E2B4E; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: saturate(.5) contrast(1.02); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--caramel); color: var(--deep); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(80px, 13vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(26,32,54,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--display); font-size: 18px; font-weight: 500; color: var(--navy); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--toast),var(--toast)) center/14px 1.5px no-repeat, linear-gradient(var(--toast),var(--toast)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4A4F63; font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(80px, 13vw, 150px); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 26px; border-radius: 14px; overflow: hidden; }
+.tiles img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.gram h2 { font-family: var(--display); font-size: clamp(26px, 7vw, 46px); font-weight: 500; line-height: 1.45; color: var(--navy); }
+.gram p { margin-top: 10px; color: #4A4F63; font-size: 15px; }
+.gram .btn.fill { background: var(--navy); color: var(--batter); }
+
+/* 最後 */
+.foot { background: var(--deep); color: var(--mist); padding: 56px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--latin); font-style: italic; font-weight: 600; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--batter); font-size: clamp(170px, 56vw, 520px); line-height: .8; letter-spacing: -.06em; margin: 0 0 36px -.06em; }
+.foot .huge span { color: var(--caramel); }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(22,33,61,.84); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.28); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--batter); }
+.dock a.main { background: var(--caramel); color: var(--deep); }
+
+@media (min-width: 900px) {
+  .hero img { object-position: 70% 60%; }
+  .hero::after { background: linear-gradient(90deg, rgba(12,19,40,.75) 0%, rgba(12,19,40,.3) 40%, rgba(12,19,40,0) 60%), linear-gradient(180deg, rgba(12,19,40,.4) 0%, rgba(12,19,40,0) 30%, rgba(12,19,40,0) 70%, rgba(12,19,40,.6) 100%); }
+  .hero .title { top: auto; bottom: calc(150px + 4vh); right: 45%; }
+  .hero .bottom { right: 45%; bottom: 72px; }
+  .hero .caption { bottom: 24px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.15fr .85fr; align-items: end; column-gap: 80px; }
+  .bake .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 72px; padding-top: 110px; }
+  .bake h2 { grid-column: 1 / -1; }
+  .stage { width: min(38vw, 62svh, 520px); }
+  .bake .side { align-self: center; }
+  .steps li b { font-size: 18px; }
+  .steps li p { font-size: 15px; }
+  .menu .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; padding: 0 var(--g); align-items: start; }
+  .feature { display: block; margin: 0; position: sticky; top: 110px; }
+  .item .pic { display: none; }
+  .list { padding: 0; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .tips { grid-template-columns: repeat(3, 1fr); }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .awning .track { animation: none; }
+  .hero img, .feature img { transform: none; transition: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <svg viewBox="-200 -200 400 400">
+    <circle r="190" fill="#0C1328"/>
+    <circle r="190" fill="none" stroke="#24345F" stroke-width="5"/>
+    <circle id="ld-batter" r="0" fill="#F6E7C6"/>
+    <g id="ld-rake" opacity="0"><path d="M-6 -150 H6 V40 H-6 Z" fill="#C79A63"/><rect x="-70" y="-160" width="140" height="12" rx="6" fill="#B4844F"/></g>
+    <text class="word" id="ld-word" text-anchor="middle" y="38" opacity="0">AN</text>
+  </svg>
+  <div class="sub">CREPE &amp; BAKE</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">AN</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="crepe ＆ bake AN">
+    <picture>
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="紙に包んだ苺とクリームのクレープ（イメージ）">
+    </picture>
+    <div class="title">
+      <p class="kicker">Crêpes &amp; gâteaux ／ 船橋市南本町</p>
+      <h1>
+        <span class="small"><span class="w"><span>crepe <b>&amp;</b> bake</span></span></span>
+        <span class="big"><span class="w"><span>AN</span></span></span>
+      </h1>
+    </div>
+    <div class="bottom">
+      <p class="tag">注文を受けてから、<br>一枚ずつ焼くクレープ。</p>
+      <p class="rate"><b>4.6</b>Googleの口コミ<br>108件</p>
+    </div>
+    <span class="caption">写真はイメージです</span>
+  </section>
+
+  <div class="awning" aria-hidden="true">
+    <div class="track">
+      <span>Fraises</span><span>苺</span><span>Sucre-beurre</span><span>シュガーバター</span><span>Citron meringué</span><span>レモンメレンゲ</span><span>Chocolat-banane</span><span>チョコバナナ</span><span>Salée</span><span>おかずクレープ</span><span>Gâteaux</span><span>焼き菓子</span>
+      <span>Fraises</span><span>苺</span><span>Sucre-beurre</span><span>シュガーバター</span><span>Citron meringué</span><span>レモンメレンゲ</span><span>Chocolat-banane</span><span>チョコバナナ</span><span>Salée</span><span>おかずクレープ</span><span>Gâteaux</span><span>焼き菓子</span>
+    </div>
+  </div>
+  <div class="scallop" aria-hidden="true"></div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>生地が、</span></span><span class="line"><span><em>主役</em>の</span></span><span class="line"><span>クレープ。</span></span></h2>
+    <div>
+      <p class="lead">船橋駅から少し歩いた住宅街。紺色のひさしの小さなお店で、注文を受けてから一枚ずつ焼いています。口コミに並ぶのは、具よりも先に生地をほめる言葉です。</p>
+      <div class="words" aria-label="口コミによく出てくる言葉"><span>もちもち</span><span>サクサク</span><span>香ばしい</span><span>薄いのに存在感</span></div>
+      <div class="stars"><b>4.6</b><span>Googleの口コミ 108件の平均（2026年10月）</span></div>
+    </div>
+  </section>
+
+  <section class="showcase" aria-label="鉄板で焼ける生地">
+    <div class="ph"><img src="img/griddle.jpg" alt="丸い鉄板の上で焼き色がついたクレープ生地（イメージ）" loading="lazy"></div>
+    <div class="txt"><h2><span class="line"><span>焼き色まで、</span></span><span class="line"><span>ひと皿の仕事。</span></span></h2></div>
+    <div class="foot-txt"><span class="la">One crêpe at a time.</span></div>
+    <span class="cap">写真はイメージです</span>
+  </section>
+
+  <section class="bake" id="bake" aria-labelledby="bake-title">
+    <div class="pin">
+      <h2 id="bake-title">一枚が<em>焼きあがるまで</em>を、<br>スクロールで。</h2>
+      <div class="stage" aria-hidden="true">
+        <svg viewBox="-200 -200 400 400" id="griddle">
+          <defs>
+            <radialGradient id="g-iron" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#26324F"/><stop offset="1" stop-color="#070B18"/></radialGradient>
+            <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.1"/></filter>
+            <radialGradient id="g-heat" r="60%"><stop offset="0" stop-color="#DE9B4C" stop-opacity=".35"/><stop offset="1" stop-color="#DE9B4C" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle r="192" fill="url(#g-iron)"/>
+          <circle r="192" fill="none" stroke="#2E3F6E" stroke-width="5"/>
+          <circle id="heat" r="180" fill="url(#g-heat)" opacity="0"/>
+          <g id="crepe">
+            <circle id="batter" r="0" fill="#F6E7C6"/>
+            <g id="lace" filter="url(#soft)"></g>
+            <g id="fill"></g>
+          </g>
+          <g id="rake" opacity="0"><path d="M-5 -140 H5 V40 H-5 Z" fill="#C79A63"/><rect x="-66" y="-150" width="132" height="12" rx="6" fill="#B4844F"/></g>
+          <g id="cone" opacity="0">
+            <path d="M-78 -40 L0 170 L78 -40 Z" fill="#FBF4E6"/>
+            <path d="M-78 -40 L0 170 L30 -40 Z" fill="#EFE3CB"/>
+            <path d="M-92 -58 Q-60 -150 0 -158 Q60 -150 92 -58 L78 -40 L-78 -40 Z" fill="#E2B575"/>
+            <circle cx="-34" cy="-92" r="30" fill="#FFFDF8"/><circle cx="16" cy="-110" r="32" fill="#FFFDF8"/><circle cx="52" cy="-80" r="24" fill="#FFFDF8"/>
+            <path d="M-66 -70 q14 -30 30 -6 q-12 22 -30 6z" fill="#D8434F"/><path d="M-4 -86 q16 -32 32 -4 q-14 22 -32 4z" fill="#D8434F"/><path d="M40 -60 q14 -28 28 -4 q-12 20 -28 4z" fill="#D8434F"/>
+            <path d="M-92 -58 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0 q8 -8 16 0" fill="none" stroke="#C3803C" stroke-width="5" stroke-linecap="round" transform="translate(0 18)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="side">
+        <ol class="steps" id="steps">
+          <li data-i="0"><span class="n">01</span><b>注文を受けてから、流す</b><p>作り置きはせず、一枚ずつ。鉄板に生地を流すところから始まります。</p></li>
+          <li data-i="1"><span class="n">02</span><b>薄く、まるく、のばす</b><p>口コミには「薄いのに、生地そのものに存在感がある」という声。</p></li>
+          <li data-i="2"><span class="n">03</span><b>焼き色をつける</b><p>「もちもち」と書く人も、「サクサクで香ばしい」と書く人も。焼き色がその香りをつくります。</p></li>
+          <li data-i="3"><span class="n">04</span><b>包む</b><p>カスタードと生クリーム、果物。おかずを包む食事系もあります。</p></li>
+          <li data-i="4"><span class="n">05</span><b>受け取って、近くの公園へ</b><p>イートインはなく、テイクアウトのみ。近くの公園で食べるのがおすすめ、という声も。</p></li>
+        </ol>
+        <div class="meter"><i id="meter"></i></div>
+        <p class="note">※口コミの内容をもとにした工程のイメージです。実際の作り方に合わせて差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <h2 id="menu-title">口コミに<br>名前が出てくる<br>一枚</h2>
+      <p>値段と季節の内容は、実際のメニューに差し替えます</p>
+    </div>
+    <div class="wrap">
+      <div class="feature" aria-hidden="true"><img class="on" data-k="fraises" src="img/hero-tall.jpg" alt="" loading="lazy"><img data-k="citron" src="img/lemon.jpg" alt="" loading="lazy"><img data-k="salee" src="img/savory.jpg" alt="" loading="lazy"><img data-k="gateaux" src="img/bake.jpg" alt="" loading="lazy"><span class="label" id="feature-label">Fraises</span><span class="cap">イメージ</span></div>
+      <div class="list">
+        <article class="item" data-k="fraises"><p class="la">Fraises</p><span class="no">01</span><h3>苺<small>定番</small></h3><p>久しぶりに来た人も、生地とカスタードと生クリームを「相変わらずおいしい」とほめる定番。</p><p class="price"><span class="fill-in">値段を入れます</span></p></article>
+        <article class="item" data-k="fraises"><p class="la">Chocolat-banane</p><span class="no">02</span><h3>チョコバナナ</h3><p>定番の組み合わせなのに高級感がある、という声。</p></article>
+        <article class="item" data-k="fraises"><p class="la">Sucre-beurre</p><span class="no">03</span><h3>シュガーバター</h3><p>生地はサクッと香ばしく、バターの塩気と砂糖がちょうどいい。<br>生地の味がいちばん分かる一枚。</p></article>
+        <article class="item" data-k="citron"><p class="la">Citron meringué</p><span class="no">04</span><h3>レモンメレンゲ</h3><figure class="pic" style="margin-inline:0"><img src="img/lemon.jpg" alt="焼き色のついたメレンゲとレモンのクレープ（イメージ）" loading="lazy"><span class="cap">イメージ</span></figure><p>季節のクレープと並んで<br>「こちらもおいしかった」と名前が挙がる一枚。</p></article>
+        <article class="item" data-k="citron"><p class="la">Saison</p><span class="no">05</span><h3>季節限定</h3><p>ほろ苦いティラミス、メロンとカスタード、春の一枚など。<br>時期ごとに中身が変わります。</p><p class="price"><span class="fill-in">今の季節の一枚を入れます</span></p></article>
+        <article class="item" data-k="salee"><p class="la">Salée</p><span class="no">06</span><h3>食事系クレープ</h3><figure class="pic" style="margin-inline:0"><img src="img/savory.jpg" alt="四角く折った食事系のクレープ（イメージ）" loading="lazy"><span class="cap">イメージ</span></figure><p>具を包む器ではなく、<br>生地そのものが料理になっている、という声。</p></article>
+        <article class="item" data-k="gateaux"><p class="la">Gâteaux</p><span class="no">07</span><h3>焼き菓子</h3><figure class="pic" style="margin-inline:0"><img src="img/bake.jpg" alt="紙袋と焼き菓子（イメージ）" loading="lazy"><span class="cap">イメージ</span></figure><p>クッキーなど数種類。<br>クレープと一緒に、手みやげにも。</p></article>
+      </div>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がったものから選んでいます。説明は口コミの要旨をもとにしたイメージです。</p>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">行く前に<br>知っておくと<br>安心なこと</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年10月）</p>
+    </div>
+    <div class="tips">
+      <div class="tip">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="3" y="3" width="46" height="46" rx="14" fill="#24345F"/><path d="M19 36V16h9a6 6 0 0 1 0 12h-9" fill="none" stroke="#DE9B4C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 40L40 12" stroke="#FBF4E6" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <div><b>駐車場はありません</b><span>口コミでは、歩いて2分ほどのコインパーキングを使ったという声があります。</span></div>
+      </div>
+      <div class="tip">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="3" y="3" width="46" height="46" rx="14" fill="#24345F"/><path d="M18 18 L26 40 L34 18 Z" fill="#FBF4E6"/><path d="M16 18 Q26 6 36 18 Z" fill="#DE9B4C"/></svg>
+        <div><b>テイクアウトのみ</b><span>店内で食べる席はありません。近くの公園で食べるのがおすすめ、という声も。</span></div>
+      </div>
+      <div class="tip">
+        <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="3" y="3" width="46" height="46" rx="14" fill="#24345F"/><circle cx="26" cy="26" r="13" fill="none" stroke="#FBF4E6" stroke-width="2.6"/><path d="M26 18v8l5 4" fill="none" stroke="#DE9B4C" stroke-width="3" stroke-linecap="round"/></svg>
+        <div><b>並ぶ日もあります</b><span>行列ができる日もあれば、平日の昼すぎは空いていたという声も。<span class="fill-in">混みやすい時間帯を入れます</span></span></div>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>定休日</span></li>
+          <li data-d="2" class="closed"><span>火</span><span>定休日</span></li>
+          <li data-d="3" class="closed"><span>水</span><span>定休日</span></li>
+          <li data-d="4"><span>木</span><span>12:00 – 19:00</span></li>
+          <li data-d="5"><span>金</span><span>12:00 – 19:00</span></li>
+          <li data-d="6"><span>土</span><span>12:00 – 19:00</span></li>
+          <li data-d="0"><span>日</span><span>12:00 – 19:00</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram をご確認ください。</p>
+      </div>
+      <div>
+        <p class="addr">〒273-0004<br>千葉県船橋市南本町36-5</p>
+        <div class="map"><iframe title="crepe ＆ bake AN の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=crepe%20%26%20bake%20AN%20%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82%E5%8D%97%E6%9C%AC%E7%94%BA36-5&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=11988365642740929849" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>お店で食べられますか？</summary><p>イートインはなく、テイクアウトのみです。近くの公園で食べるのがおすすめ、という口コミもあります。</p></details>
+    <details><summary>車で行けますか？</summary><p>お店の駐車場はありません。近くのコインパーキングをご利用ください。口コミでは、歩いて2分ほどのコインパーキングを使ったという声があります。</p></details>
+    <details><summary>予約や取り置きはできますか？</summary><p><span class="fill-in">予約・取り置きの可否と方法（Instagram の DM など）を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>今の季節限定は何ですか？</summary><p>季節限定のクレープは時期によって変わります。<span class="fill-in">今の季節の一枚と、お知らせ先を入れます。</span></p></details>
+    <details><summary>焼き菓子だけ買えますか？</summary><p>クッキーなど数種類の焼き菓子があります。<span class="fill-in">焼き菓子だけのお買い物や、手みやげ用の包み方について書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="tiles"><img src="img/lemon.jpg" alt="" loading="lazy"><img src="img/savory.jpg" alt="" loading="lazy"><img src="img/bake.jpg" alt="" loading="lazy"></div>
+    <h2 id="gram-title">季節の一枚と<br>お休みの日は、<br>Instagramで。</h2>
+    <p>フォローしておくと、<br>新しい一枚に気づけます。</p>
+    <div class="row"><a class="btn fill" href="https://www.instagram.com/an_crepe.and.bake/" target="_blank" rel="noopener">@an_crepe.and.bake を見る</a></div>
+  </section>
+</main>
+
+<div class="scallop deep" aria-hidden="true" style="background-color: var(--batter)"></div>
+<footer class="foot">
+  <p class="huge" aria-hidden="true">A<span>N</span></p>
+  <p>crepe ＆ bake AN<br>千葉県船橋市南本町36-5<br>木〜日 12:00–19:00　月・火・水 定休日</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=11988365642740929849" target="_blank" rel="noopener">道順</a>
+  <a href="#menu">メニュー</a>
+  <a href="https://www.instagram.com/an_crepe.and.bake/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  /* 万一の保険: 演出が止まっても幕を残さない */
+  setTimeout(() => $('.loader')?.remove(), 6000);
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 4: [12, 19], 5: [12, 19], 6: [12, 19], 0: [12, 19] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  $('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  document.querySelector(`#hours li[data-d="${d}"]`)?.classList.add('is-today');
+
+  /* メニュー: 見ている品に合わせて写真を替える（PC） */
+  const fImgs = [...document.querySelectorAll('.feature img')], fLabel = $('#feature-label');
+  const NAMES_F = { fraises: 'Fraises', citron: 'Citron meringué', salee: 'Salée', gateaux: 'Gâteaux' };
+  const setFeature = k => { fImgs.forEach(im => im.classList.toggle('on', im.dataset.k === k)); fLabel.textContent = NAMES_F[k]; };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setFeature(e.target.dataset.k); }), { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.item[data-k]').forEach(el => io.observe(el));
+  }
+
+  /* 鉄板のクレープ: 焼き色の模様と具を作る */
+  const NS = 'http://www.w3.org/2000/svg';
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const lace = $('#lace'), fill = $('#fill');
+  for (let i = 0; i < 260; i++) {
+    const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * 158;
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', (Math.cos(a) * r).toFixed(1)); c.setAttribute('cy', (Math.sin(a) * r).toFixed(1));
+    c.setAttribute('r', (1.5 + rnd() * rnd() * 7).toFixed(1));
+    c.setAttribute('fill', i % 3 ? '#C98840' : '#A9662A'); c.setAttribute('opacity', (.18 + rnd() * .32).toFixed(2));
+    lace.appendChild(c);
+  }
+  const FILL = [
+    ['c', -60, -40, 26], ['c', 0, -58, 30], ['c', 58, -38, 25], ['c', -28, 8, 24], ['c', 34, 10, 26],
+    ['b', -88, -6], ['b', -20, -30], ['b', 30, -70], ['b', 82, 0], ['b', 0, 30], ['k', -50, 34], ['k', 64, 40]
+  ];
+  const fillEls = FILL.map(([k, x, y, r]) => {
+    let el;
+    if (k === 'c') { el = document.createElementNS(NS, 'circle'); el.setAttribute('cx', x); el.setAttribute('cy', y); el.setAttribute('r', r); el.setAttribute('fill', '#FFFDF8'); }
+    else if (k === 'b') { el = document.createElementNS(NS, 'path'); el.setAttribute('d', `M${x} ${y} q12 -26 26 -4 q-10 20 -26 4z`); el.setAttribute('fill', '#D8434F'); }
+    else { el = document.createElementNS(NS, 'circle'); el.setAttribute('cx', x); el.setAttribute('cy', y); el.setAttribute('r', 16); el.setAttribute('fill', '#F2D27A'); }
+    el.style.transformBox = 'fill-box'; el.style.transformOrigin = 'center';
+    fill.appendChild(el); return el;
+  });
+
+  const batter = $('#batter'), rake = $('#rake'), heat = $('#heat'), crepe = $('#crepe'), cone = $('#cone');
+  const steps = [...document.querySelectorAll('#steps li')], meter = $('#meter');
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const mix = (c1, c2, k) => { const p = s => [1, 3, 5].map(i => parseInt(s.slice(i, i + 2), 16)); const A = p(c1), B = p(c2); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * k)).join(',')})`; };
+  let curStep = -1;
+  const setProgress = p => {
+    const pour = seg(p, 0, .18), spread = seg(p, .18, .4), brown = seg(p, .4, .6), wrap = seg(p, .6, .8), fold = seg(p, .82, 1);
+    batter.setAttribute('r', (pour * 82 + spread * 82).toFixed(1));
+    batter.setAttribute('fill', mix('#F6E7C6', '#E7B873', brown));
+    heat.setAttribute('opacity', (Math.min(pour * 3, 1) * (1 - fold)).toFixed(2));
+    rake.setAttribute('opacity', p > .14 && p < .42 ? 1 : 0);
+    rake.setAttribute('transform', `rotate(${spread * 720})`);
+    lace.setAttribute('opacity', brown.toFixed(2));
+    fillEls.forEach((el, i) => { const k = clamp(wrap * FILL.length - i); el.style.opacity = k; el.style.transform = `scale(${.4 + .6 * k})`; });
+    crepe.setAttribute('transform', `scale(${(1 - fold * .55).toFixed(3)}, ${(1 - fold * .2).toFixed(3)})`);
+    crepe.setAttribute('opacity', (1 - fold).toFixed(2));
+    cone.setAttribute('opacity', fold.toFixed(2));
+    cone.setAttribute('transform', `translate(0 ${(1 - fold) * 40 - 14}) scale(${(.66 + .2 * fold).toFixed(3)})`);
+    const s = Math.min(4, Math.floor(p / .2));
+    if (s !== curStep) { curStep = s; steps.forEach((li, i) => li.classList.toggle('on', i === s)); }
+    meter.style.width = `${p * 100}%`;
+  };
+
+  const headSolid = () => $('#head').classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', headSolid, { passive: true }); headSolid();
+  if (reduced || !window.gsap) {
+    $('.loader')?.remove(); $('#bake').classList.add('static'); setProgress(1);
+    steps.forEach(li => li.classList.add('on'));
+    $('#dock').classList.add('show');
+    return;
+  }
+  setProgress(0);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const el = document.querySelector(a.getAttribute('href')); if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -60 }); } }));
+  }
+
+  /* 読み込みの演出（1回だけ）: 生地がひろがって店名が出る→幕が上がる */
+  const loader = $('.loader'), wipe = { v: 0 };
+  const setWipe = () => { loader.style.clipPath = `inset(0 0 ${wipe.v}% 0)`; };
+  gsap.set('.hero h1 .w > span', { yPercent: 110 });
+  gsap.set('.hero .kicker, .hero .bottom', { opacity: 0, y: 16 });
+  const ld = { r: 0, rot: 0 };
+  const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  intro.set('#ld-rake', { opacity: 1 })
+       .to(ld, { r: 168, rot: 540, duration: 1.2, ease: 'power2.inOut', onUpdate: () => { $('#ld-batter').setAttribute('r', ld.r); $('#ld-rake').setAttribute('transform', `rotate(${ld.rot})`); } })
+       .to('#ld-rake', { opacity: 0, duration: .2 }, '-=0.15')
+       .to('#ld-batter', { attr: { fill: '#E7B873' }, duration: .6 }, '-=0.1')
+       .to('#ld-word', { opacity: 1, duration: .5 }, '<')
+       .to('.loader .sub', { opacity: 1, duration: .4 }, '<')
+       .to(wipe, { v: 100, duration: 1, ease: 'power4.inOut', onUpdate: setWipe }, '+=0.3')
+       .to('.hero img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.8')
+       .to('.hero h1 .w > span', { yPercent: 0, duration: 1.2, stagger: .12, ease: 'power4.out' }, '-=2.0')
+       .to('.hero .kicker, .hero .bottom', { opacity: 1, y: 0, duration: .9, stagger: .1 }, '-=1.1')
+       .add(() => loader.remove());
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: () => $('#dock').classList.add('show') });
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero picture', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+  gsap.from('.words span', { y: 14, opacity: 0, stagger: .08, duration: .7, scrollTrigger: { trigger: '.words', start: 'top 90%' } });
+
+  /* 大きな写真: 枠を開きながら写真を動かす */
+  const sh = { v: 18 }, showPh = $('.showcase .ph');
+  const setSh = () => { showPh.style.clipPath = `inset(${sh.v}% ${sh.v / 2}% ${sh.v}% ${sh.v / 2}% round ${sh.v * 1.5}px)`; };
+  setSh();
+  gsap.to(sh, { v: 0, ease: 'none', onUpdate: setSh, scrollTrigger: { trigger: '.showcase', start: 'top bottom', end: 'top 15%', scrub: true } });
+  gsap.fromTo('.showcase img', { yPercent: -12 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.showcase', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* 一枚が焼きあがるまで: スクロールで工程を進める */
+  ScrollTrigger.create({
+    trigger: '#bake', start: 'top top', end: '+=260%', pin: '#bake .pin', scrub: .4,
+    onUpdate: s => setProgress(s.progress)
+  });
+
+  /* メニュー */
+  gsap.utils.toArray('.item').forEach(el => {
+    gsap.from(el.querySelector('.la'), { xPercent: -6, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+  gsap.from('.tip', { y: 24, opacity: 0, stagger: .1, duration: .8, scrollTrigger: { trigger: '.tips', start: 'top 85%' } });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+})();
+</script>
+</body>
+</html>
