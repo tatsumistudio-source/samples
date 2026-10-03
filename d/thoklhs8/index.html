@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F2B1C">
+<title>＋HERB flower and cafe（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Zen+Old+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --moss: #1F2B1C;     /* 木立の奥 */
+  --leaf: #3E5836;     /* ハーブの葉 */
+  --sage: #A9B99B;     /* セージ */
+  --mint: #DCE5D2;
+  --paper: #F3EFE3;    /* 包み紙 */
+  --cream: #FBF8F0;
+  --coral: #E4683B;    /* ナスタチウムの橙。大事な所とボタンだけ */
+  --viola: #6B4A9B;    /* 食べられる花の紫 */
+  --rose: #E7A2A0;
+  --kraft: #C99A66;
+  --ink: #1C2318;
+  --muted: #5C6655;
+  --line: rgba(243,239,227,.16);
+  --serif-en: "Instrument Serif", serif;
+  --serif-jp: "Zen Old Mincho", serif;
+  --sans: "Noto Sans JP", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+main, footer { overflow-x: clip; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.9; overflow-x: hidden; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.en { font-family: var(--serif-en); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.plus { color: var(--coral); font-style: normal; }
+
+/* 紙の粒 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--coral); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出 */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--moss); display: grid; place-items: center; }
+.loader .mark { display: flex; align-items: center; gap: .08em; color: var(--paper); font-family: var(--serif-en); font-size: clamp(64px, 20vw, 180px); line-height: 1; }
+.loader .mark svg { width: .82em; height: .82em; overflow: visible; }
+.loader .letters { display: flex; overflow: hidden; padding: 0 .04em .06em 0; }
+.loader .letters span { display: inline-block; transform: translateY(110%); }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--sage); font-size: 12px; letter-spacing: .32em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--paper); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(31,43,28,.88); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .logo { font-family: var(--serif-en); font-size: 26px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(31,43,28,.4); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); opacity: .6; }
+.status.open i { background: #8FDB8A; opacity: 1; box-shadow: 0 0 0 4px rgba(143,219,138,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: radial-gradient(120% 80% at 70% 100%, #2D3E28 0%, var(--moss) 60%); color: var(--paper); }
+.hero .ph, .hero .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .ph img { transform-origin: 50% 60%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(24,33,21,.55) 0%, rgba(24,33,21,0) 24%, rgba(24,33,21,.08) 40%, rgba(24,33,21,.72) 62%, rgba(24,33,21,.95) 100%); }
+.hero .title { text-shadow: 0 2px 24px rgba(20,28,18,.55); }
+.hero .kicker { color: var(--mint) !important; }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--sage); margin-bottom: 4px; }
+.hero h1 { font-family: var(--serif-en); font-weight: 400; font-size: clamp(110px, 34vw, 330px); line-height: .8; letter-spacing: -.035em; margin-left: -.04em; white-space: nowrap; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .04em .04em 0; vertical-align: bottom; }
+.hero h1 .w > span { display: inline-block; }
+.hero .sub-en { font-family: var(--serif-en); font-style: italic; font-size: clamp(26px, 7.4vw, 60px); line-height: 1; color: var(--mint); margin-top: 6px; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 20px; font-size: 13px; color: var(--sage); }
+.hero .meta b { color: var(--coral); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 104px; writing-mode: vertical-rl; font-family: var(--serif-jp); font-weight: 500; font-size: clamp(17px, 4.6vw, 26px); letter-spacing: .3em; line-height: 1.9; color: var(--paper); text-shadow: 0 0 14px rgba(31,43,28,.9), 0 0 4px rgba(31,43,28,.8); }
+.hero .caption { position: absolute; z-index: 2; left: var(--g); top: 106px; font-size: 10px; color: rgba(243,239,227,.75); }
+/* 写真の見せ場 */
+.scape { position: relative; height: 110svh; min-height: 640px; overflow: hidden; background: var(--moss); color: var(--paper); }
+.scape .frame { position: absolute; inset: 0; overflow: hidden; }
+.scape .frame img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; object-position: 58% 50%; }
+.scape::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(24,33,21,.35) 0%, rgba(24,33,21,0) 30%, rgba(24,33,21,.1) 55%, rgba(24,33,21,.9) 100%); }
+.scape .txt { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: clamp(112px, 15vh, 150px); display: grid; gap: 14px; max-width: 34em; }
+.scape .txt .en { font-size: clamp(48px, 15vw, 120px); line-height: .9; color: var(--mint); white-space: nowrap; }
+.scape .txt h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.6vw, 64px); line-height: 1.35; }
+.scape .txt p { font-size: 15px; color: #E3E8DA; max-width: 22em; }
+.scape .cap { position: absolute; z-index: 2; right: 14px; top: 98px; bottom: auto; color: rgba(243,239,227,.8); }
+.photo { margin: 0; position: relative; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper); }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo figcaption, .photo .cap { position: absolute; right: 12px; bottom: 10px; font-size: 10px; color: rgba(255,255,255,.88); text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+.cue { width: 1px; height: 44px; background: rgba(243,239,227,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--coral); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--mint); color: var(--moss); overflow: hidden; white-space: nowrap; padding: 14px 0 10px; border-block: 1px solid rgba(31,43,28,.1); }
+.marquee .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--serif-en); font-style: italic; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--serif-jp); font-style: normal; font-size: .5em; font-weight: 500; }
+.marquee .track i { width: .32em; height: .32em; border-radius: 50%; background: var(--coral); display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(84px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; }
+.story .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(38px, 11vw, 96px); line-height: 1.32; letter-spacing: .02em; color: var(--moss); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: var(--muted); font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--leaf); font-weight: 700; }
+.plate { margin: 0; position: relative; border-radius: 6px; overflow: hidden; background: var(--paper); aspect-ratio: 4 / 5; }
+.plate svg { width: 100%; height: 100%; }
+.plate figcaption, .cap { position: absolute; right: 12px; bottom: 10px; font-size: 10px; color: rgba(28,35,24,.55); }
+.plate .tag { position: absolute; left: 14px; top: 12px; font-family: var(--serif-en); font-style: italic; font-size: 15px; color: var(--leaf); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(28,35,24,.14); font-size: 13px; color: var(--muted); }
+.stars b { font-family: var(--serif-en); font-weight: 400; font-size: 54px; color: var(--moss); line-height: 1; }
+
+/* 週3日とテラスの陰（スクロールで動く） */
+.day { position: relative; background: var(--moss); color: var(--paper); }
+.day .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 14px; padding: 88px var(--g) 92px; }
+.day .heads { position: relative; min-height: 3.2em; font-family: var(--serif-jp); font-weight: 500; font-size: clamp(23px, 6.4vw, 42px); line-height: 1.45; }
+.day .heads h2 { position: absolute; inset: 0; font: inherit; transition: opacity .45s, transform .45s; }
+.day .heads h2 em { font-style: normal; color: var(--coral); }
+.day .heads h2.off { opacity: 0; transform: translateY(10px); }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.week li { list-style: none; text-align: center; border: 1px solid var(--line); border-radius: 12px; padding: 7px 0 6px; font-size: 13px; line-height: 1.3; color: rgba(243,239,227,.42); transition: background .3s, color .3s, border-color .3s, transform .3s; }
+.week li small { display: block; font-size: 9.5px; letter-spacing: .02em; }
+.week li.open { color: var(--paper); border-color: rgba(228,104,59,.6); }
+.week li.cur { transform: translateY(-4px); background: rgba(243,239,227,.1); }
+.week li.open.cur { background: var(--coral); color: #fff; border-color: var(--coral); }
+.week { margin: 0; padding: 0; }
+.scene { position: relative; align-self: center; width: 100%; max-width: 620px; justify-self: center; }
+.scene svg { width: 100%; height: auto; border-radius: 18px; }
+.scene .closed { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 18px; background: rgba(20,28,18,.55); backdrop-filter: blur(2px); font-family: var(--serif-jp); font-size: clamp(22px, 6vw, 34px); letter-spacing: .3em; opacity: 0; transition: opacity .3s; }
+.scene .closed.on { opacity: 1; }
+.readout { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.time { font-family: var(--serif-en); font-size: clamp(66px, 20vw, 150px); line-height: .85; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.time.shade { color: var(--sage); }
+.msg { white-space: pre-line; font-size: 13.5px; color: var(--sage); min-height: 3.6em; max-width: 17em; text-align: right; line-height: 1.75; }
+.day .note { font-size: 10.5px; color: #8D9884; }
+
+/* 口コミに出てくるもの */
+.menu { padding: clamp(84px, 14vw, 160px) 0 0; }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.5vw, 64px); line-height: 1.3; color: var(--moss); }
+.sec-head p { font-size: 12px; color: var(--muted); max-width: 18em; }
+.rail { display: grid; gap: 60px; padding: 0 var(--g) 40px; }
+.card .plate { aspect-ratio: 4 / 5; }
+.card .en { font-size: clamp(42px, 12vw, 64px); line-height: 1; color: var(--leaf); margin: 18px 0 6px; }
+.card h3 { font-family: var(--serif-jp); font-size: 20px; font-weight: 700; color: var(--moss); }
+.card p { margin-top: 8px; color: var(--muted); font-size: 15px; max-width: 24em; }
+.src { padding: 0 var(--g) 20px; font-size: 11px; color: #7E8776; }
+
+/* 花の章 */
+.flowers { background: var(--paper); padding: clamp(84px, 14vw, 160px) var(--g) clamp(64px, 12vw, 120px); overflow: hidden; }
+.flowers .sec-head { padding: 0; }
+.count { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 22px; color: var(--leaf); }
+.count b { font-family: var(--serif-en); font-weight: 400; font-size: clamp(90px, 26vw, 200px); line-height: .8; color: var(--coral); font-variant-numeric: tabular-nums; }
+.count span { font-family: var(--serif-jp); font-size: 18px; }
+.buckets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px 8px; }
+.buckets svg { width: 100%; height: auto; overflow: visible; }
+.buckets .b { opacity: .1; transform: translateY(14px); transition: opacity .35s, transform .45s cubic-bezier(.2,.8,.2,1); }
+.buckets .b.on { opacity: 1; transform: none; }
+.flowers .body { margin-top: 30px; display: grid; gap: 14px; color: var(--muted); font-size: 15.5px; max-width: 32em; }
+.flowers .body strong { color: var(--moss); font-family: var(--serif-jp); font-size: 19px; font-weight: 700; display: block; }
+
+/* 来店 */
+.visit { background: var(--leaf); color: var(--paper); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--paper); }
+.visit .sec-head p { color: var(--mint); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 28px; background: rgba(31,43,28,.25); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage); flex: none; }
+.today.open .dot { background: #8FDB8A; box-shadow: 0 0 0 6px rgba(143,219,138,.16); }
+.today b { font-family: var(--serif-jp); font-size: 20px; font-weight: 500; }
+.today small { display: block; color: var(--mint); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: #FFD3BF; font-weight: 700; }
+.hours li.closed span:last-child { color: #AEBBA3; }
+.small { font-size: 11.5px; color: var(--mint); }
+.addr { margin-top: 40px; font-family: var(--serif-jp); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #2E4428; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: saturate(.6) contrast(1.02); }
+.facts { margin-top: 18px; display: grid; gap: 10px; }
+.fact { padding: 16px 18px; border-left: 3px solid var(--coral); background: rgba(31,43,28,.22); border-radius: 0 14px 14px 0; font-size: 14.5px; line-height: 1.8; }
+.fact b { display: block; font-family: var(--serif-jp); font-size: 17px; font-weight: 500; margin-bottom: 2px; }
+.fill-in { background: rgba(228,104,59,.2); color: #FFD3BF; padding: 0 4px; border-radius: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--coral); color: #fff; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(28,35,24,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--serif-jp); font-size: 18px; font-weight: 500; color: var(--moss); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--coral),var(--coral)) center/14px 1.5px no-repeat, linear-gradient(var(--coral),var(--coral)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: var(--muted); font-size: 15px; }
+details .fill-in { color: #A2401A; background: rgba(228,104,59,.14); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.gram .box { background: var(--mint); border-radius: 24px; padding: 34px 24px; position: relative; overflow: hidden; }
+.gram .box svg.deco { position: absolute; right: -30px; bottom: -40px; width: 220px; height: 220px; opacity: .9; }
+.gram h2 { position: relative; font-family: var(--serif-jp); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; color: var(--moss); }
+.gram p { position: relative; margin-top: 10px; color: var(--muted); font-size: 15px; max-width: 19em; }
+.gram .btn.fill { position: relative; background: var(--moss); color: var(--paper); }
+
+/* 最後 */
+.foot { background: var(--moss); color: var(--sage); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif-en); color: var(--paper); font-size: clamp(120px, 38vw, 400px); line-height: .8; letter-spacing: -.04em; margin: 0 0 40px -.05em; white-space: nowrap; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(31,43,28,.82); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--paper); }
+.dock a.main { background: var(--coral); color: #fff; }
+
+/* 植物の絵（JSで描く） */
+.stem { fill: none; stroke-linecap: round; }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(90deg, rgba(24,33,21,.86) 0%, rgba(24,33,21,.5) 34%, rgba(24,33,21,0) 58%), linear-gradient(180deg, rgba(24,33,21,.45) 0%, rgba(24,33,21,0) 22%, rgba(24,33,21,0) 60%, rgba(24,33,21,.7) 100%); }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .scape .txt { left: auto; right: var(--g); width: 30em; }
+  .scape::after { background: linear-gradient(270deg, rgba(24,33,21,.82) 0%, rgba(24,33,21,.45) 32%, rgba(24,33,21,0) 55%), linear-gradient(180deg, rgba(24,33,21,.35) 0%, rgba(24,33,21,0) 25%, rgba(24,33,21,0) 70%, rgba(24,33,21,.55) 100%); }
+  .scape .cap { right: auto; left: 14px; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .day .pin { grid-template-columns: 1fr 1.25fr; grid-template-rows: auto auto 1fr auto; column-gap: 64px; padding-top: 110px; }
+  .day .heads { grid-column: 1; grid-row: 1; }
+  .week { grid-column: 1; grid-row: 2; }
+  .readout { grid-column: 1; grid-row: 3; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .msg { text-align: left; }
+  .scene { grid-column: 2; grid-row: 1 / 4; }
+  .day .note { grid-column: 1 / -1; }
+  .rail { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .card:nth-child(even) { margin-top: 120px; }
+  .card .en { font-size: 46px; }
+  .flowers .wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+  .buckets { grid-template-columns: repeat(4, 1fr); gap: 10px 14px; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .gram .box { padding: 56px 56px; }
+  .gram .box svg.deco { width: 320px; height: 320px; right: 0; }
+  .dock { left: auto; right: 24px; width: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero .ph img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="mark">
+    <svg viewBox="0 0 100 100"><path class="lp" d="M50 8V92M8 50H92" stroke="#E4683B" stroke-width="9" stroke-linecap="round" fill="none" pathLength="1"/></svg>
+    <div class="letters"><span>H</span><span>E</span><span>R</span><span>B</span></div>
+  </div>
+  <div class="sub">FLOWER AND CAFE</div>
+</div>
+<script>setTimeout(function () { var l = document.querySelector('.loader'); if (l) l.remove(); }, 6000);</script>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="logo" href="#top"><span class="plus">+</span>HERB</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="＋HERB flower and cafe">
+    <picture class="ph">
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="池のほとりのテラスの木のテーブルに置いた、ガラスのポットのハーブティーと食べられる花（イメージ）">
+    </picture>
+    <span class="caption">写真はイメージです</span>
+    <p class="vert" aria-hidden="true">公園のとなりの、花屋とカフェ</p>
+    <div class="title">
+      <p class="kicker">Flower shop &amp; Cafe ／ 市川市国府台</p>
+      <h1><span class="w"><span><span class="plus">+</span>HERB</span></span></h1>
+      <p class="sub-en">flower and cafe</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.6</b>（29件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Herb tea</span><span>ハーブティー</span><i></i><span>Flowers</span><span>切り花と花束</span><i></i><span>Terrace</span><span>テラス席</span><i></i><span>Edible flowers</span><span>花を飾ったケーキ</span><i></i>
+      <span>Herb tea</span><span>ハーブティー</span><i></i><span>Flowers</span><span>切り花と花束</span><i></i><span>Terrace</span><span>テラス席</span><i></i><span>Edible flowers</span><span>花を飾ったケーキ</span><i></i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>扉を開けると、</span></span><span class="line"><span>花の香りが</span></span><span class="line"><span>ほんのり。</span></span></h2>
+    <div>
+      <p class="lead">じゅんさい池緑地のとなりにある、花屋とカフェがひとつになったお店。口コミには <q>リゾートのよう</q> <q>緑が多くて落ち着く</q> <q>器や盛り付けが凝っている</q> という声が並びます。大きな窓の外は木立、店の真ん中には切り花と観葉植物。</p>
+      <div class="stars" style="margin-top:28px"><b>4.6</b><span>Googleの口コミ 29件の平均（2026年10月）</span></div>
+    </div>
+    <figure class="photo"><img src="img/teatable.jpg" alt="木立と池を背にしたテーブルのハーブティーと花（イメージ）" loading="lazy"><figcaption>写真はイメージです</figcaption></figure>
+  </section>
+
+  <section class="day" aria-labelledby="day-title">
+    <div class="pin">
+      <div class="heads">
+        <h2 id="day-title">扉が開くのは、<br><em>金・土・日</em>だけ。</h2>
+        <h2 class="off" id="day-title2" aria-hidden="true">午後のテラスは、<br><em>建物の陰</em>に入る。</h2>
+      </div>
+      <ul class="week" id="week" aria-label="営業日">
+        <li data-d="1">月<small>休</small></li>
+        <li data-d="2">火<small>休</small></li>
+        <li data-d="3">水<small>休</small></li>
+        <li data-d="4">木<small>休</small></li>
+        <li data-d="5" class="open">金<small>営業</small></li>
+        <li data-d="6" class="open">土<small>営業</small></li>
+        <li data-d="0" class="open">日<small>営業</small></li>
+      </ul>
+      <div class="scene">
+        <svg id="scene" viewBox="0 -70 400 330" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop id="sky1" offset="0" stop-color="#CFE0D8"/><stop id="sky2" offset="1" stop-color="#F3EFE3"/></linearGradient>
+            <clipPath id="sceneclip"><rect y="-70" width="400" height="330" rx="18"/></clipPath>
+          </defs>
+          <g clip-path="url(#sceneclip)">
+            <rect y="-70" width="400" height="330" fill="url(#sky)"/>
+            <circle id="sun" cx="90" cy="70" r="15" fill="#F6C67A"/>
+            <circle id="sunglow" cx="90" cy="70" r="30" fill="#F6C67A" opacity=".25"/>
+            <!-- 木立と池 -->
+            <g fill="#4F6E45"><circle cx="20" cy="140" r="44"/><circle cx="70" cy="122" r="40"/><circle cx="118" cy="138" r="36"/><circle cx="160" cy="128" r="30"/></g>
+            <g fill="#3E5836"><circle cx="44" cy="160" r="34"/><circle cx="96" cy="156" r="30"/><circle cx="142" cy="160" r="26"/></g>
+            <ellipse cx="80" cy="190" rx="110" ry="16" fill="#8FB0A6"/>
+            <ellipse cx="60" cy="188" rx="40" ry="4" fill="#B9D0C8"/>
+            <!-- テラス -->
+            <path d="M0 196H400V260H0Z" fill="#C9A77E"/>
+            <g stroke="#B08D64" stroke-width="1.2"><path d="M0 210H400M0 226H400M0 243H400"/></g>
+            <!-- 陰（午後に伸びる） -->
+            <path id="shade" d="M300 196L300 196L300 260L300 260Z" fill="#26331F" opacity=".38"/>
+            <!-- テーブルと椅子 -->
+            <g id="table" fill="#5A4632">
+              <rect x="186" y="200" width="56" height="5" rx="2"/><rect x="211" y="205" width="6" height="28"/><rect x="200" y="231" width="28" height="4" rx="2"/>
+              <path d="M166 214h16v4h-16zM168 218h3v17h-3zM177 218h3v17h-3zM166 200h3v14h-3z"/>
+              <path d="M246 214h16v4h-16zM248 218h3v17h-3zM257 218h3v17h-3zM259 200h3v14h-3z"/>
+            </g>
+            <g id="pot"><rect x="204" y="190" width="14" height="10" rx="4" fill="#E7A2A0" opacity=".9"/><rect x="221" y="194" width="7" height="6" rx="2" fill="#FBF8F0"/></g>
+            <!-- 建物（窓の大きい壁。外観ではなく陰を作る面として描く） -->
+            <path d="M300 20H400V260H300Z" fill="#E9E2D2"/>
+            <rect x="318" y="88" width="64" height="108" rx="2" fill="#B9CBBF" stroke="#CFC5B0" stroke-width="4"/>
+            <path d="M350 88V196" stroke="#CFC5B0" stroke-width="3"/>
+            <rect x="296" y="14" width="104" height="10" fill="#D4CAB6"/><rect x="318" y="40" width="64" height="30" rx="2" fill="#B9CBBF" stroke="#CFC5B0" stroke-width="4"/>
+            <rect id="dim" y="-70" width="400" height="330" fill="#1B2617" opacity="0"/>
+          </g>
+        </svg>
+        <div class="closed" id="closed">お休み</div>
+      </div>
+      <div class="readout">
+        <div class="time" id="time">11:30</div>
+        <p class="msg" id="msg">午後、テラスは建物の陰に。
+風が通って心地よい時間。</p>
+      </div>
+      <p class="note">※営業日・時間はGoogleマップの情報です。午後の日陰は口コミにある様子をもとにした目安で、季節や天気で変わります。</p>
+    </div>
+  </section>
+
+  <section class="scape" aria-labelledby="scape-title">
+    <div class="frame"><img src="img/terrace.jpg" alt="池と木立を望む木のテーブルに置いたハーブティー（イメージ）" loading="lazy"></div>
+    <span class="cap">写真はイメージです</span>
+    <div class="txt">
+      <p class="en">By the pond</p>
+      <h2 id="scape-title">テラスの先は、<br>木立と池。</h2>
+      <p>じゅんさい池緑地のとなり。にぎやかな通りを忘れて、ゆったりした時間を過ごせる、という声が並びます。</p>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <h2 id="menu-title">口コミで<br>名前が挙がる<br>もの</h2>
+      <p>実際のメニュー名・写真に差し替えます</p>
+    </div>
+    <div class="rail">
+      <article class="card">
+        <figure class="photo"><img src="img/tea.jpg" alt="いちごとバラの花びらが入ったガラスのポットのハーブティー（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></figure>
+        <p class="en">Herb tea</p>
+        <h3>ハーブティー</h3>
+        <p>メニューの最初のページに並ぶお茶。種類が多く、カフェインが苦手な人でも選べるものが多いという声。ポットで出てきます。</p>
+      </article>
+      <article class="card">
+        <figure class="plate" style="background:#F1E6EC"><svg id="p-cake" viewBox="40 105 340 425" aria-hidden="true"></svg><span class="cap">絵はイメージです</span></figure>
+        <p class="en">Petal cake</p>
+        <h3>花を飾ったケーキ</h3>
+        <p>食べられる花をのせたシフォンやスフレ、濃厚なショコラ。ボリュームもしっかり。</p>
+      </article>
+      <article class="card">
+        <figure class="plate" style="background:#F4EBDA"><svg id="p-waffle" viewBox="0 50 400 500" aria-hidden="true"></svg><span class="cap">絵はイメージです</span></figure>
+        <p class="en">Waffle</p>
+        <h3>ワッフルとフォカッチャ</h3>
+        <p>甘いものも、軽い食事も。器と飾り付けまで手が込んでいる、という声が多いお店です。</p>
+      </article>
+      <article class="card">
+        <figure class="plate" style="background:#E9E3D6"><svg id="p-bouquet" viewBox="0 0 400 500" aria-hidden="true"></svg><span class="cap">絵はイメージです</span></figure>
+        <p class="en">Bouquet</p>
+        <h3>花束</h3>
+        <p>お茶のついでに、花束を。センスよく、目を引く仕上がりにしてもらえたという口コミも。</p>
+      </article>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がったものから選んでいます。写真・絵はイメージで、お店の写真に差し替えます。</p>
+  </section>
+
+  <section class="flowers" aria-labelledby="flowers-title">
+    <div class="wrap">
+      <div>
+        <div class="sec-head"><h2 id="flowers-title">花だけ、<br>買いに来ても。</h2></div>
+        <div class="count"><b id="count">8</b><span>種類ほどの切り花</span></div>
+      </div>
+      <div>
+        <div class="buckets" id="buckets" aria-hidden="true"></div>
+        <div class="body">
+          <p><strong>店の真ん中が、花の売り場。</strong>口コミによると、切り花は7〜8種類。プリザーブドフラワーや観葉植物も並びます。</p>
+          <p>カフェの席から花を眺められるのも、このお店ならでは。<span style="color:#A2401A">花束の予約方法や、その日の入荷は実際の内容に差し替えます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年10月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="5"><span>金</span><span>11:30 – 17:30</span></li>
+          <li data-d="6"><span>土</span><span>11:30 – 17:30</span></li>
+          <li data-d="0"><span>日</span><span>11:30 – 17:30</span></li>
+          <li data-d="1" class="closed"><span>月</span><span>お休み</span></li>
+          <li data-d="2" class="closed"><span>火</span><span>お休み</span></li>
+          <li data-d="3" class="closed"><span>水</span><span>お休み</span></li>
+          <li data-d="4" class="closed"><span>木</span><span>お休み</span></li>
+        </ul>
+        <p class="small">臨時のお休みや営業日の変更は Instagram でお知らせします。</p>
+      </div>
+      <div>
+        <p class="addr">〒272-0827<br>千葉県市川市国府台6丁目1-2</p>
+        <div class="map"><iframe title="＋HERB flower and cafe の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%2BHERB%20flower%20and%20cafe%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%9B%BD%E5%BA%9C%E5%8F%B06%E4%B8%81%E7%9B%AE1-2&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="facts">
+          <div class="fact"><b>駐車場</b>お店に向かって左手に3台（口コミより）。<span class="fill-in">満車の時の案内を入れます</span></div>
+          <div class="fact"><b>わんちゃん連れ</b>テラス席にリードをつなぐフックがあります（口コミより）。<span class="fill-in">店内の可否を入れます</span></div>
+          <div class="fact"><b>席</b>店内のテーブル席と、木立に面したテラス席。<span class="fill-in">席数・予約の可否を入れます</span></div>
+        </div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=11372105148123841650" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>平日は開いていますか？</summary><p>営業は金・土・日の11:30〜17:30です（Googleマップの情報）。臨時の変更は Instagram でお知らせします。</p></details>
+    <details><summary>犬を連れて行けますか？</summary><p>テラス席にはリードをつなぐフックがあります。<span class="fill-in">店内に入れるかどうかを、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>カフェインが苦手でも楽しめますか？</summary><p>ハーブティーの種類が多く、カフェインが苦手な人でも選べるものが多い、という口コミがあります。<span class="fill-in">ノンカフェインのお茶の一覧を入れます。</span></p></details>
+    <details><summary>花束だけ買いに行ってもいいですか？</summary><p><span class="fill-in">花束の予約・取り置きの方法と、予算の伝え方を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <svg class="deco" id="gram-art" viewBox="0 0 300 300" aria-hidden="true"></svg>
+      <h2 id="gram-title">今週の花と<br>お菓子は、<br>Instagramで。</h2>
+      <p>入荷した花や季節のお菓子、臨時のお休みのお知らせは、こちらから。</p>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/plus_herb.flower.cafe/" target="_blank" rel="noopener">@plus_herb.flower.cafe</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true"><span class="plus">+</span>HERB</p>
+  <p>＋HERB flower and cafe<br>千葉県市川市国府台6丁目1-2<br>金・土・日 11:30–17:30　月〜木 お休み</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真・絵はイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=11372105148123841650" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0477023411">電話</a>
+  <a href="https://www.instagram.com/plus_herb.flower.cafe/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+  // 何があっても読み込みの幕は残さない
+  setTimeout(() => $('.loader')?.remove(), 5000);
+
+  /* ---------- 植物の絵を描く道具 ---------- */
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647, (seed - 1) / 2147483646);
+  const C = { leaf: '#5E8253', dark: '#3E5836', sage: '#A9B99B', mint: '#C7D6BA', coral: '#E4683B', viola: '#6B4A9B', rose: '#E7A2A0', cream: '#FBF8F0', butter: '#F2C66B', kraft: '#C99A66', ink: '#1C2318' };
+  const leafPath = (l, w) => `M0 0C${l*.3} ${-w} ${l*.7} ${-w} ${l} 0C${l*.7} ${w} ${l*.3} ${w} 0 0Z`;
+  // 茎（二次曲線）に葉を互い違いにつける
+  function sprig({ x, y, len, ang, bend = 0, leaves = 8, leafLen = 22, leafW = 7, color = C.leaf, stem = C.dark, sw = 2.2, top = '' }) {
+    const r = ang * Math.PI / 180;
+    const ex = x + Math.cos(r) * len, ey = y + Math.sin(r) * len;
+    const cx = (x + ex) / 2 - Math.sin(r) * bend, cy = (y + ey) / 2 + Math.cos(r) * bend;
+    const P = t => [(1-t)*(1-t)*x + 2*(1-t)*t*cx + t*t*ex, (1-t)*(1-t)*y + 2*(1-t)*t*cy + t*t*ey];
+    const T = t => Math.atan2(2*(1-t)*(cy-y) + 2*t*(ey-cy), 2*(1-t)*(cx-x) + 2*t*(ex-cx)) * 180 / Math.PI;
+    let s = `<g class="sprig"><path class="stem" pathLength="1" d="M${x} ${y}Q${cx} ${cy} ${ex} ${ey}" stroke="${stem}" stroke-width="${sw}"/>`;
+    for (let i = 0; i < leaves; i++) {
+      const t = 0.18 + 0.8 * i / leaves, [px, py] = P(t), side = i % 2 ? 1 : -1;
+      const k = 1 - t * 0.45;
+      s += `<g transform="translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${(T(t) + side * (48 + rnd() * 14)).toFixed(1)})"><path class="lf" d="${leafPath(leafLen * k, leafW * k)}" fill="${color}"/></g>`;
+    }
+    if (top) s += `<g transform="translate(${ex.toFixed(1)} ${ey.toFixed(1)})">${top}</g>`;
+    return s + '</g>';
+  }
+  function bloom(r, n, petal, center, rot = 0) {
+    let s = `<g class="bl" transform="rotate(${rot})">`;
+    for (let i = 0; i < n; i++) s += `<ellipse cx="0" cy="${-r*.55}" rx="${r*.36}" ry="${r*.58}" fill="${petal}" transform="rotate(${i*360/n})"/>`;
+    return s + `<circle r="${r*.22}" fill="${center}"/></g>`;
+  }
+  // すみれ風（上2枚・横2枚・下1枚）
+  function viola(r) {
+    return `<g class="bl"><ellipse cx="${-r*.32}" cy="${-r*.45}" rx="${r*.38}" ry="${r*.5}" fill="${C.viola}" transform="rotate(-20)"/><ellipse cx="${r*.32}" cy="${-r*.45}" rx="${r*.38}" ry="${r*.5}" fill="${C.viola}" transform="rotate(20)"/><ellipse cx="${-r*.5}" cy="${r*.05}" rx="${r*.4}" ry="${r*.32}" fill="#9A7CC6"/><ellipse cx="${r*.5}" cy="${r*.05}" rx="${r*.4}" ry="${r*.32}" fill="#9A7CC6"/><ellipse cx="0" cy="${r*.42}" rx="${r*.42}" ry="${r*.38}" fill="#F2D27A"/><circle r="${r*.12}" fill="${C.ink}" opacity=".5"/></g>`;
+  }
+  const rosebud = r => `<g class="bl"><circle r="${r}" fill="${C.rose}"/><path d="M${-r*.6} 0A${r*.6} ${r*.6} 0 0 1 ${r*.6} 0M${-r*.3} ${-r*.2}A${r*.35} ${r*.35} 0 0 1 ${r*.35} ${r*.1}" stroke="#C97C7A" stroke-width="${r*.12}" fill="none" stroke-linecap="round"/></g>`;
+  const chamo = r => bloom(r, 12, C.cream, '#F2C14E');
+  const nastur = r => bloom(r, 5, C.coral, '#F6B046', 18);
+  const lav = (x, y, len, ang) => { // 穂の形
+    const r = ang * Math.PI / 180; let s = `<g class="sprig"><path class="stem" pathLength="1" d="M${x} ${y}L${x+Math.cos(r)*len} ${y+Math.sin(r)*len}" stroke="${C.dark}" stroke-width="1.8"/>`;
+    for (let i = 0; i < 7; i++) { const t = .6 + i * .06; s += `<g transform="translate(${(x+Math.cos(r)*len*t).toFixed(1)} ${(y+Math.sin(r)*len*t).toFixed(1)})"><ellipse class="bl" rx="3.4" ry="5" fill="#8E73B8" transform="rotate(${ang+90})"/></g>`; }
+    return s + '</g>';
+  };
+
+
+
+  /* カードの絵 */
+  seed = 41;
+  const tops = [[150,236,viola(20)],[196,226,nastur(18)],[240,232,chamo(14)],[176,250,viola(14)],[222,252,rosebud(9)],[262,248,nastur(11)]];
+  $('#p-cake').innerHTML = `
+    <ellipse cx="200" cy="392" rx="160" ry="26" fill="#FBF8F0" stroke="${C.ink}" stroke-width="3"/>
+    <g class="pop"><path d="M100 262L300 240L320 362L110 384Z" fill="#F4DFA0" stroke="${C.ink}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M104 300L306 278M108 340L313 320" stroke="#E7C67A" stroke-width="3"/>
+      <path d="M98 262q40-30 100-26t104 4q4 14-2 0" fill="#FBF8F0" stroke="${C.ink}" stroke-width="3"/>
+      <path d="M100 262q100-16 200-22l-4 10q-90 4-196 22z" fill="#FBF8F0"/></g>
+    ${tops.map(([x,y,f]) => `<g transform="translate(${x} ${y})">${f}</g>`).join('')}
+    <g transform="translate(286 410) rotate(-30)"><path class="lf" d="${leafPath(34,10)}" fill="#6E9461"/></g>`;
+
+  let grid = '';
+  for (let i = 1; i < 6; i++) grid += `<path d="M${-110+i*36.7} -110V110M-110 ${-110+i*36.7}H110" stroke="#C48A3E" stroke-width="5"/>`;
+  $('#p-waffle').innerHTML = `
+    <clipPath id="wfc"><rect x="-110" y="-110" width="220" height="220" rx="26"/></clipPath>
+    <ellipse cx="200" cy="300" rx="178" ry="92" fill="#FBF8F0" stroke="${C.ink}" stroke-width="3"/>
+    <ellipse cx="200" cy="300" rx="140" ry="68" fill="none" stroke="#E6DCC8" stroke-width="2"/>
+    <g class="pop"><g transform="translate(200 304) scale(1 .5) rotate(-14)"><rect x="-110" y="-110" width="220" height="220" rx="26" fill="#B98440" stroke="${C.ink}" stroke-width="5"/></g>
+      <g transform="translate(200 288) scale(1 .5) rotate(-14)"><rect x="-110" y="-110" width="220" height="220" rx="26" fill="#E3B36A" stroke="${C.ink}" stroke-width="5"/><g clip-path="url(#wfc)">${grid}</g><rect x="-110" y="-110" width="220" height="220" rx="26" fill="none" stroke="${C.ink}" stroke-width="5"/></g></g>
+    <g class="pop"><ellipse cx="232" cy="262" rx="40" ry="24" fill="#FBF8F0" stroke="${C.ink}" stroke-width="3"/><ellipse cx="226" cy="250" rx="22" ry="12" fill="#fff"/></g>
+    <g transform="translate(262 250)">${nastur(16)}</g><g transform="translate(200 256) rotate(-150)"><path class="lf" d="${leafPath(30,10)}" fill="#5E8253"/></g>
+    <g transform="translate(150 266)">${viola(16)}</g>
+    <g transform="translate(96 330) rotate(20)"><path class="lf" d="${leafPath(26,8)}" fill="#6E9461"/></g><g transform="translate(300 334) rotate(-160)"><path class="lf" d="${leafPath(22,7)}" fill="#7FA270"/></g>`;
+
+  seed = 53;
+  let bq = '';
+  for (let i = 0; i < 7; i++) bq += sprig({ x: 200, y: 330, len: 150 + rnd() * 50, ang: -150 + i * 20, bend: (rnd() - .5) * 30, leaves: 6, leafLen: 40, leafW: 15, color: i % 2 ? '#4F7445' : '#6E9461' });
+  bq += lav(200, 330, 230, -80) + lav(200, 330, 210, -104) + lav(200, 330, 190, -60);
+  const fl = [nastur, viola, chamo, rosebud, nastur, chamo, viola, rosebud, chamo, nastur, rosebud, chamo, viola];
+  fl.forEach((f, i) => {
+    const a = -145 + i * (110 / (fl.length - 1)) + rnd() * 6, len = 105 + rnd() * 50;
+    bq += sprig({ x: 200, y: 330, len, ang: a, bend: (rnd() - .5) * 24, leaves: 2, leafLen: 22, leafW: 9, color: '#7FA270', top: f(20 + rnd() * 10) });
+  });
+  $('#p-bouquet').innerHTML = bq + `
+    <g class="pop"><path d="M128 250L272 250L214 450L186 450Z" fill="${C.kraft}" stroke="${C.ink}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M128 250L200 300L272 250" fill="#D8B184" stroke="${C.ink}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M176 360q24 10 48 0M182 366l-16 26M218 366l14 26" stroke="#F3EFE3" stroke-width="4" fill="none" stroke-linecap="round"/></g>`;
+
+  /* 花のバケツ（8つ） */
+  seed = 71;
+  const heads = [nastur, viola, chamo, rosebud, r => bloom(r, 8, '#F2C66B', '#C48A3E'), r => bloom(r, 6, '#FBF8F0', '#E7A2A0'), r => bloom(r, 10, '#E7A2A0', '#C9575B'), null];
+  let bk = '';
+  heads.forEach((h, i) => {
+    let s = '';
+    if (h) for (let j = 0; j < 4; j++) s += sprig({ x: 60, y: 120, len: 70 + rnd() * 30, ang: -120 + j * 20 + rnd() * 8, bend: (rnd() - .5) * 14, leaves: 2, leafLen: 18, leafW: 6, color: '#6E9461', sw: 1.6, top: h(10 + rnd() * 4) });
+    else for (let j = 0; j < 5; j++) s += sprig({ x: 60, y: 120, len: 70 + rnd() * 30, ang: -130 + j * 20, bend: (rnd() - .5) * 20, leaves: 6, leafLen: 22, leafW: 9, color: j % 2 ? '#4F7445' : '#7FA270', sw: 1.6 });
+    bk += `<svg class="b" viewBox="0 0 120 170">${s}<path d="M30 112h60l-8 54H38z" fill="#B7BDB4" stroke="#7D857A" stroke-width="2" stroke-linejoin="round"/><path d="M28 112h64" stroke="#7D857A" stroke-width="4" stroke-linecap="round"/></svg>`;
+  });
+  $('#buckets').innerHTML = bk;
+  const bEls = [...document.querySelectorAll('#buckets .b')];
+  const setBuckets = n => { bEls.forEach((el, i) => el.classList.toggle('on', i < n)); $('#count').textContent = Math.max(n, 1); };
+  setBuckets(8);
+
+  seed = 89;
+  $('#gram-art').innerHTML = [
+    sprig({ x: 220, y: 320, len: 260, ang: -110, bend: 20, leaves: 8, leafLen: 34, leafW: 12, color: '#7FA270', top: nastur(26) }),
+    sprig({ x: 240, y: 320, len: 200, ang: -80, bend: -20, leaves: 6, leafLen: 30, leafW: 10, color: '#5E8253', top: viola(24) }),
+    lav(260, 320, 230, -96)
+  ].join('');
+
+  /* ---------- 営業中かどうか（日本時間） ---------- */
+  const HOURS = { 5: [11.5, 17.5], 6: [11.5, 17.5], 0: [11.5, 17.5] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  document.querySelector(`#hours li[data-d="${d}"]`)?.classList.add('is-today');
+
+  /* ---------- 週3日とテラスの陰 ---------- */
+  const ORDER = [1, 2, 3, 4, 5, 6, 0];
+  const weekEls = ORDER.map(x => document.querySelector(`#week li[data-d="${x}"]`));
+  const timeEl = $('#time'), msgEl = $('#msg'), shade = $('#shade'), sun = $('#sun'), glow = $('#sunglow'), dim = $('#dim'), closed = $('#closed');
+  const h1 = $('#day-title'), h2 = $('#day-title2');
+  const mix = (a, b, k) => '#' + [0, 2, 4].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - k) + parseInt(b.substr(i, 2), 16) * k).toString(16).padStart(2, '0')).join('');
+  function setHour(hr) {
+    const f = (hr - 11.5) / 6;                 // 0..1
+    const sx = 70 + f * 300, sy = 112 - Math.sin(Math.PI * (0.25 + f * 0.75)) * 132;
+    sun.setAttribute('cx', sx.toFixed(1)); sun.setAttribute('cy', sy.toFixed(1));
+    glow.setAttribute('cx', sx.toFixed(1)); glow.setAttribute('cy', sy.toFixed(1));
+    const s = Math.min(1, Math.max(0, (hr - 13) / 2.5));   // 13時ごろから陰が伸びる
+    const w = s * 230;
+    shade.setAttribute('d', `M300 196L${300 - w * .8} 196L${300 - w} 260L300 260Z`);
+    $('#sky1').setAttribute('stop-color', mix('CFE0D8', 'F0D2AE', Math.max(0, f - .55) / .45));
+    timeEl.textContent = fmt(Math.round(hr * 4) / 4);
+    timeEl.classList.toggle('shade', s > .4);
+    msgEl.textContent =
+      hr < 12.5 ? '開店。扉を開けると、\n生花の香りがほんのり。' :
+      hr < 13.75 ? 'テラスの先は木立と池。\nリゾートのよう、という声も。' :
+      hr < 15.5 ? '午後、テラスは建物の陰に。\n風が通って心地よい時間。' :
+      hr < 17.3 ? 'お茶のおかわりをして、\nもう少しだけ。' : '閉店。\nまた金曜日に。';
+  }
+  function setProgress(p) {
+    const split = 0.34;
+    if (p < split) {
+      const i = Math.min(6, Math.floor(p / split * 7));
+      const isOpen = i >= 4;
+      weekEls.forEach((el, k) => el.classList.toggle('cur', k === i));
+      closed.classList.toggle('on', !isOpen);
+      dim.setAttribute('opacity', isOpen ? 0 : .35);
+      h1.classList.remove('off'); h2.classList.add('off');
+      setHour(11.5);
+      if (!isOpen) { msgEl.textContent = `${NAMES[ORDER[i]]}曜はお休み。`; timeEl.textContent = 'Closed'; timeEl.classList.add('shade'); }
+    } else {
+      weekEls.forEach((el, k) => el.classList.toggle('cur', k === 6));
+      closed.classList.remove('on'); dim.setAttribute('opacity', 0);
+      const q = (p - split) / (1 - split);
+      h1.classList.toggle('off', q > .3); h2.classList.toggle('off', q <= .3);
+      setHour(11.5 + q * 6);
+    }
+  }
+  // 最初に見せる状態（動きなし・CDNなしでも意味が通る）: 日曜の15時
+  weekEls.forEach((el, k) => el.classList.toggle('cur', k === 6));
+  setHour(15);
+  h1.classList.remove('off'); h2.classList.add('off');
+
+  const headSolid = () => $('#head').classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', headSolid, { passive: true }); headSolid();
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) { $('.loader')?.remove(); showDock(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ） */
+  const curtain = { v: 0 };
+  const loader = $('.loader');
+  gsap.set('.loader .lp', { strokeDasharray: 1, strokeDashoffset: 1 });
+  gsap.set('.hero h1 .w > span', { yPercent: 105 });
+  gsap.set('.hero .ph img', { scale: 1.12 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .meta, .hero .sub-en', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader .lp', { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' })
+       .to('.loader .letters span', { y: 0, duration: 0.8, stagger: 0.06 }, '-=0.35')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.4')
+       .to(curtain, { v: 100, duration: 1.1, ease: 'power4.inOut', onUpdate: () => { if (loader) loader.style.clipPath = `inset(0 0 ${curtain.v}% 0)`; } }, '+=0.2')
+       .to('.hero .ph img', { scale: 1, duration: 2.4, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .w > span', { yPercent: 0, duration: 1.2 }, '-=2.0')
+       .to('.hero .vert, .hero .kicker, .hero .sub-en, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=1.4')
+       .add(() => loader?.remove(), 2.6);
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  function showDock() { $('#dock').classList.add('show'); }
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  /* ファーストビューの植物をゆっくり沈める */
+  gsap.to('.hero .ph', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 写真の見せ場: 枠が広がりながら写真がゆっくり動く */
+  const sc = { v: 9 }, scFrame = $('.scape .frame');
+  const setSc = () => { scFrame.style.clipPath = `inset(${sc.v}% ${sc.v * 0.6}% ${sc.v}% ${sc.v * 0.6}% round ${sc.v * 2}px)`; };
+  setSc();
+  gsap.to(sc, { v: 0, ease: 'none', onUpdate: setSc, scrollTrigger: { trigger: '.scape', start: 'top bottom', end: 'top 15%', scrub: true } });
+  gsap.fromTo('.scape .frame img', { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.scape', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.scape .txt > *', { y: 30, opacity: 0, duration: 1, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.scape .txt', start: 'top 85%' } });
+  gsap.utils.toArray('.photo').forEach(f => {
+    const img = f.querySelector('img');
+    gsap.fromTo(img, { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 標本・カードの絵: 茎が伸びて葉と花が開く */
+  gsap.utils.toArray('.card .plate svg, #gram-art').forEach(svg => {
+    const q = s => [...svg.querySelectorAll(s)];
+    const stems = q('.stem'), pops = q('.pop'), petals = q('.lf, .bl'), leaves = q('.lf');
+    if (stems.length) gsap.set(stems, { strokeDasharray: 1, strokeDashoffset: 1 });
+    if (pops.length || petals.length) gsap.set([...pops, ...petals], { scale: 0, transformOrigin: '50% 50%' });
+    if (leaves.length) gsap.set(leaves, { transformOrigin: '0% 50%' });
+    const tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: 'top 80%' } });
+    if (pops.length) tl.to(pops, { scale: 1, duration: 0.8, stagger: 0.08, ease: 'back.out(1.5)' }, 0);
+    if (stems.length) tl.to(stems, { strokeDashoffset: 0, duration: 1.2, stagger: 0.05, ease: 'power2.out' }, 0);
+    if (petals.length) tl.to(petals, { scale: 1, duration: 0.7, stagger: 0.01, ease: 'back.out(1.7)' }, 0.4);
+  });
+
+  /* 週3日とテラスの陰: スクロールで 月→日、そして 11:30→17:30 */
+  setProgress(0);
+  ScrollTrigger.create({
+    trigger: '.day', start: 'top top', end: '+=260%', pin: '.day .pin', scrub: true,
+    onUpdate: s => setProgress(s.progress)
+  });
+
+  /* 花のバケツが1つずつ並ぶ */
+  setBuckets(0);
+  ScrollTrigger.create({ trigger: '#buckets', start: 'top 85%', end: 'bottom 45%', scrub: true, onUpdate: s => setBuckets(Math.round(s.progress * 8)) });
+
+  /* カードの英字をずらして出す */
+  gsap.utils.toArray('.card .en').forEach(el => {
+    gsap.from(el, { xPercent: 12, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
