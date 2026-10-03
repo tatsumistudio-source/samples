@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1D2521">
+<title>en.（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400;1,6..96,500&family=Zen+Old+Mincho:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #1D2521;    /* ユーカリの夜 */
+  --moss: #2E3A34;
+  --sage: #8FA396;
+  --sage-soft: #DCE3DD;
+  --linen: #F3EEE6;
+  --ivory: #FBF8F3;
+  --oil: #C98A4B;      /* アンバーのオイル。大事な所とボタンだけ */
+  --oil-soft: #EBCBA8;
+  --blush: #EAD8CB;
+  --ink: #2A2724;
+  --mute: #6E6862;
+  --line: rgba(251,248,243,.16);
+  --serif-en: "Bodoni Moda", "Didot", serif;
+  --serif-jp: "Zen Old Mincho", serif;
+  --sans: "Noto Sans JP", system-ui, sans-serif;
+  --g: clamp(22px, 5.5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--linen); color: var(--ink); font-family: var(--sans); font-weight: 400; font-size: 16px; line-height: 1.9; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--oil); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+h2, h3, .big, summary { word-break: keep-all; overflow-wrap: anywhere; }
+.en { font-family: var(--serif-en); font-style: italic; font-weight: 400; }
+.jp { font-family: var(--serif-jp); font-weight: 500; }
+
+/* 粒子感 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--oil-soft); color: var(--night); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出（円を描いてから店名） */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; }
+.loader .mark { position: relative; width: min(64vw, 340px); aspect-ratio: 1; display: grid; place-items: center; }
+.loader svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.loader circle { fill: none; stroke: var(--oil); stroke-width: .6; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loader .word { font-family: var(--serif-en); font-style: italic; color: var(--ivory); font-size: min(22vw, 120px); line-height: 1; opacity: 0; letter-spacing: -.02em; }
+.loader .sub { position: absolute; bottom: 12vh; color: var(--sage); font-size: 11px; letter-spacing: .4em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--ivory); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(29,37,33,.84); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .logo { font-family: var(--serif-en); font-style: italic; font-size: 26px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(29,37,33,.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); }
+.status.open i { background: #9FD8A8; box-shadow: 0 0 0 4px rgba(159,216,168,.18); }
+
+/* 写真の枠（写真が無い間は絵で見せる） */
+.ph { position: relative; overflow: hidden; }
+.ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ph .art { position: absolute; inset: 0; }
+.ph.has-photo .art { display: none; }
+.cap { position: absolute; right: 10px; bottom: 8px; z-index: 3; font-size: 10px; color: rgba(255,255,255,.82); letter-spacing: .04em; }
+
+/* カーテン越しの光（絵） */
+.curtain { background:
+  radial-gradient(120% 70% at 18% 8%, rgba(235,203,168,.55) 0%, rgba(235,203,168,0) 55%),
+  radial-gradient(90% 60% at 85% 100%, rgba(143,163,150,.35) 0%, rgba(143,163,150,0) 60%),
+  repeating-linear-gradient(90deg, rgba(251,248,243,.0) 0 14px, rgba(251,248,243,.07) 22px, rgba(251,248,243,0) 34px, rgba(0,0,0,.05) 46px, rgba(251,248,243,0) 58px),
+  linear-gradient(180deg, #3A463F 0%, #26302B 55%, #1D2521 100%); }
+.curtain::before { content: ""; position: absolute; inset: -20% -40%; background: linear-gradient(105deg, rgba(251,248,243,0) 35%, rgba(251,248,243,.16) 48%, rgba(251,248,243,0) 60%); animation: beam 9s ease-in-out infinite alternate; }
+@keyframes beam { from { transform: translateX(-18%); } to { transform: translateX(18%); } }
+.curtain.light { background:
+  radial-gradient(110% 70% at 15% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 55%),
+  radial-gradient(80% 60% at 90% 100%, rgba(201,138,75,.22) 0%, rgba(201,138,75,0) 60%),
+  repeating-linear-gradient(90deg, rgba(0,0,0,0) 0 16px, rgba(0,0,0,.035) 26px, rgba(0,0,0,0) 40px, rgba(255,255,255,.35) 52px, rgba(0,0,0,0) 64px),
+  linear-gradient(180deg, #EFE7DB 0%, #E6DCCD 100%); }
+.curtain.light::before { background: linear-gradient(105deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.45) 48%, rgba(255,255,255,0) 60%); }
+.glow { background: radial-gradient(55% 40% at 66% 30%, rgba(222,160,96,.75) 0%, rgba(201,138,75,.3) 40%, rgba(201,138,75,0) 75%), radial-gradient(80% 50% at 20% 100%, rgba(143,163,150,.25), rgba(143,163,150,0) 70%), linear-gradient(180deg, #3A2E26 0%, #2A2621 50%, #1D2521 100%); }
+.glow::before { content: ""; position: absolute; inset: 0; background: radial-gradient(30% 22% at 66% 32%, rgba(255,226,190,.55), rgba(255,226,190,0) 70%); animation: breathe 5s ease-in-out infinite alternate; }
+@keyframes breathe { from { opacity: .5; transform: scale(.94); } to { opacity: 1; transform: scale(1.06); } }
+.art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--night); color: var(--ivory); }
+.hero .ph { position: absolute; inset: 0; }
+.hero .ph > img { transform: scale(1.12); transform-origin: 50% 40%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(29,37,33,.55) 0%, rgba(29,37,33,.18) 30%, rgba(29,37,33,.3) 55%, rgba(29,37,33,.92) 100%); }
+.hero .ring { position: absolute; z-index: 1; width: 128vw; max-width: 980px; aspect-ratio: 1; right: -46vw; top: 14%; pointer-events: none; }
+.hero .ring circle { fill: none; stroke: rgba(235,203,168,.55); stroke-width: .25; }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .1em; color: var(--sage-soft); margin-bottom: 10px; }
+.hero h1 { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: clamp(132px, 42vw, 360px); line-height: .8; letter-spacing: -.04em; margin-left: -.05em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .08em .06em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero h1 .dot { color: var(--oil); }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 22px; font-size: 13px; color: var(--sage-soft); }
+.hero .meta b { color: var(--oil-soft); font-weight: 700; font-size: 15px; }
+.hero .vert { position: absolute; z-index: 2; right: var(--g); top: 116px; writing-mode: vertical-rl; font-family: var(--serif-jp); font-size: clamp(18px, 5vw, 28px); letter-spacing: .3em; line-height: 1.9; text-shadow: 0 1px 2px rgba(0,0,0,.35), 0 2px 18px rgba(0,0,0,.45); }
+.hero .vert small { display: block; font-size: .6em; letter-spacing: .25em; color: var(--sage-soft); margin-right: .6em; }
+.hero .cap { left: var(--g); right: auto; top: 116px; bottom: auto; }
+.cue { width: 1px; height: 44px; background: rgba(251,248,243,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--oil-soft); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--sage-soft); color: var(--night); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.marquee .track { display: inline-flex; align-items: center; gap: 30px; animation: slide 32s linear infinite; font-family: var(--serif-en); font-style: italic; font-size: clamp(30px, 8vw, 60px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--serif-jp); font-style: normal; font-size: .52em; }
+.marquee .track i { width: 9px; height: 9px; border: 1px solid var(--oil); border-radius: 50%; display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(92px, 17vw, 190px) var(--g) clamp(72px, 12vw, 140px); display: grid; gap: 44px; }
+.story .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(40px, 11.4vw, 104px); line-height: 1.3; letter-spacing: .02em; color: var(--night); }
+.story .big em { font-style: normal; color: var(--oil); }
+.line { display: block; overflow: hidden; padding-bottom: .05em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: var(--mute); font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--night); font-weight: 500; }
+.story figure { margin: 0; border-radius: 200px 200px 6px 6px; aspect-ratio: 4 / 5; }
+.story figure .ph { position: absolute; inset: 0; }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid rgba(42,39,36,.14); font-size: 13px; color: var(--mute); margin-top: 30px; }
+.stars b { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 52px; color: var(--night); line-height: 1; }
+.stars .s { color: var(--oil); letter-spacing: .1em; font-size: 15px; }
+
+/* 90分の章（スクロールで流れが進む） */
+.flow { position: relative; color: var(--night); background: #E4E8E3; }
+.flow .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) calc(84px + env(safe-area-inset-bottom)); position: relative; overflow: hidden; }
+.flow .warm { position: absolute; inset: 0; background: radial-gradient(90% 60% at 50% 55%, #F2D2B0 0%, #EBC9A6 40%, #E9D9C9 100%); opacity: 0; pointer-events: none; }
+.flow .pin > *:not(.warm) { position: relative; }
+.flow .eyebrow { font-size: 11px; letter-spacing: .3em; color: var(--mute); margin-bottom: 6px; }
+.flow h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(24px, 6.6vw, 44px); line-height: 1.45; }
+.flow h2 em { font-style: normal; color: var(--oil); }
+.stage { align-self: center; display: grid; justify-items: center; gap: 18px; }
+.dial { position: relative; width: min(70vw, 300px, 38svh); aspect-ratio: 1; }
+.dial svg.track { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.dial .bg { fill: none; stroke: rgba(29,37,33,.12); stroke-width: 1.2; }
+.dial .fg { fill: none; stroke: var(--oil); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: .8; }
+.dial .num { position: absolute; left: 50%; top: 9%; transform: translateX(-50%); font-family: var(--serif-en); font-style: italic; font-size: 15px; color: var(--mute); letter-spacing: .05em; }
+.icons { position: absolute; inset: 22%; }
+.icons svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transform: translateY(8px) scale(.94); transition: opacity .45s, transform .45s; fill: none; stroke: var(--night); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.icons svg.on { opacity: 1; transform: none; }
+.icons .amber { fill: rgba(201,138,75,.85); stroke: var(--night); }
+.icons .soft { fill: rgba(201,138,75,.18); }
+.steam path { animation: steam 2.6s ease-in-out infinite; }
+.steam path:nth-child(2) { animation-delay: .5s; }
+.steam path:nth-child(3) { animation-delay: 1s; }
+@keyframes steam { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(-3px); opacity: .35; } }
+.waves circle { stroke: var(--oil); transform-origin: 50px 50px; animation: wave 3s ease-out infinite; opacity: 0; }
+.waves circle:nth-child(2) { animation-delay: 1s; }
+.waves circle:nth-child(3) { animation-delay: 2s; }
+@keyframes wave { from { transform: scale(.35); opacity: .9; } to { transform: scale(1.15); opacity: 0; } }
+.say { text-align: center; max-width: 23em; min-height: 6.4em; }
+.say .t { font-family: var(--serif-jp); font-weight: 700; font-size: clamp(20px, 5.4vw, 28px); line-height: 1.5; }
+.say .t small { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 13px; color: var(--oil); letter-spacing: .06em; }
+.say p { margin-top: 6px; font-size: 14.5px; color: #4E4A45; line-height: 1.8; }
+.steps { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+.steps i { width: 26px; height: 2px; border-radius: 2px; background: rgba(29,37,33,.15); transition: background .3s; }
+.steps i.on { background: var(--oil); }
+.flow .note { font-size: 11px; color: var(--mute); text-align: center; }
+/* 動かない時は5つを並べて見せる */
+.flow.static .pin { height: auto; min-height: 0; }
+.flow.static .stage { display: none; }
+.flow .list { display: none; list-style: none; padding: 0; margin: 28px 0; }
+.flow.static .list { display: grid; gap: 18px; }
+.flow .list li { padding: 18px 20px; background: rgba(251,248,243,.7); border-radius: 14px; }
+.flow .list b { font-family: var(--serif-jp); font-size: 18px; display: block; }
+
+/* 見せ場（大きな絵） */
+.mood { position: relative; height: 112svh; min-height: 640px; overflow: hidden; color: var(--ivory); background: var(--night); }
+.mood .ph { position: absolute; inset: -8% 0; }
+.mood::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,37,33,.1) 0%, rgba(29,37,33,0) 30%, rgba(29,37,33,.55) 60%, rgba(29,37,33,.9) 100%); pointer-events: none; }
+.mood .copy { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: 14svh; }
+.mood .copy p.en { font-size: clamp(56px, 17vw, 150px); line-height: .95; color: var(--oil-soft); letter-spacing: -.02em; }
+.mood .copy h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(26px, 7.4vw, 52px); line-height: 1.45; margin-top: 18px; }
+.mood .copy small { display: block; margin-top: 14px; font-size: 13px; color: var(--sage-soft); max-width: 26em; line-height: 1.8; }
+
+/* こんな方へ */
+.for { padding: clamp(92px, 15vw, 170px) var(--g) clamp(72px, 12vw, 140px); background: var(--ivory); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 40px; }
+.sec-head .en { font-size: clamp(16px, 4vw, 20px); color: var(--oil); }
+.sec-head h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(31px, 8.8vw, 64px); line-height: 1.3; color: var(--night); }
+.sec-head p { font-size: 12.5px; color: var(--mute); max-width: 24em; }
+.for-ph { margin: 18px 0 0; aspect-ratio: 4 / 5; border-radius: 6px; }
+.for ol { list-style: none; margin: 0; padding: 0; counter-reset: f; }
+.for li { counter-increment: f; display: grid; grid-template-columns: 56px 1fr; gap: 6px 14px; padding: 26px 0; border-top: 1px solid rgba(42,39,36,.12); }
+.for li:last-child { border-bottom: 1px solid rgba(42,39,36,.12); }
+.for li::before { content: "0" counter(f); font-family: var(--serif-en); font-style: italic; font-size: 34px; line-height: 1; color: var(--oil); grid-row: span 2; }
+.for li b { font-family: var(--serif-jp); font-size: 20px; font-weight: 700; line-height: 1.5; }
+.for li span { font-size: 14.5px; color: var(--mute); }
+
+/* メニュー */
+.menu { padding: clamp(92px, 14vw, 160px) 0 40px; background: var(--linen); }
+.menu, .story, .for, .visit, .faq { overflow-x: clip; }
+html { overflow-x: clip; }
+.menu .sec-head { padding: 0 var(--g); }
+.rail { display: grid; gap: 64px; padding: 0 var(--g) 32px; }
+.card .ph { aspect-ratio: 4 / 5; border-radius: 6px; }
+.card .ph > img { transform: scale(1.12); }
+.card .en { display: block; font-size: clamp(38px, 11vw, 62px); line-height: 1; color: var(--night); margin: 20px 0 8px; }
+.card h3 { font-family: var(--serif-jp); font-size: 21px; font-weight: 700; color: var(--night); }
+.card p { margin-top: 8px; color: #4E4A45; font-size: 15px; max-width: 24em; }
+.fill-in { background: rgba(201,138,75,.16); color: #8A5524; padding: 1px 5px; border-radius: 3px; font-size: .92em; }
+.src { padding: 0 var(--g) 20px; font-size: 11px; color: var(--mute); }
+
+/* 口コミ */
+.voices { background: var(--night); color: var(--ivory); padding: clamp(92px, 14vw, 160px) 0 clamp(72px, 10vw, 120px); overflow: hidden; }
+.voices .sec-head { padding: 0 var(--g); }
+.voices .sec-head h2 { color: var(--ivory); }
+.voices .sec-head p { color: var(--sage); }
+.vrail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--g); padding: 0 var(--g) 20px; scrollbar-width: none; }
+.vrail::-webkit-scrollbar { display: none; }
+.vcard { flex: 0 0 min(80vw, 360px); scroll-snap-align: start; padding: 28px 24px 24px; border-radius: 22px; background: var(--moss); border: 1px solid var(--line); display: grid; align-content: space-between; gap: 30px; min-height: 270px; }
+.vcard .q { font-family: var(--serif-en); font-style: italic; font-size: 70px; line-height: .5; color: var(--oil); height: 26px; }
+.vcard p { font-family: var(--serif-jp); font-size: 18px; line-height: 1.8; }
+.vcard small { font-size: 12px; color: var(--sage); }
+.voices .src { color: var(--sage); margin-top: 8px; }
+.swipe { padding: 0 var(--g); font-size: 11px; color: var(--sage); letter-spacing: .2em; margin-bottom: 18px; }
+
+/* 来店 */
+.visit { background: var(--ivory); padding: clamp(92px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { margin-bottom: 36px; }
+.today { display: flex; align-items: center; gap: 14px; padding: 20px 22px; background: var(--linen); border-radius: 18px; margin-bottom: 26px; }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage); flex: none; }
+.today.open .dot { background: #5DAE6B; box-shadow: 0 0 0 6px rgba(93,174,107,.16); }
+.today b { font-family: var(--serif-jp); font-size: 21px; font-weight: 500; }
+.today small { display: block; color: var(--mute); font-size: 12.5px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.4em 1fr; padding: 12px 4px; border-bottom: 1px solid rgba(42,39,36,.1); font-size: 15px; font-variant-numeric: tabular-nums; }
+.hours li.is-today { color: var(--oil); font-weight: 700; }
+.small { font-size: 12px; color: var(--mute); }
+.addr { margin-top: 44px; font-family: var(--serif-jp); font-size: 19px; line-height: 1.75; color: var(--night); }
+.walk { display: flex; align-items: center; gap: 12px; margin-top: 14px; font-size: 14px; color: var(--mute); }
+.walk b { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 44px; color: var(--oil); line-height: 1; }
+.map { margin-top: 20px; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--sage-soft); }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.7) sepia(.15) contrast(1.02); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--night); color: var(--ivory); }
+.btn.oil { background: var(--oil); color: var(--ivory); }
+.btn.ghost { border: 1px solid currentColor; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 13vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(42,39,36,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--serif-jp); font-size: 18px; font-weight: 500; color: var(--night); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--oil),var(--oil)) center/14px 1.5px no-repeat, linear-gradient(var(--oil),var(--oil)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4E4A45; font-size: 15px; }
+
+/* 予約・Instagram */
+.book { margin: 40px var(--g) clamp(84px, 13vw, 150px); padding: 44px 26px 40px; border-radius: 28px; background: var(--night); color: var(--ivory); position: relative; overflow: hidden; }
+.book::before { content: ""; position: absolute; width: 420px; aspect-ratio: 1; right: -190px; top: -150px; border-radius: 50%; border: 1px solid rgba(235,203,168,.4); }
+.book h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(25px, 7vw, 44px); line-height: 1.45; position: relative; }
+.book p { margin-top: 12px; color: var(--sage-soft); font-size: 14.5px; position: relative; }
+.book .btn.ghost { color: var(--ivory); }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--sage); padding: 80px var(--g) calc(124px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif-en); font-style: italic; color: var(--ivory); font-size: clamp(150px, 52vw, 460px); line-height: .78; letter-spacing: -.05em; margin: 0 0 44px -.06em; }
+.foot .huge span { color: var(--oil); }
+.foot p { font-size: 13px; line-height: 1.95; }
+.foot .made { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(29,37,33,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.22); transform: translateY(150%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ivory); white-space: nowrap; }
+.dock a.main { background: var(--oil); }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(270deg, rgba(29,37,33,.62) 0%, rgba(29,37,33,.25) 12%, rgba(29,37,33,0) 22%), linear-gradient(90deg, rgba(29,37,33,.7) 0%, rgba(29,37,33,.3) 40%, rgba(29,37,33,0) 65%), linear-gradient(180deg, rgba(29,37,33,.3) 0%, rgba(29,37,33,0) 25%, rgba(29,37,33,0) 60%, rgba(29,37,33,.7) 100%); }
+  .hero .ring { right: -12vw; top: -8%; width: 70vw; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .sec-head .en { grid-column: 1 / -1; }
+  .story { grid-template-columns: 1.15fr .85fr; align-items: end; column-gap: 90px; }
+  .story .big { grid-column: 1 / -1; }
+  .flow .pin { padding-top: 110px; }
+  .flow .stage { grid-template-columns: auto 1fr; gap: 70px; justify-items: start; align-items: center; max-width: 1040px; margin: 0 auto; width: 100%; }
+  .dial { width: min(380px, 44svh); }
+  .say { text-align: left; max-width: 26em; }
+  .say .t { font-size: 40px; }
+  .say .t small { font-size: 18px; margin-bottom: 6px; }
+  .say p { font-size: 16.5px; }
+  .steps { justify-content: flex-start; }
+  .mood .copy { left: 7vw; right: auto; width: 640px; }
+  .mood .copy h2 { font-size: 46px; }
+  .mood::after { background: linear-gradient(90deg, rgba(29,37,33,.72) 0%, rgba(29,37,33,.45) 35%, rgba(29,37,33,0) 60%), linear-gradient(180deg, rgba(29,37,33,.1) 0%, rgba(29,37,33,0) 40%, rgba(29,37,33,.6) 100%); }
+  .for .sec-head { grid-template-columns: 1fr; align-items: start; }
+  .for-ph { max-width: 420px; }
+  .for .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; max-width: 1200px; margin: 0 auto; }
+  .rail { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .card:nth-child(2) { margin-top: 120px; }
+  .card .en { font-size: 46px; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; max-width: 1200px; margin: 0 auto; }
+  .visit .sec-head { max-width: 1200px; margin-left: auto; margin-right: auto; }
+  .addr { margin-top: 0; }
+  .faq { max-width: 980px; margin: 0 auto; }
+  .book { max-width: 980px; margin-left: auto; margin-right: auto; padding: 64px 56px; }
+  .dock { left: auto; right: 24px; width: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after, .curtain::before, .glow::before, .steam path, .waves circle { animation: none; }
+  .waves circle { opacity: .6; transform: scale(.8); }
+  .hero .ph > img, .card .ph > img { transform: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="mark">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" pathLength="1"/></svg>
+    <div class="word">en.</div>
+  </div>
+  <div class="sub">PRIVATE SALON</div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="logo" href="#top">en.</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="en.（エン）">
+    <div class="ph" data-photo="hero-tall" data-photo-wide="room" data-alt="朝の光が入る施術スペース（イメージ）">
+      <div class="art curtain"></div>
+    </div>
+    <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="41"/></svg>
+    <span class="cap photo-only" hidden>写真はイメージです</span>
+    <p class="vert" aria-hidden="true">背中から、ほどく。<small>大人の女性のための</small></p>
+    <div class="title">
+      <p class="kicker">Private salon ／ 市川市南八幡・本八幡駅から徒歩5分</p>
+      <h1><span class="w"><span>en<span class="dot">.</span></span></span></h1>
+      <div class="meta">
+        <span>Googleの口コミ <b>★5.0</b>（107件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Back care</span><span>背中のケア</span><i></i><span>Scapula</span><span>肩甲骨はがし</span><i></i><span>Bridal</span><span>ブライダルエステ</span><i></i><span>Posture</span><span>猫背リセット</span><i></i><span>Aroma oil</span><span>香りを選ぶ</span><i></i>
+      <span>Back care</span><span>背中のケア</span><i></i><span>Scapula</span><span>肩甲骨はがし</span><i></i><span>Bridal</span><span>ブライダルエステ</span><i></i><span>Posture</span><span>猫背リセット</span><i></i><span>Aroma oil</span><span>香りを選ぶ</span><i></i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>背中は、</span></span><span class="line"><span>自分では</span></span><span class="line"><span><em>見えない</em>から。</span></span></h2>
+    <div>
+      <p class="lead">口コミに並ぶのは <q>人生で初めてのエステ</q> <q>結婚式の前に</q> <q>背中美人になりたくて</q> という言葉。本八幡駅から歩いて5分、背中と肩甲骨まわりを中心に、全身をていねいにほぐす大人の女性のためのプライベートサロンです。</p>
+      <div class="stars"><b>5.0</b><span class="s">★★★★★</span><span>Googleの口コミ 107件の平均（2026年10月）</span></div>
+    </div>
+    <figure class="ph" data-photo="room-tall" data-alt="窓辺の光が入る施術スペース（イメージ）">
+      <div class="art curtain light">
+        <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <ellipse cx="100" cy="196" rx="64" ry="12" fill="rgba(42,39,36,.06)"/>
+          <ellipse cx="100" cy="186" rx="58" ry="10" fill="#FBF8F3" stroke="#2A2724" stroke-width=".8"/>
+          <path d="M62 128h76l-6 44c-2 9-12 14-32 14s-30-5-32-14z" fill="#FBF8F3" stroke="#2A2724" stroke-width=".8"/>
+          <ellipse cx="100" cy="128" rx="38" ry="7" fill="#9A5A32" stroke="#2A2724" stroke-width=".8"/>
+          <path d="M138 138c14 0 16 20 0 22" fill="none" stroke="#2A2724" stroke-width=".8"/>
+          <g class="steam" fill="none" stroke="#C98A4B" stroke-width="1" stroke-linecap="round"><path d="M88 112c-6-10 6-14 0-26"/><path d="M100 108c-6-12 6-16 0-30"/><path d="M112 112c-6-10 6-14 0-26"/></g>
+        </svg>
+      </div>
+      <span class="cap photo-only" hidden>イメージ</span>
+    </figure>
+  </section>
+
+  <section class="flow" id="flow" aria-labelledby="flow-title">
+    <div class="pin">
+      <div class="warm" id="warm"></div>
+      <div>
+        <p class="eyebrow">FIRST VISIT</p>
+        <h2 id="flow-title">はじめての方へ。<br>口コミでたどる<em>90分</em>。</h2>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="dial">
+          <svg class="track" viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46"/><circle class="fg" id="arc" cx="50" cy="50" r="46" pathLength="1"/></svg>
+          <span class="num" id="num">01 / 05</span>
+          <div class="icons" id="icons">
+            <svg viewBox="0 0 100 100" class="on"><rect x="18" y="30" width="64" height="44" rx="3"/><path d="M18 33l32 22 32-22"/><circle cx="50" cy="56" r="7" class="amber"/></svg>
+            <svg viewBox="0 0 100 100"><path d="M24 50h46l-4 22c-1 6-8 9-19 9s-18-3-19-9z"/><path d="M70 55c10 0 10 13 0 13"/><path d="M18 86h62"/><g class="steam"><path d="M36 40c-4-6 4-9 0-16"/><path d="M47 38c-4-7 4-10 0-18"/><path d="M58 40c-4-6 4-9 0-16"/></g></svg>
+            <svg viewBox="0 0 100 100"><path d="M20 84V52c0-5 4-8 4-12v-6h8v6c0 4 4 7 4 12v32z" class="soft"/><path d="M42 74V40c0-5 5-9 5-13v-7h8v7c0 4 5 8 5 13v34z" class="amber"/><path d="M64 84V52c0-5 4-8 4-12v-6h8v6c0 4 4 7 4 12v32z" class="soft"/><path d="M14 86h72"/></svg>
+            <svg viewBox="0 0 100 100" class="waves"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="8" style="fill:#C98A4B;stroke:none;animation:none;opacity:1;transform:none"/></svg>
+            <svg viewBox="0 0 100 100"><rect x="26" y="16" width="48" height="68" rx="3"/><path d="M36 34h28M36 46h28M36 58h18"/><path d="M58 70l6 6 12-14" stroke="#C98A4B" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div>
+          <div class="steps" id="steps"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          <div class="say" id="say"></div>
+        </div>
+      </div>
+      <ol class="list" id="list"></ol>
+      <p class="note">※Googleの口コミをもとにした流れのイメージです。実際の流れ・時間に差し替えます。</p>
+    </div>
+  </section>
+
+  <section class="mood" aria-labelledby="mood-title">
+    <div class="ph" data-photo="room2" data-alt="カーテン越しの光が入る施術スペース（イメージ）"><div class="art glow"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="66" cy="34" r="30" fill="none" stroke="rgba(235,203,168,.45)" stroke-width=".25"/><circle cx="66" cy="34" r="22" fill="none" stroke="rgba(235,203,168,.3)" stroke-width=".2"/></svg></div></div>
+    <span class="cap photo-only" hidden>写真はイメージです</span>
+    <div class="copy">
+      <p class="en">a little reward</p>
+      <h2 id="mood-title">がんばっている自分へ、<br>ご褒美の時間を。</h2>
+      <small>「自分へのご褒美に、また通いたい」という口コミも。気持ちを察して、話したい日も静かに過ごしたい日も合わせてくれる、という声があります。</small>
+    </div>
+  </section>
+
+  <section class="for" aria-labelledby="for-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">For you</span>
+        <h2 id="for-title">こんな方に<br>選ばれています</h2>
+        <p>Googleの口コミに書かれていたことから</p>
+        <figure class="ph for-ph" data-photo="oils" data-alt="琥珀色のオイルの小瓶（イメージ）"><span class="cap photo-only" hidden>イメージ</span></figure>
+      </div>
+      <ol>
+        <li><b>エステは初めてで、少し緊張している</b><span>口コミには「人生で初めてのエステだった」という方が何人も。相談からゆっくり始まります。</span></li>
+        <li><b>背中や肩甲骨まわりがガチガチ</b><span>背中を中心に全身をくまなくほぐしてもらえた、という声が多くあります。</span></li>
+        <li><b>結婚式に向けて、ドレス姿を整えたい</b><span>式の前のボディのお手入れとして、何度か通う方もいらっしゃいます。</span></li>
+        <li><b>自分のための時間がほしい</b><span>オイルの香りを選んで、紅茶を飲んで。最初から最後まで、ゆったりした時間だったという声。</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <span class="en">Menu</span>
+      <h2 id="menu-title">背中から整える、<br>3つのメニュー</h2>
+      <p>料金・時間は実際の内容に差し替えます</p>
+    </div>
+    <div class="rail">
+      <article class="card">
+        <div class="ph">
+          <div class="art curtain light" style="filter:none">
+            <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><ellipse cx="100" cy="196" rx="70" ry="7" fill="rgba(42,39,36,.06)"/><circle cx="82" cy="128" r="34" fill="none" stroke="#C98A4B" stroke-width="3.2"/><circle cx="118" cy="128" r="34" fill="none" stroke="#2A2724" stroke-width="1.4"/><path d="M82 94l5-7h-10z" fill="#FBF8F3" stroke="#2A2724" stroke-width=".8"/><g stroke="#C98A4B" stroke-width="1" stroke-linecap="round"><path d="M146 70v12M140 76h12"/><path d="M56 62v8M52 66h8"/></g></svg>
+          </div>
+        </div>
+        <span class="en">Bridal</span>
+        <h3>ブライダルエステ</h3>
+        <p>結婚式の前に、ドレスで見える背中や肩まわりをお手入れ。式までに何回か通う方も。</p>
+        <p><span class="fill-in">料金・時間・おすすめの回数を書きます</span></p>
+      </article>
+      <article class="card">
+        <div class="ph">
+          <div class="art" style="background:linear-gradient(180deg,#DCE3DD,#C9D3CC)">
+            <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 186h200" stroke="rgba(42,39,36,.25)"/><g fill="#FBF8F3" stroke="rgba(42,39,36,.35)" stroke-width=".7"><circle cx="60" cy="166" r="20"/><circle cx="100" cy="166" r="20"/><circle cx="140" cy="166" r="20"/><circle cx="80" cy="130" r="20" fill="#EAD8CB"/><circle cx="120" cy="130" r="20" fill="#EAD8CB"/><circle cx="100" cy="94" r="20"/></g><g fill="none" stroke="rgba(42,39,36,.2)" stroke-width=".6"><circle cx="60" cy="166" r="10"/><circle cx="100" cy="166" r="10"/><circle cx="140" cy="166" r="10"/><circle cx="80" cy="130" r="10"/><circle cx="120" cy="130" r="10"/><circle cx="100" cy="94" r="10"/></g></svg>
+          </div>
+        </div>
+        <span class="en">Posture</span>
+        <h3>猫背リセット</h3>
+        <p>前かがみの姿勢が続きがちな、大人の女性に向けたメニュー。背中から全身をていねいにほぐします。</p>
+        <p><span class="fill-in">料金・時間・内容を書きます</span></p>
+      </article>
+      <article class="card">
+        <div class="ph">
+          <div class="art" style="background:radial-gradient(80% 60% at 30% 20%,#F6E7D5,#E7D3BC)">
+            <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><ellipse cx="100" cy="200" rx="80" ry="8" fill="rgba(42,39,36,.08)"/><g stroke="#2A2724" stroke-width=".8"><path d="M48 198v-58c0-8 8-12 8-20v-12h16v12c0 8 8 12 8 20v58z" fill="rgba(201,138,75,.55)"/><path d="M86 192v-70c0-9 9-14 9-24v-14h18v14c0 10 9 15 9 24v70z" fill="rgba(201,138,75,.9)"/><path d="M130 198v-58c0-8 8-12 8-20v-12h16v12c0 8 8 12 8 20v58z" fill="rgba(201,138,75,.4)"/></g><g fill="#2A2724"><rect x="57" y="96" width="14" height="12" rx="2"/><rect x="95" y="70" width="18" height="14" rx="2"/><rect x="139" y="96" width="14" height="12" rx="2"/></g></svg>
+          </div>
+        </div>
+        <span class="en">Scapula</span>
+        <h3>肩甲骨はがし</h3>
+        <p>肩甲骨のまわりを中心に、こわばりやすい背中をじっくりほぐす施術。</p>
+        <p><span class="fill-in">料金・時間・内容を書きます</span></p>
+      </article>
+    </div>
+    <p class="src">※メニュー名は Googleマップのお店の名前に入っている言葉から選んでいます。内容は実際のメニューに差し替えます。</p>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <div class="sec-head">
+      <span class="en" style="color:var(--oil-soft)">Voices</span>
+      <h2 id="voices-title">口コミより</h2>
+      <p>Googleの口コミの要旨をもとにしたイメージです</p>
+    </div>
+    <p class="swipe">SWIPE →</p>
+    <div class="vrail">
+      <div class="vcard"><span class="q">“</span><p>初めてのエステでドキドキしていたけれど、紅茶を飲みながらの相談で、気持ちがほどけました。</p><small>はじめての方</small></div>
+      <div class="vcard"><span class="q">“</span><p>ガチガチだった背中を奥までほぐしてもらい、施術中から体がぽかぽか。家でできるストレッチも教わりました。</p><small>背中のこりが気になっていた方</small></div>
+      <div class="vcard"><span class="q">“</span><p>結婚式の前のボディのお手入れに。3種類のオイルから香りを選べて、ドレスを着るのが楽しみに。</p><small>ブライダルの方</small></div>
+      <div class="vcard"><span class="q">“</span><p>通りで待っていてくれたり、手書きのメッセージがあったり。心づかいがうれしいサロンです。</p><small>背中のお手入れの方</small></div>
+    </div>
+    <p class="src" style="padding:0 var(--g)">※Googleの口コミ（2026年10月時点）の要旨を言い換えています。感じ方には個人差があります。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <span class="en">Access</span>
+      <h2 id="visit-title">お店の場所と<br>営業時間</h2>
+      <p>Googleマップの情報（2026年10月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1"><span>月</span><span>9:00 – 18:00</span></li>
+          <li data-d="2"><span>火</span><span>9:00 – 18:00</span></li>
+          <li data-d="3"><span>水</span><span>9:00 – 18:00</span></li>
+          <li data-d="4"><span>木</span><span>9:00 – 18:00</span></li>
+          <li data-d="5"><span>金</span><span>9:00 – 18:00</span></li>
+          <li data-d="6"><span>土</span><span>9:00 – 17:00</span></li>
+          <li data-d="0"><span>日</span><span>9:00 – 17:00</span></li>
+        </ul>
+        <p class="small"><span class="fill-in">ご予約の方法と、お休みの知らせ方を書きます</span></p>
+      </div>
+      <div>
+        <p class="addr">〒272-0023<br>千葉県市川市南八幡4丁目14-9<br>TAKAKEN HILLS No.9 203号室</p>
+        <p class="walk"><b>5</b><span>本八幡駅から<br>歩いて5分</span></p>
+        <div class="map"><iframe title="en.の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%8D%97%E5%85%AB%E5%B9%A14%E4%B8%81%E7%9B%AE14-9&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row"><a class="btn fill" href="https://maps.google.com/?cid=10143715804372027030" target="_blank" rel="noopener">Googleマップで道順を見る</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><span class="en">Q &amp; A</span><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>エステが初めてでも大丈夫ですか？</summary><p>口コミには、初めてのエステだったという方が何人もいらっしゃいます。紅茶を飲みながら、体の気になるところを相談するところから始まります。</p></details>
+    <details><summary>予約はどうやって取りますか？</summary><p><span class="fill-in">予約の方法（Instagram の DM・LINE など）と、空き状況の見方を書きます。</span></p></details>
+    <details><summary>料金と時間は？</summary><p><span class="fill-in">メニューごとの料金と時間を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>結婚式の前は、いつごろから通えばいい？</summary><p><span class="fill-in">お店のおすすめの時期と回数を書きます。</span></p></details>
+    <details><summary>着替えや持ち物は？</summary><p><span class="fill-in">着替え・持ち物・支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="book" aria-labelledby="book-title">
+    <h2 id="book-title">ご予約・ご相談は、<br>InstagramのDMから。</h2>
+    <p>気になるところや、結婚式の日取りなど、まずは気軽にメッセージを。</p>
+    <div class="row">
+      <a class="btn oil" href="https://ig.me/m/private_salon_en._" target="_blank" rel="noopener">DMで相談する</a>
+      <a class="btn ghost" href="https://www.instagram.com/private_salon_en._/" target="_blank" rel="noopener">@private_salon_en._</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">en<span>.</span></p>
+  <p>en.（エン）<br>千葉県市川市南八幡4丁目14-9<br>TAKAKEN HILLS No.9 203号室<br>月〜金 9:00–18:00　土・日 9:00–17:00</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真・イラストはイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a href="https://maps.google.com/?cid=10143715804372027030" target="_blank" rel="noopener">道順</a>
+  <a class="main" href="https://ig.me/m/private_salon_en._" target="_blank" rel="noopener">予約・相談</a>
+  <a href="https://www.instagram.com/private_salon_en._/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+
+  /* 写真: 生成した写真が img/ に入ったら true にする（無い写真を読みに行くとエラーが出るため） */
+  const PHOTOS = true;
+  if (PHOTOS) {
+    const wide = matchMedia('(min-width: 900px)').matches;
+    document.querySelectorAll('[data-photo]').forEach(box => {
+      const name = (wide && box.dataset.photoWide) || box.dataset.photo;
+      const img = new Image();
+      img.src = `img/${name}.jpg`; img.alt = box.dataset.alt || ''; img.decoding = 'async';
+      if (box.closest('.hero') === null) img.loading = 'lazy';
+      box.prepend(img); box.classList.add('has-photo');
+    });
+    document.querySelectorAll('.photo-only').forEach(el => el.hidden = false);
+  }
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 0: [9, 17], 1: [9, 18], 2: [9, 18], 3: [9, 18], 4: [9, 18], 5: [9, 18], 6: [9, 17] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  document.querySelector(`#hours li[data-d="${d}"]`)?.classList.add('is-today');
+
+  /* 90分の流れ（口コミの要旨から） */
+  const STEPS = [
+    { en: 'Welcome', t: 'お出迎え', p: '手書きのウェルカムメッセージが用意されていた、という声も。最初の一歩から、ほっとできます。' },
+    { en: 'Tea & talk', t: '紅茶を飲みながら、相談', p: '温かい紅茶をいただきながら、体の気になるところや、なりたい姿をゆっくり話します。' },
+    { en: 'Choose your oil', t: '3つの香りから選ぶ', p: '香りの違う3種類のオイルから、その日の気分で。香りに包まれて施術が始まります。' },
+    { en: 'Full body', t: '背中を中心に、全身を', p: '背中を整えるために、全身をくまなくほぐします。<br>「施術中からぽかぽかしてきた」という声も。' },
+    { en: 'Home care', t: 'おうちでのストレッチ', p: '硬くなりやすいところに合わせて、家でできるストレッチを教えてもらえた、という声があります。' }
+  ];
+  const flow = document.getElementById('flow');
+  const sayEl = document.getElementById('say'), numEl = document.getElementById('num'), arc = document.getElementById('arc'), warm = document.getElementById('warm');
+  const icons = [...document.getElementById('icons').children], dots = [...document.getElementById('steps').children];
+  let cur = -1;
+  const showStep = i => {
+    if (i === cur) return; cur = i;
+    const s = STEPS[i];
+    sayEl.innerHTML = `<p class="t"><small>${s.en}</small>${s.t}</p><p>${s.p}</p>`;
+    numEl.textContent = `0${i + 1} / 05`;
+    icons.forEach((el, k) => el.classList.toggle('on', k === i));
+    dots.forEach((el, k) => el.classList.toggle('on', k <= i));
+  };
+  const setFlow = p => {
+    arc.style.strokeDashoffset = String(1 - Math.max(0.02, p));
+    warm.style.opacity = String(Math.min(1, p * 1.15));
+    showStep(Math.min(4, Math.floor(p * 5)));
+  };
+  // 動かない時は5つを並べた一覧で見せる
+  document.getElementById('list').innerHTML = STEPS.map((s, i) => `<li><b>0${i + 1}　${s.t}</b>${s.p}</li>`).join('');
+  const makeStatic = () => { flow.classList.add('static'); warm.style.opacity = '1'; };
+
+  function showDock() { document.getElementById('dock').classList.add('show'); }
+  if (reduced || !window.gsap || !window.ScrollTrigger) { document.querySelector('.loader')?.remove(); makeStatic(); showDock(); return; }
+  setFlow(0);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: 円を描く → 店名 → 幕が上がる */
+  const curtain = { v: 0 };
+  const setClip = () => document.querySelector('.loader')?.style.setProperty('clip-path', `inset(0 0 ${curtain.v}% 0)`);
+  gsap.set('.hero h1 .w > span', { yPercent: 108 });
+  gsap.set('.hero .vert, .hero .kicker, .hero .meta, .hero .ring', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.loader circle', { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' })
+       .to('.loader .word', { opacity: 1, duration: 0.7 }, '-=0.35')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.4')
+       .to(curtain, { v: 100, duration: 1.1, ease: 'power4.inOut', onUpdate: setClip }, '+=0.2')
+       .to('.hero .ph > img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .w > span', { yPercent: 0, duration: 1.2 }, '-=1.9')
+       .to('.hero .vert, .hero .kicker, .hero .meta, .hero .ring', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => document.querySelector('.loader')?.remove());
+  // 万一演出が止まっても幕を残さない
+  setTimeout(() => { const l = document.querySelector('.loader'); if (l) { l.remove(); gsap.set('.hero h1 .w > span, .hero .vert, .hero .kicker, .hero .meta, .hero .ring', { clearProps: 'all' }); } }, 6000);
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const onScroll = () => {
+    document.getElementById('head').classList.toggle('solid', scrollY > innerHeight * 0.8);
+    if (scrollY > innerHeight * 0.6) showDock();
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ファーストビュー: 背景を沈め、円をゆっくり回す */
+  gsap.to('.hero .ph', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.to('.hero .ring', { rotate: 40, scale: 1.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 紅茶の窓（アーチ）を下から開く */
+  const arch = { v: 18 };
+  const story = document.querySelector('.story figure');
+  story.style.clipPath = `inset(${arch.v}% 0 0 0 round 200px 200px 6px 6px)`;
+  gsap.to(arch, { v: 0, duration: 1.4, ease: 'power3.out', onUpdate: () => story.style.clipPath = `inset(${arch.v}% 0 0 0 round 200px 200px 6px 6px)`, scrollTrigger: { trigger: story, start: 'top 85%' } });
+
+  /* 90分の章: スクロールで円が満ち、色が温まり、5つの流れが進む */
+  ScrollTrigger.create({
+    trigger: '.flow', start: 'top top', end: '+=260%', pin: '.flow .pin', scrub: true,
+    onUpdate: s => setFlow(s.progress)
+  });
+
+  /* 見せ場: 背景をゆっくり動かし、文字を出す */
+  gsap.fromTo('.mood .ph', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.mood', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.mood .copy > *', { y: 40, opacity: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.mood .copy', start: 'top 85%' } });
+
+  /* こんな方へ: 1行ずつ */
+  gsap.utils.toArray('.for li').forEach(el => {
+    gsap.from(el, { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* メニューの写真枠を開く */
+  gsap.utils.toArray('.card .ph').forEach(ph => {
+    const o = { v: 14 };
+    const draw = () => ph.style.clipPath = `inset(${o.v}% 0 ${o.v}% 0)`;
+    draw();
+    gsap.to(o, { v: 0, duration: 1.3, ease: 'power3.out', onUpdate: draw, onComplete: () => ph.style.clipPath = '', scrollTrigger: { trigger: ph, start: 'top 88%' } });
+    const im = ph.querySelector('img, .art');
+    gsap.fromTo(im, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: ph, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+  gsap.utils.toArray('.card .en').forEach(el => {
+    gsap.from(el, { xPercent: 12, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+  });
+
+  /* 口コミのカードを順に */
+  gsap.from('.vcard', { y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.vrail', start: 'top 85%' } });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
