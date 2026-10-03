@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#15110E">
+<title>pain ordinaire（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Dela+Gothic+One&family=M+PLUS+2:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #15110E;      /* 焦げたクラストの黒 */
+  --crust: #5A2E14;     /* 皮 */
+  --walnut: #8A5A2B;    /* くるみ */
+  --kraft: #CDB089;     /* 紙袋 */
+  --crumb: #EBDDC1;     /* 中身 */
+  --flour: #F5F0E7;     /* 粉 */
+  --paprika: #D9462A;   /* 差し色（激辛・ボタン） */
+  --ink: #1E1814;
+  --mute: #B9A88F;
+  --line: rgba(245,240,231,.16);
+  --lat: "Fraunces", serif;
+  --head: "Dela Gothic One", sans-serif;
+  --sans: "M PLUS 2", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 56px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--flour); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; line-break: strict; word-break: keep-all; overflow-wrap: anywhere; }
+h1, h2, h3, .big, .copy, .q, .quote, .steps b { word-break: keep-all; }
+.steps p, .face.back p, .cut .note, .pinmark { word-break: keep-all; overflow-wrap: anywhere; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--paprika); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.lat { font-family: var(--lat); font-weight: 400; font-style: italic; }
+
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--kraft); color: var(--char); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 写真の枠（写真が無い時も形が崩れないように） */
+.ph { position: relative; overflow: hidden; background:
+  radial-gradient(120% 90% at 30% 20%, rgba(205,176,137,.35), transparent 60%),
+  repeating-linear-gradient(135deg, rgba(0,0,0,.03) 0 2px, transparent 2px 7px), #3A2A1E; }
+.ph img { width: 100%; height: 100%; object-fit: cover; }
+.ph picture { display: block; width: 100%; height: 100%; }
+.ph.empty::before { content: "写真（イメージ）を入れます"; position: absolute; inset: 0; display: grid; place-items: center; color: rgba(245,240,231,.55); font-size: 12px; letter-spacing: .1em; }
+.cap { position: absolute; right: 10px; bottom: 8px; z-index: 2; font-size: 10px; color: rgba(255,255,255,.82); text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+
+/* 読み込みの演出: 紙袋にスタンプを押す */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--kraft); display: grid; place-items: center; }
+.loader::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(90,46,20,.05) 0 1px, transparent 1px 5px); }
+.stamp { position: relative; width: min(64vw, 300px); aspect-ratio: 1; color: var(--paprika); transform: scale(2.4) rotate(-24deg); opacity: 0; }
+.stamp svg { width: 100%; height: 100%; }
+.stamp .core { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font-family: var(--lat); font-style: italic; font-size: clamp(34px, 10vw, 52px); line-height: .9; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--flour); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(21,17,14,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--lat); font-style: italic; font-size: 22px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(21,17,14,.4); backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--mute); }
+.status.open i { background: #8FD67E; box-shadow: 0 0 0 4px rgba(143,214,126,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: radial-gradient(90% 60% at 70% 35%, #4A2F1C 0%, #241912 45%, var(--char) 80%); color: var(--flour); }
+.hero .ph { position: absolute; inset: 0; background: transparent; }
+.hero .ph.empty::before { content: none; }
+.hero img { transform: scale(1.14); transform-origin: 50% 40%; }
+.hero .art { position: absolute; right: -18vw; top: 16%; width: 110vw; max-width: 900px; opacity: .9; }
+.hero.has-photo .art { display: none; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,17,14,.4) 0%, rgba(21,17,14,0) 28%, rgba(21,17,14,.2) 52%, rgba(21,17,14,.94) 100%); pointer-events: none; }
+.hero .title { position: absolute; left: var(--g); right: var(--g); top: 92px; z-index: 2; text-shadow: 0 2px 24px rgba(0,0,0,.55); }
+.hero.has-photo::after { background: linear-gradient(180deg, rgba(21,17,14,.75) 0%, rgba(21,17,14,.45) 38%, rgba(21,17,14,0) 52%, rgba(21,17,14,.25) 68%, rgba(21,17,14,.92) 100%); }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--kraft); margin-bottom: 10px; }
+.hero h1 { font-family: var(--lat); font-weight: 400; font-style: italic; font-size: clamp(76px, 24vw, 230px); line-height: .84; letter-spacing: -.04em; margin-left: -.03em; }
+.hero h1 .w { display: block; overflow: hidden; padding: 0 .08em .16em .1em; margin: 0 0 -.16em -.1em; }
+.hero h1 .w span { display: inline-block; }
+.hero h1 .w:last-child span { color: var(--kraft); }
+.hero .lower { position: absolute; left: var(--g); right: var(--g); bottom: calc(44px + env(safe-area-inset-bottom)); z-index: 2; text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+.hero .copy { margin-top: 0; font-family: var(--head); font-size: clamp(19px, 5.4vw, 34px); line-height: 1.5; }
+.hero .copy em { font-style: normal; color: var(--paprika); }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 16px; font-size: 13px; color: var(--mute); }
+.hero .meta b { color: var(--flour); font-family: var(--lat); font-style: normal; font-weight: 600; font-size: 20px; }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); bottom: calc(18px + env(safe-area-inset-bottom)); font-size: 10px; color: rgba(245,240,231,.8); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.cue { width: 1px; height: 44px; background: rgba(245,240,231,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--paprika); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯（紙袋の色・2段で逆向き） */
+.marquee { background: var(--kraft); color: var(--char); overflow: hidden; white-space: nowrap; padding: 14px 0; }
+.marquee .track { display: inline-flex; gap: 30px; align-items: center; animation: slide 34s linear infinite; font-family: var(--head); font-size: clamp(22px, 6vw, 44px); line-height: 1.2; }
+.marquee .track.rev { animation-direction: reverse; font-family: var(--lat); font-style: italic; font-size: clamp(20px, 5vw, 36px); color: var(--crust); margin-top: 4px; }
+.marquee .track i { width: 10px; height: 10px; border-radius: 50%; background: var(--paprika); flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 40px; }
+.big { font-family: var(--head); font-weight: 400; font-size: clamp(40px, 11.5vw, 104px); line-height: 1.22; color: var(--char); }
+.big em { font-style: normal; color: var(--paprika); }
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #54473C; font-size: 15.5px; }
+.story .lead b { color: var(--crust); }
+.points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 0; }
+.points li { display: grid; grid-template-columns: 2.6em 1fr; align-items: baseline; padding: 14px 0; border-top: 1px solid rgba(30,24,20,.14); font-size: 15px; }
+.points li span { font-family: var(--lat); font-style: italic; font-size: 22px; color: var(--paprika); }
+.story-ph { margin: 0; }
+.story-ph .ph { aspect-ratio: 4 / 5; border-radius: 6px; }
+.story-ph img { transform: scale(1.12); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(30,24,20,.14); font-size: 13px; color: #6E5F51; }
+.stars b { font-family: var(--lat); font-weight: 600; font-size: 52px; color: var(--char); line-height: 1; }
+
+/* 切る章（スクロールでナイフが進み、断面が出る） */
+.cut { position: relative; background: var(--char); color: var(--flour); }
+.cut .pin { height: 100svh; min-height: 680px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) calc(92px + env(safe-area-inset-bottom)); }
+.cut h2 { font-family: var(--head); font-weight: 400; font-size: clamp(26px, 7.4vw, 52px); line-height: 1.35; }
+.cut h2 em { font-style: normal; color: var(--kraft); }
+.cut .stage { align-self: center; justify-self: center; width: 100%; max-width: 560px; position: relative; }
+.cut svg { width: 100%; height: auto; overflow: visible; }
+.cut .steps { position: relative; min-height: 6.6em; font-size: 15px; line-height: 1.7; }
+.cut .steps p { position: absolute; inset: 0 0 auto; opacity: 0; transition: opacity .35s, transform .35s; transform: translateY(8px); }
+.cut .steps p.on { opacity: 1; transform: none; }
+.cut .steps b { display: block; font-family: var(--head); font-weight: 400; font-size: 20px; color: var(--kraft); margin-bottom: 2px; }
+.meter { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; font-size: 11.5px; color: var(--mute); margin-top: 10px; }
+.meter .bar { height: 6px; border-radius: 6px; background: rgba(245,240,231,.12); overflow: hidden; }
+.meter .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--walnut), var(--paprika)); border-radius: 6px; }
+.cut .note { font-size: 11px; color: #8F8070; margin-top: 10px; }
+.inc { transform-box: fill-box; transform-origin: center; transition: opacity .25s, transform .3s cubic-bezier(.3,1.6,.5,1); opacity: 0; transform: scale(.2); }
+.inc.on { opacity: 1; transform: scale(1); }
+
+/* 断面の写真 */
+.slice { background: var(--char); padding: 0 0 clamp(72px, 12vw, 140px); }
+.slice .ph { height: 78svh; max-height: 820px; }
+.slice .ph img { transform: scale(1.15); }
+.slice .quote { padding: 36px var(--g) 0; color: var(--flour); font-family: var(--head); font-size: clamp(24px, 6.6vw, 48px); line-height: 1.45; }
+.slice .quote small { display: block; margin-top: 14px; font-family: var(--sans); font-size: 12px; color: var(--mute); }
+
+/* なんの味？（めくるカード） */
+.guess { padding: clamp(88px, 14vw, 160px) 0 clamp(56px, 10vw, 120px); background: var(--flour); }
+.sec-head { padding: 0 var(--g); display: grid; gap: 12px; margin-bottom: 34px; }
+.sec-head h2 { font-family: var(--head); font-weight: 400; font-size: clamp(32px, 9vw, 68px); line-height: 1.25; color: var(--char); }
+.sec-head p { font-size: 13px; color: #75665A; }
+.sp { display: inline-block; white-space: nowrap; }
+.cards { display: flex; gap: 14px; padding: 6px var(--g) 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--g); scrollbar-width: none; }
+.cards::-webkit-scrollbar { display: none; }
+.cards .flip { flex: 0 0 78%; scroll-snap-align: start; }
+.slice .ph.empty, .visit figure .ph.empty, .story-ph .ph.empty { display: none; }
+.flip { position: relative; aspect-ratio: 4 / 5; perspective: 1400px; cursor: pointer; border: 0; padding: 0; background: none; text-align: left; font: inherit; color: inherit; width: 100%; }
+.flip .in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.flip.open .in { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; }
+.face.front { background: var(--kraft); color: var(--char); }
+.face.front::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(90,46,20,.05) 0 1px, transparent 1px 5px); }
+.face.front .q { position: relative; font-family: var(--head); font-size: clamp(24px, 7vw, 34px); line-height: 1.35; }
+.face.back .ph.empty::before { content: none; }
+.face.front .n { position: relative; font-family: var(--lat); font-style: italic; font-size: 64px; line-height: 1; color: var(--paprika); }
+.face.front .tap { position: relative; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; }
+.face.front .tap i { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--char); display: grid; place-items: center; font-style: normal; font-size: 18px; }
+.face.back { transform: rotateY(180deg); background: #3A2A1E; color: var(--flour); padding: 0; }
+.face.back .ph { position: absolute; inset: 0; }
+.face.back .txt { position: relative; z-index: 2; margin-top: auto; padding: 60px 22px 22px; background: linear-gradient(180deg, transparent, rgba(21,17,14,.92) 45%); }
+.face.back h3 { font-family: var(--head); font-weight: 400; font-size: 24px; line-height: 1.35; color: var(--kraft); }
+.face.back p { margin-top: 6px; font-size: 14.5px; }
+.face.back .cap { top: 10px; bottom: auto; }
+.face.back .txt { background: none; padding-top: 22px; }
+.face.back h3 { font-size: 44px; line-height: 1.15; }
+.face.back.b-crust { background: radial-gradient(120% 80% at 20% 10%, #7A4220, #3A1D0C); }
+.face.back.b-kraft { background: var(--kraft); color: var(--char); }
+.face.back.b-kraft h3 { color: var(--crust); }
+.face.back.b-char { background: radial-gradient(120% 80% at 80% 10%, #3A2A1E, var(--char)); }
+.also { padding: 40px var(--g) 0; }
+.also h3 { font-size: 13px; color: #75665A; font-weight: 700; margin-bottom: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(30,24,20,.25); font-size: 14px; font-weight: 500; }
+.src { padding: 18px var(--g) 0; font-size: 11px; color: #8A7B6E; }
+
+/* 朝のうちに */
+.morning { background: var(--paprika); color: var(--flour); padding: clamp(84px, 14vw, 150px) var(--g); overflow: hidden; }
+.morning .big { color: var(--flour); }
+.morning .lead { margin-top: 22px; max-width: 30em; font-size: 15.5px; }
+.day { position: relative; margin-top: 56px; padding-top: 80px; }
+.day .rail { position: relative; height: 54px; border-radius: 10px; overflow: hidden; background: rgba(21,17,14,.22); }
+.day .fill { position: absolute; inset: 0; background: linear-gradient(90deg, var(--flour) 0%, rgba(245,240,231,.85) 18%, rgba(245,240,231,.45) 46%, rgba(245,240,231,.12) 100%); transform-origin: left; }
+.day .hrs { display: flex; justify-content: space-between; font-family: var(--lat); font-size: 13px; margin-top: 8px; }
+.pinmark { position: absolute; top: 0; transform: translateX(-50%); width: max-content; max-width: 46vw; font-size: 12.5px; line-height: 1.5; text-align: center; }
+.pinmark b { display: block; font-family: var(--lat); font-weight: 600; font-size: 20px; }
+.pinmark::after { content: ""; display: block; width: 1.5px; height: 22px; margin: 6px auto 0; background: var(--flour); }
+.morning .note { margin-top: 22px; font-size: 11.5px; opacity: .85; }
+.fill-in { background: rgba(205,176,137,.25); padding: 0 4px; border-radius: 3px; }
+.morning .fill-in { background: rgba(21,17,14,.25); }
+
+/* 来店 */
+.visit { background: var(--char); color: var(--flour); padding: clamp(84px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head { padding: 0; }
+.visit .sec-head h2 { color: var(--flour); }
+.visit .sec-head p { color: var(--mute); }
+.visit figure { margin: 0 calc(var(--g) * -1) 40px; }
+.visit figure .ph { aspect-ratio: 3 / 2; }
+.visit figure img { transform: scale(1.12); }
+.today { display: flex; align-items: center; gap: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 16px; margin-bottom: 26px; }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mute); flex: none; }
+.today.open .dot { background: #8FD67E; box-shadow: 0 0 0 6px rgba(143,214,126,.15); }
+.today b { font-family: var(--head); font-weight: 400; font-size: 20px; }
+.today small { display: block; color: var(--mute); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--kraft); font-weight: 700; }
+.hours li.closed span:last-child { color: #8F8070; }
+.small { font-size: 11.5px; color: var(--mute); }
+.addr { margin-top: 40px; font-size: 18px; line-height: 1.7; font-weight: 500; }
+.map { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #2A2019; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.8) sepia(.15) contrast(1.05) brightness(.92); }
+.park { margin-top: 18px; padding: 18px 20px; border-left: 3px solid var(--paprika); background: rgba(245,240,231,.05); border-radius: 0 14px 14px 0; font-size: 14.5px; }
+.park b { display: block; font-family: var(--head); font-weight: 400; font-size: 16px; margin-bottom: 4px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--paprika); color: var(--flour); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(84px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(30,24,20,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-size: 17px; font-weight: 700; color: var(--char); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--paprika),var(--paprika)) center/14px 2px no-repeat, linear-gradient(var(--paprika),var(--paprika)) center/2px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #54473C; font-size: 15px; }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(84px, 14vw, 150px); }
+.gram .box { background: var(--kraft); border-radius: 8px; padding: 32px 24px; position: relative; overflow: hidden; }
+.gram .box::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(90,46,20,.05) 0 1px, transparent 1px 5px); }
+.gram h2, .gram p, .gram .row { position: relative; }
+.gram h2 { font-family: var(--head); font-weight: 400; font-size: clamp(24px, 6.8vw, 44px); line-height: 1.4; color: var(--char); }
+.gram p { margin-top: 10px; color: #4A3B2E; font-size: 15px; }
+.gram .btn.fill { background: var(--char); }
+
+/* 最後 */
+.foot { background: var(--char); color: var(--mute); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--lat); font-style: italic; color: var(--flour); font-size: clamp(80px, 25vw, 300px); line-height: .82; letter-spacing: -.04em; margin: 0 0 40px -.04em; }
+.foot .huge span { color: var(--kraft); display: block; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(21,17,14,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--flour); }
+.dock a.main { background: var(--paprika); }
+
+@media (min-width: 900px) {
+  .hero::after { background: linear-gradient(90deg, rgba(21,17,14,.85) 0%, rgba(21,17,14,.45) 40%, rgba(21,17,14,0) 65%), linear-gradient(180deg, rgba(21,17,14,.35) 0%, rgba(21,17,14,0) 25%, rgba(21,17,14,0) 60%, rgba(21,17,14,.7) 100%); }
+  .hero .art { right: -4vw; top: 10%; width: 62vw; }
+  .hero .title { right: 40%; top: auto; bottom: 250px; }
+  .hero .lower { right: 40%; bottom: 80px; }
+  .hero.has-photo::after { background: linear-gradient(90deg, rgba(21,17,14,.85) 0%, rgba(21,17,14,.45) 40%, rgba(21,17,14,0) 65%), linear-gradient(180deg, rgba(21,17,14,.35) 0%, rgba(21,17,14,0) 25%, rgba(21,17,14,0) 60%, rgba(21,17,14,.7) 100%); }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .story-ph { grid-row: 2 / 4; grid-column: 2; }
+  .story .stars { grid-column: 1; }
+  .cut .pin { grid-template-columns: 1fr 1.2fr; grid-template-rows: auto 1fr; column-gap: 64px; padding-top: 110px; }
+  .cut h2 { grid-column: 1; align-self: end; }
+  .cut .stage { grid-column: 2; grid-row: 1 / 3; }
+  .cut .bottom { grid-column: 1; grid-row: 2; align-self: start; margin-top: 30px; }
+  .slice { display: grid; grid-template-columns: 1.3fr 1fr; align-items: end; }
+  .slice .quote { padding: 0 var(--g) 40px; }
+  .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; overflow: visible; }
+  .flip:nth-child(even) { margin-top: 90px; }
+  .face.front .q { font-size: 30px; }
+  .sp { display: none; }
+  .day .pinmark { max-width: 24vw; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .visit figure { margin: 0 0 56px; }
+  .visit figure .ph { aspect-ratio: 21 / 9; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero img, .slice .ph img, .visit figure img, .story-ph img { transform: none; }
+  .flip .in { transition: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="stamp">
+    <svg viewBox="0 0 200 200"><defs><path id="ring" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <text font-family="M PLUS 2, sans-serif" font-size="13" font-weight="700" letter-spacing="5" fill="currentColor"><textPath href="#ring">BOULANGERIE ・ MINAMI-GYOTOKU ・ ICHIKAWA ・</textPath></text>
+    </svg>
+    <div class="core">pain<br>ordinaire</div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">pain ordinaire</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero" aria-label="パン オルディネール">
+    <picture class="ph">
+      <source media="(min-width: 900px)" srcset="img/hero.jpg">
+      <img src="img/hero-tall.jpg" alt="板の上に積んだハード系のパン（イメージ）">
+    </picture>
+    <svg class="art" viewBox="0 0 600 420" aria-hidden="true">
+      <defs>
+        <radialGradient id="crustG" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#A86A36"/><stop offset=".55" stop-color="#6B3A1A"/><stop offset="1" stop-color="#2A160A"/></radialGradient>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E7A35B" stop-opacity=".35"/><stop offset="1" stop-color="#E7A35B" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="300" cy="230" rx="300" ry="190" fill="url(#glow)"/>
+      <ellipse cx="300" cy="352" rx="230" ry="22" fill="#000" opacity=".45"/>
+      <path d="M86 300C80 200 170 112 300 112s222 88 214 188c-4 42-90 58-214 58S90 342 86 300z" fill="url(#crustG)"/>
+      <g fill="none" stroke="#E9C995" stroke-linecap="round" opacity=".85">
+        <path d="M170 210c40-48 92-62 140-58" stroke-width="7"/>
+        <path d="M196 262c52-46 120-60 176-52" stroke-width="7"/>
+        <path d="M258 304c48-30 104-38 152-30" stroke-width="6"/>
+      </g>
+      <g fill="#F5F0E7" opacity=".35"><circle cx="230" cy="160" r="2"/><circle cx="380" cy="150" r="1.6"/><circle cx="420" cy="220" r="2.2"/><circle cx="160" cy="250" r="1.5"/><circle cx="330" cy="130" r="1.8"/></g>
+    </svg>
+    <span class="caption">写真はイメージです</span>
+    <div class="title">
+      <p class="kicker">Boulangerie ／ 市川市南行徳</p>
+      <h1><span class="w"><span>pain</span></span><span class="w"><span>ordinaire</span></span></h1>
+    </div>
+    <div class="lower">
+      <p class="copy">ふつうの日に、<br><em>ふつうじゃない</em>パンを。</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（161件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>ハード系</span><i></i><span>クイニーアマン</span><i></i><span>メイプルメロンパン</span><i></i><span>激辛ソーセージのパン</span><i></i><span>カレーパン</span><i></i><span>ゆめちから食パン</span><i></i>
+      <span>ハード系</span><i></i><span>クイニーアマン</span><i></i><span>メイプルメロンパン</span><i></i><span>激辛ソーセージのパン</span><i></i><span>カレーパン</span><i></i><span>ゆめちから食パン</span><i></i>
+    </div><br>
+    <div class="track rev">
+      <span>pain ordinaire</span><span>— everyday bread, not so ordinary —</span><span>pain ordinaire</span><span>— everyday bread, not so ordinary —</span>
+      <span>pain ordinaire</span><span>— everyday bread, not so ordinary —</span><span>pain ordinaire</span><span>— everyday bread, not so ordinary —</span>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>味の想像が、</span></span><span class="line"><span><em>つかない。</em></span></span></h2>
+    <div>
+      <p class="lead">口コミでくり返し語られるのは、<b>ほかでは<wbr>見かけない<wbr>個性的なパン</b>が<wbr>棚いっぱいに<wbr>並ぶこと。ハード系から<wbr>甘いパン、おかずパンまで、選んでいる<wbr>だけで<wbr>わくわくする、という声が集まっています。</p>
+      <ul class="points">
+        <li><span>01</span>ほかにはない、個性的な味のパンが多い</li>
+        <li><span>02</span>ハード系に、ナッツやレーズンがたっぷり</li>
+        <li><span>03</span>種類が多く、値段は良心的という声も</li>
+      </ul>
+    </div>
+    <figure class="story-ph"><div class="ph"><img src="img/loaves-tall.jpg" alt="板の上に並んだハード系のパン（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></div></figure>
+    <div class="stars"><b>4.5</b><span>Googleの口コミ 161件の平均（2026年10月）</span></div>
+  </section>
+
+  <section class="cut" aria-labelledby="cut-title">
+    <div class="pin">
+      <h2 id="cut-title">ハード系を、<br><em>切ってみる。</em></h2>
+      <div class="stage" aria-hidden="true">
+        <svg id="loaf" viewBox="0 0 400 300">
+          <defs>
+            <radialGradient id="crumbG" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#F1E3C6"/><stop offset="1" stop-color="#D9C19A"/></radialGradient>
+            <linearGradient id="skinG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A5A2A"/><stop offset=".6" stop-color="#5A2E14"/><stop offset="1" stop-color="#2E170A"/></linearGradient>
+            <clipPath id="faceClip"><ellipse cx="200" cy="155" rx="162" ry="112"/></clipPath>
+            <clipPath id="skinClip"><rect id="skinRect" x="0" y="20" width="400" height="300"/></clipPath>
+          </defs>
+          <ellipse cx="200" cy="285" rx="170" ry="12" fill="#000" opacity=".5"/>
+          <ellipse cx="200" cy="155" rx="176" ry="126" fill="#4A250F"/>
+          <ellipse cx="200" cy="155" rx="162" ry="112" fill="url(#crumbG)"/>
+          <g clip-path="url(#faceClip)" id="holes" fill="#C9AE84" opacity=".7"></g>
+          <g clip-path="url(#faceClip)" id="incs"></g>
+          <g clip-path="url(#skinClip)">
+            <ellipse cx="200" cy="155" rx="176" ry="126" fill="url(#skinG)"/>
+            <g fill="none" stroke="#E5C08A" stroke-linecap="round" opacity=".9">
+              <path d="M96 120c40-30 100-40 150-34" stroke-width="8"/>
+              <path d="M110 170c50-34 130-44 190-36" stroke-width="8"/>
+              <path d="M150 220c40-22 96-28 140-22" stroke-width="7"/>
+            </g>
+            <g fill="#F5F0E7" opacity=".45"><circle cx="140" cy="90" r="2"/><circle cx="260" cy="70" r="1.6"/><circle cx="300" cy="190" r="2"/><circle cx="90" cy="200" r="1.6"/><circle cx="210" cy="250" r="1.8"/></g>
+          </g>
+          <g id="knife">
+            <rect x="-10" y="-3" width="330" height="6" rx="2" fill="#E8E4DC"/>
+            <rect x="-10" y="-3" width="330" height="2" fill="#FFFFFF" opacity=".8"/>
+            <rect x="320" y="-9" width="96" height="18" rx="6" fill="#2A1B12" stroke="#5A3A24"/>
+            <circle cx="345" cy="0" r="2.5" fill="#CDB089"/><circle cx="385" cy="0" r="2.5" fill="#CDB089"/>
+          </g>
+        </svg>
+      </div>
+      <div class="bottom">
+        <div class="steps" id="steps">
+          <p class="on"><b>外は、ずっしり固い。</b>スクロールすると、ナイフが進みます。</p>
+          <p><b>切ると、</b>しっとりした中身が見えてきて。</p>
+          <p><b>ナッツとレーズンが、ぎっしり。</b>これほど具の多い<wbr>パンは<wbr>なかなか<wbr>見かけない、という口コミも。</p>
+          <p><b>固いパンのおいしさに、はじめて気づいた。</b>そんな声が届くハード系です。</p>
+        </div>
+        <div class="meter"><span>具の量</span><span class="bar"><i id="meter"></i></span><span id="meterTxt">これから</span></div>
+        <p class="note">※口コミの要旨をもとにした図です。実際の断面や<wbr>具材は<wbr>パンごとに<wbr>違います。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slice" aria-label="ハード系の断面">
+    <div class="ph" id="slicePh"><img src="img/cut.jpg" alt="くるみやレーズンがぎっしり詰まったハード系のパンの断面（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></div>
+    <p class="quote">ひと切れごとに、<br>具が顔を出す。<small>ナッツやレーズンがとにかく多い、という<wbr>口コミの声を<wbr>もとにした<wbr>イメージです</small></p>
+  </section>
+
+  <section class="guess" aria-labelledby="guess-title">
+    <div class="sec-head">
+      <h2 id="guess-title">これ、<br>なんの味？</h2>
+      <p>カードをタップすると答えが出ます<span class="sp">（横にスワイプで次へ）</span></p>
+    </div>
+    <div class="cards">
+      <button class="flip" type="button" aria-label="クイニーアマンの中身を見る">
+        <span class="in">
+          <span class="face front"><span class="n">01</span><span class="q">見た目は<br>クイニーアマン。<br>中には？</span><span class="tap">タップでめくる<i>↻</i></span></span>
+          <span class="face back b-crust"><span class="txt"><h3>あんこ。</h3><p>カリッと甘い生地の中に、あんこ入り。おいしかった、という声。</p></span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-label="メロンパンの答えを見る">
+        <span class="in">
+          <span class="face front"><span class="n">02</span><span class="q">メロンパン、<br>なのに<br>何味？</span><span class="tap">タップでめくる<i>↻</i></span></span>
+          <span class="face back b-kraft"><span class="txt"><h3>メイプル。</h3><p>メイプル味のメロンパン。いままででいちばん軽い、と書いた方も。</p></span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-label="ソーセージのパンの答えを見る">
+        <span class="in">
+          <span class="face front"><span class="n">03</span><span class="q">ソーセージの<br>パン。<br>ただし？</span><span class="tap">タップでめくる<i>↻</i></span></span>
+          <span class="face back" style="background:var(--paprika)"><span class="txt" style="background:none;padding-top:22px"><h3 style="color:var(--flour);font-size:56px;line-height:1.1">激辛。</h3><p>激辛ソーセージのパン、おいしかった、という口コミがあります。</p></span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-label="カレーパンの食べ方を見る">
+        <span class="in">
+          <span class="face front"><span class="n">04</span><span class="q">カレーパンは、<br>家でひと手間<br>かけると？</span><span class="tap">タップでめくる<i>↻</i></span></span>
+          <span class="face back b-char"><span class="txt"><h3>もっとおいしい。</h3><p>家で温め直したら、よりおいしく食べられた、という声。</p></span></span>
+        </span>
+      </button>
+    </div>
+    <div class="also">
+      <h3>口コミに名前が出てくるパン</h3>
+      <div class="chips"><span>ゆめちから食パン</span><span>クロワッサン</span><span>メロンパン</span><span>クリームパン</span><span>塩パン</span><span>ポンデケージョ</span><span>ピザパン</span></div>
+    </div>
+    <p class="src">※Googleの口コミで<wbr>名前が<wbr>挙がった<wbr>パンから<wbr>選んでいます。日によって並ばないパンもあります。写真はすべてイメージです。</p>
+  </section>
+
+  <section class="morning" aria-labelledby="morning-title">
+    <h2 class="big" id="morning-title"><span class="line"><span>選ぶなら、</span></span><span class="line"><span>朝のうちに。</span></span></h2>
+    <p class="lead">口コミには、10時ごろに<wbr>行ったら<wbr>お目当ての<wbr>パンが<wbr>売り切れていた、お昼過ぎは<wbr>棚がかなり<wbr>空いていた、という声も。いろいろ選びたい日は、早めの時間がおすすめです。</p>
+    <div class="day" aria-hidden="true">
+      <div class="pinmark" style="left:22%"><b>10:00</b>人気のパンは<br>売り切れも</div>
+      <div class="pinmark" style="left:50%"><b>12:30</b>棚は<br>かなり少なめ</div>
+      <div class="rail"><span class="fill" id="dayFill"></span></div>
+      <div class="hrs"><span>8:00 開店</span><span>17:00 閉店</span></div>
+    </div>
+    <p class="note">※口コミの要旨から作った目安です。<span class="fill-in">焼き上がりの時間を、実際の内容に差し替えます。</span></p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title">お店へ<br>行く前に</h2>
+      <p>営業日・時間は<wbr>Googleマップの<wbr>情報（2026年10月）</p>
+    </div>
+    <figure><div class="ph"><img src="img/loaves-wide.jpg" alt="紙に包まれたハード系のパン（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></div></figure>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>お休み</span></li>
+          <li data-d="2"><span>火</span><span>8:00 – 17:00</span></li>
+          <li data-d="3"><span>水</span><span>8:00 – 17:00</span></li>
+          <li data-d="4"><span>木</span><span>8:00 – 17:00</span></li>
+          <li data-d="5"><span>金</span><span>8:00 – 17:00</span></li>
+          <li data-d="6"><span>土</span><span>8:00 – 17:00</span></li>
+          <li data-d="0" class="closed"><span>日</span><span>お休み</span></li>
+        </ul>
+        <p class="small">臨時のお休みは Instagram でお知らせします。</p>
+      </div>
+      <div>
+        <p class="addr">〒272-0138<br>千葉県市川市南行徳1丁目22-7 1階</p>
+        <div class="map"><iframe title="パン オルディネールの地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=pain%20ordinaire%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82%E5%8D%97%E8%A1%8C%E5%BE%B31-22-7&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="park"><b>駐車場・自転車</b><span class="fill-in">駐車場と駐輪の案内を、実際の内容に合わせて入れます。</span></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=12880719957803580365" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head" style="padding:0"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>何時ごろに行くと、種類を選べますか？</summary><p>口コミでは、午前中のうちに<wbr>人気のパンが<wbr>売り切れる<wbr>ことも<wbr>あるようです。いろいろ<wbr>選びたい日は<wbr>早めの時間が<wbr>おすすめです。<span class="fill-in">焼き上がりの時間を入れます。</span></p></details>
+    <details><summary>お目当てのパンを<wbr>取り置き<wbr>できますか？</summary><p><span class="fill-in">取り置きの可否と方法を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>カレーパンのおすすめの食べ方は？</summary><p>口コミでは、家で<wbr>温め直したら<wbr>さらに<wbr>おいしかった、という声がありました。<span class="fill-in">お店のおすすめの温め方を入れます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <h2 id="gram-title">今日のパンは、<br>Instagramで。</h2>
+      <p>その日のパンや<wbr>臨時のお休みの<wbr>お知らせは、Instagramから。</p>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/painordinaire/" target="_blank" rel="noopener">@painordinaire を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">pain<span>ordinaire</span></p>
+  <p>pain ordinaire（パン オルディネール）<br>千葉県市川市南行徳1丁目22-7 1階<br>火〜土 8:00–17:00　日・月 お休み</p>
+  <p class="made">このページは<wbr>辰巳アンドスタジオが<wbr>ご提案用に<wbr>作成した<wbr>サンプルです。お店の公式サイトではありません。写真は生成したイメージで、文章は<wbr>口コミの要旨を<wbr>もとにしています。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=12880719957803580365" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0477040064">電話</a>
+  <a href="https://www.instagram.com/painordinaire/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+
+  /* 写真が無い時は枠だけ残す */
+  document.querySelectorAll('.ph img').forEach(img => {
+    const ph = img.closest('.ph');
+    const ok = () => { ph.classList.remove('empty'); if (ph.parentElement.id === 'hero') $('#hero').classList.add('has-photo'); };
+    const ng = () => { img.style.visibility = 'hidden'; ph.classList.add('empty'); clearTimeout(window.__rf); window.__rf = setTimeout(() => window.ScrollTrigger && ScrollTrigger.refresh(), 200); };
+    if (img.complete) (img.naturalWidth ? ok() : ng()); else { img.addEventListener('load', ok); img.addEventListener('error', ng); }
+  });
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 2: [8, 17], 3: [8, 17], 4: [8, 17], 5: [8, 17], 6: [8, 17] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日はお休み';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  $('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* めくるカード */
+  document.querySelectorAll('.flip').forEach(b => b.addEventListener('click', () => b.classList.toggle('open')));
+
+  /* 断面の具（決まった並びで作る） */
+  const NS = 'http://www.w3.org/2000/svg';
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const holes = $('#holes'), incs = $('#incs');
+  for (let i = 0; i < 46; i++) {
+    const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd());
+    const e = document.createElementNS(NS, 'ellipse');
+    e.setAttribute('cx', 200 + Math.cos(a) * r * 150); e.setAttribute('cy', 155 + Math.sin(a) * r * 100);
+    e.setAttribute('rx', 2 + rnd() * 5); e.setAttribute('ry', 1.5 + rnd() * 3);
+    holes.appendChild(e);
+  }
+  const pieces = [];
+  for (let i = 0; i < 40; i++) {
+    const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * 0.92;
+    const x = 200 + Math.cos(a) * r * 148, y = 155 + Math.sin(a) * r * 98, rot = rnd() * 180;
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'inc');
+    if (i % 3 === 0) {
+      g.innerHTML = `<ellipse cx="${x}" cy="${y}" rx="7" ry="4.6" fill="#3B1A26" transform="rotate(${rot} ${x} ${y})"/><ellipse cx="${x - 2}" cy="${y - 1.5}" rx="2.4" ry="1.2" fill="#7A4A5A" opacity=".7" transform="rotate(${rot} ${x} ${y})"/>`;
+    } else {
+      const s = 0.8 + rnd() * 0.6;
+      g.innerHTML = `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><path d="M-12 -2C-12 -9 -4 -11 0 -7C4 -11 12 -9 12 -2C12 6 5 10 0 7C-5 10 -12 6 -12 -2Z" fill="#8A5A2B"/><path d="M0 -6V6M-6 -3C-3 0 -3 3 -6 5M6 -3C3 0 3 3 6 5" stroke="#5E3815" stroke-width="1.4" fill="none" stroke-linecap="round"/></g>`;
+    }
+    incs.appendChild(g); pieces.push(g);
+  }
+  const skinRect = $('#skinRect'), knife = $('#knife'), steps = [...document.querySelectorAll('#steps p')];
+  const meter = $('#meter'), meterTxt = $('#meterTxt');
+  const setCut = p => {
+    const k = Math.min(1, p / 0.42);
+    const ky = 20 + k * 270;
+    skinRect.setAttribute('y', ky);
+    knife.setAttribute('transform', `translate(${-30 + k * 20} ${ky})`);
+    knife.style.opacity = p < 0.46 ? 1 : Math.max(0, 1 - (p - 0.46) / 0.06);
+    const q = Math.max(0, Math.min(1, (p - 0.3) / 0.6));
+    const n = Math.round(q * pieces.length);
+    pieces.forEach((g, i) => g.classList.toggle('on', i < n));
+    meter.style.width = `${q * 100}%`;
+    meterTxt.textContent = q === 0 ? 'これから' : q < 0.5 ? 'ふえてきた' : q < 0.95 ? 'たっぷり' : 'ぎっしり';
+    const si = p < 0.12 ? 0 : p < 0.42 ? 1 : p < 0.85 ? 2 : 3;
+    steps.forEach((el, i) => el.classList.toggle('on', i === si));
+  };
+
+  addEventListener('load', () => window.ScrollTrigger && ScrollTrigger.refresh());
+  function showDock() { $('#dock').classList.add('show'); }
+  if (reduced || !window.gsap || !window.ScrollTrigger) {
+    document.querySelector('.loader')?.remove(); setCut(1); showDock(); return;
+  }
+  setCut(0);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出: スタンプを押して、紙袋の幕が上がる */
+  const cover = { v: 0 };
+  const loader = $('.loader');
+  gsap.set('.hero h1 .w span', { yPercent: 110 });
+  gsap.set('.hero .kicker, .hero .copy, .hero .meta', { opacity: 0, y: 16 });
+  gsap.set('.hero .art', { opacity: 0, scale: 1.08 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.to('.stamp', { opacity: 1, scale: 1, rotate: -8, duration: 0.55, ease: 'back.out(2.2)' })
+       .to('.stamp', { scale: 0.96, duration: 0.12, yoyo: true, repeat: 1, ease: 'power1.inOut' })
+       .to(cover, { v: 100, duration: 1.0, ease: 'power4.inOut', onUpdate: () => { if (loader) loader.style.clipPath = `inset(0 0 ${cover.v}% 0)`; } }, '+=0.35')
+       .to('.hero img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.8')
+       .to('.hero .art', { opacity: 0.9, scale: 1, duration: 1.8, ease: 'power3.out' }, '<')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2, stagger: 0.1 }, '-=2')
+       .to('.hero .kicker, .hero .copy, .hero .meta', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => loader?.remove());
+  setTimeout(() => { if (document.body.contains(loader)) { loader.remove(); gsap.set('.hero h1 .w span, .hero .kicker, .hero .copy, .hero .meta, .hero .art', { clearProps: 'all' }); } }, 6000);
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  const headSolid = () => $('#head').classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', headSolid, { passive: true }); headSolid();
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  gsap.to('.hero .ph, .hero .art', { yPercent: 16, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+  gsap.from('.points li', { opacity: 0, x: -20, duration: 0.8, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.points', start: 'top 85%' } });
+
+  /* 切る章 */
+  ScrollTrigger.create({ trigger: '.cut', start: 'top top', end: '+=170%', pin: '.cut .pin', scrub: true, onUpdate: s => setCut(s.progress) });
+
+  /* 写真は枠の中で動かす（clip-path は数値から組み立てる） */
+  /* 断面の写真: 小さな窓から画面いっぱいへ広がる */
+  const sl = $('#slicePh');
+  if (sl) {
+    const c = { v: 1 };
+    const paint = () => { const k = c.v; sl.style.clipPath = `inset(${k * 12}% ${k * 9}% ${k * 12}% ${k * 9}% round ${k * 18}px)`; };
+    paint();
+    gsap.to(c, { v: 0, ease: 'none', onUpdate: paint, scrollTrigger: { trigger: sl, start: 'top 85%', end: 'top 15%', scrub: true } });
+    gsap.fromTo(sl.querySelector('img'), { scale: 1.3 }, { scale: 1.05, ease: 'none', scrollTrigger: { trigger: sl, start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+  gsap.utils.toArray('.visit figure .ph, .story-ph .ph').forEach(ph => {
+    const img = ph.querySelector('img');
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: ph, start: 'top bottom', end: 'bottom top', scrub: true } });
+    const c = { v: 14 };
+    gsap.to(c, { v: 0, duration: 1.3, ease: 'power3.out', onUpdate: () => { ph.style.clipPath = `inset(${c.v}% ${c.v / 2}% ${c.v}% ${c.v / 2}%)`; }, scrollTrigger: { trigger: ph, start: 'top 85%' } });
+  });
+
+  /* カードは傾けて出す。最初の1枚だけ一度めくって見せる */
+  gsap.utils.toArray('.flip').forEach((el, i) => {
+    gsap.from(el, { y: 60, rotate: i % 2 ? 4 : -4, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+  });
+  const first = $('.flip');
+  ScrollTrigger.create({ trigger: first, start: 'top 55%', once: true, onEnter: () => { first.classList.add('open'); setTimeout(() => first.classList.remove('open'), 1600); } });
+
+  /* 朝のうちに: 棚の明るさが右へ薄れていく */
+  gsap.from('#dayFill', { scaleX: 0, duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: '.day', start: 'top 80%' } });
+  gsap.from('.pinmark', { y: -20, opacity: 0, duration: 0.8, stagger: 0.25, delay: 0.6, ease: 'back.out(2)', scrollTrigger: { trigger: '.day', start: 'top 80%' } });
+
+  gsap.from('.foot .huge', { yPercent: 30, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
