@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111A14">
+<title>heureux flower and plants works（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,100;1,9..144,300..600,100&family=Zen+Old+Mincho:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #111A14;    /* ユーカリの葉の影 */
+  --moss: #22312A;     /* 苔 */
+  --sage: #A9B8A2;     /* セージ */
+  --paper: #F1EDE4;    /* 包み紙 */
+  --kraft: #D8C6A8;    /* クラフト紙 */
+  --coral: #E8704C;    /* プロテアの珊瑚色。大事な所とボタンだけ */
+  --blush: #E9B9A8;    /* ドライのバラ */
+  --ink: #18211C;
+  --mute: #6A746C;
+  --line: rgba(241,237,228,.16);
+  --serif-jp: "Zen Old Mincho", serif;
+  --latin: "Fraunces", serif;
+  --sans: "Zen Maru Gothic", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.9; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.lt { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "opsz" 144; letter-spacing: -.02em; }
+
+/* 紙の粒子 */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--coral); color: #1A0F0A; font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出（花がひらいて店名が出る） */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-items: center; }
+.loader .in { display: grid; justify-items: center; gap: 10px; }
+.loader svg { width: 92px; height: 92px; }
+.loader .word { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "opsz" 144; color: var(--paper); font-size: clamp(56px, 16vw, 150px); line-height: 1.05; display: flex; overflow: hidden; letter-spacing: -.02em; }
+.loader .word span { display: inline-block; transform: translateY(110%); }
+.loader .sub { color: var(--sage); font-size: 11px; letter-spacing: .32em; opacity: 0; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--paper); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(17,26,20,.86); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--latin); font-style: italic; font-weight: 400; font-variation-settings: "SOFT" 100; font-size: 24px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(17,26,20,.4); backdrop-filter: blur(6px); white-space: nowrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); opacity: .6; }
+.status.open i { background: #8EE29B; opacity: 1; box-shadow: 0 0 0 4px rgba(142,226,155,.18); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--night); color: var(--paper); }
+.hero .ph { position: absolute; inset: 0; overflow: hidden; }
+.hero .ph img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.14); transform-origin: 50% 35%; }
+.hero .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,26,20,.45) 0%, rgba(17,26,20,0) 26%, rgba(17,26,20,.1) 50%, rgba(17,26,20,.94) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: var(--sage); margin-bottom: 4px; }
+.hero h1 { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "opsz" 144; font-size: clamp(84px, 25vw, 210px); line-height: .9; letter-spacing: -.035em; margin-left: -.03em; }
+.hero h1 .w { display: inline-block; overflow: hidden; padding: 0 .08em .08em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero .meaning { margin-top: 12px; font-family: var(--serif-jp); font-size: clamp(17px, 4.6vw, 24px); line-height: 1.6; }
+.hero .meaning em { font-style: normal; color: var(--coral); }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 16px; font-size: 13px; color: var(--sage); }
+.hero .meta b { color: var(--paper); font-weight: 700; font-size: 15px; }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); bottom: 14px; font-size: 10px; color: rgba(241,237,228,.75); }
+.hero .tag { position: absolute; z-index: 2; right: var(--g); top: 106px; font-family: var(--latin); font-style: italic; font-size: 14px; color: var(--paper); opacity: .9; text-align: right; line-height: 1.3; text-shadow: 0 1px 12px rgba(0,0,0,.7); }
+.cue { width: 1px; height: 44px; background: rgba(241,237,228,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--coral); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--moss); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; }
+.marquee .track { display: inline-flex; gap: 26px; animation: slide 34s linear infinite; font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100; font-size: clamp(30px, 8vw, 60px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--sans); font-style: normal; font-size: .4em; align-self: center; color: var(--sage); letter-spacing: .08em; }
+.marquee .track span:nth-child(4n+1) { color: var(--blush); }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; }
+.story .big { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(36px, 10.4vw, 92px); line-height: 1.35; letter-spacing: .02em; color: var(--moss); }
+.story .big em { font-style: normal; color: var(--coral); }
+.line { display: block; overflow: hidden; padding-bottom: .05em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #4A554D; font-size: 15.5px; }
+.story .lead q { quotes: "「" "」"; color: var(--moss); font-weight: 700; }
+.story figure { margin: 0; position: relative; overflow: hidden; border-radius: 200px 200px 6px 6px; }
+.story figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.15); }
+.cap { position: absolute; right: 12px; bottom: 9px; font-size: 10px; color: rgba(255,255,255,.85); text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(24,33,28,.14); font-size: 13px; color: var(--mute); }
+.stars b { font-family: var(--latin); font-style: italic; font-weight: 400; font-size: 48px; color: var(--moss); line-height: 1; }
+
+/* 曜日の章（スクロールで月曜から日曜まで巡る） */
+.week { position: relative; background: var(--night); color: var(--paper); }
+.week .pin { height: 100svh; min-height: 640px; display: grid; grid-template-rows: auto 1fr auto; padding: 92px var(--g) 30px; overflow: hidden; }
+.week h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(23px, 6.2vw, 42px); line-height: 1.5; }
+.week h2 em { font-style: normal; color: var(--coral); }
+.week .why { margin-top: 6px; font-size: 12.5px; color: var(--sage); }
+.dial-wrap { align-self: center; justify-self: center; }
+.dial { --d: min(80vw, 46svh, 400px); position: relative; width: var(--d); height: var(--d); }
+.dial .ring { position: absolute; inset: 26px; border-radius: 50%; border: 1px dashed rgba(169,184,162,.35); }
+.dial .hand { position: absolute; left: 50%; top: 50%; width: 2px; height: calc(var(--d) / 2 - 52px); margin-left: -1px; background: linear-gradient(to top, rgba(232,112,76,0) 0 55%, var(--coral)); transform-origin: 50% 100%; transform: translateY(-100%) rotate(0deg); border-radius: 2px; }
+.node { position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; transform: rotate(var(--a)) translateY(calc(var(--d) / -2 + 26px)) rotate(calc(var(--a) * -1)); display: grid; place-items: center; }
+.node svg { width: 46px; height: 46px; overflow: visible; }
+.node .lb { position: absolute; font-size: 11px; color: var(--sage); top: -16px; letter-spacing: 0; }
+.node .bud { fill: none; stroke: rgba(169,184,162,.5); stroke-width: 1.5; }
+.node .pet { fill: var(--blush); transform-origin: 23px 23px; transform: scale(.15); transition: transform .45s cubic-bezier(.3,1.6,.5,1), fill .3s; }
+.node .ctr { fill: var(--coral); transform-origin: 23px 23px; transform: scale(.4); transition: transform .4s; }
+.node.lit .pet { transform: scale(1); }
+.node.lit .ctr { transform: scale(1); }
+.node.cur .lb { color: var(--paper); font-weight: 700; }
+.node.closed.cur .bud { stroke: var(--paper); }
+.node.today::before { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 1.5px solid var(--coral); }
+.node.today::after { content: "今日"; position: absolute; bottom: -19px; font-size: 10px; font-weight: 700; color: var(--coral); }
+.dc { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 2px; }
+.dc .day { font-family: var(--serif-jp); font-weight: 700; font-size: calc(var(--d) * .26); line-height: 1; }
+.dc .hrs { font-family: var(--latin); font-weight: 400; font-variation-settings: "SOFT" 50; font-size: calc(var(--d) * .075); color: var(--coral); font-variant-numeric: tabular-nums; }
+.dc .hrs.off { color: var(--sage); font-family: var(--sans); font-size: calc(var(--d) * .05); letter-spacing: .2em; }
+.week .msg { min-height: 3.2em; font-size: 14.5px; color: var(--sage); text-align: center; margin-top: 12px; }
+.week .sum { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.week .sum div { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; font-size: 12px; color: var(--sage); }
+.week .sum b { display: block; font-family: var(--serif-jp); font-weight: 500; font-size: 17px; color: var(--paper); line-height: 1.5; }
+.week .sum .o b { color: var(--coral); }
+.week .note { font-size: 11px; color: #8A968D; margin-top: 10px; }
+.fill-in { background: rgba(232,112,76,.16); color: var(--coral); padding: 0 4px; border-radius: 3px; }
+
+/* 品ぞろえ（横に流れる） */
+.range { background: var(--paper); position: relative; }
+.range .pin { min-height: 100svh; padding: 92px 0 36px; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); gap: 22px; overflow: hidden; }
+.range .head2 { padding: 0 var(--g); display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.range h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.4vw, 62px); line-height: 1.3; color: var(--moss); }
+.range .count { font-family: var(--latin); font-style: italic; font-size: 15px; color: var(--mute); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.htrack { display: flex; gap: 16px; padding: 0 var(--g); width: max-content; align-items: stretch; }
+.panel { width: min(76vw, 420px); flex: none; display: flex; flex-direction: column; }
+.panel .ph { position: relative; overflow: hidden; border-radius: 6px; flex: 1; min-height: 0; max-height: 50svh; }
+.panel img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
+.panel .art { position: relative; border-radius: 6px; aspect-ratio: 4 / 5; max-height: 50svh; display: grid; place-items: center; overflow: hidden; }
+.panel .art svg { width: 64%; height: auto; }
+.panel .art.a1 { background: var(--moss); color: var(--sage); }
+.panel .art.a2 { background: var(--blush); color: var(--moss); }
+.panel .art.a3 { background: var(--kraft); color: #5A4630; }
+.panel .art.a4 { background: var(--coral); color: #2A140C; }
+.panel .art .cap { color: currentColor; text-shadow: none; opacity: .75; }
+.panel .no { font-family: var(--latin); font-style: italic; font-size: 13px; color: var(--coral); margin-top: 14px; }
+.panel h3 { font-family: var(--serif-jp); font-size: 21px; font-weight: 700; color: var(--moss); line-height: 1.45; }
+.panel h3 .lt { display: block; font-size: 30px; line-height: 1.1; color: var(--ink); margin-bottom: 4px; font-weight: 300; }
+.panel p { font-size: 14px; color: #4A554D; margin-top: 6px; }
+.panel.end { justify-content: center; padding: 0 12px; }
+.panel.end p { font-family: var(--serif-jp); font-size: 22px; line-height: 1.7; color: var(--moss); }
+.src { padding: 0 var(--g); font-size: 11px; color: #858E86; }
+.no-gsap .htrack, .reduced .htrack { overflow-x: auto; width: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.no-gsap .panel, .reduced .panel { scroll-snap-align: start; }
+
+/* 見せ場（ハーバリウム） */
+.glass { position: relative; height: 130svh; background: var(--night); overflow: hidden; color: var(--paper); }
+.glass .ph { position: absolute; inset: 0; }
+.glass img { width: 100%; height: 100%; object-fit: cover; }
+.glass .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17,26,20,.92) 0%, rgba(17,26,20,.7) 22%, rgba(17,26,20,.05) 42%, rgba(17,26,20,.05) 58%, rgba(17,26,20,.92) 100%); }
+.glass .t1, .glass .t2 { text-shadow: 0 2px 18px rgba(0,0,0,.55); }
+.glass .t2 .fill-in { display: inline-block; margin-top: 6px; }
+.glass .t1 { position: absolute; top: 14svh; left: var(--g); right: var(--g); font-family: var(--serif-jp); font-size: clamp(30px, 8.6vw, 72px); line-height: 1.4; font-weight: 500; }
+.glass .t2 { position: absolute; bottom: 12svh; left: var(--g); right: var(--g); max-width: 26em; font-size: 15px; }
+.glass .t2 .lt { display: block; font-size: clamp(44px, 13vw, 120px); line-height: 1; color: var(--blush); margin-bottom: 14px; }
+
+/* 声 */
+.voices { padding: clamp(88px, 14vw, 160px) var(--g) clamp(64px, 10vw, 120px); background: var(--paper); }
+.voices h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(28px, 7.8vw, 56px); line-height: 1.35; color: var(--moss); margin-bottom: 36px; }
+.vlist { display: grid; gap: 14px; }
+.v { background: #fff; border-radius: 22px; padding: 24px 22px 20px; position: relative; box-shadow: 0 1px 0 rgba(24,33,28,.05); }
+.v::before { content: "“"; position: absolute; right: 18px; top: -6px; font-family: var(--latin); font-size: 84px; line-height: 1; color: var(--blush); }
+.v p { font-family: var(--serif-jp); font-size: 18px; line-height: 1.75; color: var(--ink); padding-right: 32px; }
+.v small { display: block; margin-top: 10px; font-size: 12px; color: var(--mute); }
+.voices .note { margin-top: 18px; font-size: 11px; color: #858E86; }
+
+/* 来店 */
+.visit { background: var(--moss); color: var(--paper); padding: clamp(88px, 14vw, 160px) var(--g) 64px; }
+.visit h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(30px, 8.4vw, 62px); line-height: 1.3; }
+.visit .sub { font-size: 12px; color: var(--sage); margin: 10px 0 34px; }
+.visit figure { margin: 0 calc(var(--g) * -1) 40px; position: relative; overflow: hidden; }
+.visit figure img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transform: scale(1.12); }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 18px; margin-bottom: 26px; background: rgba(17,26,20,.35); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage); opacity: .6; flex: none; }
+.today.open .dot { background: #8EE29B; opacity: 1; box-shadow: 0 0 0 6px rgba(142,226,155,.15); }
+.today b { font-family: var(--serif-jp); font-size: 21px; font-weight: 500; }
+.today small { display: block; color: var(--sage); font-size: 12px; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li.is-today { color: var(--coral); font-weight: 700; }
+.hours li.closed span:last-child { color: #9AA79C; }
+.small { font-size: 12px; color: var(--sage); }
+.addr { margin-top: 40px; font-family: var(--serif-jp); font-size: 19px; line-height: 1.7; }
+.map { margin-top: 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: var(--night); }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.7) sepia(.15) contrast(1.02) brightness(.95); }
+.park { margin-top: 18px; padding: 16px 20px; border-left: 3px solid var(--coral); background: rgba(241,237,228,.06); border-radius: 0 14px 14px 0; font-size: 14.5px; }
+.park b { display: block; font-family: var(--serif-jp); font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--coral); color: #1A0F0A; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(88px, 14vw, 150px) var(--g) 40px; }
+.faq h2 { font-family: var(--serif-jp); font-weight: 500; font-size: clamp(28px, 7.8vw, 56px); color: var(--moss); margin-bottom: 18px; }
+details { border-bottom: 1px solid rgba(24,33,28,.14); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-family: var(--serif-jp); font-size: 18px; font-weight: 500; color: var(--moss); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--coral),var(--coral)) center/14px 1.5px no-repeat, linear-gradient(var(--coral),var(--coral)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4A554D; font-size: 15px; }
+details .fill-in { color: #A9472A; background: rgba(232,112,76,.14); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(88px, 14vw, 150px); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 26px; }
+.tiles img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.tiles img:nth-child(2) { border-radius: 999px 999px 0 0; }
+.gram h2 { font-family: var(--serif-jp); font-size: clamp(24px, 6.8vw, 44px); font-weight: 500; line-height: 1.45; color: var(--moss); }
+.gram p { margin-top: 10px; color: #4A554D; font-size: 15px; }
+.gram .btn.fill { background: var(--moss); color: var(--paper); }
+
+/* 最後 */
+.foot { background: var(--night); color: var(--sage); padding: 72px var(--g) calc(120px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--latin); font-style: italic; font-weight: 300; font-variation-settings: "SOFT" 100, "opsz" 144; color: var(--paper); font-size: clamp(100px, 29vw, 400px); line-height: .9; letter-spacing: -.04em; margin: 0 0 8px -.04em; }
+.foot .fr { font-family: var(--serif-jp); color: var(--blush); font-size: 15px; margin-bottom: 36px; }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(17,26,20,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--paper); }
+.dock a.main { background: var(--coral); color: #1A0F0A; }
+
+@media (min-width: 900px) {
+  .hero .ph img { object-position: 50% 38%; }
+  .hero .ph::after { background: linear-gradient(90deg, rgba(17,26,20,.88) 0%, rgba(17,26,20,.55) 34%, rgba(17,26,20,0) 62%), linear-gradient(180deg, rgba(17,26,20,.4) 0%, rgba(17,26,20,0) 22%, rgba(17,26,20,0) 70%, rgba(17,26,20,.6) 100%); }
+  .hero .title { right: auto; width: min(52vw, 760px); bottom: 88px; }
+  .hero h1 { font-size: clamp(120px, 13.5vw, 230px); }
+  .hero .caption { left: auto; right: 24px; top: auto; bottom: 18px; }
+  .story { grid-template-columns: 1.1fr .9fr; align-items: end; column-gap: 80px; }
+  .story > div { align-self: end; padding-bottom: 12px; }
+  .hero .cue { display: none; }
+  .story figure { max-width: 460px; justify-self: end; }
+  .week .pin { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; column-gap: 64px; padding-top: 110px; }
+  .week .pin > header { align-self: center; }
+  .dial-wrap { grid-column: 2; grid-row: 1 / 3; }
+  .dial { --d: min(40vw, 62svh, 520px); }
+  .week .bottom { grid-column: 1; grid-row: 2; }
+  .panel { width: 380px; }
+  .panel .ph, .panel .art { max-height: 44svh; }
+  .range h2 { font-size: 52px; }
+  .glass .t1 { left: 50%; }
+  .vlist { grid-template-columns: repeat(3, 1fr); }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .visit figure { margin: 0 0 56px; border-radius: 6px; }
+  .faq, .gram, .voices > * { max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .faq, .gram { max-width: 980px; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero .ph img, .story figure img, .visit figure img { transform: none; }
+  .node .pet, .node .ctr { transition: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="in">
+    <svg viewBox="0 0 100 100">
+      <g fill="#E9B9A8">
+        <ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/>
+        <g transform="rotate(60 50 50)"><ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/></g>
+        <g transform="rotate(120 50 50)"><ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/></g>
+        <g transform="rotate(180 50 50)"><ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/></g>
+        <g transform="rotate(240 50 50)"><ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/></g>
+        <g transform="rotate(300 50 50)"><ellipse class="pt" cx="50" cy="26" rx="13" ry="22"/></g>
+      </g>
+      <circle class="pt" cx="50" cy="50" r="9" fill="#E8704C"/>
+    </svg>
+    <div class="word"><span>h</span><span>e</span><span>u</span><span>r</span><span>e</span><span>u</span><span>x</span></div>
+    <div class="sub">FLOWER AND PLANTS WORKS</div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">heureux</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="heureux flower and plants works">
+    <div class="ph"><img src="img/hero-tall.jpg" alt="バラやゆり、ワイルドフラワーを合わせた大きな花の器（イメージ）"></div>
+    <span class="caption">写真はイメージです</span>
+    <p class="tag" aria-hidden="true">flower<br>and plants<br>works</p>
+    <div class="title">
+      <p class="kicker">花と植物の店 ／ 船橋市印内</p>
+      <h1><span class="w"><span>heureux</span></span></h1>
+      <p class="meaning">ウルー。フランス語で<em>「幸せ」</em>。</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.5</b>（17件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Roses</span><span>バラ</span><span>Lilies</span><span>ゆり</span><span>Wildflowers</span><span>ワイルドフラワー</span><span>Succulents</span><span>多肉植物</span><span>Air plants</span><span>エアプランツ</span><span>Herbarium</span><span>ハーバリウム</span><span>Dried</span><span>ドライフラワー</span>
+      <span>Roses</span><span>バラ</span><span>Lilies</span><span>ゆり</span><span>Wildflowers</span><span>ワイルドフラワー</span><span>Succulents</span><span>多肉植物</span><span>Air plants</span><span>エアプランツ</span><span>Herbarium</span><span>ハーバリウム</span><span>Dried</span><span>ドライフラワー</span>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big" id="story-title"><span class="line"><span>花も、鉢も、</span></span><span class="line"><span>めずらしい</span></span><span class="line"><span>植物も。</span></span></h2>
+    <div>
+      <p class="lead">口コミに並ぶのは <q>品ぞろえが個性的</q> <q>植物がたくさん</q> <q>店主さんの接客があたたかい</q> という声。季節の切り花から、オーストラリアのワイルドフラワー、多肉植物やエアプランツ、かわいい鉢まで。贈り物にも、自分の部屋用にも選べるお店です。</p>
+      <div class="stars" style="margin-top:28px"><b>4.5</b><span>Googleの口コミ 17件の平均（2026年10月）</span></div>
+    </div>
+  </section>
+
+  <section class="week" aria-labelledby="week-title">
+    <div class="pin">
+      <header>
+        <h2 id="week-title">開いているのは、<br><em>火・水・金・土</em>の<br>10時から18時。</h2>
+        <p class="why">せっかく来てくれた人が迷わないように、<br>営業日をいちばん目立つ所に。</p>
+      </header>
+      <div class="dial-wrap">
+        <div class="dial" id="dial" aria-hidden="true">
+          <div class="ring"></div>
+          <div class="hand" id="hand"></div>
+          <div class="dc"><span class="day" id="dDay">火</span><span class="hrs" id="dHrs">10:00 – 18:00</span></div>
+        </div>
+        <p class="msg" id="dMsg">10時から18時まで営業しています。</p>
+      </div>
+      <div class="bottom">
+        <div class="sum">
+          <div class="o"><b>火・水・金・土</b>10:00 – 18:00</div>
+          <div><b>月・木・日</b>定休日</div>
+        </div>
+        <p class="note">※Googleマップの営業時間（2026年10月）。<span class="fill-in">臨時のお休みのお知らせ方法（Instagram など）を入れます</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="range" aria-labelledby="range-title">
+    <div class="pin">
+      <div class="head2">
+        <h2 id="range-title">ひとつの店に、<br>この幅。</h2>
+        <span class="count" id="count">01 / 04</span>
+      </div>
+      <div class="htrack" id="htrack">
+        <article class="panel">
+          <div class="art a1" aria-hidden="true"><svg viewBox="0 0 200 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M58 150h84l-10 72H68z"/><path d="M52 150h96"/><g transform="translate(100 138)"><ellipse rx="10" ry="26" transform="translate(0 -18)"/><ellipse rx="10" ry="24" transform="rotate(50) translate(0 -18)"/><ellipse rx="10" ry="24" transform="rotate(-50) translate(0 -18)"/><ellipse rx="9" ry="20" transform="rotate(100) translate(0 -16)"/><ellipse rx="9" ry="20" transform="rotate(-100) translate(0 -16)"/></g><path d="M150 96c-6-20 4-40 18-46M150 96c-14-12-30-12-40-4M150 96c2-18 14-30 28-30M150 96c-8-8-10-24-4-36"/></g></svg><span class="cap">イラスト</span></div>
+          <p class="no">01</p>
+          <h3><span class="lt">Plants &amp; pots</span>多肉植物、エアプランツ、鉢</h3>
+          <p>植物の種類が多く、かわいい鉢もたくさん。鉢ごと部屋に置けます。</p>
+        </article>
+        <article class="panel">
+          <div class="art a2" aria-hidden="true"><svg viewBox="0 0 200 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M88 30h24v8h-24z"/><path d="M90 38v34c-14 8-22 22-22 40v100a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12V112c0-18-8-32-22-40V38"/><path d="M100 210V120M100 160l-14-14M100 140l14-12"/><circle cx="100" cy="112" r="9"/><circle cx="84" cy="144" r="6"/><circle cx="116" cy="126" r="6"/></g></svg><span class="cap">イラスト</span></div>
+          <p class="no">02</p>
+          <h3><span class="lt">Herbarium</span>ハーバリウム</h3>
+          <p>瓶の中に花を閉じ込めたハーバリウム。口コミで人気と言われている品です。</p>
+        </article>
+        <article class="panel">
+          <div class="art a3" aria-hidden="true"><svg viewBox="0 0 200 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="100" cy="128" r="58"/><g id="lv"><ellipse cx="100" cy="70" rx="7" ry="15" transform="rotate(20 100 70)"/></g><use href="#lv" transform="rotate(30 100 128)"/><use href="#lv" transform="rotate(60 100 128)"/><use href="#lv" transform="rotate(90 100 128)"/><use href="#lv" transform="rotate(120 100 128)"/><use href="#lv" transform="rotate(150 100 128)"/><use href="#lv" transform="rotate(180 100 128)"/><use href="#lv" transform="rotate(210 100 128)"/><use href="#lv" transform="rotate(240 100 128)"/><use href="#lv" transform="rotate(270 100 128)"/><use href="#lv" transform="rotate(300 100 128)"/><use href="#lv" transform="rotate(330 100 128)"/><path d="M100 40v30"/><circle cx="100" cy="36" r="4"/></g></svg><span class="cap">イラスト</span></div>
+          <p class="no">03</p>
+          <h3><span class="lt">Swag &amp; wreath</span>ドライフラワーの<br>スワッグ、リース</h3>
+          <p>生花だけでなく、壁に飾れるドライフラワーの品も。</p>
+        </article>
+        <article class="panel">
+          <div class="art a4" aria-hidden="true"><svg viewBox="0 0 200 250"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M60 110l40 120 40-120"/><path d="M60 110c12 10 68 10 80 0"/><path d="M84 176c10 6 22 6 32 0M92 176l-10 18M108 176l10 18"/><circle cx="76" cy="88" r="18"/><circle cx="124" cy="86" r="16"/><circle cx="100" cy="68" r="20"/><circle cx="100" cy="68" r="6"/><circle cx="76" cy="88" r="5"/><circle cx="124" cy="86" r="5"/></g></svg><span class="cap">イラスト</span></div>
+          <p class="no">04</p>
+          <h3><span class="lt">Seasonal</span>季節の花を、贈り物に</h3>
+          <p>色とりどりの季節の花。プレゼントにすすめる声が多いお店です。</p>
+        </article>
+        <article class="panel end">
+          <p>お店の花や<br>植物の様子は、<br>Instagramで。</p>
+        </article>
+      </div>
+      <p class="src">※Googleの口コミで名前が挙がった品から選んでいます。絵はイラストで、実際の品ぞろえとは違います。</p>
+    </div>
+  </section>
+
+  <section class="glass" aria-labelledby="glass-title">
+    <div class="ph"><img src="img/wild.jpg" alt="プロテアやバンクシアなどのワイルドフラワー（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></div>
+    <h2 class="t1" id="glass-title"><span class="line"><span>バラやゆりの</span></span><span class="line"><span>となりに、</span></span><span class="line"><span>南半球の花。</span></span></h2>
+    <p class="t2"><span class="lt">Wildflowers</span>定番の花に加えて、<br>オーストラリアのワイルドフラワーも<br>並ぶお店。<span class="fill-in">その時季に入っている花の種類を入れます</span></p>
+  </section>
+
+  <section class="voices" aria-labelledby="voices-title">
+    <h2 id="voices-title">お客さまの声</h2>
+    <div class="vlist">
+      <div class="v"><p>めずらしい花や植物が多くて、贈り物も自分用も選べる。</p><small>★5 の口コミの要旨</small></div>
+      <div class="v"><p>植物も鉢もたくさん。手に取りやすい価格で、部屋に飾るものが見つかった。</p><small>★5 の口コミの要旨</small></div>
+      <div class="v"><p>久しぶりに行ったら、お店が広くなって、さらにおしゃれに。</p><small>★5 の口コミの要旨</small></div>
+    </div>
+    <p class="note">※Googleの口コミをもとに言い換えたものです（原文ではありません）。</p>
+  </section>
+
+  <section class="visit" aria-labelledby="visit-title">
+    <h2 id="visit-title">お店へ<br>行く前に</h2>
+    <p class="sub">営業日・時間はGoogleマップの情報（2026年10月）</p>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">営業時間を確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="closed"><span>月</span><span>定休日</span></li>
+          <li data-d="2"><span>火</span><span>10:00 – 18:00</span></li>
+          <li data-d="3"><span>水</span><span>10:00 – 18:00</span></li>
+          <li data-d="4" class="closed"><span>木</span><span>定休日</span></li>
+          <li data-d="5"><span>金</span><span>10:00 – 18:00</span></li>
+          <li data-d="6"><span>土</span><span>10:00 – 18:00</span></li>
+          <li data-d="0" class="closed"><span>日</span><span>定休日</span></li>
+        </ul>
+        <p class="small"><span class="fill-in">臨時のお休みのお知らせ方法を入れます</span></p>
+      </div>
+      <div>
+        <p class="addr">〒273-0039<br>千葉県船橋市印内3丁目23-18</p>
+        <div class="map"><iframe title="heureux flower and plants works の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=heureux%20flower%20and%20plants%20works%20%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82%E5%8D%B0%E5%86%853%E4%B8%81%E7%9B%AE23-18&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="park"><b>駐車場</b><span class="fill-in">駐車場の有無と台数を入れます</span></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=15138832724839583082" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">よくある質問</h2>
+    <details><summary>定休日はいつですか？</summary><p>月曜・木曜・日曜がお休みです。火・水・金・土の10時から18時まで開いています（Googleマップの情報）。<span class="fill-in">臨時のお休みのお知らせ先を入れます</span></p></details>
+    <details><summary>花束を前もって頼めますか？</summary><p><span class="fill-in">注文の受け方（電話・Instagram の DM など）と、何日前までかを、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>贈り物用に包んでもらえますか？</summary><p><span class="fill-in">ラッピングやメッセージカードの有無を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <h2 id="gram-title">今日の店先は、<br>Instagramで。</h2>
+    <p>お店の花や植物の様子は Instagram で見られます。</p>
+    <div class="row"><a class="btn fill" href="https://www.instagram.com/_heureux_works_/" target="_blank" rel="noopener">@_heureux_works_ を見る</a></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">heureux</p>
+  <p class="fr">ウルー ／ フランス語で「幸せ」</p>
+  <p>heureux flower and plants works<br>千葉県船橋市印内3丁目23-18<br>火・水・金・土 10:00–18:00　月・木・日 定休日</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=15138832724839583082" target="_blank" rel="noopener">道順</a>
+  <a href="tel:0474017930">電話</a>
+  <a href="https://www.instagram.com/_heureux_works_/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const loader = document.querySelector('.loader');
+  const dropLoader = () => loader && loader.remove();
+  setTimeout(dropLoader, 6000); // 何かあっても幕は必ず外す
+
+  /* 営業中かどうか（日本時間） */
+  const HOURS = { 2: [10, 18], 3: [10, 18], 5: [10, 18], 6: [10, 18] };
+  const NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+  const fmt = h => `${Math.floor(h)}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, t = HOURS[d];
+  let main, sub, open = false;
+  if (t && h >= t[0] && h < t[1]) { open = true; main = '本日は営業中'; sub = `${fmt(t[1])}まで`; }
+  else if (t && h < t[0]) { main = '本日はこれから開店'; sub = `${fmt(t[0])}から`; }
+  else {
+    let k = 1; while (!HOURS[(d + k) % 7]) k++;
+    const nd = (d + k) % 7;
+    main = t ? '本日の営業は終了' : '本日は定休日';
+    sub = `次の営業は${k === 1 ? '明日' : NAMES[nd] + '曜'} ${fmt(HOURS[nd][0])}から`;
+  }
+  document.querySelector('#status span').textContent = open ? `営業中 ${fmt(t[1])}まで` : main;
+  document.getElementById('status').classList.toggle('open', open);
+  document.getElementById('today').classList.toggle('open', open);
+  document.getElementById('today-main').textContent = main;
+  document.getElementById('today-sub').textContent = sub;
+  const todayRow = document.querySelector(`#hours li[data-d="${d}"]`);
+  if (todayRow) todayRow.classList.add('is-today');
+
+  /* ヘッダーを濃くする */
+  const head = document.getElementById('head');
+  const solid = () => head.classList.toggle('solid', scrollY > innerHeight * 0.8);
+  addEventListener('scroll', solid, { passive: true }); solid();
+
+  /* 曜日の輪（月曜から時計回り） */
+  const dial = document.getElementById('dial');
+  const ORDER = [1, 2, 3, 4, 5, 6, 0];
+  const flower = '<svg viewBox="0 0 46 46"><circle class="bud" cx="23" cy="23" r="7"/>' +
+    [0, 60, 120, 180, 240, 300].map(a => `<g transform="rotate(${a} 23 23)"><ellipse class="pet" cx="23" cy="11" rx="6.5" ry="11"/></g>`).join('') +
+    '<circle class="ctr" cx="23" cy="23" r="5"/></svg>';
+  const bud = '<svg viewBox="0 0 46 46"><circle class="bud" cx="23" cy="23" r="7"/></svg>';
+  const nodes = ORDER.map((wd, i) => {
+    const el = document.createElement('div');
+    el.className = 'node ' + (HOURS[wd] ? 'open' : 'closed') + (wd === d ? ' today' : '');
+    el.style.setProperty('--a', `${i * 360 / 7}deg`);
+    el.innerHTML = (HOURS[wd] ? flower : bud) + `<span class="lb">${NAMES[wd]}</span>`;
+    dial.appendChild(el);
+    return el;
+  });
+  const hand = document.getElementById('hand'), dDay = document.getElementById('dDay'), dHrs = document.getElementById('dHrs'), dMsg = document.getElementById('dMsg');
+  const MSG = {
+    1: '月曜は定休日です。',
+    2: '火曜から営業。10時から18時まで開いています。',
+    3: '水曜も10時から18時まで。',
+    4: '木曜は定休日。週のまんなかはお休みです。',
+    5: '金曜は10時から18時まで。週末の贈り物の花選びに。',
+    6: '土曜も10時から18時まで開いています。',
+    0: '日曜は定休日です。'
+  };
+  let cur = -1;
+  const setDay = i => {
+    if (i === cur) return; cur = i;
+    const wd = ORDER[i];
+    nodes.forEach((n, k) => { n.classList.toggle('lit', k <= i && n.classList.contains('open')); n.classList.toggle('cur', k === i); });
+    hand.style.transform = `translateY(-100%) rotate(${i * 360 / 7}deg)`;
+    dDay.textContent = NAMES[wd];
+    dHrs.textContent = HOURS[wd] ? '10:00 – 18:00' : '定休日';
+    dHrs.classList.toggle('off', !HOURS[wd]);
+    dMsg.textContent = MSG[wd];
+  };
+  const todayIdx = ORDER.indexOf(d);
+
+  if (reduced || !window.gsap || !window.ScrollTrigger) {
+    document.body.classList.add('no-gsap');
+    setDay(todayIdx); nodes.forEach(n => n.classList.contains('open') && n.classList.add('lit'));
+    dropLoader(); document.getElementById('dock').classList.add('show');
+    return;
+  }
+  setDay(0);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: 花がひらく → 店名 → 幕が上がる */
+  const curtain = { v: 0 };
+  const setCurtain = () => { if (loader) loader.style.clipPath = `inset(0 0 ${curtain.v}% 0)`; };
+  gsap.set('.hero h1 .w span', { yPercent: 105 });
+  gsap.set('.hero .meaning, .hero .kicker, .hero .meta, .hero .tag', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' }, onComplete: dropLoader });
+  intro.from('.loader .pt', { scale: 0, svgOrigin: '50 50', duration: 0.8, stagger: 0.06, ease: 'back.out(1.8)' })
+       .to('.loader .word span', { y: 0, duration: 0.8, stagger: 0.05 }, '-=0.45')
+       .to('.loader .sub', { opacity: 1, duration: 0.5 }, '-=0.4')
+       .to(curtain, { v: 100, duration: 1.1, ease: 'power4.inOut', onUpdate: setCurtain }, '+=0.25')
+       .to('.hero .ph img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.9')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2 }, '-=1.9')
+       .to('.hero .kicker, .hero .meaning, .hero .meta, .hero .tag', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9');
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: () => document.getElementById('dock').classList.add('show') });
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero .ph', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ下から出す */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 写真は枠の中で少しずつ動かす */
+  gsap.utils.toArray('.story figure img, .visit figure img').forEach(img => {
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  /* 曜日の章: スクロールで月曜から日曜まで巡り、営業日の花がひらく */
+  ScrollTrigger.create({
+    trigger: '.week', start: 'top top', end: '+=210%', pin: '.week .pin', scrub: true,
+    onUpdate: s => setDay(Math.min(6, Math.floor(s.progress * 7.0001)))
+  });
+
+  /* 品ぞろえ: 縦のスクロールで横に流す */
+  const track = document.getElementById('htrack'), count = document.getElementById('count');
+  const panels = track.querySelectorAll('.panel:not(.end)');
+  const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+  gsap.to(track, {
+    x: () => -dist(), ease: 'none',
+    scrollTrigger: {
+      trigger: '.range', start: 'top top', end: () => '+=' + dist(), pin: '.range .pin', scrub: 0.6, invalidateOnRefresh: true,
+      onUpdate: s => { const n = Math.min(panels.length, 1 + Math.floor(s.progress * panels.length)); count.textContent = `0${n} / 0${panels.length}`; }
+    }
+  });
+
+  /* ハーバリウムの見せ場: 写真をゆっくり寄せる */
+  gsap.fromTo('.glass img', { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.glass', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.glass .t2', { y: 40, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.glass .t2', start: 'top 90%' } });
+
+  /* 声のカードを順に出す */
+  gsap.from('.v', { y: 40, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.vlist', start: 'top 85%' } });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
