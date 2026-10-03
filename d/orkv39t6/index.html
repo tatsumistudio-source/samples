@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#161413">
+<title>I've cafe（ご提案用サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=IBM+Plex+Sans+JP:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --char: #161413;      /* 夜の店内 */
+  --soot: #24201D;      /* 照明の届かない壁 */
+  --concrete: #D3CEC6;  /* 打ちっぱなしの壁（昼） */
+  --stone: #8F8880;     /* コンクリートの影 */
+  --paper: #EFECE7;
+  --amber: #F0A43A;     /* ペンダントライトの灯り。大事な所とボタンだけ */
+  --lcd: #C9F2E2;       /* MDプレーヤーの液晶 */
+  --ink: #1B1816;
+  --line: rgba(239,236,231,.16);
+  --serif: "Instrument Serif", serif;
+  --dot: "DotGothic16", monospace;
+  --sans: "IBM Plex Sans JP", system-ui, sans-serif;
+  --g: clamp(20px, 5vw, 64px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.85; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+.kw { word-break: keep-all; overflow-wrap: anywhere; }
+
+/* コンクリートのざらつき */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* 提案用サンプルの表示（必須） */
+.demo-note { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 24px; display: flex; align-items: center; justify-content: center; background: var(--amber); color: var(--char); font-size: 11px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+
+/* 読み込みの演出: MD を差し込むと店名が液晶に出る */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--char); display: grid; place-items: center; }
+.loader .deck { display: grid; justify-items: center; gap: 26px; }
+.loader .md { width: 112px; height: 118px; }
+.loader .lcd { min-width: 250px; padding: 12px 18px; border-radius: 8px; background: #0E1A16; box-shadow: inset 0 0 0 1px rgba(201,242,226,.18), 0 0 40px rgba(201,242,226,.08); font-family: var(--dot); color: var(--lcd); font-size: 22px; line-height: 1.3; letter-spacing: .08em; text-align: center; }
+.loader .lcd small { display: block; font-size: 12px; opacity: .6; letter-spacing: .2em; }
+.no-js .loader, .reduced .loader { display: none; }
+
+/* ヘッダー */
+.head { position: fixed; top: 24px; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px var(--g); color: var(--paper); transition: background .4s, padding .4s; }
+.head.solid { background: rgba(22,20,19,.84); backdrop-filter: blur(10px); padding-top: 10px; padding-bottom: 10px; }
+.head .mark { font-family: var(--serif); font-style: italic; font-size: 26px; text-decoration: none; line-height: 1; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(22,20,19,.4); backdrop-filter: blur(6px); }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--stone); }
+.status.open i { background: var(--amber); box-shadow: 0 0 0 4px rgba(240,164,58,.22); }
+
+/* ファーストビュー */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--char); color: var(--paper); }
+.hero .ph { position: absolute; inset: 0; overflow: hidden; }
+.hero .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; transform: scale(1.14); transform-origin: 70% 30%; }
+.hero .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22,20,19,.45) 0%, rgba(22,20,19,0) 26%, rgba(22,20,19,.08) 50%, rgba(22,20,19,.94) 100%); }
+.hero .title { position: absolute; left: var(--g); right: var(--g); bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 2; }
+.hero .kicker { font-size: 12px; letter-spacing: .14em; color: rgba(239,236,231,.78); margin-bottom: 4px; }
+.hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(96px, 30vw, 300px); line-height: .8; letter-spacing: -.03em; margin-left: -.03em; }
+.hero h1 .w { display: block; overflow: hidden; padding: 0 .06em .06em 0; }
+.hero h1 .w span { display: inline-block; }
+.hero h1 em { font-style: italic; color: var(--amber); }
+.hero .tag { margin-top: 18px; font-size: 15px; line-height: 1.7; font-weight: 500; }
+.hero .meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 14px; font-size: 13px; color: rgba(239,236,231,.72); }
+.hero .meta b { color: var(--amber); font-weight: 700; font-size: 15px; }
+.hero .chip { position: absolute; z-index: 2; left: var(--g); top: 104px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; background: rgba(14,26,22,.72); backdrop-filter: blur(6px); font-family: var(--dot); color: var(--lcd); font-size: 14px; letter-spacing: .08em; box-shadow: inset 0 0 0 1px rgba(201,242,226,.18); }
+.hero .chip b { font-weight: 400; color: var(--amber); }
+.hero .caption { position: absolute; z-index: 2; right: var(--g); top: 112px; font-size: 10px; color: rgba(239,236,231,.72); }
+.cue { width: 1px; height: 44px; background: rgba(239,236,231,.25); position: relative; overflow: hidden; flex: none; }
+.cue::after { content: ""; position: absolute; left: 0; top: -50%; width: 1px; height: 50%; background: var(--amber); animation: cue 1.8s ease-in-out infinite; }
+@keyframes cue { to { top: 110%; } }
+
+/* 流れる帯 */
+.marquee { background: var(--char); color: var(--paper); overflow: hidden; white-space: nowrap; padding: 16px 0 12px; border-top: 1px solid var(--line); }
+.marquee .track { display: inline-flex; align-items: center; gap: 26px; animation: slide 30s linear infinite; font-family: var(--serif); font-style: italic; font-size: clamp(30px, 8vw, 64px); line-height: 1; }
+.marquee .track span:nth-child(even) { font-family: var(--dot); font-style: normal; font-size: .42em; color: var(--lcd); letter-spacing: .1em; }
+.marquee .track i { width: .28em; height: .28em; border-radius: 50%; background: var(--amber); display: inline-block; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 語りの章 */
+.story { padding: clamp(88px, 16vw, 180px) var(--g) clamp(64px, 12vw, 140px); display: grid; gap: 44px; background: var(--concrete); position: relative; }
+.story::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 12% 18%, rgba(0,0,0,.08) 0 3px, transparent 4px), radial-gradient(circle at 62% 70%, rgba(0,0,0,.08) 0 3px, transparent 4px); background-size: 50% 33%; opacity: .9; }
+.story .big { font-weight: 700; font-size: clamp(36px, 10.4vw, 92px); line-height: 1.3; letter-spacing: .01em; color: var(--char); position: relative; }
+.line { display: block; overflow: hidden; padding-bottom: .04em; }
+.line > span { display: block; }
+.story .lead { max-width: 30em; color: #3E3833; font-size: 15.5px; position: relative; }
+.story .lead q { quotes: "「" "」"; font-weight: 700; color: var(--char); }
+.story figure { margin: 0; position: relative; overflow: hidden; border-radius: 3px; }
+.story figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.15); }
+.cap { position: absolute; right: 10px; bottom: 8px; font-size: 10px; color: rgba(255,255,255,.85); text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+.stars { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(27,24,22,.18); font-size: 13px; color: #4D4640; position: relative; }
+.stars b { font-family: var(--serif); font-weight: 400; font-size: 56px; color: var(--char); line-height: 1; }
+
+/* 13時間の章（スクロールで 11:00 → 0:00） */
+.day { position: relative; --bg: #D3CEC6; --fg: #1B1816; --sub: #4D4640; --glow: 0; --sun: 1; background: var(--bg); color: var(--fg); }
+.day .pin { height: 100svh; min-height: 660px; display: grid; grid-template-rows: auto 1fr auto; gap: 8px; padding: 88px var(--g) calc(84px + env(safe-area-inset-bottom)); background: var(--bg); color: var(--fg); position: relative; overflow: hidden; }
+.day .sunbeam { position: absolute; inset: -20% -40%; pointer-events: none; opacity: calc(var(--sun) * .55); background: repeating-linear-gradient(115deg, transparent 0 70px, rgba(255,248,232,.55) 70px 150px, transparent 150px 260px); mix-blend-mode: soft-light; }
+.day h2 { font-weight: 700; font-size: clamp(24px, 6.6vw, 46px); line-height: 1.45; position: relative; }
+.day h2 em { font-style: normal; color: var(--amber); }
+.scene { position: relative; align-self: center; width: 100%; max-width: min(520px, 42svh * 1.333); justify-self: center; }
+.scene svg { width: 100%; height: auto; display: block; overflow: visible; }
+.scene .it { opacity: 0; transition: opacity .45s, transform .45s; transform: translateY(6px); }
+.scene .it.on { opacity: 1; transform: none; }
+.player { position: relative; display: grid; gap: 10px; }
+.lcdbox { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 16px; padding: 12px 16px; border-radius: 10px; background: #0E1A16; color: var(--lcd); font-family: var(--dot); box-shadow: inset 0 0 0 1px rgba(201,242,226,.16), 0 12px 30px rgba(0,0,0,.18); }
+.lcdbox .tr { font-size: 12px; letter-spacing: .12em; opacity: .7; }
+.lcdbox .clock { grid-row: span 2; font-size: clamp(44px, 13vw, 76px); line-height: 1; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.lcdbox .name { font-size: 17px; letter-spacing: .06em; color: var(--amber); }
+.msg { min-height: 5.3em; font-size: 14px; line-height: 1.75; color: var(--sub); }
+.tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; list-style: none; padding: 0; margin: 0; }
+.tracks li { border-top: 2px solid color-mix(in srgb, var(--fg) 22%, transparent); padding-top: 6px; font-size: 11px; line-height: 1.4; color: var(--sub); transition: border-color .3s, color .3s; }
+.tracks li b { display: block; font-family: var(--dot); font-weight: 400; font-size: 12px; letter-spacing: .06em; }
+.tracks li.on { border-color: var(--amber); color: var(--fg); }
+.day .note { font-size: 11px; color: var(--sub); margin-top: 8px; }
+
+/* 写真の見せ場 */
+.wide { position: relative; height: 92svh; min-height: 560px; overflow: hidden; background: var(--char); color: var(--paper); }
+.wide .ph { position: absolute; inset: 0; }
+.wide img { width: 100%; height: 120%; object-fit: cover; object-position: 38% 50%; }
+.wide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(22,20,19,.2) 0%, rgba(22,20,19,0) 40%, rgba(22,20,19,.88) 100%); }
+.wide .txt { position: absolute; z-index: 2; left: var(--g); right: var(--g); bottom: 56px; }
+.wide .txt p:first-child { font-family: var(--serif); font-style: italic; font-size: clamp(54px, 15vw, 160px); line-height: .9; letter-spacing: -.02em; }
+.wide .txt p + p { margin-top: 16px; font-size: 15px; max-width: 24em; color: rgba(239,236,231,.86); }
+
+/* 口コミで名前が挙がるもの */
+.menu { padding: clamp(88px, 14vw, 160px) var(--g) 32px; background: var(--paper); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 36px; }
+.sec-head h2 { font-weight: 700; font-size: clamp(30px, 8.4vw, 64px); line-height: 1.3; color: var(--char); }
+.sec-head p { font-size: 12px; color: #6D655E; max-width: 23em; }
+.grid8 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile { position: relative; border-radius: 14px; padding: 16px 14px 18px; min-height: 212px; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; background: var(--concrete); color: var(--char); }
+.tile.dark { background: var(--char); color: var(--paper); }
+.tile.amber { background: var(--amber); color: var(--char); }
+.tile.soot { background: var(--soot); color: var(--paper); }
+.tile .en { font-family: var(--serif); font-style: italic; font-size: 24px; line-height: 1; padding-right: 8px; }
+.tile .badge + .en { padding-right: 44px; }
+.tile svg { width: 74px; height: 74px; align-self: center; justify-self: center; margin: 10px 0; }
+.tile h3 { font-size: 16px; font-weight: 700; line-height: 1.4; }
+.tile p { font-size: 12.5px; line-height: 1.6; margin-top: 4px; opacity: .8; }
+.tile .badge { position: absolute; right: 12px; top: 12px; font-family: var(--dot); font-size: 11px; letter-spacing: .08em; padding: 2px 7px; border-radius: 4px; background: #0E1A16; color: var(--lcd); }
+.src { padding: 16px 0 0; font-size: 11px; color: #7D756E; }
+
+/* はじめての方へ */
+.first { background: var(--char); color: var(--paper); padding: clamp(88px, 14vw, 160px) var(--g) clamp(64px, 10vw, 120px); }
+.first .sec-head h2 { color: var(--paper); }
+.first .sec-head p { color: var(--stone); }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { display: grid; grid-template-columns: 64px 1fr; gap: 4px 14px; padding: 22px 0; border-top: 1px solid var(--line); }
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+.steps .n { font-family: var(--dot); font-size: 30px; line-height: 1; color: var(--amber); grid-row: span 2; }
+.steps h3 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.steps p { font-size: 14.5px; color: #B7AFA7; }
+.qr { display: inline-grid; grid-template-columns: repeat(5, 6px); gap: 2px; vertical-align: middle; margin-left: 6px; }
+.qr i { width: 6px; height: 6px; background: var(--lcd); }
+.qr i:nth-child(3n) { background: transparent; }
+
+/* 来店 */
+.visit { background: var(--soot); color: var(--paper); padding: clamp(88px, 14vw, 160px) var(--g) 64px; }
+.visit .sec-head h2 { color: var(--paper); }
+.visit .sec-head p { color: var(--stone); }
+.today { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 14px; margin-bottom: 26px; background: #0E1A16; color: var(--lcd); box-shadow: inset 0 0 0 1px rgba(201,242,226,.16); }
+.today .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--stone); flex: none; }
+.today.open .dot { background: var(--amber); box-shadow: 0 0 0 6px rgba(240,164,58,.18); }
+.today b { font-family: var(--dot); font-size: 21px; font-weight: 400; letter-spacing: .04em; }
+.today small { display: block; font-size: 12px; opacity: .75; }
+.hours { list-style: none; margin: 0 0 12px; padding: 0; }
+.hours li { display: grid; grid-template-columns: 3.2em 1fr; padding: 11px 4px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.hours li span:last-child { font-variant-numeric: tabular-nums; }
+.hours li.is-today { color: var(--amber); font-weight: 700; }
+.small { font-size: 11.5px; color: var(--stone); }
+.addr { margin-top: 40px; font-size: 19px; font-weight: 500; line-height: 1.7; }
+.addr small { display: block; font-size: 13px; color: var(--stone); font-weight: 400; }
+.map { margin-top: 18px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: #2A2522; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(1.05) brightness(.9); }
+.fill-in { background: rgba(240,164,58,.18); color: var(--amber); padding: 0 4px; border-radius: 3px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn.fill { background: var(--amber); color: var(--char); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* 質問 */
+.faq { padding: clamp(88px, 14vw, 150px) var(--g) 40px; }
+details { border-bottom: 1px solid rgba(27,24,22,.16); }
+summary { list-style: none; cursor: pointer; padding: 22px 36px 22px 0; position: relative; font-size: 17px; font-weight: 700; color: var(--char); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: linear-gradient(var(--stone),var(--stone)) center/14px 1.5px no-repeat, linear-gradient(var(--stone),var(--stone)) center/1.5px 14px no-repeat; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 22px; color: #4D4640; font-size: 15px; }
+details .fill-in { color: #8A4F08; background: rgba(240,164,58,.24); }
+
+/* Instagram */
+.gram { padding: 40px var(--g) clamp(88px, 14vw, 150px); }
+.gram .box { border-radius: 18px; padding: 30px 22px; background: var(--concrete); }
+.gram h2 { font-size: clamp(24px, 6.6vw, 44px); font-weight: 700; line-height: 1.45; color: var(--char); }
+.gram p { margin-top: 10px; color: #4D4640; font-size: 15px; }
+.gram .btn.fill { background: var(--char); color: var(--paper); }
+
+/* 最後 */
+.foot { background: var(--char); color: var(--stone); padding: 72px var(--g) calc(124px + env(safe-area-inset-bottom)); overflow: hidden; }
+.foot .huge { font-family: var(--serif); font-style: italic; color: var(--paper); font-size: clamp(110px, 34vw, 400px); line-height: .82; letter-spacing: -.04em; margin: 0 0 40px -.04em; white-space: nowrap; }
+.foot .huge span { color: var(--amber); }
+.foot p { font-size: 13px; line-height: 1.9; }
+.foot .made { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; }
+
+/* 下の固定ボタン */
+.dock { position: fixed; z-index: 55; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(22,20,19,.8); backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.28); transform: translateY(140%); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.dock.show { transform: none; }
+.dock a { min-height: 46px; border-radius: 999px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--paper); }
+.dock a.main { background: var(--amber); color: var(--char); }
+
+@media (min-width: 900px) {
+  .hero { display: grid; grid-template-columns: 1.05fr .95fr; }
+  .hero .ph { position: relative; grid-column: 2; inset: auto; height: 100%; }
+  .hero .ph::after { background: linear-gradient(90deg, rgba(22,20,19,1) 0%, rgba(22,20,19,0) 26%), linear-gradient(180deg, rgba(22,20,19,.4) 0%, rgba(22,20,19,0) 22%); }
+  .hero .ph img { object-position: 50% 55%; }
+  .hero .title { right: auto; width: 62vw; bottom: 64px; }
+  .hero h1 { font-size: clamp(150px, 15.5vw, 280px); }
+  .hero .tag { font-size: 18px; }
+  .hero .caption { right: 24px; }
+  .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+  .story { grid-template-columns: 1.15fr .85fr; align-items: end; column-gap: 80px; }
+  .story .big { grid-column: 1 / -1; }
+  .day .pin { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 72px; padding-top: 110px; }
+  .day h2 { grid-column: 1 / -1; }
+  .scene { max-width: 600px; }
+  .player { align-self: center; }
+  .grid8 { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .tile { min-height: 260px; padding: 22px; }
+  .tile svg { width: 96px; height: 96px; }
+  .first .wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; }
+  .visit .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .faq, .gram { max-width: 980px; margin: 0 auto; }
+  .gram .box { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 40px; padding: 44px; }
+  .dock { left: auto; right: 24px; width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track, .cue::after { animation: none; }
+  .hero .ph img, .story figure img { transform: none; }
+  .scene .it { transition: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js'); if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('reduced');</script>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div class="deck">
+    <svg class="md" viewBox="0 0 112 118"><rect x="2" y="2" width="108" height="114" rx="6" fill="#2B2724" stroke="#4A433E" stroke-width="2"/><rect x="2" y="2" width="16" height="16" fill="#161413"/><rect class="shutter" x="22" y="64" width="68" height="44" rx="3" fill="#8F8880"/><rect x="40" y="70" width="32" height="32" rx="2" fill="#5E5852"/><rect x="18" y="14" width="76" height="40" rx="3" fill="#F0A43A" opacity=".9"/></svg>
+    <div class="lcd"><span id="lcd-text">&nbsp;</span><small>TRACK 01</small></div>
+  </div>
+</div>
+
+<div class="demo-note">ご提案用サンプル（公式サイトではありません）｜辰巳アンドスタジオ</div>
+
+<header class="head" id="head">
+  <a class="mark" href="#top">I've cafe</a>
+  <span class="status" id="status"><i></i><span>営業時間を確認中</span></span>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="I've cafe">
+    <div class="ph"><img src="img/hero-tall.jpg" alt="コンクリートの壁と小さな丸テーブル、黒いラテとスイーツ（イメージ）"></div>
+    <span class="chip" aria-hidden="true"><span>KASHIWA</span><b id="now">--:--</b></span>
+    <span class="caption">写真はイメージです</span>
+    <div class="title">
+      <p class="kicker">CAFE &amp; BAR ／ 柏・中央町 バイブスビル3F</p>
+      <h1><span class="w"><span>I've</span></span><span class="w"><span><em>cafe</em></span></span></h1>
+      <p class="tag kw">昼はラテ、夜はカクテル。<br>毎日11時から0時まで。</p>
+      <div class="meta">
+        <span>Googleの口コミ <b>★4.7</b>（209件）</span>
+        <span class="cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Charcoal latte</span><span>チャコールラテ</span><i></i><span>Chicken over rice</span><span>チキンオーバーライス</span><i></i><span>Cocktails</span><span>カクテル</span><i></i><span>Beer</span><span>ビール</span><i></i>
+      <span>Charcoal latte</span><span>チャコールラテ</span><i></i><span>Chicken over rice</span><span>チキンオーバーライス</span><i></i><span>Cocktails</span><span>カクテル</span><i></i><span>Beer</span><span>ビール</span><i></i>
+    </div>
+  </div>
+
+  <section class="story" aria-labelledby="story-title">
+    <h2 class="big kw" id="story-title"><span class="line"><span>打ちっぱなしの、</span></span><span class="line"><span>少し暗い、</span></span><span class="line"><span>広い部屋。</span></span></h2>
+    <div>
+      <p class="lead">口コミに並ぶのは <q>穴場感</q> <q>照明が暗めでおしゃれ</q> <q>BGMの選曲がいい</q> という言葉。駅から近いビルの3階、コンクリートむき出しの広い店内で、昼はコーヒーとスイーツ、夜はカクテルやビールを。</p>
+      <div class="stars" style="margin-top:28px"><b>4.7</b><span>Googleの口コミ 209件の平均（2026年10月）</span></div>
+    </div>
+    <figure><img src="img/lamp.jpg" alt="コンクリートの壁に灯るアンバー色のペンダントライト（イメージ）" loading="lazy"><span class="cap">写真はイメージです</span></figure>
+  </section>
+
+  <section class="day" id="day" aria-labelledby="day-title">
+    <div class="pin">
+      <div class="sunbeam" aria-hidden="true"></div>
+      <h2 id="day-title" class="kw">同じテーブルで、<br><em>13時間</em>。</h2>
+      <div class="scene" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#F0A43A" stop-opacity=".75"/><stop offset=".45" stop-color="#F0A43A" stop-opacity=".22"/><stop offset="1" stop-color="#F0A43A" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle id="glowc" cx="290" cy="78" r="150" fill="url(#glow)" style="opacity: var(--glow)"/>
+          <line x1="290" y1="-40" x2="290" y2="48" stroke="currentColor" stroke-width="1.5" opacity=".6"/>
+          <path d="M268 52h44l8 28h-60z" fill="#C97F22" opacity=".95"/>
+          <ellipse cx="290" cy="80" rx="30" ry="5" fill="#7A4A12"/>
+          <circle cx="290" cy="76" r="6" fill="#FFE2A8" style="opacity: calc(.35 + var(--glow) * .65)"/>
+          <!-- テーブル -->
+          <ellipse cx="190" cy="262" rx="70" ry="9" fill="currentColor" opacity=".12"/>
+          <rect x="184" y="214" width="12" height="48" fill="currentColor" opacity=".7"/>
+          <ellipse cx="190" cy="212" rx="150" ry="20" fill="#3A322D"/>
+          <ellipse cx="190" cy="207" rx="150" ry="20" fill="#5A4E46"/>
+          <!-- TRACK 01 ごはん -->
+          <g class="it" data-t="1">
+            <path d="M150 196c0 18 18 26 40 26s40-8 40-26z" fill="#E9E4DC"/>
+            <path d="M154 196c6-14 20-20 36-20s30 6 36 20z" fill="#F7F3EC"/>
+            <path d="M160 190c10-8 22-11 30-11s22 3 30 11c-8 4-18 6-30 6s-22-2-30-6z" fill="#C98A3A"/>
+            <circle cx="176" cy="186" r="3" fill="#7EA35A"/><circle cx="198" cy="183" r="3" fill="#7EA35A"/><circle cx="210" cy="189" r="2.6" fill="#D2483A"/>
+            <g transform="translate(250 170)"><ellipse cx="18" cy="28" rx="26" ry="6" fill="#E9E4DC"/><path d="M4 22a14 9 0 1 0 28 0a14 9 0 1 0-28 0zm7 0a7 4 0 1 1 14 0a7 4 0 1 1-14 0z" fill="#D69A45"/></g>
+          </g>
+          <!-- TRACK 02 ラテとスイーツ -->
+          <g class="it" data-t="2">
+            <path d="M138 150h34l-4 50h-26z" fill="#2B2724" opacity=".92"/>
+            <path d="M138 150h34l-1 12h-32z" fill="#F4EFE6"/>
+            <path d="M172 160c10 0 12 18 0 20" fill="none" stroke="#9D958C" stroke-width="3"/>
+            <ellipse cx="225" cy="198" rx="34" ry="7" fill="#E9E4DC"/>
+            <rect x="207" y="172" width="36" height="24" rx="6" fill="#2F2A27"/>
+            <ellipse cx="225" cy="172" rx="18" ry="5" fill="#463E39"/>
+            <circle cx="225" cy="164" r="6" fill="#B3262E"/>
+            <path d="M225 158c2-6 6-9 10-10" stroke="#5B7A3A" stroke-width="1.6" fill="none"/>
+          </g>
+          <!-- TRACK 03 ひとりで、ふたりで -->
+          <g class="it" data-t="3">
+            <path d="M118 158h28l-3 42h-22z" fill="#C59A6E"/><path d="M118 158h28l-1 9h-26z" fill="#F4EFE6"/>
+            <path d="M236 158h28l-3 42h-22z" fill="#2B2724"/><path d="M236 158h28l-1 9h-26z" fill="#F4EFE6"/>
+            <rect x="168" y="190" width="44" height="12" rx="3" fill="#1E1B19" transform="rotate(-6 190 196)"/>
+            <rect x="171" y="192" width="38" height="8" rx="2" fill="#3C5A52" transform="rotate(-6 190 196)"/>
+          </g>
+          <!-- TRACK 04 夜 -->
+          <g class="it" data-t="4">
+            <path d="M126 160h40l-4 40h-32z" fill="#E7C27A" opacity=".35"/>
+            <path d="M129 176h34l-2 24h-30z" fill="#D9862A"/>
+            <rect x="136" y="166" width="18" height="18" rx="3" fill="#F5F1EA" opacity=".7"/>
+            <path d="M184 128h30l-3 72h-24z" fill="#E8A630"/>
+            <path d="M184 128h30l-1 14h-28z" fill="#FBF6EC"/>
+            <path d="M184 128c2-8 28-8 30 0" fill="#FBF6EC"/>
+            <g transform="rotate(-12 262 192)"><rect x="240" y="176" width="44" height="34" rx="3" fill="#2B2724" stroke="#4A433E"/><rect x="250" y="194" width="26" height="14" rx="2" fill="#8F8880"/><rect x="246" y="179" width="32" height="12" rx="2" fill="#F0A43A"/></g>
+          </g>
+        </svg>
+      </div>
+      <div class="player">
+        <div class="lcdbox" aria-live="off">
+          <span class="clock" id="clock">11:00</span>
+          <span class="tr" id="tr">TRACK 01 / 04</span>
+          <span class="name" id="tname">ごはん</span>
+        </div>
+        <p class="msg" id="msg"></p>
+        <ol class="tracks" id="tracks">
+          <li data-t="1"><b>11:00</b>ごはん</li>
+          <li data-t="2"><b>14:00</b>ラテと甘いもの</li>
+          <li data-t="3"><b>17:00</b>ひとりでも</li>
+          <li data-t="4"><b>20:00</b>夜はお酒も</li>
+        </ol>
+        <p class="note">※時間の区切りは過ごし方のイメージです。料理とお酒の提供時間は、実際の内容に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wide" aria-label="店内のイメージ">
+    <div class="ph"><img src="img/table.jpg" alt="夕方の光が差すコンクリートの壁と丸テーブル（イメージ）" loading="lazy"></div>
+    <span class="cap" style="z-index:3;top:12px;bottom:auto">写真はイメージです</span>
+    <div class="txt">
+      <p>Stay a while.</p>
+      <p class="kw">広めの席が多く、ひとりの作業にも、友だちとのおしゃべりにも。少し高めの丸テーブルは、スマホを触るのにちょうどいい高さです。</p>
+    </div>
+  </section>
+
+  <section class="menu" aria-labelledby="menu-title">
+    <div class="sec-head">
+      <h2 id="menu-title" class="kw">口コミで<br>名前が挙がる<br>もの</h2>
+      <p>価格と内容は、実際のメニューに差し替えます</p>
+    </div>
+    <div class="grid8">
+      <article class="tile dark">
+        <span class="badge">RARE</span>
+        <p class="en">Charcoal latte</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h36l-4 52H26z" fill="#3A3431"/><path d="M22 18h36l-1 12H23z" fill="#F4EFE6"/><path d="M57 30c11 0 11 20 0 22" fill="none" stroke="#8F8880" stroke-width="3"/></svg>
+        <div><h3>チャコールラテ</h3><p>ほかのカフェでは、あまり見かけない一杯。</p></div>
+      </article>
+      <article class="tile">
+        <p class="en">Latte</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h36l-4 52H26z" fill="#C59A6E"/><path d="M22 18h36l-1 12H23z" fill="#FBF7F0"/><path d="M33 23c3-3 11-3 14 0" stroke="#C59A6E" stroke-width="2" fill="none"/></svg>
+        <div><h3>コーヒー・ラテ</h3><p>香りがよく、ミルクとのバランスがいい、という声。</p></div>
+      </article>
+      <article class="tile amber">
+        <p class="en">Sweets</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><ellipse cx="40" cy="64" rx="30" ry="7" fill="#FBF7F0"/><rect x="22" y="36" width="36" height="26" rx="7" fill="#2F2A27"/><ellipse cx="40" cy="36" rx="18" ry="5" fill="#4A403A"/><circle cx="40" cy="28" r="6" fill="#B3262E"/></svg>
+        <div><h3>スイーツ</h3><p>見た目が華やかで、写真を撮りたくなる。</p></div>
+      </article>
+      <article class="tile soot">
+        <p class="en">Chicken over rice</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M10 40c0 18 14 28 30 28s30-10 30-28z" fill="#E9E4DC"/><path d="M14 40c6-10 16-15 26-15s20 5 26 15z" fill="#F7F3EC"/><path d="M18 38c8-6 16-8 22-8s14 2 22 8c-6 3-14 4-22 4s-16-1-22-4z" fill="#C98A3A"/><circle cx="30" cy="33" r="2.6" fill="#7EA35A"/><circle cx="50" cy="34" r="2.6" fill="#D2483A"/></svg>
+        <div><h3 class="kw">チキン<wbr>オーバー<wbr>ライス</h3><p>柏でこの味はここだけ、という声も。</p></div>
+      </article>
+      <article class="tile">
+        <p class="en">Taco rice</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><ellipse cx="40" cy="56" rx="32" ry="12" fill="#E9E4DC"/><path d="M16 52c4-12 14-18 24-18s20 6 24 18z" fill="#F7F3EC"/><path d="M20 48c6-6 12-8 20-8s14 2 20 8z" fill="#9C5A2E"/><path d="M26 44l6-4M38 42l5-4M48 44l6-3" stroke="#7EA35A" stroke-width="3" stroke-linecap="round"/><circle cx="44" cy="46" r="3" fill="#D2483A"/></svg>
+        <div><h3>タコライス</h3><p>お昼の一皿に。</p></div>
+      </article>
+      <article class="tile dark">
+        <p class="en">Onion rings</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M10 48a16 10 0 1 0 32 0a16 10 0 1 0-32 0zm8 0a8 5 0 1 1 16 0a8 5 0 1 1-16 0z" fill="#D69A45"/><path d="M36 36a17 11 0 1 0 34 0a17 11 0 1 0-34 0zm8 0a9 5 0 1 1 18 0a9 5 0 1 1-18 0z" fill="#E3AE5A"/></svg>
+        <div><h3>オニオンリング</h3><p>もう少し食べたい時の追加に。</p></div>
+      </article>
+      <article class="tile amber">
+        <p class="en">Cocktails</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M20 26h40l-4 44H24z" fill="#FBF7F0" opacity=".45"/><path d="M23 42h34l-2 28H25z" fill="#8A3F0E"/><rect x="31" y="32" width="18" height="18" rx="3" fill="#FBF7F0" opacity=".8"/></svg>
+        <div><h3>カクテル</h3><p>種類がとても多い、という声。</p></div>
+      </article>
+      <article class="tile soot">
+        <p class="en">Beer</p>
+        <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M24 14h32l-3 58H27z" fill="#E8A630"/><path d="M24 14h32l-1 12H25z" fill="#FBF6EC"/><path d="M24 14c2-8 30-8 32 0" fill="#FBF6EC"/></svg>
+        <div><h3>ビール</h3><p>カフェだけど、ビールも飲める。</p></div>
+      </article>
+    </div>
+    <p class="src">※Googleの口コミで名前が挙がったものから選んでいます。絵は説明用のイラストです。</p>
+  </section>
+
+  <section class="first" aria-labelledby="first-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="first-title" class="kw">はじめて<br>来る方へ</h2>
+        <p>口コミに書かれていたことをもとにしています</p>
+      </div>
+      <ol class="steps">
+        <li><span class="n">01</span><h3>ビルの3階へ</h3><p>柏・中央町のバイブスビル3F。穴場のような場所にあります。</p></li>
+        <li><span class="n">02</span><h3>注文は席のQRコードから<span class="qr" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></h3><p>スマホで読み取ると LINE のミニアプリが開き、そのまま注文できます。</p></li>
+        <li><span class="n">03</span><h3>テーブルには MD</h3><p>各テーブルに MD が置いてあります。持ち帰らないように、だけご注意を。</p></li>
+        <li><span class="n">04</span><h3>たばこは外の非常階段で</h3><p>喫煙所は、お店の外の非常階段のところです。</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="sec-head">
+      <h2 id="visit-title" class="kw">お店へ<br>行く前に</h2>
+      <p>営業日・時間はGoogleマップの情報（2026年10月）</p>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="today" id="today"><span class="dot"></span><div><b id="today-main">確認中</b><small id="today-sub"></small></div></div>
+        <ul class="hours" id="hours">
+          <li data-d="1"><span>月</span><span>11:00 – 0:00</span></li>
+          <li data-d="2"><span>火</span><span>11:00 – 0:00</span></li>
+          <li data-d="3"><span>水</span><span>11:00 – 0:00</span></li>
+          <li data-d="4"><span>木</span><span>11:00 – 0:00</span></li>
+          <li data-d="5"><span>金</span><span>11:00 – 0:00</span></li>
+          <li data-d="6"><span>土</span><span>11:00 – 0:00</span></li>
+          <li data-d="0"><span>日</span><span>11:00 – 0:00</span></li>
+        </ul>
+        <p class="small">臨時の変更は、お店の Instagram でご確認ください。</p>
+      </div>
+      <div>
+        <p class="addr">〒277-0021<br>千葉県柏市中央町6-2<br>バイブスビル 3F<small>駅から近い、ビルの3階</small></p>
+        <div class="map"><iframe title="I've cafe の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=I%27ve%20cafe%20%E5%8D%83%E8%91%89%E7%9C%8C%E6%9F%8F%E5%B8%82%E4%B8%AD%E5%A4%AE%E7%94%BA6-2%20%E3%83%90%E3%82%A4%E3%83%96%E3%82%B9%E3%83%93%E3%83%AB3F&amp;z=16&amp;output=embed"></iframe></div>
+        <div class="row">
+          <a class="btn fill" href="https://maps.google.com/?cid=16520245296820621646" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="sec-head"><h2 id="faq-title">よくある質問</h2></div>
+    <details><summary>お酒は何時から飲めますか？</summary><p>カクテルやビールがあります。<span class="fill-in">お酒を出す時間帯を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>ひとりでも入りやすいですか？</summary><p>広めの席が多く、ひとりで作業をしに来る方も、友だちとおしゃべりに来る方もいます。</p></details>
+    <details><summary>どうやって注文しますか？</summary><p>席にある QR コードをスマホで読み取り、LINE のミニアプリから注文します。</p></details>
+    <details><summary>予約はできますか？</summary><p><span class="fill-in">予約の可否と方法（Instagram の DM など）を、お店のルールに合わせて書きます。</span></p></details>
+    <details><summary>支払い方法は？</summary><p><span class="fill-in">使える支払い方法を、実際の内容に合わせて書きます。</span></p></details>
+    <details><summary>たばこは吸えますか？</summary><p>店内ではなく、お店の外の非常階段のところに喫煙所があります。</p></details>
+  </section>
+
+  <section class="gram" aria-labelledby="gram-title">
+    <div class="box">
+      <div>
+        <h2 id="gram-title" class="kw">最新のメニューと<br>お知らせは<br>Instagramで。</h2>
+        <p>お店からの最新の情報は、こちらから。</p>
+      </div>
+      <div class="row"><a class="btn fill" href="https://www.instagram.com/i.ve.cafe/" target="_blank" rel="noopener">@i.ve.cafe を見る</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="huge" aria-hidden="true">I've<span>.</span></p>
+  <p>I've cafe<br>千葉県柏市中央町6-2 バイブスビル 3F<br>毎日 11:00–0:00</p>
+  <p class="made">このページは辰巳アンドスタジオがご提案用に作成したサンプルです。お店の公式サイトではありません。写真は生成したイメージ、絵は説明用のイラストです。</p>
+</footer>
+
+<nav class="dock" id="dock" aria-label="すぐに使う操作">
+  <a class="main" href="https://maps.google.com/?cid=16520245296820621646" target="_blank" rel="noopener">道順</a>
+  <a href="#visit">営業時間</a>
+  <a href="https://www.instagram.com/i.ve.cafe/" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduced = document.body.classList.contains('reduced');
+  const $ = s => document.querySelector(s);
+
+  /* 日本時間 */
+  const jst = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const pad = n => String(n).padStart(2, '0');
+  const tickNow = () => { const n = jst(); $('#now').textContent = `${pad(n.getHours())}:${pad(n.getMinutes())}`; };
+  tickNow(); setInterval(tickNow, 20000);
+
+  /* 営業中かどうか（毎日 11:00–24:00） */
+  const OPEN = 11, CLOSE = 24;
+  const n = jst(), d = n.getDay(), h = n.getHours() + n.getMinutes() / 60;
+  let main, sub, open = false;
+  if (h >= OPEN && h < CLOSE) {
+    open = true; main = '営業中';
+    const left = CLOSE - h; sub = `0:00まで（あと${Math.floor(left)}時間${pad(Math.round((left % 1) * 60) % 60)}分）`;
+  } else { main = 'これから開店'; sub = '本日 11:00から'; }
+  $('#status span').textContent = open ? '営業中 0:00まで' : '11:00 開店';
+  $('#status').classList.toggle('open', open);
+  $('#today').classList.toggle('open', open);
+  $('#today-main').textContent = main;
+  $('#today-sub').textContent = sub;
+  const row = document.querySelector(`#hours li[data-d="${d}"]`); if (row) row.classList.add('is-today');
+
+  /* 13時間の章 */
+  const TRACKS = [
+    { t: 1, from: 11, name: 'ごはん', msg: 'チキンオーバーライスやタコライスで、軽めのごはん。もう少し食べたい日は、オニオンリングを足して。' },
+    { t: 2, from: 14, name: 'ラテと甘いもの', msg: 'ほかではあまり見かけないチャコールラテと、写真を撮りたくなるスイーツで、ひと休み。' },
+    { t: 3, from: 17, name: 'ひとりでも', msg: '広めの席で、ひとりで作業をしても、ふたりで話しこんでも。高めの丸テーブルは、スマホが触りやすい高さ。' },
+    { t: 4, from: 20, name: '夜はお酒も', msg: '照明は落とし気味、BGM はいい選曲。種類の多いカクテルや、ビールを。テーブルの MD もお忘れなく。' }
+  ];
+  const day = $('#day'), items = [...document.querySelectorAll('.scene .it')], lis = [...document.querySelectorAll('#tracks li')];
+  const DAY = [211, 206, 198], NIGHT = [22, 20, 19];
+  const mix = (a, b, k) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+  let cur = 0;
+  const setHour = hr => {
+    const s = Math.min(24, Math.round(hr * 4) / 4);
+    const hh = Math.floor(s) % 24, mm = Math.round((s % 1) * 60);
+    $('#clock').textContent = `${hh}:${pad(mm)}`;
+    const k = Math.min(1, Math.max(0, (s - 15) / 6.5));
+    const bg = mix(DAY, NIGHT, k);
+    day.style.setProperty('--bg', `rgb(${bg})`);
+    day.style.setProperty('--fg', k > .5 ? '#EFECE7' : '#1B1816');
+    day.style.setProperty('--sub', k > .5 ? '#B7AFA7' : '#4D4640');
+    day.style.setProperty('--glow', (0.15 + 0.85 * k).toFixed(3));
+    day.style.setProperty('--sun', (1 - Math.min(1, Math.max(0, (s - 13) / 5))).toFixed(3));
+    let tr = TRACKS[0]; TRACKS.forEach(x => { if (s >= x.from) tr = x; });
+    if (tr.t !== cur) {
+      cur = tr.t;
+      items.forEach(el => el.classList.toggle('on', +el.dataset.t === cur));
+      lis.forEach(el => el.classList.toggle('on', +el.dataset.t === cur));
+      $('#tr').textContent = `TRACK 0${cur} / 04`;
+      $('#tname').textContent = tr.name;
+      $('#msg').textContent = tr.msg;
+    }
+  };
+
+  const showDock = () => $('#dock').classList.add('show');
+  if (reduced || !window.gsap || !window.ScrollTrigger) {
+    setHour(20.5); // 最終状態（夜）を見せる
+    $('.loader')?.remove(); showDock(); return;
+  }
+  setHour(11);
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* PC だけなめらかスクロール */
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    const lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* 読み込みの演出（1回だけ）: MD を差し込む → 液晶に店名 → 幕が上がる */
+  const loader = $('.loader');
+  const safety = setTimeout(() => loader?.remove(), 6000);
+  const lcd = $('#lcd-text'), word = "I'VE CAFE";
+  const typer = { n: 0 }, curtain = { v: 0 };
+  gsap.set('.hero h1 .w span', { yPercent: 108 });
+  gsap.set('.hero .kicker, .hero .tag, .hero .meta, .hero .chip', { opacity: 0, y: 16 });
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.from('.loader .md', { x: 160, rotate: 8, opacity: 0, duration: 0.8 })
+       .to('.loader .md .shutter', { x: -14, duration: 0.35, ease: 'power2.inOut' })
+       .to(typer, { n: word.length, duration: 0.7, ease: 'none', onUpdate: () => { lcd.textContent = word.slice(0, Math.round(typer.n)) || ' '; } }, '-=0.1')
+       .to(curtain, { v: 100, duration: 1.0, ease: 'power4.inOut', onUpdate: () => { loader.style.clipPath = `inset(0 0 ${curtain.v}% 0)`; } }, '+=0.3')
+       .to('.hero .ph img', { scale: 1, duration: 2.2, ease: 'power3.out' }, '-=0.8')
+       .to('.hero h1 .w span', { yPercent: 0, duration: 1.2, stagger: 0.1 }, '-=2')
+       .to('.hero .kicker, .hero .tag, .hero .meta, .hero .chip', { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, '-=0.9')
+       .add(() => { clearTimeout(safety); loader?.remove(); });
+
+  /* ヘッダーを濃くする・下のボタンを出す */
+  ScrollTrigger.create({ start: () => innerHeight * 0.8, end: 'max', onEnter: () => $('#head').classList.add('solid'), onLeaveBack: () => $('#head').classList.remove('solid') });
+  ScrollTrigger.create({ start: () => innerHeight * 0.6, onEnter: showDock });
+
+  /* ファーストビューの写真をゆっくり沈める */
+  gsap.to('.hero .ph', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* 見出しを1行ずつ */
+  gsap.utils.toArray('.line > span').forEach(el => {
+    gsap.from(el, { yPercent: 110, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+  });
+
+  /* 写真: 枠の中で少し動かす＋上下から開く */
+  gsap.utils.toArray('.story figure').forEach(fig => {
+    const img = fig.querySelector('img'), o = { v: 14 };
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.to(o, { v: 0, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: fig, start: 'top 85%' }, onUpdate: () => { fig.style.clipPath = `inset(${o.v}% 0 ${o.v}% 0)`; } });
+  });
+
+  /* 13時間の章: スクロールで 11:00 → 0:00 */
+  ScrollTrigger.create({
+    trigger: '.day', start: 'top top', end: '+=220%', pin: '.day .pin', scrub: true,
+    onUpdate: s => setHour(11 + s.progress * 13)
+  });
+
+  /* 写真の見せ場: 横から開いて、写真はゆっくり上へ */
+  const wide = $('.wide'), wo = { v: 18 };
+  gsap.to(wo, { v: 0, ease: 'none', scrollTrigger: { trigger: wide, start: 'top bottom', end: 'top 30%', scrub: true }, onUpdate: () => { wide.style.clipPath = `inset(0 ${wo.v}% 0 ${wo.v}% round ${wo.v * 1.4}px)`; } });
+  gsap.fromTo('.wide img', { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: wide, start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.wide .txt > *', { y: 40, opacity: 0, duration: 1.1, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.wide .txt', start: 'top 85%' } });
+
+  /* メニューのタイルを順に */
+  gsap.from('.tile', { y: 50, opacity: 0, duration: 0.9, stagger: 0.07, ease: 'power3.out', scrollTrigger: { trigger: '.grid8', start: 'top 85%' } });
+  gsap.utils.toArray('.tile svg').forEach(el => {
+    gsap.from(el, { rotate: -10, scale: .8, duration: 1, ease: 'back.out(2)', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* はじめての方へ: 番号を液晶のように点灯 */
+  gsap.utils.toArray('.steps li').forEach(li => {
+    gsap.from(li, { x: -24, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: li, start: 'top 88%' } });
+  });
+
+  /* 最後の大きな店名 */
+  gsap.from('.foot .huge', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'power4.out', scrollTrigger: { trigger: '.foot', start: 'top 80%' } });
+})();
+</script>
+</body>
+</html>
